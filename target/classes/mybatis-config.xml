@@ -6,10 +6,12 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	
+	<!-- 연결할 MODEL 혹은 VO 혹은 DTO추가 -->
 	<typeAliases>
 
 	</typeAliases>
 	
+	<!-- mapper 파일 추가 -->
 	<mappers>
 	</mappers>
 </configuration>

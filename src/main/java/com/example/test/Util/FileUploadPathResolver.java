@@ -35,6 +35,7 @@ public class FileUploadPathResolver {
     }
     
 
+    //저장 경로 지정
     public String getUploadPath(String fileName) {
         String extension = getFileExtension(fileName);	
         String subDirectory = extensionPaths.getOrDefault(extension, "others");
