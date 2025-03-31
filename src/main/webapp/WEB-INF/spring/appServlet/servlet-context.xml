@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd"
+		>
+		<!-- spring 네임스페이스를 선언하고, 스프링 설정 파일이 해당 xml스키마를 참조하도록 함. -->
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/static/**" location="/resources/static" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<!-- 패키지 및 어노테이션 읽기위함 -->
+	<context:component-scan base-package="com.example.test">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+	<!-- 트랜잭션 활성화 -->
+	<tx:annotation-driven/>
+	
+	
+	<!-- scheduler -->
+	<task:annotation-driven scheduler="scheduler"/>
+	<task:scheduler id="scheduler" pool-size="10"/>
+	
+		<!--  <beans:bean id="Counting" class="어떤 클래스에 컴포넌트를 적용할 것인가?"> </beans:bean>-->
+	
+	<task:scheduled-tasks>
+		<task:scheduled ref="Counting" method="resetDailyCount" cron = "0 0 0 * * *"/>
+		<task:scheduled ref="Counting" method="resetWeekCount" cron = "0 0 0 * * MON"/>
+		<task:scheduled ref="Counting" method="resetMonthCount" cron = "0 0 0 1 * *"/>
+	</task:scheduled-tasks>
+	
+	<!-- interceptor작성 -->
+	
+	
+	
+</beans:beans>
