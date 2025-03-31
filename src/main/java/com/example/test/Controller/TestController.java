@@ -17,6 +17,11 @@ public class TestController {
 	@Autowired
 	TestSerivce testService;
 	
+	@GetMapping("/test")
+	public String getmethod() {
+		return "test";
+	}
+	
 	@PostMapping("/test")
 	public String getmethod(TestDto test) {
 		testService.add(test);
