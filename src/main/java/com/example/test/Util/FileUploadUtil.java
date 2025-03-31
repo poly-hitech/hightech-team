@@ -39,6 +39,7 @@ public class FileUploadUtil {
         } catch (Exception e) {
             model.addAttribute("message", "파일 업로드 중 오류 발생: " + e.getMessage());
         }
+        //저장 경로 반환
 		return uploadDir;
 	}
 }
