@@ -21,38 +21,38 @@ import com.example.test.Service.ResourceShopService;
 @Controller
 @RequestMapping("/shop")
 public class MarketController {
-	private final static String path = "shop";
+	private final static String path = "shop/";
 
 	@Autowired
 	ResourceShopService resourceShopService;
 	
 	//전체 상점 목록
 	@GetMapping("/list")
-	public String shopList(Model model) {
+	String shopList(Model model) {
 		List<MarketList> list = resourceShopService.list();
 		
 		model.addAttribute("list", list);
 		
-		return path + "/list";
+		return path + "list";
 	}
 	
 	//유저별 등록한 리소스 목록
 	@GetMapping("{userId}/list")
-	public String MyshopList(@PathVariable Long userId, Model model, HttpSession session) {
+	String MyshopList(@PathVariable Long userId, Model model, HttpSession session) {
 		
 		List<MarketList> list = resourceShopService.list(userId);
 		
 		model.addAttribute("list", list);
 		
-		return path + "/list";
+		return path + "list";
 	}
 	
 	@PostMapping("{roleId}/add/{userId}")
-	public String uploadResource(@PathVariable Long roleId, @PathVariable Long userId, Market market, @RequestParam MultipartFile file, Model model) throws Exception {
+	String uploadResource(@PathVariable Long roleId, @PathVariable Long userId, Market market, @RequestParam MultipartFile file, Model model) throws Exception {
 		
 		resourceShopService.addResource(userId, market, file, model);
 		
-		return path + roleId + "/add";
+		return path + roleId + "add";
 	}
 	
 }
