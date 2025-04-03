@@ -21,7 +21,7 @@
 		
 		<insert id="add">
 			insert into users
-			values (#{username}, #{password},#{nickname}, #{birthday}, #{phone}, #{gender}, #{profileImage}, #{agreeStatus}, #{signupDay}, #{roleId})
+			values (USERS_SEQ.nextval, #{username}, #{password},#{nickname}, #{birthday}, #{phone}, #{gender}, #{profileImage}, #{agreeStatus}, #{signupDay}, #{roleId})
 		</insert>
 		
 		<update id="update">

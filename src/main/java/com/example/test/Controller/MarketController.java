@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.test.Model.Market;
-import com.example.test.Model.ResourceShop;
-import com.example.test.Model.Users;
+import com.example.test.Model.MarketList;
 import com.example.test.Service.ResourceShopService;
-import com.example.test.Util.FileUploadUtil;
 
 @Controller
 @RequestMapping("/shop")
@@ -31,7 +29,7 @@ public class MarketController {
 	//전체 상점 목록
 	@GetMapping("/list")
 	public String shopList(Model model) {
-		List<Market> list = resourceShopService.list();
+		List<MarketList> list = resourceShopService.list();
 		
 		model.addAttribute("list", list);
 		
@@ -42,7 +40,7 @@ public class MarketController {
 	@GetMapping("{userId}/list")
 	public String MyshopList(@PathVariable Long userId, Model model, HttpSession session) {
 		
-		List<Market> list = resourceShopService.list(userId);
+		List<MarketList> list = resourceShopService.list(userId);
 		
 		model.addAttribute("list", list);
 		
@@ -50,9 +48,9 @@ public class MarketController {
 	}
 	
 	@PostMapping("{roleId}/add/{userId}")
-	public String uploadResource(@PathVariable Long roleId, @PathVariable Long userId, ResourceShop resource, @RequestParam MultipartFile file, Model model) throws Exception {
+	public String uploadResource(@PathVariable Long roleId, @PathVariable Long userId, Market market, @RequestParam MultipartFile file, Model model) throws Exception {
 		
-		resourceShopService.addResource(resource, file, model);
+		resourceShopService.addResource(userId, market, file, model);
 		
 		return path + roleId + "/add";
 	}

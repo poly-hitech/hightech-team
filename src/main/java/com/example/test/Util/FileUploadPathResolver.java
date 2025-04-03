@@ -3,6 +3,9 @@ package com.example.test.Util;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class FileUploadPathResolver {
     private String baseDirectory = "C:/upload";
     private final Map<String, String> extensionPaths = new HashMap<>();

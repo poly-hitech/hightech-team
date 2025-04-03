@@ -2,14 +2,15 @@ package com.example.test.Dao;
 
 import java.util.List;
 
-import com.example.test.Model.Market;
+import com.example.test.Model.MarketList;
 import com.example.test.Model.ResourceShop;
+import com.example.test.Model.ResourceSubCategory;
 
 public interface ResourceDao {
 
-	List<Market> list();
+	List<MarketList> list();
 
-	List<Market> list(Long userId);
+	List<MarketList> list(Long userId);
 
 	void save(ResourceShop resource);
 

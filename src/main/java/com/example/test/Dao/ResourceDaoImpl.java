@@ -6,8 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.example.test.Model.Market;
+import com.example.test.Model.MarketList;
 import com.example.test.Model.ResourceShop;
+import com.example.test.Model.ResourceSubCategory;
 
 @Repository
 public class ResourceDaoImpl implements ResourceDao {
@@ -16,21 +17,20 @@ public class ResourceDaoImpl implements ResourceDao {
 	SqlSession sql;
 	
 	@Override
-	public List<Market> list() {
+	public List<MarketList> list() {
 		// TODO Auto-generated method stub
-		return sql.selectList("market.list");
+		return sql.selectList("market.marketList");
 	}
 
 	@Override
-	public List<Market> list(Long userId) {
-		// TODO Auto-generated method stub
-		return sql.selectList("market.list", userId);
+	public List<MarketList> list(Long userId) {
+		return sql.selectList("market.Mylist", userId);
 	}
 
 	@Override
 	public void save(ResourceShop resource) {
 		
-		sql.insert("market.add", resource);
+		sql.insert("market.resourceAdd", resource);
 	}
 
 }

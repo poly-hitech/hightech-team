@@ -1,6 +1,7 @@
 package com.example.test.Util;
 
 import java.io.File;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUploadUtil {
 
 	@Autowired
-	FileUploadPathResolver pathModuler = new FileUploadPathResolver();
+	FileUploadPathResolver pathModuler;
 	
 	
 	public String saveFile(MultipartFile file, Model model) throws Exception{
@@ -21,8 +22,9 @@ public class FileUploadUtil {
             return "uploadResult";
         }
 
+		String uuid = UUID.randomUUID().toString();
         // 업로드 경로 설정
-        String uploadDir = pathModuler.getUploadPath(file.getOriginalFilename());
+        String uploadDir = pathModuler.getUploadPath(file.getOriginalFilename() + uuid);
         File uploadFolder = new File(uploadDir);
 
         // 디렉토리가 존재하지 않으면 생성
@@ -32,7 +34,7 @@ public class FileUploadUtil {
 
         try {
             // 파일 저장
-            File destinationFile = new File(uploadDir + "/" + file.getOriginalFilename());
+            File destinationFile = new File(uploadDir + "/" + file.getOriginalFilename() + uuid);
             file.transferTo(destinationFile);
 
             model.addAttribute("message", "파일 업로드 성공!");

@@ -11,7 +11,7 @@ public class ResourceShop {
 	private LocalDate resourceDate;
 	private String resourceFile;
 	private Long rankingId;
-	private Long resourceCategoryId;
+	private Long resourceSubCategoryId;
 	private Long userId;
 	
 	public Long getItemId() {
@@ -38,12 +38,6 @@ public class ResourceShop {
 	public void setItemPrice(Long itemPrice) {
 		this.itemPrice = itemPrice;
 	}
-	public Long getResourceCategoryId() {
-		return resourceCategoryId;
-	}
-	public void setResourceCategoryId(Long resourceCategoryId) {
-		this.resourceCategoryId = resourceCategoryId;
-	}
 	public Long getRankingId() {
 		return rankingId;
 	}
@@ -61,6 +55,12 @@ public class ResourceShop {
 	}
 	public void setResourceDate(LocalDate resourceDate) {
 		this.resourceDate = resourceDate;
+	}
+	public Long getResourceSubCategoryId() {
+		return resourceSubCategoryId;
+	}
+	public void setResourceSubCategoryId(Long resourceSubCategoryId) {
+		this.resourceSubCategoryId = resourceSubCategoryId;
 	}
 
 }
