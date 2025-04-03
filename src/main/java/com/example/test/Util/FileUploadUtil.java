@@ -3,9 +3,11 @@ package com.example.test.Util;
 import java.io.File;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+@Component
 public class FileUploadUtil {
 
 	@Autowired
@@ -39,7 +41,8 @@ public class FileUploadUtil {
         } catch (Exception e) {
             model.addAttribute("message", "파일 업로드 중 오류 발생: " + e.getMessage());
         }
+        
         //저장 경로 반환
-		return uploadDir;
+		return uploadDir;	//컨트롤러에서 
 	}
 }

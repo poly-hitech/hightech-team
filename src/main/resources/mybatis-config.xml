@@ -8,11 +8,13 @@
 	
 	<!-- 연결할 MODEL 혹은 VO 혹은 DTO추가 -->
 	<typeAliases>
-		<typeAlias type="com.example.test.model.TestDto" alias="Test"></typeAlias>
+		<typeAlias type="com.example.test.model.Users" alias="Users"></typeAlias>
+		<typeAlias type="com.example.test.model.Market" alias="Market"></typeAlias>
 	</typeAliases>
 	
 	<!-- mapper 파일 추가 -->
 	<mappers>
-		<mapper resource="mybatis/test.xml"/>
+		<mapper resource="mybatis/users.xml"/>
+		<mapper resource="mybatis/market.xml"/>
 	</mappers>
 </configuration>

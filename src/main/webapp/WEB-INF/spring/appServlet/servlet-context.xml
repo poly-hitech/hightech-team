@@ -35,7 +35,8 @@
 	<!-- 트랜잭션 활성화 트랜잭션-->
 	<tx:annotation-driven/>
 	
-	
+	<beans:bean id="Counting" class="com.example.test.Component.Counting"></beans:bean>
+		
 	<!-- scheduler -->
 	<task:annotation-driven scheduler="scheduler"/>
 	<task:scheduler id="scheduler" pool-size="10"/>
@@ -49,7 +50,31 @@
 	</task:scheduled-tasks>
 	
 	<!-- interceptor작성 -->
-	
+	<interceptors>
+		<interceptor>		
+			<mapping path="/admin/**"/>
+			<mapping path="/event/**"/>
+			
+			<exclude-mapping path="/page_info/page_info"/>
+			<exclude-mapping path="/music_info/list"/>
+			<exclude-mapping path="/event/list"/>
+			 <!--제외시켜라  -->
+			
+			<beans:bean class="com.example.test.interceptor.AdminInterceptor"></beans:bean>	<!-- 어떤걸 실행시킬지 -->
+		</interceptor>
+		
+		<interceptor>		
+			<mapping path="/partner/**"/>
+			
+			<beans:bean class="com.example.test.interceptor.PartnerInterceptor"></beans:bean>	<!-- 어떤걸 실행시킬지 -->
+		</interceptor>
+		
+		<interceptor>		
+			<mapping path="/normal/**"/>
+			
+			<beans:bean class="com.example.test.interceptor.NormalInterceptor"></beans:bean>	<!-- 어떤걸 실행시킬지 -->
+		</interceptor>
+	</interceptors>
 	
 	
 </beans:beans>

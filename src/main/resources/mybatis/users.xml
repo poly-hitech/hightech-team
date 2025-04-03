@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="users">
-
+	<select id = "total" resultType="Integer">
+			select count(*) from users	
+		</select>
+		
+		<select id="list" resultType="Users">
+			select * from users
+		</select>
+		
+		<select id="items" resultType="Users">
+			select * from users
+			where users.userId=#{userId}
+		</select>
+		
+		<select id="item" resultType="Users">
+			select * from users
+			where userId=#{userId}
+		</select>
+		
+		<insert id="add">
+			insert into users
+			values (#{username}, #{password},#{nickname}, #{birthday}, #{phone}, #{gender}, #{profileImage}, #{agreeStatus}, #{signupDay}, #{roleId})
+		</insert>
+		
+		<update id="update">
+			update users
+			set username=#{username}, password=#{password}, nickname=#{nickname}, birthday=#{birthday}, phone=#{phone},gender=#{gender}, profileImage=#{profileImage}, agreeStatus=#{agreeStatus}, signupDay=#{signupDay}, roleId=#{roleId}
+			where userID=#{userID}
+		</update>
+		
+		<delete id="delete">
+			delete from users
+			where userId=#{userId}
+		</delete>
+		
+		<select id="login" resultType="Users">
+			select * from users
+			where userId=#{userId} and password=#{password}
+		</select>
 </mapper>
