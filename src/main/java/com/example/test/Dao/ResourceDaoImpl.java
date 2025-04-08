@@ -18,19 +18,18 @@ public class ResourceDaoImpl implements ResourceDao {
 	
 	@Override
 	public List<MarketList> list() {
-		// TODO Auto-generated method stub
-		return sql.selectList("market.marketList");
+		return sql.selectList("resourcesshop.marketList");
 	}
 
 	@Override
 	public List<MarketList> list(Long userId) {
-		return sql.selectList("market.Mylist", userId);
+		return sql.selectList("resourcesshop.Mylist", userId);
 	}
 
 	@Override
 	public void save(ResourceShop resource) {
 		
-		sql.insert("market.resourceAdd", resource);
+		sql.insert("resourcesshop.resourceAdd", resource);
 	}
 
 }

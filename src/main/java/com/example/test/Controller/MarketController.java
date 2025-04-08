@@ -27,7 +27,7 @@ public class MarketController {
 	ResourceShopService resourceShopService;
 	
 	//전체 상점 목록
-	@GetMapping("/list")
+	@GetMapping("public/list")
 	String shopList(Model model) {
 		List<MarketList> list = resourceShopService.list();
 		
@@ -37,7 +37,7 @@ public class MarketController {
 	}
 	
 	//유저별 등록한 리소스 목록
-	@GetMapping("{userId}/list")
+	@GetMapping("user/{userId}/list")
 	String MyshopList(@PathVariable Long userId, Model model, HttpSession session) {
 		
 		List<MarketList> list = resourceShopService.list(userId);
@@ -47,6 +47,7 @@ public class MarketController {
 		return path + "list";
 	}
 	
+	//리소스 상품 등록
 	@PostMapping("{roleId}/add/{userId}")
 	String uploadResource(@PathVariable Long roleId, @PathVariable Long userId, Market market, @RequestParam MultipartFile file, Model model) throws Exception {
 		
@@ -54,5 +55,15 @@ public class MarketController {
 		
 		return path + roleId + "add";
 	}
+	
+	/*
+	//리소스 상품 수정
+	@PostMapping("{roleId}/add/{itemId}")
+	String updateResource(@PathVariable Long roleId, @PathVariable Long itemId, Market market, @RequestParam MultipartFile file, Model model) throws Exception {
+		
+		resourceShopService.Resource(itemId, market, file, model);
+		
+		return path + roleId + "update";
+	}*/
 	
 }

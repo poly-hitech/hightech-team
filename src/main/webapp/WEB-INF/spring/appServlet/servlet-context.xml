@@ -53,7 +53,6 @@
 	<interceptors>
 		<interceptor>		
 			<mapping path="/admin/**"/>
-			<mapping path="/event/**"/>
 			
 			<exclude-mapping path="/page_info/page_info"/>
 			<exclude-mapping path="/music_info/list"/>

@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.test.Model.Market;
 import com.example.test.Model.MarketList;
+import com.example.test.Model.Users;
 
 public interface ResourceShopService {
 

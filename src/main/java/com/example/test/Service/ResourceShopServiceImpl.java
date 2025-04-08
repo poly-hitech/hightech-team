@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.test.Dao.ResourceDao;
 import com.example.test.Model.Market;
 import com.example.test.Model.MarketList;
+import com.example.test.Model.Users;
 import com.example.test.Util.FileUploadUtil;
 
 @Service
@@ -38,11 +39,12 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 	@Override
 	public void addResource(Long userId, Market market, MultipartFile file, Model model) throws Exception{
 		
-		String filepath = fileupload.saveFile(file, model);
+		//파일 업로드(업로드와 경로 추출)
+		String filepath = fileupload.saveFile(file, model);		//반환된 파일 업로드 경로를 가져와 변수저장
 		
 		if (filepath != null && !filepath.isEmpty()) {
             // 파일이 정상적으로 업로드된 경우에만 경로를 설정
-			market.getResourceShop().setResourceFile(filepath);
+			market.getResourceShop().setResourceFile(filepath);		//파일 경로를 db에 저장하기 위함
 			
 			market.getResourceShop().setUserId(userId);
             market.getResourceShop().setResourceSubCategoryId(market.getResourceSubCategory().getResourceSubCategoryId());
@@ -57,4 +59,6 @@ public class ResourceShopServiceImpl implements ResourceShopService {
             model.addAttribute("message", "파일 업로드에 실패하였습니다.");
         }
 		
-	}}
+	}
+
+}
