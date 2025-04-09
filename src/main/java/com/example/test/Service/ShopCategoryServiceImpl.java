@@ -36,6 +36,8 @@ public class ShopCategoryServiceImpl implements ShopCategoryService {
 	public void addAdminCategory(MarketCategory item) {
 
 		dao.add(item);
+		//dao.addCategory(item.getResourceCategory());
+		//dao.addSubCategory(item.getResourceSubCategory());
 	}
 
 }

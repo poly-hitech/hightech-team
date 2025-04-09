@@ -35,26 +35,29 @@
 	<!-- 트랜잭션 활성화 트랜잭션-->
 	<tx:annotation-driven/>
 	
+	<!-- 
 	<beans:bean id="Counting" class="com.example.test.Component.Counting"></beans:bean>
-		
+	 -->
+	
 	<!-- scheduler -->
+	<!--  
 	<task:annotation-driven scheduler="scheduler"/>
-	<task:scheduler id="scheduler" pool-size="10"/>
+	<task:scheduler id="scheduler" pool-size="10"/> -->
 	
 		<!--  <beans:bean id="Counting" class="어떤 클래스에 컴포넌트를 적용할 것인가?"> </beans:bean>-->
-	
+	<!--  
 	<task:scheduled-tasks>
 		<task:scheduled ref="Counting" method="resetDailyCount" cron = "0 0 0 * * *"/>
 		<task:scheduled ref="Counting" method="resetWeekCount" cron = "0 0 0 * * MON"/>
 		<task:scheduled ref="Counting" method="resetMonthCount" cron = "0 0 0 1 * *"/>
-	</task:scheduled-tasks>
+	</task:scheduled-tasks> -->
 	
 	<!-- interceptor작성 -->
 	<interceptors>
 		<interceptor>		
 			<mapping path="/admin/**"/>
 			
-			<exclude-mapping path="/page_info/page_info"/>
+			<exclude-mapping path="**/shop/**"/>
 			<exclude-mapping path="/music_info/list"/>
 			<exclude-mapping path="/event/list"/>
 			 <!--제외시켜라  -->

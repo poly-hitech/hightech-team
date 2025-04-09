@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
 // 스케쥴러를 사용한 일간/주간/월간 초기화
 @Component
 public class Counting {
-	/*
+	
+/*
     @Autowired
     CountingService service;
     
@@ -35,5 +36,6 @@ public class Counting {
     public void resetMonthCount() {
     	service.resetMonthCount();
     	
-    	Service.resetMonthrank(); */
-    }
+    	Service.resetMonthrank();
+    }*/
+}

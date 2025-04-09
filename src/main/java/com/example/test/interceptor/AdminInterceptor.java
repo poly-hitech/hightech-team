@@ -22,7 +22,7 @@ public class AdminInterceptor implements HandlerInterceptor  {
 		
 		if(member != null) {
 			//로그인한 일반 사용자
-			if(UsersRole.NORMAL.equals(member.getRoleId())) {
+			if(UsersRole.ADMIN.equals(member.getRoleId())) {
 
 				return true;
 			}

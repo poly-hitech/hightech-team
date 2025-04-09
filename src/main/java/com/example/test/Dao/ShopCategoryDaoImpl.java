@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.test.Model.MarketCategory;
+import com.example.test.Model.ResourceCategory;
+import com.example.test.Model.ResourceSubCategory;
 
 @Repository
 public class ShopCategoryDaoImpl implements ShopCategoryDao {
@@ -35,7 +37,13 @@ public class ShopCategoryDaoImpl implements ShopCategoryDao {
 	@Override
 	public void add(MarketCategory item) {
 
-		sql.insert("resourceCategory.add", item);
+		sql.insert("resourceCategory.addCate", item.getResourceCategory());
+		
+		if(item.getResourceSubCategory() != null) {
+			List<ResourceSubCategory> list = item.getResourceSubCategory();
+			sql.insert("resourceCategory.addSubCate", list);
+		}
+
 	}
 
 }

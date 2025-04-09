@@ -49,7 +49,7 @@ public class AdminController {
 		return path + "shop";
 	}
 	
-	//리소스 상점 게부 카테고리 변경하기
+	//리소스 상점 세부 카테고리 변경하기
 	@PostMapping("/shop/{resourceCategoryId}")
 	String updateAdminShop(@PathVariable Long resourceCategoryId, MarketCategory item) {
 		item.getResourceCategory().setResourceCategoryId(resourceCategoryId);
@@ -61,7 +61,7 @@ public class AdminController {
 	
 	//리소스 상점 카테고리 추가
 	@PostMapping("/shop/add")
-	String addAdminShop( MarketCategory item) {
+	String addAdminShop(MarketCategory item) {
 		
 		shopCategoryService.addAdminCategory(item);
 		

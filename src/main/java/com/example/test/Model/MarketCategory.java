@@ -1,14 +1,16 @@
 package com.example.test.Model;
 
+import java.util.List;
+
 public class MarketCategory {
 
-	private ResourceSubCategory resourceSubCategory;
+	private List<ResourceSubCategory> resourceSubCategory;
 	private ResourceCategory resourceCategory;
 	
-	public ResourceSubCategory getResourceSubCategory() {
+	public List<ResourceSubCategory> getResourceSubCategory() {
 		return resourceSubCategory;
 	}
-	public void setResourceSubCategory(ResourceSubCategory resourceSubCategory) {
+	public void setResourceSubCategory(List<ResourceSubCategory> resourceSubCategory) {
 		this.resourceSubCategory = resourceSubCategory;
 	}
 	public ResourceCategory getResourceCategory() {

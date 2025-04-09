@@ -37,8 +37,8 @@ public class MarketController {
 	}
 	
 	//유저별 등록한 리소스 목록
-	@GetMapping("user/{userId}/list")
-	String MyshopList(@PathVariable Long userId, Model model, HttpSession session) {
+	@GetMapping("{roleId}/{userId}/list")
+	String MyshopList(@PathVariable Long userId, @PathVariable Long roleId, Model model, HttpSession session) {
 		
 		List<MarketList> list = resourceShopService.list(userId);
 		

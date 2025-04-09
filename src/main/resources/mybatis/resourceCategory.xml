@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="resourceCategory">
+	<select id="item" resultType="MarketCategory">
+		select ResourceCategory.*, ResourceSubCategory.* from ResourceCategory
+		join ResourceSubCategory on ResourceCategory.resourceCategoryId = ResourceSubCategory.resourceCategoryId
+		where resourceCategoryId=#{resourceCategoryId}
+	</select>
+
+	<insert id="addCate">
+		insert
+		into ResourceCategory
+		values (RESOURCESUBCATEGORY_SEQ.nextval, #{resourceCategoryName})
+		
+		<selectKey keyProperty="resourceCategoryId" resultType="Long" order="AFTER">
+			select RESOURCESUBCATEGORY_SEQ.currval FROM dual
+		</selectKey>
+	</insert> 
+
+	<insert id="addSubCate" parameterType="java.util.List">
+	    INSERT ALL
+	    <foreach collection="list" item="item">
+	        INTO ResourceSubCategory 
+	        (resourceSubCategoryId, resourceSubCategoryName, resourceCategoryId)
+	        VALUES (RESOURCESUBCATEGORY_SEQ.nextval, #{item.resourceSubCategoryName}, #{item.resourceCategoryId})
+	    </foreach>
+	    SELECT * FROM dual
+	</insert>
+</mapper>
