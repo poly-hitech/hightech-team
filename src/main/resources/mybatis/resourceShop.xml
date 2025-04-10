@@ -1,6 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="resourceShop">
-
+	<insert id="add">
+		insert into ResourceSubCategory
+		values (#{RESOURCESHOP_SEQ.nextval}, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceFile}, #{resourceDate}, #{resourceSubCategoryId}, #{userID})
+	</insert>
+	
+	<select id="list" resultType="MarketList" resultMap="MarketListMap">
+		select ResourceShop.*, ResourceSubCategory.*, ResourceCategory.*, Ranking.*, Counting.*
+		from ResourceShop
+		join Ranking on ResourceShop.rankid = Ranking.rankid
+		left join ResourceSubCategory on ResourceSubCategory.resourceSubCategoryId = ResourceShop.resourceSubCategoryId
+		left join ResourceCategory on ResourceSubCategory.resourceCategoryId = ResourceCategory.resourceCategoryId
+		left join OrdersDetails on OrdersDetails.itemId = ResourceShop.itemId
+		left join Counting on OrdersDetails.ordersDetailsId = Counting.ordersDetailsId
+	</select>
+	
+	<resultMap type="MarketList" id="MarketListMap" autoMapping="true">
+		<id column="itemId" property="itemId" />
+		<result column="itemName" property="itemName"/>
+		<result column="itemPrice" property="itemPrice"/>
+		<result column="itemWriter" property="itemWriter"/>
+		<result column="resourceFile" property="resourceFile"/>
+		<result column="resourceDate" property="resourceDate"/>
+		<result column="resourceSubCategoryId" property="resourceSubCategoryId"/>
+		<result column="rankingId" property="rankingId"/>
+		
+		<association javaType="Ranking" property="counting">
+			<id column="rankId" property="rankId"/>
+			<result column="totalRank" property="totalRank"/>
+			<result column="dailyRank" property="dailyRank"/>
+			<result column="weeklyRank" property="weeklyRank"/>
+			<result column="monthlyRank" property="monthlyRank"/>
+		</association>
+		
+	    <association javaType="ResourceSubCategory" property="resourceSubCategory" >
+	        <id property="resourceSubCategoryId" column="resourceSubCategoryId"/>
+	        <result property="resourceSubCategoryName" column="resourceSubCategoryName"/>
+	
+	        <association javaType="ResourceCategory" property="resourceCategory">
+	            <id property="resourceCategoryId" column="resourceCategoryId"/>
+	            <result property="resourceCategoryName" column="resourceCategoryName"/>
+	        </association>
+	    </association>
+		
+		<association javaType="Counting" property="counting">
+			<id column="countingId" property="countingId"/>
+			<result column="totalcount" property="totalcount"/>
+			<result column="dailycount" property="dailycount"/>
+			<result column="weekcount" property="weekcount"/>
+			<result column="monthcount" property="monthcount"/>
+		</association>
+	</resultMap>
+	
+	
 
 </mapper>
