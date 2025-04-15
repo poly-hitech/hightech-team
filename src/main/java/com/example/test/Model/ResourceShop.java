@@ -1,6 +1,6 @@
 package com.example.test.Model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 //리소스 아이템 정보
 public class ResourceShop {
@@ -8,7 +8,7 @@ public class ResourceShop {
 	private Long itemId;
 	private String itemName;
 	private Long itemPrice;
-	private LocalDate resourceDate;
+	private Date resourceDate;
 	private String resourceFile;
 	private Long rankingId;
 	private Long resourceSubCategoryId;
@@ -50,10 +50,10 @@ public class ResourceShop {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-	public LocalDate getResourceDate() {
+	public Date getResourceDate() {
 		return resourceDate;
 	}
-	public void setResourceDate(LocalDate resourceDate) {
+	public void setResourceDate(Date resourceDate) {
 		this.resourceDate = resourceDate;
 	}
 	public Long getResourceSubCategoryId() {

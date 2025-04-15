@@ -6,15 +6,19 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	
-	<!-- 연결할 MODEL 혹은 VO 혹은 DTO추가 -->
+	<!-- 연결할 MODEL 혹은 VO 혹은 DTO추가(각각의 모델마다 패키지명을 생략하여 지정한 명칭으로 해당 모델을 사용할 수 있게 해줌) -->
 	<typeAliases>
 		<typeAlias type="com.example.test.Model.Users" alias="Users"></typeAlias>
 		<typeAlias type="com.example.test.Model.MarketCategory" alias="MarketCategory"/>
+		<typeAlias type="com.example.test.Model.ResourceCategory" alias="ResourceCategory"/>
+		<typeAlias type="com.example.test.Model.ResourceSubCategory" alias="ResourceSubCategory"/>
+		
 	</typeAliases>
 	
 	<!-- mapper 파일 추가 -->
 	<mappers>
 		<mapper resource="mybatis/users.xml"/>
 		<mapper resource="mybatis/resourceCategory.xml"/>
+		<mapper resource="mybatis/resourceSubCategory.xml"/
 	</mappers>
 </configuration>

@@ -1,11 +1,11 @@
 package com.example.test.Model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 //주문
 public class Orders {
 	private Long ordersId;
-	private LocalDate orderDate;
+	private Date orderDate;
 	private String ordersUser;
 	private Long userId;
 	
@@ -15,10 +15,10 @@ public class Orders {
 	public void setOrdersId(Long ordersId) {
 		this.ordersId = ordersId;
 	}
-	public LocalDate getOrderDate() {
+	public Date getOrderDate() {
 		return orderDate;
 	}
-	public void setOrderDate(LocalDate orderDate) {
+	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
 	public String getOrdersUser() {

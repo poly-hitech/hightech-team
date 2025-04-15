@@ -58,8 +58,6 @@
 			<mapping path="/admin/**"/>
 			
 			<exclude-mapping path="**/shop/**"/>
-			<exclude-mapping path="/music_info/list"/>
-			<exclude-mapping path="/event/list"/>
 			 <!--제외시켜라  -->
 			
 			<beans:bean class="com.example.test.interceptor.AdminInterceptor"></beans:bean>	<!-- 어떤걸 실행시킬지 -->
@@ -67,6 +65,7 @@
 		
 		<interceptor>		
 			<mapping path="/partner/**"/>
+
 			
 			<beans:bean class="com.example.test.interceptor.PartnerInterceptor"></beans:bean>	<!-- 어떤걸 실행시킬지 -->
 		</interceptor>

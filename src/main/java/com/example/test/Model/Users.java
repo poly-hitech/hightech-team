@@ -1,6 +1,5 @@
 package com.example.test.Model;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 //회원정보
@@ -8,7 +7,7 @@ public class Users {
 	private Long userId;
 	private Date birthday;
 	private String phone;
-	private LocalDate signupDay;
+	private Date signupDay;
 	private String gender;
 	private String profileImage;
 	private String nickname;
@@ -35,10 +34,10 @@ public class Users {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public LocalDate getSignupDay() {
+	public Date getSignupDay() {
 		return signupDay;
 	}
-	public void setSignupDay(LocalDate signupDay) {
+	public void setSignupDay(Date signupDay) {
 		this.signupDay = signupDay;
 	}
 	public String getGender() {

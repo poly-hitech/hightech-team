@@ -6,6 +6,11 @@
 		join ResourceSubCategory on ResourceCategory.resourceCategoryId = ResourceSubCategory.resourceCategoryId
 		where resourceCategoryId=#{resourceCategoryId}
 	</select>
+ 
+	<select id="selectCategory" resultType="ResourceCategory">
+		select * from ResourceCategory
+		where resourceCategoryId=#{resourceCategoryId}
+	</select>
 
 	<insert id="addCate">
 		insert
@@ -15,7 +20,7 @@
 		<selectKey keyProperty="resourceCategoryId" resultType="Long" order="AFTER">
 			select RESOURCESUBCATEGORY_SEQ.currval FROM dual
 		</selectKey>
-	</insert> 
+	</insert>
 
 	<insert id="addSubCate" parameterType="java.util.List">
 	    INSERT ALL

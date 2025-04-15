@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="../js/addSubCateButton.js"></script>
+<script src="/js/addSubCateButton.js"></script>
 </head>
 <body>
 	<form method="post" class="d-grid gap-3">

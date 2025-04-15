@@ -10,6 +10,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import com.example.test.Model.Users;
 import com.example.test.Model.UsersRole;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component
 public class PartnerInterceptor implements HandlerInterceptor  {
 	
@@ -22,11 +25,12 @@ public class PartnerInterceptor implements HandlerInterceptor  {
 		
 		if(member != null) {
 			//로그인한 일반 사용자
-			if(UsersRole.NORMAL.equals(member.getRoleId())) {
+			if(UsersRole.PARTNER.equals(member.getRoleId())) {
 
 				return true;
 			}
-				
+			log.info("session에 담긴 값 확인 : ", member.getRoleId());
+			
 			response.sendRedirect("/");
 			return false;
 		}

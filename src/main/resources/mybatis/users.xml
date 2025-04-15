@@ -11,12 +11,12 @@
 		
 		<select id="items" resultType="Users">
 			select * from users
-			where users.userId=#{userId}
+			where "userId"=#{userId}
 		</select>
 		
 		<select id="item" resultType="Users">
 			select * from users
-			where userId=#{userId}
+			where "userId"=#{userId}
 		</select>
 		
 		<insert id="add">
@@ -26,17 +26,17 @@
 		
 		<update id="update">
 			update users
-			set username=#{username}, password=#{password}, nickname=#{nickname}, birthday=#{birthday}, phone=#{phone},gender=#{gender}, profileImage=#{profileImage}, agreeStatus=#{agreeStatus}, signupDay=#{signupDay}, roleId=#{roleId}
-			where userID=#{userID}
+			set "username"=#{username}, "password"=#{password}, "nickname"=#{nickname}, "birthday"=#{birthday}, "phone"=#{phone}, "gender"=#{gender}, "profileImage"=#{profileImage}, "agreeStatus"=#{agreeStatus}, "signupDay"=#{signupDay}, "roleId"=#{roleId}
+			where "userId"=#{userId}
 		</update>
 		
 		<delete id="delete">
 			delete from users
-			where userId=#{userId}
+			where "userId"=#{userId}
 		</delete>
 		
 		<select id="login" resultType="Users">
 			select * from users
-			where userId=#{userId} and password=#{password}
+			where "username"=#{username} and "password"=#{password}
 		</select>
 </mapper>

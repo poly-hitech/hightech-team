@@ -1,12 +1,12 @@
 package com.example.test.Model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 //상품 리뷰
 public class ShopReview {
 	private Long reviewId;
 	private String reviewContent;
-	private LocalDate reviewDate;
+	private Date reviewDate;
 	private String reviewWriter;
 	private Long ordersDetailId;
 	private Long userId;
@@ -23,10 +23,10 @@ public class ShopReview {
 	public void setReviewContent(String reviewContent) {
 		this.reviewContent = reviewContent;
 	}
-	public LocalDate getReviewDate() {
+	public Date getReviewDate() {
 		return reviewDate;
 	}
-	public void setReviewDate(LocalDate reviewDate) {
+	public void setReviewDate(Date reviewDate) {
 		this.reviewDate = reviewDate;
 	}
 	public String getReviewWriter() {

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.test.Dao.ShopCategoryDao;
 import com.example.test.Model.MarketCategory;
+import com.example.test.Model.ResourceSubCategory;
 
 @Service
 public class ShopCategoryServiceImpl implements ShopCategoryService {
@@ -27,7 +28,7 @@ public class ShopCategoryServiceImpl implements ShopCategoryService {
 	}
 
 	@Override
-	public void updateAdminCategory(MarketCategory item) {
+	public void updateAdminCategory(ResourceSubCategory item) {
 		
 		dao.update(item);
 	}
@@ -36,8 +37,6 @@ public class ShopCategoryServiceImpl implements ShopCategoryService {
 	public void addAdminCategory(MarketCategory item) {
 
 		dao.add(item);
-		//dao.addCategory(item.getResourceCategory());
-		//dao.addSubCategory(item.getResourceSubCategory());
 	}
 
 }

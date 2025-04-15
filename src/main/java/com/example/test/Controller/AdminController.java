@@ -17,6 +17,7 @@ import com.example.test.Service.ShopCategoryService;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	//path 등록해서 
 	private final static String path = "admin/";
 	
 	@Autowired
@@ -51,12 +52,11 @@ public class AdminController {
 	
 	//리소스 상점 세부 카테고리 변경하기
 	@PostMapping("/shop/{resourceCategoryId}")
-	String updateAdminShop(@PathVariable Long resourceCategoryId, MarketCategory item) {
-		item.getResourceCategory().setResourceCategoryId(resourceCategoryId);
+	String updateAdminShop(@PathVariable Long resourceCategoryId, ResourceSubCategory item) {
 		
 		shopCategoryService.updateAdminCategory(item);
 		
-		return path + "shop";
+		return "redirect:shop";
 	}
 	
 	//리소스 상점 카테고리 추가
@@ -65,7 +65,7 @@ public class AdminController {
 		
 		shopCategoryService.addAdminCategory(item);
 		
-		return path + "shop";
+		return "redirect:shop";
 	}
 	
 	//리소스 상점 카테고리 추가 페이지
@@ -74,6 +74,7 @@ public class AdminController {
 		
 		return path + "shop/add";
 	}
+	
 	
 	
 

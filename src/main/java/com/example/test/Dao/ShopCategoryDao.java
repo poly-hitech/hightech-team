@@ -12,7 +12,7 @@ public interface ShopCategoryDao {
 
 	MarketCategory item(Long resourceCategoryId);
 
-	void update(MarketCategory item);
+	void update(ResourceSubCategory item);
 	
 	void add(MarketCategory item);
 
