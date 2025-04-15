@@ -19,6 +19,7 @@
 	<mappers>
 		<mapper resource="mybatis/users.xml"/>
 		<mapper resource="mybatis/resourceCategory.xml"/>
-		<mapper resource="mybatis/resourceSubCategory.xml"/
+		<mapper resource="mybatis/resourceSubCategory.xml"/>
+		<mapper resource="mybatis/resourceShop.xml"/>
 	</mappers>
 </configuration>

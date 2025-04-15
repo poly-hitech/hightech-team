@@ -7,11 +7,13 @@
 		where resourceCategoryId=#{resourceCategoryId}
 	</select>
  
+ 	<!-- 리소스 1차 카테고리 로출 -->
 	<select id="selectCategory" resultType="ResourceCategory">
 		select * from ResourceCategory
 		where resourceCategoryId=#{resourceCategoryId}
 	</select>
 
+	<!-- 리소스 1차 카테고리 추가 sql -->
 	<insert id="addCate">
 		insert
 		into ResourceCategory
@@ -22,6 +24,7 @@
 		</selectKey>
 	</insert>
 
+	<!-- 리소스 2차 카테고리 추가 sql -->
 	<insert id="addSubCate" parameterType="java.util.List">
 	    INSERT ALL
 	    <foreach collection="list" item="item">
@@ -31,4 +34,27 @@
 	    </foreach>
 	    SELECT * FROM dual
 	</insert>
+	
+	<!-- 리소스 1차, 2차 카테고리 리스트 출력 -->
+	<select id="list" resultMap="ResourceCategoryMap" resultType="MarketCategory">
+		SELECT * 
+	    FROM
+        (
+	        SELECT sub.*, ROWNUM rnum FROM (
+	            SELECT * FROM ResourceCategory 
+	            left JOIN ResourceSubCategory ON ResourceCategory.resourceCategoryId=ResourceSubCategory.resourceCategoryId
+	        ) sub)
+	</select>
+	
+	<!-- 리소스 1차, 2차 카테고리 -->
+	<resultMap type="ResourceCategory" id="ResourceCategoryMap">
+		<id column="resourceCategoryId" property="resourceCategoryId"/>
+		<result column="resourceCategoryName" property="resourceCategoryName"/>
+		
+		<collection javaType="ArrayList" property="resourceSubCategory" ofType="ResourceSubCategory" column="resourceCategoryId" autoMapping="true">
+			<id column="resourceSubCategoryId" property="resourceSubCategoryId"/>
+			<result column="resourceSubCategoryName" property="resourceSubCategoryName"/>
+			<result column="resourceCategoryId" property="resourceCategoryId"/>
+		</collection>
+	</resultMap>
 </mapper>

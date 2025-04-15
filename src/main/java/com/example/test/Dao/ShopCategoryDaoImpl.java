@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.test.Model.MarketCategory;
 import com.example.test.Model.ResourceCategory;
@@ -38,6 +39,7 @@ public class ShopCategoryDaoImpl implements ShopCategoryDao {
 	}
 
 	//리소스 1차, 2차 카테고리 추가
+	@Transactional
 	@Override
 	public void add(MarketCategory item) {
 		
