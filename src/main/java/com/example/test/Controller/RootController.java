@@ -44,7 +44,7 @@ public class RootController {
 		
 		if (result) {
             session.setAttribute("member", item);
-            log.info("session에 담긴 값을 확인 합니다.", session.toString());
+            log.info("session에 담긴 값을 확인 합니다.", session.getAttributeNames());
            
             return "redirect: /";
         } else {

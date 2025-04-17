@@ -4,6 +4,10 @@
 	<insert id="add">
 		insert into ResourceSubCategory
 		values (#{RESOURCESHOP_SEQ.nextval}, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceFile}, #{resourceDate}, #{resourceSubCategoryId}, #{userID})
+		
+		<selectKey keyProperty="resourceCategoryId" resultType="Long" order="AFTER">
+       		SELECT RESOURCECATEGORY_SEQ.CURRVAL FROM DUAL
+    	</selectKey>
 	</insert>
 	
 	<select id="list" resultType="MarketList" resultMap="MarketListMap">
@@ -26,7 +30,7 @@
 		<result column="resourceSubCategoryId" property="resourceSubCategoryId"/>
 		<result column="rankingId" property="rankingId"/>
 		
-		<association javaType="Ranking" property="counting">
+		<association javaType="Ranking" property="ranking">
 			<id column="rankId" property="rankId"/>
 			<result column="totalRank" property="totalRank"/>
 			<result column="dailyRank" property="dailyRank"/>

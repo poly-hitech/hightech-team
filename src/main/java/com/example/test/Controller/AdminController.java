@@ -14,6 +14,9 @@ import com.example.test.Model.MarketCategory;
 import com.example.test.Model.ResourceSubCategory;
 import com.example.test.Service.ShopCategoryService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -64,6 +67,9 @@ public class AdminController {
 	String addAdminShop(MarketCategory item) {
 		
 		shopCategoryService.addAdminCategory(item);
+		log.info("마켓 카테고리: ", item);
+		log.info("마켓 1차 카테고리: ", item.getResourceCategory());
+		log.info("마켓 2차 카테고리: ", item.getResourceSubCategory());
 		
 		return "redirect:shop";
 	}

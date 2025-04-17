@@ -12,7 +12,9 @@
 		<typeAlias type="com.example.test.Model.MarketCategory" alias="MarketCategory"/>
 		<typeAlias type="com.example.test.Model.ResourceCategory" alias="ResourceCategory"/>
 		<typeAlias type="com.example.test.Model.ResourceSubCategory" alias="ResourceSubCategory"/>
-		
+		<typeAlias type="com.example.test.Model.MarketList" alias="MarketList"/>
+		<typeAlias type="com.example.test.Model.Ranking" alias="Ranking"/>
+		<typeAlias type="com.example.test.Model.Counting" alias="Counting"/>
 	</typeAliases>
 	
 	<!-- mapper 파일 추가 -->

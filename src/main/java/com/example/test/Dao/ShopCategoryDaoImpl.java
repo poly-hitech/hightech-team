@@ -11,6 +11,9 @@ import com.example.test.Model.MarketCategory;
 import com.example.test.Model.ResourceCategory;
 import com.example.test.Model.ResourceSubCategory;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Repository
 public class ShopCategoryDaoImpl implements ShopCategoryDao {
 	
@@ -42,19 +45,16 @@ public class ShopCategoryDaoImpl implements ShopCategoryDao {
 	@Transactional
 	@Override
 	public void add(MarketCategory item) {
-		
-		ResourceCategory resourceCategory = item.getResourceCategory();
 
 		//리소스 1차 카테고리 생성
-		sql.insert("resourceCategory.addCate", resourceCategory);
+		sql.insert("resourceCategory.addCate", item.getResourceCategory());
 		
-		//생성한 리소스 1차 카테고리 호출
-		resourceCategory = sql.selectOne("resourceCategory.selectCategory", item.getResourceCategory().getResourceCategoryId());
+		//생성한 리소스 1차 카테고리 기본키 호출
+		Long resourceCategoryId = item.getResourceCategory().getResourceCategoryId();
+		log.info("resourceCategoryId" , resourceCategoryId);
 		
 		//리소스 1차 카테고리가 생성이 완료되었다면 
-		if(resourceCategory != null) {
-			//생성된 리소스 1차 카테고리의 기본키 추출
-			Long resourceCategoryId = resourceCategory.getResourceCategoryId();
+		if(resourceCategoryId != null) {
 
 			//클라이언트에서 등록된 리소스 2차 카테고리 정보들 호출
 			List<ResourceSubCategory> list = item.getResourceSubCategory();
