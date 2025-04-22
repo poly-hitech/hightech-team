@@ -2,13 +2,9 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>메인페이지</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+	<c:import url="menu.jsp"></c:import>
 </body>
 </html>

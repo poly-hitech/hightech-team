@@ -6,7 +6,7 @@ public class MarketCategory {
 
 	private List<ResourceSubCategory> resourceSubCategory;
 	private ResourceCategory resourceCategory;
-	
+
 	public List<ResourceSubCategory> getResourceSubCategory() {
 		return resourceSubCategory;
 	}

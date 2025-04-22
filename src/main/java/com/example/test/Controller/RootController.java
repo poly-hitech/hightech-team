@@ -33,6 +33,11 @@ public class RootController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/menu")
+	String menu() {
+		return "menu";
+	}
+	
 	@GetMapping("/login")
 	String login() {
 		return "login";

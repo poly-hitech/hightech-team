@@ -8,11 +8,13 @@ public class ResourceShop {
 	private Long itemId;
 	private String itemName;
 	private Long itemPrice;
+	private String itemWriter;
 	private Date resourceDate;
 	private String resourceFile;
 	private Long rankingId;
 	private Long resourceSubCategoryId;
 	private Long userId;
+	private Ranking ranking;
 	
 	public Long getItemId() {
 		return itemId;
@@ -61,6 +63,18 @@ public class ResourceShop {
 	}
 	public void setResourceSubCategoryId(Long resourceSubCategoryId) {
 		this.resourceSubCategoryId = resourceSubCategoryId;
+	}
+	public String getItemWriter() {
+		return itemWriter;
+	}
+	public void setItemWriter(String itemWriter) {
+		this.itemWriter = itemWriter;
+	}
+	public Ranking getRanking() {
+		return ranking;
+	}
+	public void setRanking(Ranking ranking) {
+		this.ranking = ranking;
 	}
 
 }

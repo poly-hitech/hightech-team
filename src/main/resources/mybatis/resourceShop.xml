@@ -21,14 +21,14 @@
 	</select>
 	
 	<resultMap type="MarketList" id="MarketListMap" autoMapping="true">
-		<id column="itemId" property="itemId" />
-		<result column="itemName" property="itemName"/>
-		<result column="itemPrice" property="itemPrice"/>
-		<result column="itemWriter" property="itemWriter"/>
-		<result column="resourceFile" property="resourceFile"/>
-		<result column="resourceDate" property="resourceDate"/>
-		<result column="resourceSubCategoryId" property="resourceSubCategoryId"/>
-		<result column="rankingId" property="rankingId"/>
+		<association javaType="ResourceShop" property="resourceShop)">
+			<id column="itemId" property="itemId" />
+			<result column="itemName" property="itemName"/>
+			<result column="itemPrice" property="itemPrice"/>
+			<result column="itemWriter" property="itemWriter"/>
+			<result column="resourceFile" property="resourceFile"/>
+			<result column="resourceDate" property="resourceDate"/>
+		</association>
 		
 		<association javaType="Ranking" property="ranking">
 			<id column="rankId" property="rankId"/>
@@ -57,6 +57,4 @@
 		</association>
 	</resultMap>
 	
-	
-
 </mapper>

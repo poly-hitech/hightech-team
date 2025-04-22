@@ -13,6 +13,7 @@
 		<typeAlias type="com.example.test.Model.ResourceCategory" alias="ResourceCategory"/>
 		<typeAlias type="com.example.test.Model.ResourceSubCategory" alias="ResourceSubCategory"/>
 		<typeAlias type="com.example.test.Model.MarketList" alias="MarketList"/>
+		<typeAlias type="com.example.test.Model.ResourceShop" alias="ResourceShop"/>
 		<typeAlias type="com.example.test.Model.Ranking" alias="Ranking"/>
 		<typeAlias type="com.example.test.Model.Counting" alias="Counting"/>
 	</typeAliases>
