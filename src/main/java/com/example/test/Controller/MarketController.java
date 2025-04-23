@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.test.Model.Market;
-import com.example.test.Model.MarketList;
+import com.example.test.Model.ResourceCategory;
 import com.example.test.Service.ResourceShopService;
 
 @Controller
@@ -29,7 +29,7 @@ public class MarketController {
 	//전체 상점 목록
 	@GetMapping("public/list")
 	String shopList(Model model) {
-		List<MarketList> list = resourceShopService.list();
+		List<ResourceCategory> list = resourceShopService.list();
 		
 		model.addAttribute("list", list);
 		
@@ -40,7 +40,7 @@ public class MarketController {
 	@GetMapping("{roleId}/{userId}/mylist")
 	String MyshopList(@PathVariable Long userId, @PathVariable Long roleId, Model model, HttpSession session) {
 		
-		List<MarketList> list = resourceShopService.list(userId);
+		List<ResourceCategory> list = resourceShopService.list(userId);
 		
 		model.addAttribute("list", list);
 		

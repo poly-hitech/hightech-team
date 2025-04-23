@@ -1,6 +1,7 @@
 package com.example.test.Model;
 
 import java.util.Date;
+import java.util.List;
 
 //리소스 아이템 정보
 public class ResourceShop {
@@ -15,6 +16,7 @@ public class ResourceShop {
 	private Long resourceSubCategoryId;
 	private Long userId;
 	private Ranking ranking;
+	private List<OrdersDetails> ordersDetails;
 	
 	public Long getItemId() {
 		return itemId;
@@ -75,6 +77,12 @@ public class ResourceShop {
 	}
 	public void setRanking(Ranking ranking) {
 		this.ranking = ranking;
+	}
+	public List<OrdersDetails> getOrdersDetails() {
+		return ordersDetails;
+	}
+	public void setOrdersDetails(List<OrdersDetails> ordersDetails) {
+		this.ordersDetails = ordersDetails;
 	}
 
 }

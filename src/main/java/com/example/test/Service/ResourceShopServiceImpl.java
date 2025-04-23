@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.test.Dao.ResourceDao;
 import com.example.test.Model.Market;
-import com.example.test.Model.MarketList;
+import com.example.test.Model.ResourceCategory;
 import com.example.test.Model.Users;
 import com.example.test.Util.FileUploadUtil;
 
@@ -24,13 +24,13 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 	FileUploadUtil fileupload;
 	
 	@Override
-	public List<MarketList> list() {
+	public List<ResourceCategory> list() {
 		
 		return dao.list();
 	}
 
 	@Override
-	public List<MarketList> list(Long userId) {
+	public List<ResourceCategory> list(Long userId) {
 		// TODO Auto-generated method stub
 		return dao.list(userId);
 	}

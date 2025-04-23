@@ -47,8 +47,8 @@ body {
   gap: 8px;
 }
 .logo_name {
-  font-size: 22px;
-  color: #333;
+  font-size: 26px;
+  color: #9b59b6;
   font-weight: 500px;
   transition: all 0.3s ease;
 }
@@ -160,19 +160,18 @@ body {
 	color: #333;
 }
 
-
 /* Navbar */
 .navbar {
-  max-width: 500px;
-  width: 100%;
   position: fixed;
-  top: 0;
-  left: 60%;
-  transform: translateX(-50%);
+  max-width: 500px;
+  top: 18px;
   background: #fff;
   padding: 10px 20px;
-  border-radius: 0 0 8px 8px;
-  justify-content: space-between;
+  border-radius: 8px 8px 8px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 #sidebar-open {
   font-size: 30px;
@@ -199,11 +198,14 @@ body {
 }
 
 /* Responsive */
-@media screen and (max-width: 1100px) {
+@media screen and (min-width: 801px) { /* 801px 이상 화면에서만 적용 */
   .navbar {
-    left: 65%;
+    left: 270px; /* 사이드바 너비만큼 왼쪽으로 이동 */
+    width: calc(100% - 270px); /* 전체 너비에서 사이드바 너비만큼 제외 */
+    transform: translateX(113%); /* navbar 자체를 오른쪽으로 50% 이동 */
+
   }
-}
+}}
 @media screen and (max-width: 800px) {
   .sidebar {
     left: 0;
@@ -219,10 +221,15 @@ body {
     display: none;
   }
   .navbar {
-    left: 0;
+    left: 270px;
     max-width: 100%;
     transform: translateX(0%);
   }
+
+  .search_box {
+    max-width: 100%;
+  }
+}
   #sidebar-open {
     display: block;
   }

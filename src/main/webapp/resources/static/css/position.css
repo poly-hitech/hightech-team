@@ -1,0 +1,10 @@
+@charset "UTF-8";
+/* 컨테이너 */
+.container {
+  margin-left: 270px; /* 사이드바 너비만큼 밀어줌 */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #212121; /* 배경색은 자유롭게 */
+}

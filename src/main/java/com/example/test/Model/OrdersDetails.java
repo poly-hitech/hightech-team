@@ -5,6 +5,7 @@ public class OrdersDetails {
 	private Long ordersDetailsId;
 	private ResourceShop resourceShop;
 	private Orders orders;
+	private Counting counting;
 	
 	public Long getOrdersDetailsId() {
 		return ordersDetailsId;
@@ -24,4 +25,11 @@ public class OrdersDetails {
 	public void setOrders(Orders orders) {
 		this.orders = orders;
 	}
+	public Counting getCounting() {
+		return counting;
+	}
+	public void setCounting(Counting counting) {
+		this.counting = counting;
+	}
+
 }
