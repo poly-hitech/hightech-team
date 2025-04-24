@@ -1,6 +1,7 @@
 package com.example.test.Model;
 
 import java.util.Date;
+import java.util.List;
 
 //회원정보
 public class Users {
@@ -15,6 +16,7 @@ public class Users {
 	private String username;
 	private String password;
 	private Long roleId;
+	private List<RegexDetail> regexDetail;
 	
 	public Long getUserId() {
 		return userId;
@@ -81,6 +83,12 @@ public class Users {
 	}
 	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
+	}
+	public List<RegexDetail> getRegexDetail() {
+		return regexDetail;
+	}
+	public void setRegexDetail(List<RegexDetail> regexDetail) {
+		this.regexDetail = regexDetail;
 	}
 
 }

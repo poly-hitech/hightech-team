@@ -159,20 +159,6 @@ body {
 	text-decoration: none;
 	color: #333;
 }
-
-/* Navbar */
-.navbar {
-  position: fixed;
-  max-width: 500px;
-  top: 18px;
-  background: #fff;
-  padding: 10px 20px;
-  border-radius: 8px 8px 8px 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
 #sidebar-open {
   font-size: 30px;
   color: #333;
@@ -203,7 +189,8 @@ body {
     left: 270px; /* 사이드바 너비만큼 왼쪽으로 이동 */
     width: calc(100% - 270px); /* 전체 너비에서 사이드바 너비만큼 제외 */
     transform: translateX(113%); /* navbar 자체를 오른쪽으로 50% 이동 */
-
+    justify-content: center;
+    align-items: center;
   }
 }}
 @media screen and (max-width: 800px) {
@@ -219,15 +206,6 @@ body {
   }
   #lock-icon {
     display: none;
-  }
-  .navbar {
-    left: 270px;
-    max-width: 100%;
-    transform: translateX(0%);
-  }
-
-  .search_box {
-    max-width: 100%;
   }
 }
   #sidebar-open {

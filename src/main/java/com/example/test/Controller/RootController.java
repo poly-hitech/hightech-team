@@ -26,16 +26,26 @@ public class RootController {
 		return "index";
 	}
 	
+	//회원가입
+	@GetMapping("/register")
+	String register() {
+		return "register";
+	}
+	
+	@PostMapping("/register")
+	String register(Users item) {
+		
+		usersService.add(item);
+		
+		return "redirect:/";
+	}
+	
+	//로그인
 	@GetMapping("/logout")
 	String logout(HttpSession session) {
 		session.invalidate();
 		
 		return "redirect:/";
-	}
-	
-	@GetMapping("/menu")
-	String menu() {
-		return "menu";
 	}
 	
 	@GetMapping("/login")
@@ -59,4 +69,10 @@ public class RootController {
         }
 	}
 
+	//상단 메뉴바
+	@GetMapping("/menu")
+	String menu() {
+		return "menu";
+	}
+	
 }

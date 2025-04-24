@@ -17,4 +17,16 @@ public class UsersDaoImpl implements UsersDao {
 		return sql.selectOne("users.login", item);
 	}
 
+	@Override
+	public void add(Users item) {
+		sql.insert("users.add",item);
+		
+	}
+
+	@Override
+	public Long getLastRegexId() {
+		
+		return sql.selectOne("users.selectLastRegexId");
+	}
+
 }

@@ -6,4 +6,8 @@ public interface UsersDao {
 
 	Users login(Users item);
 
+	void add(Users item);
+
+	Long getLastRegexId();
+
 }

@@ -131,14 +131,5 @@
         </div>
       </div>
     </nav>
-
-    <!-- Navbar -->
-    <nav class="navbar flex">
-      <i class="bx bx-menu" id="sidebar-open"></i>
-      <input type="text" placeholder="Search..." class="search_box" />
-      <span class="nav_image">
-        <img src="images/profile.jpg" alt="logo_img" />
-      </span>
-    </nav>
   </body>
 </html>
