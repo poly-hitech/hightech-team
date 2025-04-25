@@ -4,6 +4,8 @@ public class RegexDetail {
 	private Long regexId;
 	private String regexInfo;
 	private Long regexLocation;
+	private Long userId;
+	
 	public Long getRegexId() {
 		return regexId;
 	}
@@ -21,6 +23,12 @@ public class RegexDetail {
 	}
 	public void setRegexLocation(Long regexLocation) {
 		this.regexLocation = regexLocation;
+	}
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 }

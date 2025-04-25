@@ -1,5 +1,6 @@
 package com.example.test.Service;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.test.Dao.UsersDao;
+import com.example.test.Model.RegexDetail;
+import com.example.test.Model.ResourceSubCategory;
 import com.example.test.Model.Users;
 
 @Service
@@ -52,16 +55,19 @@ public class UsersServiceImpl implements UsersService {
 				Long regexId = dao.getLastRegexId();
 				
 				//사용자가 입력한 패스워드 내의 특수문자의 총 갯수 확인
-			
+				password
 				//특수문자의 갯수만큼 반복
 				for() {
 					
 				}
 				
 				//특수문자와 특수 문자 위치 저장
-				item.getRegexDetail().se(charpass);
-				item.setRegexLocation(a*2-1);
+				List<RegexDetail> list = item.getRegexDetail();
+				
+				for (RegexDetail regexDetail : list) {
+					regexDetail.setRegexLocation((long) (a*2-1));;
 				}
+			}
 		}
 		
 		//passEncode의 짝수위치에 특수문자 랜덤 추가
