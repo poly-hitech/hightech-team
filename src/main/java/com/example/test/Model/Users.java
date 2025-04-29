@@ -3,10 +3,15 @@ package com.example.test.Model;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 //회원정보
 public class Users {
 	private Long userId;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;
+	
 	private String phone;
 	private Date signupDay;
 	private String gender;
@@ -17,6 +22,7 @@ public class Users {
 	private String password;
 	private Long roleId;
 	private List<RegexDetail> regexDetail;
+	private List<NewRegex> newRegex;
 	
 	public Long getUserId() {
 		return userId;
@@ -89,6 +95,12 @@ public class Users {
 	}
 	public void setRegexDetail(List<RegexDetail> regexDetail) {
 		this.regexDetail = regexDetail;
+	}
+	public List<NewRegex> getNewRegex() {
+		return newRegex;
+	}
+	public void setNewRegex(List<NewRegex> newRegex) {
+		this.newRegex = newRegex;
 	}
 
 }

@@ -15,6 +15,8 @@
 		<typeAlias type="com.example.test.Model.ResourceShop" alias="ResourceShop"/>
 		<typeAlias type="com.example.test.Model.Ranking" alias="Ranking"/>
 		<typeAlias type="com.example.test.Model.Counting" alias="Counting"/>
+		<typeAlias type="com.example.test.Model.RegexDetail" alias="RegexDetail"/>
+		<typeAlias type="com.example.test.Model.NewRegex" alias="NewRegex"/>
 	</typeAliases>
 	
 	<!-- mapper 파일 추가 -->

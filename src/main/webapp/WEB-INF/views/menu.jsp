@@ -125,7 +125,7 @@
 			<c:if test="${sessionScope.member == null}">
 				<span class="userInfo"><a href="${root}/login">로그인</a></span>
 				<span class="userInfo"> / </span>
-				<span class="userInfo"><a href="${root}/signup">회원가입</a></span>
+				<span class="userInfo"><a href="${root}/register">회원가입</a></span>
 			</c:if>
           </div>
         </div>

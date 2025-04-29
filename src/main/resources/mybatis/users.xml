@@ -8,9 +8,40 @@
 		<select id="list" resultType="Users">
 			select * from users
 		</select>
+		<select id="selectRegexDetail" parameterType="String" resultType="RegexDetail">
+			select * from
+		        RegexDetail rd
+		    join Users u on rd.userId = u.userId
+		    where u.username = #{username}
+		    order by rd.regexId asc
+		</select>
+		
+		<select id="selectNewRegex" parameterType="String" resultType="NewRegex">
+			select * from
+		        NewRegex nr
+		    join Users u on nr.userId = u.userId
+		    where u.username = #{username}
+		    order by nr.newRegexId asc
+		</select>
+		
+		<select id="selectUserId" resultType="Long">
+			select MAX(userId) from Users
+		</select>
 			
-		<select id="selectLastRegexId" resultType="Regexdetail">
-			select MAX(regexDetailId) from regexdetail
+		<select id="selectLastRegexId" resultType="Long">
+			select MAX(regexId) from Regexdetail
+		</select>
+		
+		<select id="selectLastNewRegexId" resultType="Long">
+			select MAX(newRegexId) from NewRegex
+		</select>
+		
+		<select id="getFirstNewRegexId" resultType="long" parameterType="String">
+			select nr.newRegexId from NewRegex nr
+		    join Users u on nr.userId = u.userId
+		    where u.username = #{username}
+		    order by nr.newRegexId asc
+		    fetch first 1 rows only
 		</select>
 		
 		<select id="items" resultType="Users">
@@ -25,7 +56,27 @@
 		
 		<insert id="add">
 			insert into users
-			values (USERS_SEQ.nextval, #{username}, #{password},#{nickname}, #{birthday}, #{phone}, #{gender}, #{profileImage}, #{agreeStatus}, #{signupDay}, #{roleId})
+			values (#{userId}, #{username}, #{password},#{nickname}, #{birthday}, #{phone}, #{gender}, #{profileImage}, #{agreeStatus}, #{signupDay}, #{roleId})
+		</insert>
+		
+		<insert id="addRegex" parameterType="java.util.List">
+		    INSERT ALL
+		    <foreach collection="list" item="regexDetail">
+		        INTO RegexDetail 
+		        (regexId, regexInfo, regexLocation, userId)
+		        VALUES (#{regexDetail.regexId}, #{regexDetail.regexInfo}, #{regexDetail.regexLocation}, #{regexDetail.userId})
+		    </foreach>
+		    SELECT * FROM dual
+		</insert>
+		
+		<insert id="addNewRegex" parameterType="java.util.List">
+		    INSERT ALL
+		    <foreach collection="list" item="newRegex">
+		        INTO NewRegex 
+		        (newRegexId, newRegexInfo, newRegexLocation, userId)
+		        VALUES (#{newRegex.newRegexId}, #{newRegex.newRegexInfo}, #{newRegex.newRegexLocation}, #{newRegex.userId})
+		    </foreach>
+		    SELECT * FROM dual
 		</insert>
 		
 		<update id="update">
