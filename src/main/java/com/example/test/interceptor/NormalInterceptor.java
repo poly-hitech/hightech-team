@@ -21,8 +21,8 @@ public class NormalInterceptor implements HandlerInterceptor  {
 		Users member = (Users) session.getAttribute("member");
 		
 		if(member != null) {
-			//로그인한 일반 사용자
-			if(UsersRole.NORMAL.equals(member.getRoleId())) {
+			//로그인한 일반 사용자 또는 관리자 또는 파트너 사용자
+			if(UsersRole.NORMAL.equals(member.getRoleId()) || UsersRole.PARTNER.equals(member.getRoleId()) || UsersRole.ADMIN.equals(member.getRoleId())) {
 
 				return true;
 			}

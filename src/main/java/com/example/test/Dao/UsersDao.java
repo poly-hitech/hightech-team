@@ -28,4 +28,14 @@ public interface UsersDao {
 
 	Long getFirstNewRegexId(String username);
 
+	String search(String username);
+
+	Users item(Long userId);
+
+	void update(Users item);
+
+	void delete(Long userId);
+
+	void updateIncludeNewPassword(Users item);
+
 }

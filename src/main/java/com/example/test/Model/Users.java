@@ -13,11 +13,14 @@ public class Users {
 	private Date birthday;
 	
 	private String phone;
-	private Date signupDay;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date signupDay = new Date();
+	
 	private String gender;
 	private String profileImage;
 	private String nickname;
-	private Long agreeStatus;
+	private Long agreeStatus = 1L;
 	private String username;
 	private String password;
 	private Long roleId;

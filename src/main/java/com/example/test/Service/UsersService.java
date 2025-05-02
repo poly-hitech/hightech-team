@@ -6,4 +6,10 @@ public interface UsersService {
 	Boolean login(Users item);
 
 	void add(Users item);
+
+	Users item(Long userId);
+
+	void update(Users item);
+
+	void delete(Long userId);
 }

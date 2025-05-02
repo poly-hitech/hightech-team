@@ -74,5 +74,37 @@ public class UsersDaoImpl implements UsersDao {
 		return sql.selectOne("users.getFirstNewRegexId", username);
 	}
 
+	@Override
+	public String search(String username) {
+		// TODO Auto-generated method stub
+		return sql.selectOne("users.getUsername", username);
+	}
+
+	//회원정보 불러오기
+	@Override
+	public Users item(Long userId) {
+
+		return sql.selectOne("users.items", userId);
+	}
+
+	//회원정보 변경(비밀번호 미포함)
+	@Override
+	public void update(Users item) {
+		sql.update("users.update", item);
+	}
+
+	//회원탈퇴(영구 삭제가 아닌 roleId를 변경하는 형태로 구현)
+	@Override
+	public void delete(Long userId) {
+		sql.update("users.delete", userId);
+		
+	}
+
+	//회원정보 수정(비밀번호 포함)
+	@Override
+	public void updateIncludeNewPassword(Users item) {
+		sql.update("users.updateIncludeNewPassword", item);
+	}
+
 
 }

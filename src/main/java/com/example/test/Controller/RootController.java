@@ -59,7 +59,12 @@ public class RootController {
 		
 		if (result) {
             session.setAttribute("member", item);
-            log.info("session에 담긴 값을 확인 합니다.", session.getAttributeNames());
+            Users member = (Users) session.getAttribute("member");
+            log.info("session에 담긴 값을 확인 합니다: " + member.getBirthday());
+            if(item.getRoleId() == 0L) {
+            	log.info("회원탈퇴한 아이디입니다. 로그인에 실패했습니다. 새로 가입해주세요.");
+            	return "register";
+            }
            
             return "redirect: /";
         } else {
