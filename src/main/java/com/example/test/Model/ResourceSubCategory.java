@@ -15,10 +15,10 @@ public class ResourceSubCategory {
 	public void setResourceSubCategoryId(Long resourceSubCategoryId) {
 		this.resourceSubCategoryId = resourceSubCategoryId;
 	}
-	public String getResourceSubCategorName() {
+	public String getResourceSubCategoryName() {
 		return resourceSubCategoryName;
 	}
-	public void setResourceSubCategorName(String resourceSubCategoryName) {
+	public void setResourceSubCategoryName(String resourceSubCategoryName) {
 		this.resourceSubCategoryName = resourceSubCategoryName;
 	}
 	public Long getResourceCategoryId() {

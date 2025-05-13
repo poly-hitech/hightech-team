@@ -16,8 +16,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.test.Model.Market;
 import com.example.test.Model.ResourceCategory;
+import com.example.test.Model.ResourceSubCategory;
 import com.example.test.Service.ResourceShopService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/shop")
 public class MarketController {
@@ -49,6 +53,19 @@ public class MarketController {
 	@GetMapping("{roleId}/add/{userId}")
 	String addResourcePage(@PathVariable Long roleId, @PathVariable Long userId, Model model, HttpSession session){
 		List<ResourceCategory> category = resourceShopService.addResourcePage();
+		
+		for(int a =0;a < category.size(); a++){
+			ResourceCategory rc = category.get(a);
+			log.info("리소스 사이즈 : {}"+ category.size() + "리소스 1차 번호: {}" + rc.getResourceCategoryId());
+			List<ResourceSubCategory> sc = rc.getResourceSubCategory();
+			for(ResourceSubCategory rsc: sc) {
+				Long id = rsc.getResourceSubCategoryId();
+				String name = rsc.getResourceSubCategoryName();
+				
+				log.info("2차 카테고리 번호: {}" + id);
+				log.info("2차 카테고리 이름: {}" + name);
+			}
+		}
 		
 		model.addAttribute("category", category);
 		return path + "add";
