@@ -22,7 +22,7 @@
         <span class="nav_image">
           <img src="images/logo.png" alt="logo_img" />
         </span>
-        <span class="logo_name">코딩기딩</span>
+        <span class="logo_name"><a href="${root}/" class="logo_link">코딩기딩</a></span>
         <i class="bx bx-lock-alt" id="lock-icon" title="Unlock Sidebar"></i>
         <i class="bx bx-x" id="sidebar-close"></i>
       </div>

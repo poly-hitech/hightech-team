@@ -1,4 +1,12 @@
 @charset "UTF-8";
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 /* 로그인 박스 */
 .login-box {
   background: #fff;
@@ -21,7 +29,7 @@
   color: #333;
 }
 
-.login-box input {
+.login-box input, select {
   width: 100%;
   padding: 10px;
   border: 1px solid #aaa;
@@ -52,4 +60,29 @@
   margin-top: 10px;
   color: #4070f4;
   text-decoration: none;
+}
+
+/* 반응형 디자인 추가 */
+@media (max-width: 480px) {
+    .login-box {
+        padding: 20px;
+        max-width: 100%;
+        margin: 0 10px;
+    }
+
+    .login-box label,
+    .login-box select,
+    .login-box input,
+    .login-box button {
+        font-size: 14px;
+    }
+
+    .login-box select,
+    .login-box input {
+        padding: 8px;
+    }
+
+    .login-box button {
+        padding: 10px;
+    }
 }

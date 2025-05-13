@@ -50,7 +50,11 @@ public class ShopCategoryDaoImpl implements ShopCategoryDao {
 		sql.insert("resourceCategory.addCate", item.getResourceCategory());
 		
 		//생성한 리소스 1차 카테고리 기본키 호출
-		Long resourceCategoryId = item.getResourceCategory().getResourceCategoryId();
+		Long resourceCategoryId = sql.selectOne("resourceCategory.selectRCId");
+		if(resourceCategoryId == null) {
+			resourceCategoryId = 1L;
+		}
+		resourceCategoryId++;
 		log.info("resourceCategoryId" , resourceCategoryId);
 		
 		//리소스 1차 카테고리가 생성이 완료되었다면 

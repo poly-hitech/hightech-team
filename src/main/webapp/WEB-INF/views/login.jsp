@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="css/login.css" />
-	<link rel="stylesheet" href="css/position.css">
+	<link rel="stylesheet" href="css/position.css" />
 </head>
 <body>
 	<div>

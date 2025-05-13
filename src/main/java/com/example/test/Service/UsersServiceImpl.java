@@ -93,6 +93,7 @@ public class UsersServiceImpl implements UsersService {
 		return false;
 	}
 
+	
 	//패스워드 인코더없이 비밀번호 암호화 구현 시도.
 	//회원가입
 	@Transactional
@@ -198,7 +199,7 @@ public class UsersServiceImpl implements UsersService {
 		item.setPassword(newpassword);
 		item.setRoleId(1L);
 		
-		if(item.getNickname().isEmpty()) {
+		if(item.getNickname() == null || item.getNickname() == "미입력 시 아이디로 닉네임이 설정됩니다.") {
 			item.setNickname(item.getUsername());
 		}
 		

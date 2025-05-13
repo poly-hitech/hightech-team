@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="../../css/login.css" />
-	<link rel="stylesheet" href="../../css/position.css">
+	<link rel="stylesheet" href="../../css/position.css" />
 </head>
 <body>
 	<div>
@@ -24,10 +24,10 @@
 				<label>아이디:</label>
 				<input type="text" name="username" value="${item.username}" readonly="readonly">						
 			</div>
-					
+
 			<div>
 				<label>비밀번호:</label>
-				<input type="password" name="password">				
+				<input type="password" name="password">	
 			</div>
 			
 			<div>

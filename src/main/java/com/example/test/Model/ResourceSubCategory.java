@@ -5,7 +5,7 @@ import java.util.List;
 //리소스 2차 카테고리
 public class ResourceSubCategory {
 	private Long resourceSubCategoryId;
-	private String resourceSubCategorName;
+	private String resourceSubCategoryName;
 	private Long resourceCategoryId;
 	private List<ResourceShop> resourceShop;
 	
@@ -16,10 +16,10 @@ public class ResourceSubCategory {
 		this.resourceSubCategoryId = resourceSubCategoryId;
 	}
 	public String getResourceSubCategorName() {
-		return resourceSubCategorName;
+		return resourceSubCategoryName;
 	}
-	public void setResourceSubCategorName(String resourceSubCategorName) {
-		this.resourceSubCategorName = resourceSubCategorName;
+	public void setResourceSubCategorName(String resourceSubCategoryName) {
+		this.resourceSubCategoryName = resourceSubCategoryName;
 	}
 	public Long getResourceCategoryId() {
 		return resourceCategoryId;

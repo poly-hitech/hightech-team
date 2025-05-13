@@ -31,4 +31,10 @@ public class ResourceDaoImpl implements ResourceDao {
 		sql.insert("resourceShop.resourceAdd", resource);
 	}
 
+	@Override
+	public List<ResourceCategory> addResourceShop() {
+		// TODO Auto-generated method stub
+		return sql.selectList("resourceCategory.addResourcePage");
+	}
+
 }

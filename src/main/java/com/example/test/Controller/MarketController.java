@@ -28,9 +28,8 @@ public class MarketController {
 	
 	//전체 상점 목록
 	@GetMapping("public/list")
-	String shopList(Model model) {
+	String shopList(Model model, HttpSession session) {
 		List<ResourceCategory> list = resourceShopService.list();
-		
 		model.addAttribute("list", list);
 		
 		return path + "list";
@@ -47,13 +46,21 @@ public class MarketController {
 		return path + "mylist";
 	}
 	
+	@GetMapping("{roleId}/add/{userId}")
+	String addResourcePage(@PathVariable Long roleId, @PathVariable Long userId, Model model, HttpSession session){
+		List<ResourceCategory> category = resourceShopService.addResourcePage();
+		
+		model.addAttribute("category", category);
+		return path + "add";
+	}
+	
 	//리소스 상품 등록
 	@PostMapping("{roleId}/add/{userId}")
 	String uploadResource(@PathVariable Long roleId, @PathVariable Long userId, Market market, @RequestParam MultipartFile file, Model model) throws Exception {
 		
 		resourceShopService.addResource(userId, market, file, model);
 		
-		return path + roleId + "add";
+		return path + "add";
 	}
 	
 	/*
