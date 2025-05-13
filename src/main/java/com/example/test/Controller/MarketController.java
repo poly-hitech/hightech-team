@@ -34,6 +34,20 @@ public class MarketController {
 	@GetMapping("public/list")
 	String shopList(Model model, HttpSession session) {
 		List<ResourceCategory> list = resourceShopService.list();
+		
+		for(int a =0;a < list.size(); a++){
+			ResourceCategory rc = list.get(a);
+			log.info("리소스 사이즈 : {}"+ list.size() + "리소스 1차 번호: {}" + rc.getResourceCategoryId());
+			List<ResourceSubCategory> sc = rc.getResourceSubCategory();
+			for(ResourceSubCategory rsc: sc) {
+				Long id = rsc.getResourceSubCategoryId();
+				String name = rsc.getResourceSubCategoryName();
+				
+				log.info("2차 카테고리 번호: {}" + id);
+				log.info("2차 카테고리 이름: {}" + name);
+			}
+		}
+		
 		model.addAttribute("list", list);
 		
 		return path + "list";

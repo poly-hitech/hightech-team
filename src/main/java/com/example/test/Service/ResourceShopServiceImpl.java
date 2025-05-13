@@ -11,9 +11,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.test.Dao.ResourceDao;
 import com.example.test.Model.Market;
 import com.example.test.Model.ResourceCategory;
+import com.example.test.Model.ResourceFile;
 import com.example.test.Model.Users;
 import com.example.test.Util.FileUploadUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class ResourceShopServiceImpl implements ResourceShopService {
 	
@@ -45,24 +49,30 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 	@Override
 	public void addResource(Long userId, Market market, MultipartFile file, Model model) throws Exception{
 		
+		List<ResourceFile> rf = market.getResourceShop().getResourceFile();
 		//파일 업로드(업로드와 경로 추출)
-		String filepath = fileupload.saveFile(file, model);		//반환된 파일 업로드 경로를 가져와 변수저장
-		
-		if (filepath != null && !filepath.isEmpty()) {
-            // 파일이 정상적으로 업로드된 경우에만 경로를 설정
-			market.getResourceShop().setResourceFile(filepath);		//파일 경로를 db에 저장하기 위함
+		for(ResourceFile resourcefile: rf) {
+			String filepath = fileupload.saveFile(file, model);
 			
-			market.getResourceShop().setUserId(userId);
-            market.getResourceShop().setResourceSubCategoryId(market.getResourceSubCategory().getResourceSubCategoryId());
-            dao.save(market.getResourceShop());	//리소스 정보 업로드
-            
-            //리소스가 업로드 되지않았을 경우 예외 발생
-            if(market.getResourceShop() == null) {
-            	model.addAttribute("message", "생성된 리소스 정보가 없습니다.");
-            }
-                        
-        } else {
-            model.addAttribute("message", "파일 업로드에 실패하였습니다.");
+			//반환된 파일 업로드 경로를 가져와 변수저장		
+			if (filepath != null && !filepath.isEmpty()) {
+	            // 파일이 정상적으로 업로드된 경우에만 경로를 설정
+				resourcefile.setResourceFileName(filepath);
+				//market.getResourceShop().getResourceFile().setNa(filepath);		//파일 경로를 db에 저장하기 위함
+	                        
+	        } else {
+	        	log.info("파일 업로드에 실패했습니다.");
+	            model.addAttribute("message", "파일 업로드에 실패하였습니다.");
+	        }
+		}
+		
+		market.getResourceShop().setUserId(userId);
+		dao.save(market.getResourceShop());	//리소스 정보 업로드
+        
+        //리소스가 업로드 되지않았을 경우 예외 발생
+        if(market.getResourceShop() == null) {
+        	log.info("생성된 리소스 정보가 없습니다.");
+        	model.addAttribute("message", "생성된 리소스 정보가 없습니다.");
         }
 		
 	}

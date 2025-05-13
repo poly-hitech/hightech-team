@@ -16,7 +16,7 @@
         <c:import url="/WEB-INF/views/menu.jsp"></c:import>
     </div>
     <div class="container">
-        <form method="post" action="/${roleId}/add/${userId}" class="login-box">
+        <form method="post" class="login-box">
             <div>
                 <label for="category">1차 카테고리</label>
                 <select id="category" name="resourceCategoryId">

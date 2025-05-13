@@ -7,8 +7,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="/js/addSubCateButton.js"></script>
+
 </head>
 <body>
+	<div>
+        <c:import url="/WEB-INF/views/menu.jsp"></c:import>
+    </div>
+
 	<form method="post" class="d-grid gap-3">
 		<div class="row">
 			<label for="resourceCategoryName" class="col-1">카테고리 명:<span style="color:blue;"> * </span></label>

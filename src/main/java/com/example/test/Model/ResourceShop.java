@@ -11,7 +11,7 @@ public class ResourceShop {
 	private Long itemPrice;
 	private String itemWriter;
 	private Date resourceDate;
-	private String resourceFile;
+	private List<ResourceFile> resourceFile;
 	private Long rankingId;
 	private Long resourceSubCategoryId;
 	private Long userId;
@@ -29,12 +29,6 @@ public class ResourceShop {
 	}
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
-	}
-	public String getResourceFile() {
-		return resourceFile;
-	}
-	public void setResourceFile(String resourceFile) {
-		this.resourceFile = resourceFile;
 	}
 	public Long getItemPrice() {
 		return itemPrice;
@@ -83,6 +77,12 @@ public class ResourceShop {
 	}
 	public void setOrdersDetails(List<OrdersDetails> ordersDetails) {
 		this.ordersDetails = ordersDetails;
+	}
+	public List<ResourceFile> getResourceFile() {
+		return resourceFile;
+	}
+	public void setResourceFile(List<ResourceFile> resourceFile) {
+		this.resourceFile = resourceFile;
 	}
 
 }
