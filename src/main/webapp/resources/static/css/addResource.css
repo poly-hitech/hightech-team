@@ -1,0 +1,85 @@
+@charset "UTF-8";
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+/* 상점 등록 페이지 스타일 (로그인 페이지 스타일 기반) */
+.container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.container .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.container label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #333;
+    font-size: 16px;
+}
+
+.container select,
+.container input[type="text"],
+.container input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.container input[readonly] {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+.container button {
+    width: 100%;
+    padding: 12px;
+    background: #9b59b6;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.container button:hover {
+    background: #2f5ee2;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+        max-width: 100%;
+        margin: 0 10px;
+    }
+
+    .container label,
+    .container select,
+    .container input,
+    .container button {
+        font-size: 14px;
+    }
+
+    .container select,
+    .container input {
+        padding: 8px;
+    }
+
+    .container button {
+        padding: 10px;
+    }
+}

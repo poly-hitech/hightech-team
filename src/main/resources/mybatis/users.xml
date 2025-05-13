@@ -71,7 +71,7 @@
 		
 		<insert id="add">
 			insert into Users
-			values (#{userId}, #{username}, #{password},#{nickname}, #{birthday}, #{phone}, #{gender}, #{profileImage}, #{agreeStatus}, #{signupDay}, #{roleId})
+			values (USERS_SEQ.nextval, #{username}, #{password},#{nickname}, #{birthday}, #{phone}, #{gender}, #{profileImage}, #{agreeStatus}, #{signupDay}, #{roleId}, #{name})
 		</insert>
 		
 		<insert id="addRegex" parameterType="java.util.List">
@@ -104,13 +104,13 @@
 		
 		<update id="update">
 			update Users
-			set username=#{username}, nickname=#{nickname}, birthday=#{birthday}, phone=#{phone}, gender=#{gender}, profileImage=#{profileImage}, roleId=#{roleId}
+			set username=#{username}, nickname=#{nickname}, birthday=#{birthday}, phone=#{phone}, gender=#{gender}, profileImage=#{profileImage}
 			where userId=#{userId}
 		</update>
 		
 		<update id="updateIncludeNewPassword">
 			update Users
-			set username=#{username}, password=#{password}, nickname=#{nickname}, birthday=#{birthday}, phone=#{phone}, gender=#{gender}, profileImage=#{profileImage}, roleId=#{roleId}
+			set username=#{username}, password=#{password}, nickname=#{nickname}, birthday=#{birthday}, phone=#{phone}, gender=#{gender}, profileImage=#{profileImage}
 			where userId=#{userId}
 		</update>
 		

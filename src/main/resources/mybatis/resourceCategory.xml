@@ -6,6 +6,11 @@
 		join ResourceSubCategory on ResourceCategory.resourceCategoryId = ResourceSubCategory.resourceCategoryId
 		where resourceCategoryId=#{resourceCategoryId}
 	</select>
+	
+	<!-- 최근 리소스 1차 카테고리 번호 -->
+	<select id="selectRCId" resultType="Long">
+		select MAX(resourceCategoryId) from resourceCategoryId
+	</select>
  
  	<!-- 리소스 1차 카테고리 로출 -->
 	<select id="selectCategory" resultType="ResourceCategory">
@@ -44,6 +49,12 @@
 	            SELECT * FROM ResourceCategory 
 	            left JOIN ResourceSubCategory ON ResourceCategory.resourceCategoryId=ResourceSubCategory.resourceCategoryId
 	        ) sub)
+	</select>
+	
+		<!-- 리소스 1차, 2차 카테고리 리스트 출력 -->
+	<select id="addResourcePage" resultMap="ResourceCategoryMap">
+		SELECT * FROM ResourceCategory resourceCategory
+	    left JOIN ResourceSubCategory resourceSubCategory ON resourceCategory.resourceCategoryId=resourceSubCategory.resourceCategoryId
 	</select>
 	
 	<!-- 리소스 1차, 2차 카테고리 -->

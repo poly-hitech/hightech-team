@@ -14,4 +14,6 @@ public interface ResourceDao {
 
 	void save(ResourceShop resource);
 
+	List<ResourceCategory> addResourceShop();
+
 }

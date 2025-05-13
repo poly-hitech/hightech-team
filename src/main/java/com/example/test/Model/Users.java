@@ -24,6 +24,7 @@ public class Users {
 	private String username;
 	private String password;
 	private Long roleId;
+	private String name;
 	private List<RegexDetail> regexDetail;
 	private List<NewRegex> newRegex;
 	
@@ -104,6 +105,12 @@ public class Users {
 	}
 	public void setNewRegex(List<NewRegex> newRegex) {
 		this.newRegex = newRegex;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

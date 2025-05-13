@@ -17,14 +17,14 @@ public class FileUploadUtil {
 	
 	public String saveFile(MultipartFile file, Model model) throws Exception{
 		
-		if (file.isEmpty()) {
+		if (file==null||file.isEmpty()) {
             model.addAttribute("message", "파일을 선택해주세요!");
-            return "uploadResult";
+            return null;
         }
 
 		String uuid = UUID.randomUUID().toString();
         // 업로드 경로 설정
-        String uploadDir = pathModuler.getUploadPath(file.getOriginalFilename() + uuid);
+        String uploadDir = pathModuler.getUploadPath(file.getOriginalFilename());
         File uploadFolder = new File(uploadDir);
 
         // 디렉토리가 존재하지 않으면 생성

@@ -34,6 +34,12 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 		// TODO Auto-generated method stub
 		return dao.list(userId);
 	}
+	
+	@Transactional
+	@Override
+	public List<ResourceCategory> addResourcePage() {
+		return dao.addResourceShop();
+	}
 
 	@Transactional
 	@Override

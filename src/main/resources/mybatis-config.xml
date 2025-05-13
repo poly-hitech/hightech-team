@@ -4,6 +4,7 @@
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 		<setting name="jdbcTypeForNull" value="NULL" />
+		<setting name="returnInstanceForEmptyRow" value="true"/>
 	</settings>
 	
 	<!-- 연결할 MODEL 혹은 VO 혹은 DTO추가(각각의 모델마다 패키지명을 생략하여 지정한 명칭으로 해당 모델을 사용할 수 있게 해줌) -->
