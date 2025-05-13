@@ -59,7 +59,7 @@
 				<a href="${root}/">취소</a>
 			</div>					
 		</form>	
-	</div> 
+	</div>
 
 </body>
 </html>
