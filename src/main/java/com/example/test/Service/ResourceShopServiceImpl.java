@@ -1,5 +1,6 @@
 package com.example.test.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -50,24 +51,27 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 	@Override
 	public void addResource(Long userId, Market market, List<MultipartFile> file, Model model) throws Exception{
 		
-		List<ResourceFile> rf = market.getResourceShop().getResourceFile();
+		//resourceFile 리스트 초기화
+		List<ResourceFile> rf = new ArrayList<>();
 		
 		// 파일 개수와 ResourceFile 리스트 개수 확인
-	    if (rf == null || rf.size() != file.size()) {
-	        log.info("파일과 리소스 파일 목록의 개수가 일치하지 않습니다.");
-	        model.addAttribute("message", "파일과 리소스 파일 목록의 개수가 일치하지 않습니다.");
+	    if (file == null || file.isEmpty()) {
+	    	log.info("업로드된 파일이 없습니다.");
+	        model.addAttribute("message", "업로드된 파일이 없습니다.");
 	        return;
 	    }
 		//파일 업로드(업로드와 경로 추출)
 		for(int loop = 0; loop < file.size() ;loop++) {
-			ResourceFile resourcefile = rf.get(loop);
 	        MultipartFile singlefile = file.get(loop);
 			String filepath = fileupload.saveFile(singlefile, model);
 			
             // 파일이 정상적으로 업로드된 경우에만 경로를 설정		
 			if (filepath != null && !filepath.isEmpty()) {
 				//반환된 파일 저장 경로를 가져와 저장
+				ResourceFile resourcefile = new ResourceFile();
 				resourcefile.setResourceFileName(filepath);
+				rf.add(resourcefile);
+				log.info("리소스파일에 파일명이 들어갔는지 확인하기"+resourcefile.getResourceFileName());
 	            
 	        } else {
 	        	log.info("파일 업로드에 실패했습니다.");
@@ -75,8 +79,10 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 	            return;
 	        }
 		}
-		
 		market.getResourceShop().setUserId(userId);
+		market.getResourceShop().setResourceFile(rf);	//리소스 파일 리스트를 리소스마켓에 저장
+		
+
 		dao.save(market.getResourceShop());	//리소스 정보 업로드
         
         //리소스가 업로드 되지않았을 경우 예외 발생

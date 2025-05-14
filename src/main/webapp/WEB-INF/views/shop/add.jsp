@@ -34,15 +34,15 @@
             </div>
             <div>
                 <label for="itemName">상품명: </label>
-                <input type="text" id="itemName" name="itemName">
+                <input type="text" id="itemName" name="resourceShop.itemName">
             </div>
             <div>
                 <label for="itemWriter">판매자: </label>
-                <input type="text" id="itemWriter" name="itemWriter" value="${sessionScope.member.nickname}" readonly>
+                <input type="text" id="itemWriter" name="resourceShop.itemWriter" value="${sessionScope.member.nickname}" readonly>
             </div>
             <div>
                 <label for="itemPrice">가격: </label>
-                <input type="number" id="itemPrice" name="itemPrice">
+                <input type="number" id="itemPrice" name="resourceShop.itemPrice">
             </div>
             <div>
             	<label for="resourceFile">첨부파일: </label>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="resourceShop">
-	<insert id="add">
+	<insert id="resourceAdd">
 		insert into ResourceShop
-		values (#{RESOURCESHOP_SEQ.nextval}, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceDate}, #{resourceSubCategoryId}, #{userID})
+		values (RESOURCESHOP_SEQ.nextval, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceSubCategoryId}, #{userId} , #{resourceDate})
 		
-		<selectKey keyProperty="resourceCategoryId" resultType="Long" order="AFTER">
-       		SELECT RESOURCECATEGORY_SEQ.CURRVAL FROM DUAL
+		<selectKey keyProperty="itemId" resultType="Long" order="AFTER">
+       		SELECT RESOURCESHOP_SEQ.CURRVAL FROM DUAL
     	</selectKey>
     	
-    	<foreach collection="resourceFile" item="file" separator=";">
+    	<foreach collection="resourceFile" item="file">
         	INSERT INTO ResourceFile
-        	VALUES (ResourceFile_SEQ.nextval, #{itemId}, #{file.resourceFileName})
+        	VALUES (ResourceFile_SEQ.nextval, #{file.resourceFileName}, #{itemId})
     	</foreach>
 	</insert>
 	

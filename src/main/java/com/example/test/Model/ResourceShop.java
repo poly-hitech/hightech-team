@@ -3,6 +3,8 @@ package com.example.test.Model;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 //리소스 아이템 정보
 public class ResourceShop {
 	
@@ -10,7 +12,10 @@ public class ResourceShop {
 	private String itemName;
 	private Long itemPrice;
 	private String itemWriter;
-	private Date resourceDate;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date resourceDate = new Date();
+	
 	private List<ResourceFile> resourceFile;
 	private Long rankingId;
 	private Long resourceSubCategoryId;
