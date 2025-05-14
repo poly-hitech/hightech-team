@@ -30,11 +30,24 @@ public class FileUploadPathResolver {
         extensionPaths.put("hwp", "documents");
         extensionPaths.put("ppt", "documents");
         extensionPaths.put("pptx", "documents");
+        extensionPaths.put("zip", "documents");
         //영상
         extensionPaths.put("mp4", "video");
         extensionPaths.put("webm", "video");
         extensionPaths.put("wmv", "video");
         extensionPaths.put("avi", "video");
+        //프로그래밍 파일
+        extensionPaths.put("js", "programming");
+        extensionPaths.put("lua", "programming");
+        extensionPaths.put("cs", "programming");
+        extensionPaths.put("css", "programming");
+        extensionPaths.put("sln", "programming");
+        extensionPaths.put("html", "programming");
+        extensionPaths.put("java", "programming");
+        extensionPaths.put("c", "programming");
+        extensionPaths.put("cpp", "programming");
+        extensionPaths.put("h", "programming");
+        extensionPaths.put("hh", "programming");
     }
     
 

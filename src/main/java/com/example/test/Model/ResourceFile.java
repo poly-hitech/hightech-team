@@ -1,8 +1,11 @@
 package com.example.test.Model;
 
 public class ResourceFile {
-	private Long itemId;
+	private Long resourceFileId;
 	private String resourceFileName;
+	private Long itemId;
+
+	
 	public Long getItemId() {
 		return itemId;
 	}
@@ -14,6 +17,12 @@ public class ResourceFile {
 	}
 	public void setResourceFileName(String resourceFileName) {
 		this.resourceFileName = resourceFileName;
+	}
+	public Long getResourceFileId() {
+		return resourceFileId;
+	}
+	public void setResourceFileId(Long resourceFileId) {
+		this.resourceFileId = resourceFileId;
 	}
 	
 }

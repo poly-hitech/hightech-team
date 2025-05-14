@@ -16,9 +16,9 @@
         <c:import url="/WEB-INF/views/menu.jsp"></c:import>
     </div>
     <div class="container">
-        <form method="post" class="login-box">
+        <form method="post" class="login-box" enctype="multipart/form-data">
             <div>
-                <label for="category">1차 카테고리</label>
+                <label for="category">1차 카테고리: </label>
                 <select id="category" name="resourceCategoryId">
                     <option value="">리소스 1차 카테고리</option>
                     <c:forEach var="category" items="${category}">
@@ -27,22 +27,26 @@
                 </select>
             </div>
             <div>
-		        <label for="secondCategory">2차 카테고리</label>
+		        <label for="secondCategory">2차 카테고리: </label>
 		        <select id="secondCategory" name="resourceSubCategory.resourceSubCategoryId">
 		            <option value="">리소스 2차 카테고리</option>
 		        </select>
             </div>
             <div>
-                <label for="itemName">상품명</label>
+                <label for="itemName">상품명: </label>
                 <input type="text" id="itemName" name="itemName">
             </div>
             <div>
-                <label for="itemWriter">판매자</label>
+                <label for="itemWriter">판매자: </label>
                 <input type="text" id="itemWriter" name="itemWriter" value="${sessionScope.member.nickname}" readonly>
             </div>
             <div>
-                <label for="itemPrice">가격</label>
+                <label for="itemPrice">가격: </label>
                 <input type="number" id="itemPrice" name="itemPrice">
+            </div>
+            <div>
+            	<label for="resourceFile">첨부파일: </label>
+            	<input type="file" id="resourceFile" name="resourceFile" multiple="multiple">
             </div>
             <div>
                 <button type="submit">등록</button>

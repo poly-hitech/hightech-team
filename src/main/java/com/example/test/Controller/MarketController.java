@@ -68,6 +68,7 @@ public class MarketController {
 	String addResourcePage(@PathVariable Long roleId, @PathVariable Long userId, Model model, HttpSession session){
 		List<ResourceCategory> category = resourceShopService.addResourcePage();
 		
+		//단순 값넘어오는거 확인용 -------------------------------------------------------
 		for(int a =0;a < category.size(); a++){
 			ResourceCategory rc = category.get(a);
 			log.info("리소스 사이즈 : {}"+ category.size() + "리소스 1차 번호: {}" + rc.getResourceCategoryId());
@@ -80,6 +81,7 @@ public class MarketController {
 				log.info("2차 카테고리 이름: {}" + name);
 			}
 		}
+		//--------------------------------------------------------------------------
 		
 		model.addAttribute("category", category);
 		return path + "add";
@@ -87,7 +89,7 @@ public class MarketController {
 	
 	//리소스 상품 등록
 	@PostMapping("{roleId}/add/{userId}")
-	String uploadResource(@PathVariable Long roleId, @PathVariable Long userId, Market market, @RequestParam MultipartFile file, Model model) throws Exception {
+	String uploadResource(@PathVariable Long roleId, @PathVariable Long userId, Market market, @RequestParam("resourceFile") List<MultipartFile> file, Model model) throws Exception {
 		
 		resourceShopService.addResource(userId, market, file, model);
 		

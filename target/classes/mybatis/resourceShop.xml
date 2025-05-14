@@ -2,12 +2,17 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="resourceShop">
 	<insert id="add">
-		insert into ResourceSubCategory
-		values (#{RESOURCESHOP_SEQ.nextval}, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceFile}, #{resourceDate}, #{resourceSubCategoryId}, #{userID})
+		insert into ResourceShop
+		values (#{RESOURCESHOP_SEQ.nextval}, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceDate}, #{resourceSubCategoryId}, #{userID})
 		
 		<selectKey keyProperty="resourceCategoryId" resultType="Long" order="AFTER">
        		SELECT RESOURCECATEGORY_SEQ.CURRVAL FROM DUAL
     	</selectKey>
+    	
+    	<foreach collection="resourceFile" item="file" separator=";">
+        	INSERT INTO ResourceFile
+        	VALUES (ResourceFile_SEQ.nextval, #{itemId}, #{file.resourceFileName})
+    	</foreach>
 	</insert>
 	
 	<select id="marketList" resultMap="MarketListMap">
@@ -18,6 +23,7 @@
 		left join ResourceCategory resourceCategory on resourceSubCategory.resourceCategoryId = resourceCategory.resourceCategoryId
 		left join OrdersDetails ordersDetails on ordersDetails.itemId = resourceShop.itemId
 		left join Counting counting on ordersDetails.ordersDetailsId = counting.ordersDetailsId
+		left join ResourceFile resourceFile on resourceFile.itemId = resourceShop.itemId
 	</select>
 	
 	<resultMap type="ResourceCategory" id="MarketListMap">
@@ -25,18 +31,19 @@
 	        <result property="resourceCategoryName" column="resourceCategoryName"/>
 	
 	        <!-- 2. 리소스 서브 카테고리 리스트 -->
-	        <collection javaType="ArrayList" property="resourceSubCategory" ofType="ResourceSubCategory" column="resourceSubCategoryId" autoMapping="true">
+	        <collection javaType="ArrayList" property="resourceSubCategory" ofType="ResourceSubCategory" column="resourceCategoryId" autoMapping="true">
 	            <id property="resourceSubCategoryId" column="resourceSubCategoryId"/>
 	            <result property="resourceSubCategoryName" column="resourceSubCategoryName"/>
+	            <result property="resourceCategoryId" column="resourceCategoryId"/>
 	
 	            <!-- 3. 리소스 샵 리스트 -->
-	            <collection javaType="ArrayList" property="resourceShop" ofType="ResourceShop" column="itemId" autoMapping="true">
+	            <collection javaType="ArrayList" property="resourceShop" ofType="ResourceShop" column="resourceSubCategoryId" autoMapping="true">
 	                <id property="itemId" column="itemId"/>
 	                <result property="itemName" column="itemName"/>
 	                <result property="itemPrice" column="itemPrice"/>
 	                <result property="itemWriter" column="itemWriter"/>
-	                <result property="resourceFile" column="resourceFile"/>
 	                <result property="resourceDate" column="resourceDate"/>
+	                <result property="resourceSubCategoryId" column="resourceSubCategoryId"/>
 	
 	                <!-- 4. 랭킹 (단일) -->
 	                <association property="ranking" javaType="Ranking">
@@ -55,8 +62,12 @@
 	                    <result property="weekcount" column="weekcount"/>
 	                    <result property="monthcount" column="monthcount"/>
 	                </association>
-	
-	            </collection>
+	            	<collection javaType="ArrayList" property="resourceFile" ofType="ResourceFile" column="itemId" autoMapping="true">                          
+	            		<id property="resourceFileId" column="resourceFileId"/>
+	            		<result property="resourceFileName" column="resourceFileName"/>
+	            		<result property="itemId" column="itemId"/>
+	            	</collection>
 	        </collection>
+		</collection>
 	</resultMap>
 </mapper>
