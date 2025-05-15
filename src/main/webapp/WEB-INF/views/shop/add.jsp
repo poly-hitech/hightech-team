@@ -28,7 +28,7 @@
             </div>
             <div>
 		        <label for="secondCategory">2차 카테고리: </label>
-		        <select id="secondCategory" name="resourceSubCategory.resourceSubCategoryId">
+		        <select id="secondCategory" name="resourceShop.resourceSubCategoryId">
 		            <option value="">리소스 2차 카테고리</option>
 		        </select>
             </div>

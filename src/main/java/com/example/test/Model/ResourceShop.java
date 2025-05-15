@@ -17,7 +17,7 @@ public class ResourceShop {
 	private Date resourceDate = new Date();
 	
 	private List<ResourceFile> resourceFile;
-	private Long rankingId;
+	private Long rankId;
 	private Long resourceSubCategoryId;
 	private Long userId;
 	private Ranking ranking;
@@ -40,12 +40,6 @@ public class ResourceShop {
 	}
 	public void setItemPrice(Long itemPrice) {
 		this.itemPrice = itemPrice;
-	}
-	public Long getRankingId() {
-		return rankingId;
-	}
-	public void setRankingId(Long rankingId) {
-		this.rankingId = rankingId;
 	}
 	public Long getUserId() {
 		return userId;
@@ -88,6 +82,12 @@ public class ResourceShop {
 	}
 	public void setResourceFile(List<ResourceFile> resourceFile) {
 		this.resourceFile = resourceFile;
+	}
+	public Long getRankId() {
+		return rankId;
+	}
+	public void setRankId(Long rankId) {
+		this.rankId = rankId;
 	}
 
 }

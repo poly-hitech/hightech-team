@@ -1,6 +1,7 @@
 package com.example.test.Dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.test.Model.ResourceCategory;
+import com.example.test.Model.ResourceFile;
 import com.example.test.Model.ResourceShop;
 
 @Repository
@@ -26,6 +28,7 @@ public class ResourceDaoImpl implements ResourceDao {
 		return sql.selectList("resourceShop.Mylist", userId);
 	}
 
+	//리소스 정보 등록
 	@Override
 	public void save(ResourceShop resource) {
 		
@@ -37,6 +40,13 @@ public class ResourceDaoImpl implements ResourceDao {
 	public List<ResourceCategory> addResourceShop() {
 		// TODO Auto-generated method stub
 		return sql.selectList("resourceCategory.addResourcePage");
+	}
+
+	//파일 경로 등록
+	@Override
+	public void save(Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		sql.selectList("resourceShop.addResourceFile", params);
 	}
 
 }

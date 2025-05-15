@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="resourceShop">
-	<insert id="resourceAdd">
+	<insert id="resourceAdd" parameterType="ResourceShop">
 		insert into ResourceShop
-		values (RESOURCESHOP_SEQ.nextval, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceSubCategoryId}, #{userId} , #{resourceDate})
+		values (RESOURCESHOP_SEQ.nextval, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceSubCategoryId}, #{userId}, #{rankId} , #{resourceDate})
 		
 		<selectKey keyProperty="itemId" resultType="Long" order="AFTER">
        		SELECT RESOURCESHOP_SEQ.CURRVAL FROM DUAL
     	</selectKey>
-    	
-    	<foreach collection="resourceFile" item="file">
-        	INSERT INTO ResourceFile
-        	VALUES (ResourceFile_SEQ.nextval, #{file.resourceFileName}, #{itemId})
-    	</foreach>
+	</insert>
+	
+	<insert id="addResourceFile" parameterType="map">
+		<foreach collection="resourceFile" item="file" separator=";">
+			insert into ResourceFile
+			values (RESOURCEFILE_SEQ.NEXTVAL, #{file.resourceFileName}, #{itemId})
+		</foreach>
 	</insert>
 	
 	<select id="marketList" resultMap="MarketListMap">

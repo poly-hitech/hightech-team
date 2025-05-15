@@ -2,7 +2,9 @@ package com.example.test.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,11 +81,19 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 	            return;
 	        }
 		}
-		market.getResourceShop().setUserId(userId);
+		market.getResourceShop().setUserId(userId);		//연결 유저 번호
 		market.getResourceShop().setResourceFile(rf);	//리소스 파일 리스트를 리소스마켓에 저장
 		
 
 		dao.save(market.getResourceShop());	//리소스 정보 업로드
+		
+		//리소스 정보 등록 후 리소스 파일 등록
+	    if (!rf.isEmpty()) {
+	        Map<String, Object> params = new HashMap<>();
+	        params.put("itemId", market.getResourceShop().getItemId());
+	        params.put("resourceFile", rf);
+	        dao.save(params);
+	    }
         
         //리소스가 업로드 되지않았을 경우 예외 발생
         if(market.getResourceShop() == null) {
