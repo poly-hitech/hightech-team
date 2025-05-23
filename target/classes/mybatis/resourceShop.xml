@@ -18,58 +18,78 @@
 	</insert>
 	
 	<select id="marketList" resultMap="MarketListMap">
-		select resourceShop.*, resourceSubCategory.*, resourceCategory.*, ranking.*, counting.*
-		from ResourceShop resourceShop
-		join Ranking ranking on resourceShop.rankid = ranking.rankid
-		left join ResourceSubCategory resourceSubCategory on resourceSubCategory.resourceSubCategoryId = resourceShop.resourceSubCategoryId
-		left join ResourceCategory resourceCategory on resourceSubCategory.resourceCategoryId = resourceCategory.resourceCategoryId
-		left join OrdersDetails ordersDetails on ordersDetails.itemId = resourceShop.itemId
-		left join Counting counting on ordersDetails.ordersDetailsId = counting.ordersDetailsId
-		left join ResourceFile resourceFile on resourceFile.itemId = resourceShop.itemId
+		SELECT 
+		    resourceShop.*, 
+		    resourceSubCategory.*, 
+		    resourceCategory.*, 
+		    resourceFile.*, 
+		    ranking.*, 
+		    counting.*
+        FROM ResourceCategory resourceCategory
+        LEFT JOIN ResourceSubCategory resourceSubCategory 
+            ON resourceSubCategory.resourceCategoryId = resourceCategory.resourceCategoryId
+        LEFT JOIN ResourceShop resourceShop 
+            ON resourceShop.resourceSubCategoryId = resourceSubCategory.resourceSubCategoryId
+        LEFT JOIN ResourceFile resourceFile 
+            ON resourceFile.itemId = resourceShop.itemId
+        LEFT JOIN Ranking ranking 
+            ON resourceShop.rankid = ranking.rankid
+        LEFT JOIN OrdersDetails ordersDetails 
+            ON ordersDetails.itemId = resourceShop.itemId
+        LEFT JOIN Counting counting 
+            ON counting.ordersDetailsId = ordersDetails.ordersDetailsId
 	</select>
 	
-	<resultMap type="ResourceCategory" id="MarketListMap">
-	        <id property="resourceCategoryId" column="resourceCategoryId"/>
-	        <result property="resourceCategoryName" column="resourceCategoryName"/>
-	
-	        <!-- 2. 리소스 서브 카테고리 리스트 -->
-	        <collection javaType="ArrayList" property="resourceSubCategory" ofType="ResourceSubCategory" column="resourceCategoryId" autoMapping="true">
-	            <id property="resourceSubCategoryId" column="resourceSubCategoryId"/>
-	            <result property="resourceSubCategoryName" column="resourceSubCategoryName"/>
-	            <result property="resourceCategoryId" column="resourceCategoryId"/>
-	
-	            <!-- 3. 리소스 샵 리스트 -->
-	            <collection javaType="ArrayList" property="resourceShop" ofType="ResourceShop" column="resourceSubCategoryId" autoMapping="true">
-	                <id property="itemId" column="itemId"/>
-	                <result property="itemName" column="itemName"/>
-	                <result property="itemPrice" column="itemPrice"/>
-	                <result property="itemWriter" column="itemWriter"/>
-	                <result property="resourceDate" column="resourceDate"/>
-	                <result property="resourceSubCategoryId" column="resourceSubCategoryId"/>
-	
-	                <!-- 4. 랭킹 (단일) -->
-	                <association property="ranking" javaType="Ranking">
-	                    <id property="rankId" column="rankId"/>
-	                    <result property="totalRank" column="totalRank"/>
-	                    <result property="dailyRank" column="dailyRank"/>
-	                    <result property="weeklyRank" column="weeklyRank"/>
-	                    <result property="monthlyRank" column="monthlyRank"/>
-	                </association>
-	
-	                <!-- 5. 카운팅 (OrdersDetail 내부 → 직접 연결) -->
-	                <association property="counting" javaType="Counting">
-	                    <id property="countingId" column="countingId"/>
-	                    <result property="totalcount" column="totalcount"/>
-	                    <result property="dailycount" column="dailycount"/>
-	                    <result property="weekcount" column="weekcount"/>
-	                    <result property="monthcount" column="monthcount"/>
-	                </association>
-	            	<collection javaType="ArrayList" property="resourceFile" ofType="ResourceFile" column="itemId" autoMapping="true">                          
-	            		<id property="resourceFileId" column="resourceFileId"/>
-	            		<result property="resourceFileName" column="resourceFileName"/>
-	            		<result property="itemId" column="itemId"/>
-	            	</collection>
-	        </collection>
-		</collection>
-	</resultMap>
+<resultMap type="ResourceCategory" id="MarketListMap">
+    <id property="resourceCategoryId" column="resourceCategoryId"/>
+    <result property="resourceCategoryName" column="resourceCategoryName"/>
+
+    <!-- 2. 리소스 서브 카테고리 리스트 -->
+    <collection property="resourceSubCategory" ofType="ResourceSubCategory">
+        <id property="resourceSubCategoryId" column="resourceSubCategoryId"/>
+        <result property="resourceSubCategoryName" column="resourceSubCategoryName"/>
+        <result property="resourceCategoryId" column="resourceCategoryId"/>
+
+        <!-- 3. 리소스 샵 리스트 -->
+        <collection property="resourceShop" ofType="ResourceShop">
+            <id property="itemId" column="itemId"/>
+            <result property="itemName" column="itemName"/>
+            <result property="itemPrice" column="itemPrice"/>
+            <result property="itemWriter" column="itemWriter"/>
+            <result property="resourceDate" column="resourceDate"/>
+            <result property="resourceSubCategoryId" column="resourceSubCategoryId"/>
+
+            <!-- 4. 랭킹 (단일) -->
+            <association property="ranking" javaType="Ranking">
+                <id property="rankId" column="rankId"/>
+                <result property="totalRank" column="totalRank"/>
+                <result property="dailyRank" column="dailyRank"/>
+                <result property="weeklyRank" column="weeklyRank"/>
+                <result property="monthlyRank" column="monthlyRank"/>
+            </association>
+
+			<!-- 5. 리소스 파일 리스트 -->
+            <collection property="resourceFile" ofType="ResourceFile">
+                <id property="resourceFileId" column="resourceFileId"/>
+                <result property="resourceFileName" column="resourceFileName"/>
+                <result property="itemId" column="itemId"/>
+            </collection>
+
+            <!-- 6. 주문 정보 리스트 -->
+            <collection property="ordersDetails" ofType="OrdersDetails">
+                <id property="ordersDetailsId" column="ordersDetailsId"/>
+                <result property="itemId" column="itemId"/>
+
+                <!-- 7. 카운팅 (OrdersDetails 내부) -->
+                <association property="counting" javaType="Counting">
+                    <id property="countingId" column="countingId"/>
+                    <result property="totalcount" column="totalcount"/>
+                    <result property="dailycount" column="dailycount"/>
+                    <result property="weekcount" column="weekcount"/>
+                    <result property="monthcount" column="monthcount"/>
+                </association>
+            </collection>
+        </collection>
+    </collection>
+</resultMap>
 </mapper>

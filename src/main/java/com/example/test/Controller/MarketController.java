@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.test.Model.Market;
+import com.example.test.Model.Ranking;
 import com.example.test.Model.ResourceCategory;
+import com.example.test.Model.ResourceFile;
+import com.example.test.Model.ResourceShop;
 import com.example.test.Model.ResourceSubCategory;
 import com.example.test.Service.ResourceShopService;
 
@@ -35,16 +38,46 @@ public class MarketController {
 	String shopList(Model model, HttpSession session) {
 		List<ResourceCategory> list = resourceShopService.list();
 		
+		//넘어오는 값을 확인하기 위한 코드
 		for(int a =0;a < list.size(); a++){
 			ResourceCategory rc = list.get(a);
 			log.info("리소스 사이즈 : {}"+ list.size() + "리소스 1차 번호: {}" + rc.getResourceCategoryId());
+			//서브 카테고리 리스트를 호출
 			List<ResourceSubCategory> sc = rc.getResourceSubCategory();
-			for(ResourceSubCategory rsc: sc) {
+			//호출한 서브카테고리 리스트 만큼 반복시켜 서브 카테고리 각 객체 불러옴
+			for(ResourceSubCategory rsc : sc) {
 				Long id = rsc.getResourceSubCategoryId();
 				String name = rsc.getResourceSubCategoryName();
 				
 				log.info("2차 카테고리 번호: {}" + id);
 				log.info("2차 카테고리 이름: {}" + name);
+				//불러온 서브카테고리속에 속한 상점 정보 리스트를 불러옴
+				List<ResourceShop> rsList = rsc.getResourceShop();
+				//불러온 상점정보리스트에 담긴 상점정보 단일 객체 호출
+				for(ResourceShop resourceShop : rsList) {
+					Long shopId = resourceShop.getItemId();
+					String itemName = resourceShop.getItemName();
+					log.info("상점 아이템 번호: {}"+ shopId);
+					log.info("상점 아이템 이름: {}" + itemName);
+					
+					//해당 상점정보의 랭킹 호출
+					Ranking rank = resourceShop.getRanking();
+					Long rankId = rank.getRankingId();
+					log.info("상점 아이템 랭킹번호: {}" + rankId);
+					
+					//해당 상품의 판매량 호출
+					
+					
+					//상점 정보 속에 속한 파일 호출
+					List<ResourceFile> rfList = resourceShop.getResourceFile();
+					//위와 동일한 방식
+					for(ResourceFile resourceFile : rfList) {
+						Long fileId = resourceFile.getItemId();
+						String fileName = resourceFile.getResourceFileName();
+						log.info("상점 파일 번호: {}" + fileId);
+						log.info("상점 파일 경로: {}" + fileName);
+					}
+				}
 			}
 		}
 		

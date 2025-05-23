@@ -3,7 +3,7 @@ package com.example.test.Model;
 //주문내역
 public class OrdersDetails {
 	private Long ordersDetailsId;
-	private ResourceShop resourceShop;
+	private Long itemId;
 	private Orders orders;
 	private Counting counting;
 	
@@ -12,12 +12,6 @@ public class OrdersDetails {
 	}
 	public void setOrdersDetailsId(Long ordersDetailsId) {
 		this.ordersDetailsId = ordersDetailsId;
-	}
-	public ResourceShop getResourceShop() {
-		return resourceShop;
-	}
-	public void setResourceShop(ResourceShop resourceShop) {
-		this.resourceShop = resourceShop;
 	}
 	public Orders getOrders() {
 		return orders;
@@ -30,6 +24,12 @@ public class OrdersDetails {
 	}
 	public void setCounting(Counting counting) {
 		this.counting = counting;
+	}
+	public Long getItemId() {
+		return itemId;
+	}
+	public void setItemId(Long itemId) {
+		this.itemId = itemId;
 	}
 
 }

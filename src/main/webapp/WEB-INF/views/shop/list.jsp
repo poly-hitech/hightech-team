@@ -19,61 +19,65 @@
             <h2>${list.resourceCategoryName}</h2>
         </c:forEach>
 	</div>
-	
-	<nav class="category-nav">
-    	<ul>
-        	<li><a data-primary="All">전체</a></li>
-            <li>
-            	<a data-primary="Images">이미지 소스</a>
-           		<ul class="dropdown">
-                	<c:forEach var="secondary" items="${secondaryCategories['Images']}">
-                    	<li><a data-secondary="${secondary}">${secondary}</a></li>
-                    </c:forEach>
-                </ul>
-            </li>
-            <li>
-            	<a data-primary="Music">음원</a>
-               	<ul class="dropdown">
-                	<c:forEach var="secondary" items="${secondaryCategories['Music']}">
-                    	<li><a data-secondary="${secondary}">${secondary}</a></li>
-                    </c:forEach>
-                </ul>
-            </li>
-            <li>
-            	<a data-primary="Development">개발</a>
-              	<ul class="dropdown">
-                	<c:forEach var="secondary" items="${secondaryCategories['Development']}">
-                    	<li><a data-secondary="${secondary}">${secondary}</a></li>
-                    </c:forEach>
-                </ul>
-            </li>
-        </ul>
-    </nav>
     
-    <div class="secondary-categories" id="secondary-categories">
-    	<ul id="secondary-list"></ul>
-    </div>
 	<main>
+		<nav class="category-nav">
+	    	<ul>
+	        	<li><a data-primary="All">전체</a></li>
+	            <li>
+	            	<a data-primary="Images">이미지 소스</a>
+	           		<ul class="dropdown">
+	                	<c:forEach var="secondary" items="${secondaryCategories['Images']}">
+	                    	<li><a data-secondary="${secondary}">${secondary}</a></li>
+	                    </c:forEach>
+	                </ul>
+	            </li>
+	            <li>
+	            	<a data-primary="Music">음원</a>
+	               	<ul class="dropdown">
+	                	<c:forEach var="secondary" items="${secondaryCategories['Music']}">
+	                    	<li><a data-secondary="${secondary}">${secondary}</a></li>
+	                    </c:forEach>
+	                </ul>
+	            </li>
+	            <li>
+	            	<a data-primary="Development">개발</a>
+	              	<ul class="dropdown">
+	                	<c:forEach var="secondary" items="${secondaryCategories['Development']}">
+	                    	<li><a data-secondary="${secondary}">${secondary}</a></li>
+	                    </c:forEach>
+	                </ul>
+	            </li>
+	        </ul>
+	    </nav>
+	    
+		<div class="secondary-categories" id="secondary-categories">
+    		<ul id="secondary-list"></ul>
+    	</div>
+	    
         <div>
-            <c:forEach var="resourceCategory" items="${list}">
+            <c:forEach var="category" items="${list}">
             	<div>
-            		${list.resourceCategoryName}
+            		${category.resourceCategoryName}
             	</div>
-            	<div>
-            		${list.resourceSubCategory}
-            	</div>
-                <div>
-                    <img src="${list.resourceSubCategory.resourceShop.resource}">
-                    <h3>${list.resourceSubCategory.resourceShop.itemName}</h3>
-                    <div class="author">${list.resourceSubCategory.resourceShop.itemWriter}</div>
-                    <div class="price">${list.resourceSubCategory.resourceShop.itemPrice}</div>
-                </div>
+            	<c:forEach var="sub" items="${category.resourceSubCategory}">
+	            	<div>
+	            		${sub.resourceSubCategoryName}
+	            	</div>
+	            	<c:forEach var="shop" items="${sub.resourceShop}">
+	            		<c:forEach var="file" items="${shop.resourceFile}">
+			                <div>
+			                    <img src="${file.resourceFileName}">
+			                    <h3>${shop.itemName}</h3>
+			                    <div class="author">${shop.itemWriter}</div>
+			                    <div class="price">${shop.itemPrice}</div>
+			                </div>
+		                </c:forEach>
+	             	</c:forEach>
+                </c:forEach>
             </c:forEach>
         </div>
         <div class="loading" id="loading">Loading...</div>
     </main>
-	<div>
-		<a href="../${sessionScope.member.roleId}/add/${sessionScope.member.userId}" style="color: white; padding-left: 280px">add</a>
-	</div>
 </body>
 </html>

@@ -41,7 +41,7 @@
               </a>
             </li>
             <li class="item">
-              <a href="${root}/" class="link flex">
+              <a href="${root}/shop/${sessionScope.member.roleId}/add/${sessionScope.member.userId}" class="link flex">
                 <i class="bx bx-home-alt"></i>
                 <span>상품 등록</span>
               </a>

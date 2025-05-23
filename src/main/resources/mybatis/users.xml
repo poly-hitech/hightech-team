@@ -104,13 +104,13 @@
 		
 		<update id="update">
 			update Users
-			set username=#{username}, nickname=#{nickname}, birthday=#{birthday}, phone=#{phone}, gender=#{gender}, profileImage=#{profileImage}
+			set username=#{username}, nickname=#{nickname}, phone=#{phone}, gender=#{gender}, profileImage=#{profileImage}
 			where userId=#{userId}
 		</update>
 		
 		<update id="updateIncludeNewPassword">
 			update Users
-			set username=#{username}, password=#{password}, nickname=#{nickname}, birthday=#{birthday}, phone=#{phone}, gender=#{gender}, profileImage=#{profileImage}
+			set username=#{username}, password=#{password}, nickname=#{nickname}, phone=#{phone}, gender=#{gender}, profileImage=#{profileImage}
 			where userId=#{userId}
 		</update>
 		

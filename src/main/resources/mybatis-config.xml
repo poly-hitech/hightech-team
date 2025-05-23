@@ -19,6 +19,7 @@
 		<typeAlias type="com.example.test.Model.RegexDetail" alias="RegexDetail"/>
 		<typeAlias type="com.example.test.Model.NewRegex" alias="NewRegex"/>
 		<typeAlias type="com.example.test.Model.ResourceFile" alias="ResourceFile"/>
+		<typeAlias type="com.example.test.Model.OrdersDetails" alias="OrdersDetails"/>
 	</typeAliases>
 	
 	<!-- mapper 파일 추가 -->
