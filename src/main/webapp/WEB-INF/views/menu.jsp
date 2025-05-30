@@ -41,10 +41,18 @@
               </a>
             </li>
             <li class="item">
-              <a href="${root}/shop/${sessionScope.member.roleId}/add/${sessionScope.member.userId}" class="link flex">
-                <i class="bx bx-home-alt"></i>
-                <span>상품 등록</span>
-              </a>
+            	<c:if test="${sessionScope.member!= null}">
+            		<a href="${root}/shop/${sessionScope.member.roleId}/add/${sessionScope.member.userId}" class="link flex">
+                		<i class="bx bx-home-alt"></i>
+                		<span>상품 등록</span>
+              		</a>
+            	</c:if>
+            	<c:if test="${sessionScope.member == null}">
+            		<a href="${root}/login" class="link flex" id="pleaselogin">
+                		<i class="bx bx-home-alt"></i>
+                		<span>상품 등록</span>
+              		</a>
+            	</c:if>
             </li>
             <li class="item">
               <a href="${root}/" class="link flex">

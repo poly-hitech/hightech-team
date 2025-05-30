@@ -74,8 +74,18 @@ public class MarketController {
 					for(ResourceFile resourceFile : rfList) {
 						Long fileId = resourceFile.getItemId();
 						String fileName = resourceFile.getResourceFileName();
-						log.info("상점 파일 번호: {}" + fileId);
-						log.info("상점 파일 경로: {}" + fileName);
+						log.info("상점 파일경로: {}" + fileName);
+						//가져온 파일명에서 uuid를 제외한 진짜 파일명을 불러오기위함.
+						if(fileName != null) {
+							int pos = fileName.lastIndexOf("_");
+						
+							if(pos>0) {
+								fileName = fileName.substring(pos + 1);
+								log.info("상점 파일 번호: {}" + fileId);
+								log.info("상점 파일명: {}" + fileName);
+								//보여줄 파일명 설정
+							}
+						}
 					}
 				}
 			}
@@ -87,7 +97,7 @@ public class MarketController {
 	}
 	
 	//유저별 등록한 리소스 목록
-	@GetMapping("{roleId}/{userId}/mylist")
+	@GetMapping("{roleId}/mylist/{userId}")
 	String MyshopList(@PathVariable Long userId, @PathVariable Long roleId, Model model, HttpSession session) {
 		
 		List<ResourceCategory> list = resourceShopService.list(userId);

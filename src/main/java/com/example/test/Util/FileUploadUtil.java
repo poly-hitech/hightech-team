@@ -39,7 +39,7 @@ public class FileUploadUtil {
 	
 	        try {
 	            // 파일 저장
-	            File destinationFile = new File(uploadDir + "/" + uuid + file.getOriginalFilename());
+	            File destinationFile = new File(uploadDir + "/" + uuid +"_"+ file.getOriginalFilename());
 	            file.transferTo(destinationFile);
 	
 	            model.addAttribute("filePath", destinationFile.getAbsolutePath());
