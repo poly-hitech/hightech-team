@@ -16,4 +16,6 @@ public interface ShopCategoryDao {
 	
 	void add(MarketCategory item);
 
+	ResourceCategory getResourceCategory(Long resourceSubcategoryId);
+
 }

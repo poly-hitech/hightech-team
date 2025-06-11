@@ -74,4 +74,10 @@ public class ShopCategoryDaoImpl implements ShopCategoryDao {
 
 	}
 
+	@Override
+	public ResourceCategory getResourceCategory(Long resourceSubcategoryId) {
+		// TODO Auto-generated method stub
+		return sql.selectOne("resourceCategory.getResourceCategoryByResourceSub", resourceSubcategoryId);
+	}
+
 }

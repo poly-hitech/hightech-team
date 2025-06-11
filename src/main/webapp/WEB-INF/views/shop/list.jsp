@@ -9,47 +9,6 @@
 <title>리소스 상점</title>
 <link rel="stylesheet" href="${root}/css/shop.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- 서버에서 전달된 데이터를 JavaScript 변수로 저장 -->
-    <script>
-	    const categories = [
-	        <c:forEach var="category" items="${list}" varStatus="loop">
-	            {
-	                resourceCategoryId: ${category.resourceCategoryId},
-	                resourceCategoryName: "${category.resourceCategoryName}",
-	                resourceSubCategory: [
-	                    <c:forEach var="sub" items="${category.resourceSubCategory}" varStatus="subLoop">
-	                    	<c:if test="${sub.resourceSubCategoryId} != null">
-	                        {
-	                            resourceSubCategoryId: ${sub.resourceSubCategoryId},
-	                            resourceSubCategoryName: "${sub.resourceSubCategoryName}",
-	                            resourceShop: [
-	                                <c:forEach var="shop" items="${sub.resourceShop}" varStatus="shopLoop">
-	                                    {
-	                                        itemId: ${shop.itemId},
-	                                        itemName: "${shop.itemName}",
-	                                        itemWriter: "${shop.itemWriter}",
-	                                        itemPrice: ${shop.itemPrice},
-	                                        resourceFile: [
-	                                            <c:forEach var="file" items="${shop.resourceFile}" varStatus="fileLoop">
-	                                                {
-/* 	                                                    resourceFileName: "${file.resourceFileName}" */
-	                                                    resourceFileName: "C:\\upload\\images\\9c4b7953-d5c8-483f-b341-d186f1c9988b_contact.jpg"
-	                                                }<c:if test="${!fileLoop.last}">,</c:if>
-	                                            </c:forEach>
-	                                        ]
-	                                    }<c:if test="${!shopLoop.last}">,</c:if>
-	                                </c:forEach>
-	                            ]
-	                        }<c:if test="${!subLoop.last}">,</c:if>
-	                        </c:if>
-	                    </c:forEach>
-	                ]
-	            }<c:if test="${!loop.last}">,</c:if>
-	        </c:forEach>
-	    ];
-	    
-	    console.log("Categories defined:", categories);
-    </script>
 </head>
 <body>
 	<div>
@@ -78,9 +37,50 @@
             <div class="loading" id="loading">Loading...</div>
         </div>
     </main>
-
-
-    
+        <!-- 서버에서 전달된 데이터를 JavaScript 변수로 저장 -->
+    <script>
+    	console.log(JSON.parse('${list2}'));
+    	var categories = JSON.parse('${list2}');
+    	console.log(categories);
+	    /* const categories = [
+	        <c:forEach var="category" items="${list}" varStatus="loop">
+	            {
+	                resourceCategoryId: ${category.resourceCategoryId},
+	                resourceCategoryName: "${category.resourceCategoryName}",
+	                resourceSubCategory: [
+	                    <c:forEach var="sub" items="${category.resourceSubCategory}" varStatus="subLoop">
+	                    	<c:if test="${sub.resourceSubCategoryId} != null">
+	                        {
+	                            resourceSubCategoryId: ${sub.resourceSubCategoryId},
+	                            resourceSubCategoryName: "${sub.resourceSubCategoryName}",
+	                            resourceShop: [
+	                                <c:forEach var="shop" items="${sub.resourceShop}" varStatus="shopLoop">
+	                                    {
+	                                        itemId: ${shop.itemId},
+	                                        itemName: "${shop.itemName}",
+	                                        itemWriter: "${shop.itemWriter}",
+	                                        itemPrice: ${shop.itemPrice},
+	                                        resourceFile: [
+	                                            <c:forEach var="file" items="${shop.resourceFile}" varStatus="fileLoop">
+	                                                {
+	                                                	resourceFileName: "${file.resourceFileName}"
+	                                                     resourceFileName: "C:\\upload\\images\\9c4b7953-d5c8-483f-b341-d186f1c9988b_contact.jpg"
+	                                                }<c:if test="${!fileLoop.last}">,</c:if>
+	                                            </c:forEach>
+	                                        ]
+	                                    }<c:if test="${!shopLoop.last}">,</c:if>
+	                                </c:forEach>
+	                            ]
+	                        }<c:if test="${!subLoop.last}">,</c:if>
+	                        </c:if>
+	                    </c:forEach>
+	                ]
+	            }<c:if test="${!loop.last}">,</c:if>
+	        </c:forEach>
+	    ]; */
+	    
+	    console.log("Categories defined:", categories);
+    </script>
     <script src="${root}/js/shopList.js"></script>
 </body>
 </html>

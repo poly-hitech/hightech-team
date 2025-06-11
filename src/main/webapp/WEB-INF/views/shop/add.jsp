@@ -37,6 +37,10 @@
                 <input type="text" id="itemName" name="resourceShop.itemName">
             </div>
             <div>
+            	<label for="itemContent">상품 설명(256자 내외): </label>
+            	<input type="text" id="resourceShop.itemContent">
+            </div>
+            <div>
                 <label for="itemWriter">판매자: </label>
                 <input type="text" id="itemWriter" name="resourceShop.itemWriter" value="${sessionScope.member.nickname}" readonly>
             </div>

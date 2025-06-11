@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="resourceShop">
+
 	<insert id="resourceAdd" parameterType="ResourceShop">
 		insert into ResourceShop
-		values (RESOURCESHOP_SEQ.nextval, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceSubCategoryId}, #{userId}, #{rankId} , #{resourceDate})
+		values (RESOURCESHOP_SEQ.nextval, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceSubCategoryId}, #{userId}, #{rankId} , #{resourceDate}, #{resourceContent})
 		
 		<selectKey keyProperty="itemId" resultType="Long" order="AFTER">
        		SELECT RESOURCESHOP_SEQ.CURRVAL FROM DUAL
@@ -17,14 +18,98 @@
 		</foreach>
 	</insert>
 	
+	<select id="getItemInfo" resultMap="GetItemMap">
+		SELECT		
+	    <!-- ResourceShop -->
+	    resourceShop.itemId AS rs_itemId,
+	    resourceShop.itemName,
+	    resourceShop.itemPrice,
+	    resourceShop.itemWriter,
+	    resourceShop.resourceDate,
+	    resourceShop.resourceSubCategoryId AS rs_resourceSubCategoryId,
+	    resourceShop.rankid AS rs_rankid,
+	    
+	    <!-- ResourceFile -->
+	    resourceFile.resourceFileId,
+	    resourceFile.resourceFileName,
+	    resourceFile.itemId AS rf_itemId,
+	    
+	    <!-- Ranking -->
+	    ranking.rankId,
+	    ranking.totalRank,
+	    ranking.dailyRank,
+	    ranking.weeklyRank,
+	    ranking.monthlyRank,
+	    
+	    <!-- OrdersDetail -->
+	    ordersDetails.ordersDetailsId,
+    	ordersDetails.itemId AS od_itemId,
+	    
+	    <!-- Counting -->
+	    counting.countingId,
+	    counting.totalcounting,
+	    counting.dailycounting,
+	    counting.weeklycounting,
+	    counting.monthcounting
+		
+		FROM ResourceShop resourceShop
+        LEFT JOIN ResourceFile resourceFile 
+            ON resourceFile.itemId = resourceShop.itemId
+        LEFT JOIN Ranking ranking 
+            ON resourceShop.rankid = ranking.rankid
+        LEFT JOIN OrdersDetails ordersDetails 
+            ON ordersDetails.itemId = resourceShop.itemId
+        LEFT JOIN Counting counting 
+            ON counting.ordersDetailsId = ordersDetails.ordersDetailsId
+        WHERE resourceShop.itemId=#{itemId}
+        ORDER BY
+	    resourceShop.itemId, 
+	    resourceFile.resourceFileId, 
+	    ordersDetails.ordersDetailsId
+	</select>
+	
 	<select id="marketList" resultMap="MarketListMap">
 		SELECT 
-		    resourceShop.*, 
-		    resourceSubCategory.*, 
-		    resourceCategory.*, 
-		    resourceFile.*, 
-		    ranking.*, 
-		    counting.*
+		<!-- ResourceCategory -->
+	    resourceCategory.resourceCategoryId AS rc_resourceCategoryId,
+	    resourceCategory.resourceCategoryName,
+	    
+	    <!-- ResourceSubCategory -->
+	    resourceSubCategory.resourceSubCategoryId AS rsc_resourceSubCategoryId,
+	    resourceSubCategory.resourceSubCategoryName,
+	    resourceSubCategory.resourceCategoryId AS rsc_resourceCategoryId,
+	    
+	    <!-- ResourceShop -->
+	    resourceShop.itemId AS rs_itemId,
+	    resourceShop.itemName,
+	    resourceShop.itemPrice,
+	    resourceShop.itemWriter,
+	    resourceShop.resourceDate,
+	    resourceShop.resourceSubCategoryId AS rs_resourceSubCategoryId,
+	    resourceShop.rankid AS rs_rankid,
+	    
+	    <!-- ResourceFile -->
+	    resourceFile.resourceFileId,
+	    resourceFile.resourceFileName,
+	    resourceFile.itemId AS rf_itemId,
+	    
+	    <!-- Ranking -->
+	    ranking.rankId,
+	    ranking.totalRank,
+	    ranking.dailyRank,
+	    ranking.weeklyRank,
+	    ranking.monthlyRank,
+	    
+	    <!-- OrdersDetail -->
+	    ordersDetails.ordersDetailsId,
+    	ordersDetails.itemId AS od_itemId,
+	    
+	    <!-- Counting -->
+	    counting.countingId,
+	    counting.totalcounting,
+	    counting.dailycounting,
+	    counting.weeklycounting,
+	    counting.monthcounting
         FROM ResourceCategory resourceCategory
         LEFT JOIN ResourceSubCategory resourceSubCategory 
             ON resourceSubCategory.resourceCategoryId = resourceCategory.resourceCategoryId
@@ -38,58 +123,103 @@
             ON ordersDetails.itemId = resourceShop.itemId
         LEFT JOIN Counting counting 
             ON counting.ordersDetailsId = ordersDetails.ordersDetailsId
+        ORDER BY 
+	    resourceCategory.resourceCategoryId, 
+	    resourceSubCategory.resourceSubCategoryId, 
+	    resourceShop.itemId, 
+	    resourceFile.resourceFileId, 
+	    ordersDetails.ordersDetailsId
 	</select>
 	
-<resultMap type="ResourceCategory" id="MarketListMap">
-    <id property="resourceCategoryId" column="resourceCategoryId"/>
-    <result property="resourceCategoryName" column="resourceCategoryName"/>
+	<resultMap type="ResourceShop" id="GetItemMap">
+		<id property="itemId" column="rs_itemId"/>
+        <result property="itemName" column="itemName"/>
+        <result property="itemPrice" column="itemPrice"/>
+        <result property="itemWriter" column="itemWriter"/>
+        <result property="resourceDate" column="resourceDate"/>
+        <result property="resourceContent" column="resourceContent"/>
+        <result property="resourceSubCategoryId" column="rs_resourceSubCategoryId"/>
 
-    <!-- 2. 리소스 서브 카테고리 리스트 -->
-    <collection property="resourceSubCategory" ofType="ResourceSubCategory">
-        <id property="resourceSubCategoryId" column="resourceSubCategoryId"/>
-        <result property="resourceSubCategoryName" column="resourceSubCategoryName"/>
-        <result property="resourceCategoryId" column="resourceCategoryId"/>
+        <!-- 4. 랭킹 (단일) -->
+        <association property="ranking" javaType="Ranking">
+	        <id property="resourceSubCategoryId" column="rsc_resourceSubCategoryId"/>
+	        <result property="resourceSubCategoryName" column="resourceSubCategoryName"/>
+	        <result property="resourceCategoryId" column="rsc_resourceCategoryId"/>
+        </association>
 
-        <!-- 3. 리소스 샵 리스트 -->
-        <collection property="resourceShop" ofType="ResourceShop">
-            <id property="itemId" column="itemId"/>
-            <result property="itemName" column="itemName"/>
-            <result property="itemPrice" column="itemPrice"/>
-            <result property="itemWriter" column="itemWriter"/>
-            <result property="resourceDate" column="resourceDate"/>
-            <result property="resourceSubCategoryId" column="resourceSubCategoryId"/>
+		<!-- 5. 리소스 파일 리스트 -->
+      	<collection property="resourceFile" ofType="ResourceFile" javaType="ArrayList" column="rs_itemId">
+     		<id property="resourceFileId" column="resourceFileId"/>
+        	<result property="resourceFileName" column="resourceFileName"/>
+       		<result property="itemId" column="rf_itemId"/>
+      	</collection>
 
-            <!-- 4. 랭킹 (단일) -->
-            <association property="ranking" javaType="Ranking">
-                <id property="rankId" column="rankId"/>
-                <result property="totalRank" column="totalRank"/>
-                <result property="dailyRank" column="dailyRank"/>
-                <result property="weeklyRank" column="weeklyRank"/>
-                <result property="monthlyRank" column="monthlyRank"/>
-            </association>
+       	<!-- 6. 주문 정보 리스트 -->
+   		<collection property="ordersDetails" ofType="OrdersDetails" javaType="ArrayList" column="rs_itemId">
+			<id property="ordersDetailsId" column="ordersDetailsId"/>
+      		<result property="itemId" column="od_itemId"/>
 
-			<!-- 5. 리소스 파일 리스트 -->
-            <collection property="resourceFile" ofType="ResourceFile">
-                <id property="resourceFileId" column="resourceFileId"/>
-                <result property="resourceFileName" column="resourceFileName"/>
-                <result property="itemId" column="itemId"/>
-            </collection>
-
-            <!-- 6. 주문 정보 리스트 -->
-            <collection property="ordersDetails" ofType="OrdersDetails">
-                <id property="ordersDetailsId" column="ordersDetailsId"/>
-                <result property="itemId" column="itemId"/>
-
-                <!-- 7. 카운팅 (OrdersDetails 내부) -->
-                <association property="counting" javaType="Counting">
-                    <id property="countingId" column="countingId"/>
-                    <result property="totalcount" column="totalcount"/>
-                    <result property="dailycount" column="dailycount"/>
-                    <result property="weekcount" column="weekcount"/>
-                    <result property="monthcount" column="monthcount"/>
-                </association>
-            </collection>
-        </collection>
-    </collection>
-</resultMap>
+      		<!-- 7. 카운팅 (OrdersDetails 내부) -->
+     		<association property="counting" javaType="Counting">
+       			<id property="countingId" column="countingId"/>
+           		<result property="totalcount" column="totalcounting"/>
+             	<result property="dailycount" column="dailycounting"/>
+           		<result property="weekcount" column="weeklycounting"/>
+          		<result property="monthcount" column="monthcounting"/>
+        	</association>
+     	</collection>
+	</resultMap>
+	
+	<resultMap type="ResourceCategory" id="MarketListMap">
+	    <id property="resourceCategoryId" column="rc_resourceCategoryId"/>
+	    <result property="resourceCategoryName" column="resourceCategoryName"/>
+	
+	    <!-- 2. 리소스 서브 카테고리 리스트 -->
+	    <collection property="resourceSubCategory" ofType="ResourceSubCategory" javaType="ArrayList" column="rc_resourceCategoryId">
+	        <id property="resourceSubCategoryId" column="rsc_resourceSubCategoryId"/>
+	        <result property="resourceSubCategoryName" column="resourceSubCategoryName"/>
+	        <result property="resourceCategoryId" column="rsc_resourceCategoryId"/>
+	
+	        <!-- 3. 리소스 샵 리스트 -->
+	        <collection property="resourceShop" ofType="ResourceShop" javaType="ArrayList" column="rsc_resourceSubCategoryId">
+	            <id property="itemId" column="rs_itemId"/>
+	            <result property="itemName" column="itemName"/>
+	            <result property="itemPrice" column="itemPrice"/>
+	            <result property="itemWriter" column="itemWriter"/>
+	            <result property="resourceDate" column="resourceDate"/>
+	            <result property="resourceSubCategoryId" column="rs_resourceSubCategoryId"/>
+	
+	            <!-- 4. 랭킹 (단일) -->
+	            <association property="ranking" javaType="Ranking">
+	                <id property="rankId" column="rankId"/>
+	                <result property="totalRank" column="totalRank"/>
+	                <result property="dailyRank" column="dailyRank"/>
+	                <result property="weeklyRank" column="weeklyRank"/>
+	                <result property="monthlyRank" column="monthlyRank"/>
+	            </association>
+	
+				<!-- 5. 리소스 파일 리스트 -->
+	            <collection property="resourceFile" ofType="ResourceFile" javaType="ArrayList" column="rs_itemId">
+	                <id property="resourceFileId" column="resourceFileId"/>
+	                <result property="resourceFileName" column="resourceFileName"/>
+	                <result property="itemId" column="rf_itemId"/>
+	            </collection>
+	
+	            <!-- 6. 주문 정보 리스트 -->
+	            <collection property="ordersDetails" ofType="OrdersDetails" javaType="ArrayList" column="rs_itemId">
+	                <id property="ordersDetailsId" column="ordersDetailsId"/>
+	                <result property="itemId" column="od_itemId"/>
+	
+	                <!-- 7. 카운팅 (OrdersDetails 내부) -->
+	                <association property="counting" javaType="Counting">
+	                    <id property="countingId" column="countingId"/>
+	                    <result property="totalcount" column="totalcounting"/>
+	                    <result property="dailycount" column="dailycounting"/>
+	                    <result property="weekcount" column="weeklycounting"/>
+	                    <result property="monthcount" column="monthcounting"/>
+	                </association>
+	            </collection>
+	        </collection>
+	    </collection>
+	</resultMap>
 </mapper>

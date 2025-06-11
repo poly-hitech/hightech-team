@@ -49,4 +49,10 @@ public class ResourceDaoImpl implements ResourceDao {
 		sql.selectList("resourceShop.addResourceFile", params);
 	}
 
+	@Override
+	public ResourceShop getItem(Long itemId) {
+		// TODO Auto-generated method stub
+		return sql.selectOne("resourceShop.getItemInfo", itemId);
+	}
+
 }

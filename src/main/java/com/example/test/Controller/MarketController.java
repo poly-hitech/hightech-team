@@ -21,6 +21,9 @@ import com.example.test.Model.ResourceFile;
 import com.example.test.Model.ResourceShop;
 import com.example.test.Model.ResourceSubCategory;
 import com.example.test.Service.ResourceShopService;
+import com.example.test.Service.ShopCategoryService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,10 +36,15 @@ public class MarketController {
 	@Autowired
 	ResourceShopService resourceShopService;
 	
+	@Autowired
+	ShopCategoryService resourceCategoryService;
+	
 	//전체 상점 목록
 	@GetMapping("public/list")
 	String shopList(Model model, HttpSession session) {
 		List<ResourceCategory> list = resourceShopService.list();
+		
+		log.info("1차 카테고리 객체 확인: {}" + list);
 		
 		//넘어오는 값을 확인하기 위한 코드
 		for(int a =0;a < list.size(); a++){
@@ -92,6 +100,17 @@ public class MarketController {
 		}
 		
 		model.addAttribute("list", list);
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			String userAsString;
+			userAsString = objectMapper.writeValueAsString(list);
+			model.addAttribute("list2", userAsString);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		
 		
 		return path + "list";
 	}
@@ -137,6 +156,29 @@ public class MarketController {
 		resourceShopService.addResource(userId, market, file, model);
 		
 		return path + "add";
+	}
+	
+	//리소스 상품 상세
+	@GetMapping("/detail")
+	public String showDetail(@RequestParam("itemId") Long itemId, Model model) {
+		ResourceShop resourceShop = resourceShopService.getItemById(itemId);
+		Long resourceSubcategoryId = resourceShop.getResourceSubCategoryId();
+		ResourceCategory resourceCategory = resourceCategoryService.getResourceCategory(resourceSubcategoryId);
+		
+		log.info("아이템명 확인: {}", resourceShop.getItemName());
+		log.info("아이템 번호 확인: {}", resourceShop.getItemId());
+		
+	    // itemId로 상세정보 조회 로직
+	    model.addAttribute("shop", resourceShop);
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			String userAsString;
+			userAsString = objectMapper.writeValueAsString(resourceShop);
+			model.addAttribute("shop2", userAsString);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+	    return path + "detail";
 	}
 	
 	/*

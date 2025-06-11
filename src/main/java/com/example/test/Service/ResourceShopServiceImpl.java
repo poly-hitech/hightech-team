@@ -16,6 +16,7 @@ import com.example.test.Dao.ResourceDao;
 import com.example.test.Model.Market;
 import com.example.test.Model.ResourceCategory;
 import com.example.test.Model.ResourceFile;
+import com.example.test.Model.ResourceShop;
 import com.example.test.Model.Users;
 import com.example.test.Util.FileUploadUtil;
 
@@ -104,6 +105,13 @@ public class ResourceShopServiceImpl implements ResourceShopService {
             model.addAttribute("message", "모든 파일 업로드 및 리소스 등록이 완료되었습니다.");
         }
 		
+	}
+
+	@Override
+	public ResourceShop getItemById(Long itemId) {
+		log.info("itemId: {}", itemId);
+		// TODO Auto-generated method stub
+		return dao.getItem(itemId);
 	}
 
 }

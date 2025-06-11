@@ -7,6 +7,12 @@
 		where resourceCategoryId=#{resourceCategoryId}
 	</select>
 	
+	<select id="getResourceCategoryByResourceSub" resultMap="ResourceCategoryMap">
+		select ResourceCategory.*, ResourceSubCategory.* from ResourceCategory
+		join ResourceSubCategory on ResourceCategory.resourceCategoryId = ResourceSubCategory.resourceCategoryId
+		where resourceSubCategoryId=#{resourceSubCategoryId}
+	</select>
+	
 	<!-- 최근 리소스 1차 카테고리 번호 -->
 	<select id="selectRCId" resultType="Long">
 		select MAX(resourceCategoryId) from resourceCategoryId

@@ -3,6 +3,7 @@ package com.example.test.Service;
 import java.util.List;
 
 import com.example.test.Model.MarketCategory;
+import com.example.test.Model.ResourceCategory;
 import com.example.test.Model.ResourceSubCategory;
 
 public interface ShopCategoryService {
@@ -14,5 +15,7 @@ public interface ShopCategoryService {
 	void updateAdminCategory(ResourceSubCategory item);
 
 	void addAdminCategory(MarketCategory item);
+
+	ResourceCategory getResourceCategory(Long resourceSubcategoryId);
 
 }

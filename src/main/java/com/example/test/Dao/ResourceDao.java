@@ -20,4 +20,6 @@ public interface ResourceDao {
 
 	void save(Map<String, Object> params);
 
+	ResourceShop getItem(Long itemId);
+
 }

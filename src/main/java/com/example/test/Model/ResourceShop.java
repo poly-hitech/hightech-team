@@ -17,6 +17,7 @@ public class ResourceShop {
 	private Date resourceDate = new Date();
 	
 	private List<ResourceFile> resourceFile;
+	private String resourceContent;
 	private Long rankId;
 	private Long resourceSubCategoryId;
 	private Long userId;
@@ -88,6 +89,12 @@ public class ResourceShop {
 	}
 	public void setRankId(Long rankId) {
 		this.rankId = rankId;
+	}
+	public String getResourceContent() {
+		return resourceContent;
+	}
+	public void setResourceContent(String resourceContent) {
+		this.resourceContent = resourceContent;
 	}
 
 }
