@@ -21,6 +21,7 @@ import com.example.test.Model.ResourceCategory;
 import com.example.test.Model.ResourceFile;
 import com.example.test.Model.ResourceShop;
 import com.example.test.Model.ResourceSubCategory;
+import com.example.test.Service.OrdersService;
 import com.example.test.Service.ResourceShopService;
 import com.example.test.Service.ShopCategoryService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -39,6 +40,9 @@ public class MarketController {
 
 	@Autowired
 	ShopCategoryService resourceCategoryService;
+	
+	@Autowired
+	OrdersService ordersService;
 
 	// 전체 상점 목록
 	@GetMapping("public/list")
@@ -181,10 +185,14 @@ public class MarketController {
 	}
 
 	// 리소스 상품 구매
-	@PostMapping("{roleId}/detail/{itemId}")
-	String buyResource(@PathVariable Long roleId, @PathVariable Long itemId, Orders order, Model model)
+	@PostMapping("/detail/{userId}/{itemId}")
+	String buyResource(@PathVariable Long userId, @PathVariable Long itemId, Orders orders, ResourceShop shop)
 			throws Exception {
 
+		log.info("구매자 이름: {}", userId);
+		log.info("구매 아이템 번호: {}", itemId);
+		ordersService.buyResource(userId, itemId, orders, shop);
+		log.info("구매 완료");
 		return path + "detail";
 	}
 

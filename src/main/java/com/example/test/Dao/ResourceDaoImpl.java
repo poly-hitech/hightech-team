@@ -55,4 +55,10 @@ public class ResourceDaoImpl implements ResourceDao {
 		return sql.selectOne("resourceShop.getItemInfo", itemId);
 	}
 
+	@Override
+	public ResourceShop getOnlyOneResource(Long itemId) {
+
+		return sql.selectOne("resourceShop.getOnlyOneItem", itemId);
+	}
+
 }

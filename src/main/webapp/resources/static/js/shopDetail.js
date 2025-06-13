@@ -54,15 +54,14 @@ $(document).ready(function () {
             // 구매 로직을 여기에 추가
             // 예시: 서버에 구매 요청을 보내는 AJAX 호출
             $.ajax({
-                url: '/shop/detail/' + username + '/itemId=' + shop.itemId, // 구매 요청을 처리하는 서버 엔드포인트
+                url: '/shop/detail/' + userId + '/' + shop.itemId, // 구매 요청을 처리하는 서버 엔드포인트
                 type: 'POST',
-                data: { itemId: itemId },
+                data: null,
                 success: function (response) {
                     console.log("구매 성공:", response);
                     alert("아이템 구매가 완료되었습니다.");
-                    // 추가적인 성공 처리 로직을 여기에 작성할 수 있습니다.
                 },
-                error: function (xhr, status, error, username) {
+                error: function (xhr, status, error) {
                     console.error("구매 실패:", error);
                     //url:에 들어가는 값 확인하기
                     console.error("요청 URL:", '/shop/detail/' + username + '/itemId=' + shop.itemId);

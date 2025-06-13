@@ -22,7 +22,7 @@
     </main>
 	    
    	<script>
-   		const username = '${sessionScope.member.username}';
+   		const userId = '${sessionScope.member.userId}';
    		const shop = JSON.parse('${shop2}');
     	console.log(JSON.parse('${shop2}'));
     </script>

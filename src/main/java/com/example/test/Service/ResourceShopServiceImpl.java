@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.test.Dao.ResourceDao;
 import com.example.test.Model.Market;
+import com.example.test.Model.Orders;
+import com.example.test.Model.OrdersDetails;
 import com.example.test.Model.ResourceCategory;
 import com.example.test.Model.ResourceFile;
 import com.example.test.Model.ResourceShop;

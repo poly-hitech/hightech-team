@@ -22,4 +22,6 @@ public interface ResourceDao {
 
 	ResourceShop getItem(Long itemId);
 
+	ResourceShop getOnlyOneResource(Long itemId);
+
 }
