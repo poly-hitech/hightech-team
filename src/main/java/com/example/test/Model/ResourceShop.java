@@ -23,6 +23,8 @@ public class ResourceShop {
 	private Long userId;
 	private Ranking ranking;
 	private List<OrdersDetails> ordersDetails;
+	private List<ShopReview> shopReview;
+	private Counting counting;
 	
 	public Long getItemId() {
 		return itemId;
@@ -95,6 +97,18 @@ public class ResourceShop {
 	}
 	public void setResourceContent(String resourceContent) {
 		this.resourceContent = resourceContent;
+	}
+	public List<ShopReview> getShopReview() {
+		return shopReview;
+	}
+	public void setShopReview(List<ShopReview> shopReview) {
+		this.shopReview = shopReview;
+	}
+	public Counting getCounting() {
+		return counting;
+	}
+	public void setCounting(Counting counting) {
+		this.counting = counting;
 	}
 
 }

@@ -186,12 +186,12 @@ public class MarketController {
 
 	// 리소스 상품 구매
 	@PostMapping("/detail/{userId}/{itemId}")
-	String buyResource(@PathVariable Long userId, @PathVariable Long itemId, Orders orders, ResourceShop shop)
+	String buyResource(@PathVariable Long userId, @PathVariable Long itemId, List<ResourceShop> shop)
 			throws Exception {
 
 		log.info("구매자 이름: {}", userId);
 		log.info("구매 아이템 번호: {}", itemId);
-		ordersService.buyResource(userId, itemId, orders, shop);
+		ordersService.buyResource(userId, itemId, shop);
 		log.info("구매 완료");
 		return path + "detail";
 	}

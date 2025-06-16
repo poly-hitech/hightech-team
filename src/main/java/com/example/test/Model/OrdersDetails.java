@@ -4,7 +4,8 @@ package com.example.test.Model;
 public class OrdersDetails {
 	private Long ordersDetailsId;
 	private Long itemId;
-	private Orders orders;
+	private Long amount = 1L;
+	private Long ordersId;
 	private Counting counting;
 	
 	public Long getOrdersDetailsId() {
@@ -12,12 +13,6 @@ public class OrdersDetails {
 	}
 	public void setOrdersDetailsId(Long ordersDetailsId) {
 		this.ordersDetailsId = ordersDetailsId;
-	}
-	public Orders getOrders() {
-		return orders;
-	}
-	public void setOrders(Orders orders) {
-		this.orders = orders;
 	}
 	public Counting getCounting() {
 		return counting;
@@ -30,6 +25,18 @@ public class OrdersDetails {
 	}
 	public void setItemId(Long itemId) {
 		this.itemId = itemId;
+	}
+	public Long getAmount() {
+		return amount;
+	}
+	public void setAmount(Long amount) {
+		this.amount = amount;
+	}
+	public Long getOrdersId() {
+		return ordersId;
+	}
+	public void setOrdersId(Long ordersId) {
+		this.ordersId = ordersId;
 	}
 
 }
