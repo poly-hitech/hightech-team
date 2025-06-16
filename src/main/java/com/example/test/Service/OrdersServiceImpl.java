@@ -80,8 +80,6 @@ public class OrdersServiceImpl implements OrdersService {
 			//판매자 정보를 기준으로 포인트 변경
 			userDao.earnPoint(singleShop.getItemWriter());
 			
-			//주문이 성공하면 판매량 증가
-			countingDao.buyCountingUp(ordersDetailsId);
 		}
 		
 		//주문 넣기(주문 정보 저장)
@@ -90,6 +88,8 @@ public class OrdersServiceImpl implements OrdersService {
 		//주문 상세 저장(리스트로 반복돌리면서 주문상세정보를 저장함)
 		for(OrdersDetails ordersDetails : ordersDetailsList) {
 			ordersDao.saveOrdersDetails(ordersDetailsList);
+			//주문이 성공하면 판매량 증가
+			countingDao.buyCountingUp(ordersDetails.getOrdersDetailsId());
 		}
 
 	}
