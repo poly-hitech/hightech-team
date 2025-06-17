@@ -20,6 +20,7 @@
 		<typeAlias type="com.example.test.Model.NewRegex" alias="NewRegex"/>
 		<typeAlias type="com.example.test.Model.ResourceFile" alias="ResourceFile"/>
 		<typeAlias type="com.example.test.Model.OrdersDetails" alias="OrdersDetails"/>
+		<typeAlias type="com.example.test.Model.BuyPoint" alias="BuyPoint"/>
 	</typeAliases>
 	
 	<!-- mapper 파일 추가 -->
@@ -28,5 +29,9 @@
 		<mapper resource="mybatis/resourceCategory.xml"/>
 		<mapper resource="mybatis/resourceSubCategory.xml"/>
 		<mapper resource="mybatis/resourceShop.xml"/>
+		<mapper resource="mybatis/buyPoint.xml"/>
+		<mapper resource="mybatis/counting.xml"/>
+		<mapper resource="mybatis/orders.xml"/>
+		<mapper resource="mybatis/ordersDetails.xml"/>
 	</mappers>
 </configuration>

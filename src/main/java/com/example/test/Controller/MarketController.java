@@ -10,12 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.test.Model.Market;
-import com.example.test.Model.Orders;
 import com.example.test.Model.Ranking;
 import com.example.test.Model.ResourceCategory;
 import com.example.test.Model.ResourceFile;
@@ -173,11 +174,9 @@ public class MarketController {
 
 		// itemId로 상세정보 조회 로직
 		model.addAttribute("shop", resourceShop);
-		ObjectMapper objectMapper = new ObjectMapper();
+		
 		try {
-			String userAsString;
-			userAsString = objectMapper.writeValueAsString(resourceShop);
-			model.addAttribute("shop2", userAsString);
+			model.addAttribute("shop2", new ObjectMapper().writeValueAsString(resourceShop));
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
@@ -186,14 +185,15 @@ public class MarketController {
 
 	// 리소스 상품 구매
 	@PostMapping("/detail/{userId}/{itemId}")
-	String buyResource(@PathVariable Long userId, @PathVariable Long itemId, List<ResourceShop> shop)
-			throws Exception {
+	@ResponseBody	// responseBody를 사용하면 문자열을 반환하게됨
+	public String buyResource(@PathVariable Long userId, @PathVariable Long itemId, @RequestBody List<ResourceShop> shop)
+	        throws Exception {
 
-		log.info("구매자 이름: {}", userId);
-		log.info("구매 아이템 번호: {}", itemId);
-		ordersService.buyResource(userId, itemId, shop);
-		log.info("구매 완료");
-		return path + "detail";
+	    log.info("구매자 이름: {}", userId);
+	    log.info("구매 아이템 번호: {}", itemId);
+	    ordersService.buyResource(userId, itemId, shop);
+	    log.info("구매 완료");
+	    return "success";
 	}
 
 	/*

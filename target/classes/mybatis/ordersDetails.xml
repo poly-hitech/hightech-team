@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ordersDetails">
+	<!-- 주문 상세 조회 -->
+
+	<!-- 수정 -->
+	
+	<!-- 주문취소 -->
+	
+	<!-- 주문생성 -->
+	<insert id="saveOrdersDetails">
+		insert into OrdersDetails
+		values(ORDERSDETAILS_SEQ.nextval, #{ordersId}, #{itemId}, #{amount})
+	</insert>
+</mapper>

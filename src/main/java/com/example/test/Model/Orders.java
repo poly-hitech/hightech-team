@@ -9,7 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Orders {
 	private Long ordersId;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date orderDate = new Date();
+	private Date ordersDate = new Date();
 	private String ordersUser;
 	private Long userId;
 	private Long ordersPrice;
@@ -21,11 +21,11 @@ public class Orders {
 	public void setOrdersId(Long ordersId) {
 		this.ordersId = ordersId;
 	}
-	public Date getOrderDate() {
-		return orderDate;
+	public Date getOrdersDate() {
+		return ordersDate;
 	}
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
+	public void setOrdersDate(Date ordersDate) {
+		this.ordersDate = ordersDate;
 	}
 	public String getOrdersUser() {
 		return ordersUser;

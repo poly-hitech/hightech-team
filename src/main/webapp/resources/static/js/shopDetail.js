@@ -41,6 +41,12 @@ $(document).ready(function () {
 
     // 구매 버튼 클릭 이벤트 핸들러
     $(document).on('click', '#buyButton', function () {
+		if (!userId) {
+        	alert("로그인이 필요한 서비스입니다.");
+        	window.location.href = "/login"; // 로그인 경로로 이동
+        	return;
+    	}    
+    
         var itemId = $(this).closest('.productDetail-card').data('item-id');
         //아이템 구매 확인 메시지
         let buycheck = confirm("정말로 구매하시겠습니까?");
@@ -54,25 +60,23 @@ $(document).ready(function () {
             // 구매 로직을 여기에 추가
             // 예시: 서버에 구매 요청을 보내는 AJAX 호출
             $.ajax({
-                url: '/shop/detail/' + userId + '/' + shop.itemId, // 구매 요청을 처리하는 서버 엔드포인트
+                url: `/shop/detail/${userId}/${itemId}`, // 구매 요청을 처리하는 서버 엔드포인트
                 type: 'POST',
-                data: null,
+                contentType: 'application/json',
+    			data: JSON.stringify([shop]),
                 success: function (response) {
                     console.log("구매 성공:", response);
                     alert("아이템 구매가 완료되었습니다.");
+                    //구매 후 페이지 리디렉션
+                    window.location.href = "/shop/detail?itemId=" + itemId;
                 },
                 error: function (xhr, status, error) {
                     console.error("구매 실패:", error);
-                    //url:에 들어가는 값 확인하기
-                    console.error("요청 URL:", '/shop/detail/' + username + '/itemId=' + shop.itemId);
                     alert("아이템 구매에 실패했습니다. 나중에 다시 시도해주세요.");
                 }
             });
         } else {
             console.error("아이템 ID를 찾을 수 없습니다.");
         }
-
-        // 구매 후 페이지 새로고침
-        location.reload();
     });
 });
