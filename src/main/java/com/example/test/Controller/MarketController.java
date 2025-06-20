@@ -195,6 +195,13 @@ public class MarketController {
 	    log.info("구매 완료");
 	    return "success";
 	}
+	
+	//판매 물품 및 내역
+	@GetMapping("/salesDetail/{roleId}")
+	public String salesResources() {
+		
+		return path + "salesDetail";
+	}
 
 	/*
 	 * //리소스 상품 수정
