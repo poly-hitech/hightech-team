@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,7 +42,7 @@ public class MarketController {
 
 	@Autowired
 	ShopCategoryService resourceCategoryService;
-	
+
 	@Autowired
 	OrdersService ordersService;
 
@@ -174,7 +175,7 @@ public class MarketController {
 
 		// itemId로 상세정보 조회 로직
 		model.addAttribute("shop", resourceShop);
-		
+
 		try {
 			model.addAttribute("shop2", new ObjectMapper().writeValueAsString(resourceShop));
 		} catch (JsonProcessingException e) {
@@ -185,23 +186,32 @@ public class MarketController {
 
 	// 리소스 상품 구매
 	@PostMapping("/detail/{userId}/{itemId}")
-	@ResponseBody	// responseBody를 사용하면 문자열을 반환하게됨
-	public String buyResource(@PathVariable Long userId, @PathVariable Long itemId, @RequestBody List<ResourceShop> shop)
-	        throws Exception {
+	@ResponseBody // responseBody를 사용하면 문자열을 반환하게됨
+	public String buyResource(@PathVariable Long userId, @PathVariable Long itemId,
+			@RequestBody List<ResourceShop> shop)
+			throws Exception {
 
-	    log.info("구매자 이름: {}", userId);
-	    log.info("구매 아이템 번호: {}", itemId);
-	    ordersService.buyResource(userId, itemId, shop);
-	    log.info("구매 완료");
-	    return "success";
+		log.info("구매자 이름: {}", userId);
+		log.info("구매 아이템 번호: {}", itemId);
+		ordersService.buyResource(userId, itemId, shop);
+		log.info("구매 완료");
+		return "success";
 	}
-	
-	//판매 물품 및 내역
+
+	// 판매 물품 및 내역
 	@GetMapping("/salesDetail/{roleId}")
 	public String salesResources() {
-		
+
 		return path + "salesDetail";
 	}
+
+	/*
+	 * @ResponseBody //responseBody를 사용하면 문자열을 반환하게됨(spring입장에서는 view가 아닌 데이터로 인식하고
+	 * 클라이언트로 전송함)
+	 * 
+	 * @PutMapping("/update") public String updateResource(@RequestBody Cart cart )
+	 * throws Exception { resourceShopService.updateResource(cart); return "OK"; }
+	 */
 
 	/*
 	 * //리소스 상품 수정
