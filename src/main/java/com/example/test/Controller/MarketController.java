@@ -119,17 +119,6 @@ public class MarketController {
 		return path + "list";
 	}
 
-	// 유저별 등록한 리소스 목록
-	@GetMapping("{roleId}/mylist/{userId}")
-	String MyshopList(@PathVariable Long userId, @PathVariable Long roleId, Model model, HttpSession session) {
-
-		List<ResourceCategory> list = resourceShopService.list(userId);
-
-		model.addAttribute("list", list);
-
-		return path + "mylist";
-	}
-
 	@GetMapping("{roleId}/add/{userId}")
 	String addResourcePage(@PathVariable Long roleId, @PathVariable Long userId, Model model, HttpSession session) {
 		List<ResourceCategory> category = resourceShopService.addResourcePage();
@@ -202,7 +191,25 @@ public class MarketController {
 	@GetMapping("/salesDetail/{roleId}")
 	public String salesResources() {
 
-		return path + "salesDetail";
+		return path + "salesDetail"; 
+	}
+
+	//로그인 한 유저가 등록한 상품
+	@GetMapping("myResources/{userId}")
+	public String myResources(@PathVariable Long userId, Model model) {
+		List<ResourceCategory> category = resourceShopService.myResources(userId);
+		log.info("내가 등록한 상품 리스트: {}", category);
+		model.addAttribute("list", category);
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			String userAsString;
+			userAsString = objectMapper.writeValueAsString(category);
+			model.addAttribute("list2", userAsString);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return path + "myResources";
 	}
 
 	/*

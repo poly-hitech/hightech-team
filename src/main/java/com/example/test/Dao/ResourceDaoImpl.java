@@ -23,11 +23,6 @@ public class ResourceDaoImpl implements ResourceDao {
 		return sql.selectList("resourceShop.marketList");
 	}
 
-	@Override
-	public List<ResourceCategory> list(Long userId) {
-		return sql.selectList("resourceShop.Mylist", userId);
-	}
-
 	//리소스 정보 등록
 	@Override
 	public void save(ResourceShop resource) {
@@ -55,10 +50,18 @@ public class ResourceDaoImpl implements ResourceDao {
 		return sql.selectOne("resourceShop.getItemInfo", itemId);
 	}
 
+	//특정한 아이템 하나의 정보만 가져옴
 	@Override
 	public ResourceShop getOnlyOneResource(Long itemId) {
 
 		return sql.selectOne("resourceShop.getOnlyOneItem", itemId);
+	}
+
+	//로그인 한 사용자가 등록한 리소스 상점 정보
+	@Override
+	public List<ResourceCategory> myResources(Long userId) {
+		// TODO Auto-generated method stub
+		return sql.selectList("resourceShop.myResources", userId);
 	}
 
 }

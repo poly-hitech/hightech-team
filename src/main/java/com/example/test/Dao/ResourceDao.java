@@ -12,8 +12,6 @@ public interface ResourceDao {
 
 	List<ResourceCategory> list();
 
-	List<ResourceCategory> list(Long userId);
-
 	void save(ResourceShop resource);
 
 	List<ResourceCategory> addResourceShop();
@@ -23,5 +21,7 @@ public interface ResourceDao {
 	ResourceShop getItem(Long itemId);
 
 	ResourceShop getOnlyOneResource(Long itemId);
+
+	List<ResourceCategory> myResources(Long userId);
 
 }

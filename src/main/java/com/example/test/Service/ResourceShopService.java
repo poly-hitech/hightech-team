@@ -15,12 +15,12 @@ public interface ResourceShopService {
 
 	List<ResourceCategory> list();
 
-	List<ResourceCategory> list(Long userId);
-
 	void addResource(Long userId, Market market, List<MultipartFile> file, Model model) throws Exception;
 
 	List<ResourceCategory> addResourcePage();
 
 	ResourceShop getItemById(Long itemId);
+
+	List<ResourceCategory> myResources(Long userId);
 
 }

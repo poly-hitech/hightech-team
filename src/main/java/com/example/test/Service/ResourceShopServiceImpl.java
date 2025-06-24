@@ -39,12 +39,6 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 		
 		return dao.list();
 	}
-
-	@Override
-	public List<ResourceCategory> list(Long userId) {
-		// TODO Auto-generated method stub
-		return dao.list(userId);
-	}
 	
 	@Transactional
 	@Override
@@ -114,6 +108,12 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 		log.info("itemId: {}", itemId);
 		// TODO Auto-generated method stub
 		return dao.getItem(itemId);
+	}
+
+	@Override
+	public List<ResourceCategory> myResources(Long userId) {
+		
+		return dao.myResources(userId);
 	}
 
 }

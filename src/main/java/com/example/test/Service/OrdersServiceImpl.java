@@ -9,11 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.test.Dao.CountingDao;
 import com.example.test.Dao.OrdersDao;
+import com.example.test.Dao.RankingDao;
 import com.example.test.Dao.ResourceDao;
 import com.example.test.Dao.UsersDao;
 import com.example.test.Model.Counting;
 import com.example.test.Model.Orders;
 import com.example.test.Model.OrdersDetails;
+import com.example.test.Model.Ranking;
 import com.example.test.Model.BuyPoint;
 import com.example.test.Model.ResourceShop;
 import com.example.test.Model.Users;
@@ -35,6 +37,9 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Autowired
 	CountingDao countingDao;
+	
+	@Autowired
+	RankingDao rankingDao;
 
 	// 주문하기(차후에 시간되면 장바구니 구현할것 고려해서 모듈화 고려해서 작성)
 	@Transactional
@@ -101,6 +106,9 @@ public class OrdersServiceImpl implements OrdersService {
 			// 닉네임 기반으로 가져온 포인트 객체를 전달해서 다시 해당 정보안에 있는 유저번호와 함께 객체를 전달하여 수정
 			userDao.earnPointByNickname(saleUserPoint);
 
+			//CQRS 혹은 캐시(대용량 트래픽 처리에 있어서 캐시로 저장해뒀다가 한번에 처리 하는 것이 용이함.)
+			//(쓰기, 변경, 삭제는 자주하는 것이 대용량 트래픽 발생으로 이어지기 때문에 좋지않은 방식임.)
+			//구조적으로 좋은 설계가 아니기에 캐실 처리 필요.
 			// 주문 성공시 해당 아이템의 판매량 증가
 			// 해당 아이덴에 해당하는 counting 테이블을 가져옴
 			Counting counting = countingDao.searchByItemId(singleShop.getItemId());
@@ -114,6 +122,10 @@ public class OrdersServiceImpl implements OrdersService {
 			counting.setMonthlycount(counting.getMonthlycount() + amount);
 			// countingDao를 통해서 해당 아이템의 판매량 변경
 			countingDao.countingUpdateByItemId(counting);
+			
+			//count의 값들이 증가하면 이에 따라서 랭킹도 새로 설정
+			rankingDao.update(singleShop.getItemId());
+			
 
 		}
 

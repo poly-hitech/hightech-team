@@ -33,5 +33,6 @@
 		<mapper resource="mybatis/counting.xml"/>
 		<mapper resource="mybatis/orders.xml"/>
 		<mapper resource="mybatis/ordersDetails.xml"/>
+		<mapper resource="mybatis/ranking.xml" />
 	</mappers>
 </configuration>
