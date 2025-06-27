@@ -104,7 +104,7 @@ public class OrdersServiceImpl implements OrdersService {
 			saleUserPoint.setPointMoney(saleUserPoint.getPointMoney() + itemPrice);
 			log.info("판매자의 포인트가 증가되었는지 확인: {}" , saleUserPoint.getPointMoney());
 			// 닉네임 기반으로 가져온 포인트 객체를 전달해서 다시 해당 정보안에 있는 유저번호와 함께 객체를 전달하여 수정
-			userDao.earnPointByNickname(saleUserPoint);
+			userDao.earnPointByUserId(saleUserPoint);
 
 			//CQRS 혹은 캐시(대용량 트래픽 처리에 있어서 캐시로 저장해뒀다가 한번에 처리 하는 것이 용이함.)
 			//(쓰기, 변경, 삭제는 자주하는 것이 대용량 트래픽 발생으로 이어지기 때문에 좋지않은 방식임.)
