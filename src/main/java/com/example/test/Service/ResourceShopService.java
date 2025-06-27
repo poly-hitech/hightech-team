@@ -23,4 +23,6 @@ public interface ResourceShopService {
 
 	List<ResourceCategory> myResources(Long userId);
 
+	void updateMyResource(Long itemId, Market market, MultipartFile file, Model model) throws Exception;
+
 }

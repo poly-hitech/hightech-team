@@ -10,15 +10,15 @@
 
 </head>
 <body>
-	<div>
+<!-- 	<div>
         <c:import url="/WEB-INF/views/menu.jsp"></c:import>
-    </div>
+    </div> -->
 
 	<form method="post" class="d-grid gap-3">
 		<div class="row">
 			<label for="resourceCategoryName" class="col-1">카테고리 명:<span style="color:blue;"> * </span></label>
  			<div class="col-2">
- 				<input type="text" name="resourceCategoryName" class="form-control" />
+ 				<input type="text" name="resourceCategory.resourceCategoryName" class="form-control" />
  			</div>
  		</div>
  		

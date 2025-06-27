@@ -15,7 +15,7 @@
 	
 	<!-- 최근 리소스 1차 카테고리 번호 -->
 	<select id="selectRCId" resultType="Long">
-		select MAX(resourceCategoryId) from resourceCategoryId
+		select MAX(resourceCategoryId) from resourceCategory
 	</select>
  
  	<!-- 리소스 1차 카테고리 로출 -->

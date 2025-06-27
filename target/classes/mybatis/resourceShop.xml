@@ -4,7 +4,7 @@
 
 	<insert id="resourceAdd" parameterType="ResourceShop">
 		insert into ResourceShop
-		values (RESOURCESHOP_SEQ.nextval, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceSubCategoryId}, #{userId}, #{rankId} , #{resourceDate}, #{resourceContent})
+		values (RESOURCESHOP_SEQ.nextval, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceSubCategoryId}, #{userId}, #{resourceDate}, #{resourceContent})
 		
 		<selectKey keyProperty="itemId" resultType="Long" order="AFTER">
        		SELECT RESOURCESHOP_SEQ.CURRVAL FROM DUAL
@@ -28,7 +28,6 @@
 	    resourceShop.itemWriter,
 	    resourceShop.resourceDate,
 	    resourceShop.resourceSubCategoryId AS rs_resourceSubCategoryId,
-	    resourceShop.rankid AS rs_rankid,
 	    
 	    <!-- ResourceFile -->
 	    resourceFile.resourceFileId,
@@ -41,6 +40,7 @@
 	    ranking.dailyRank,
 	    ranking.weeklyRank,
 	    ranking.monthlyRank,
+	    ranking.itemId AS rk_itemId
 	    
 	    <!-- Counting -->
 	    counting.countingId,
@@ -54,7 +54,7 @@
         LEFT JOIN ResourceFile resourceFile 
             ON resourceFile.itemId = resourceShop.itemId
         LEFT JOIN Ranking ranking 
-            ON resourceShop.rankid = ranking.rankid
+            ON resourceShop.itemId = ranking.itemId
         LEFT JOIN OrdersDetails ordersDetails 
             ON ordersDetails.itemId = resourceShop.itemId
         LEFT JOIN Counting counting 
@@ -83,7 +83,6 @@
 	    resourceShop.itemWriter,
 	    resourceShop.resourceDate,
 	    resourceShop.resourceSubCategoryId AS rs_resourceSubCategoryId,
-	    resourceShop.rankid AS rs_rankid,
 	    
 	    <!-- ResourceFile -->
 	    resourceFile.resourceFileId,
@@ -96,6 +95,7 @@
 	    ranking.dailyRank,
 	    ranking.weeklyRank,
 	    ranking.monthlyRank,
+	    ranking.itemId AS rk_itemId,
 	    
 	    <!-- Counting -->
 	    counting.countingId,
@@ -113,7 +113,7 @@
         LEFT JOIN ResourceFile resourceFile 
             ON resourceFile.itemId = resourceShop.itemId
         LEFT JOIN Ranking ranking 
-            ON resourceShop.rankid = ranking.rankid
+            ON resourceShop.itemId = ranking.itemId
         LEFT JOIN Counting counting 
             ON counting.itemId = resourceShop.itemId
         ORDER BY 
@@ -142,7 +142,6 @@
 	    resourceShop.itemWriter,
 	    resourceShop.resourceDate,
 	    resourceShop.resourceSubCategoryId AS rs_resourceSubCategoryId,
-	    resourceShop.rankid AS rs_rankid,
 	    resourceShop.userId,
 	    
 	    <!-- ResourceFile -->
@@ -156,6 +155,7 @@
 	    ranking.dailyRank,
 	    ranking.weeklyRank,
 	    ranking.monthlyRank,
+	    ranking.itemId,
 	    
 	    <!-- Counting -->
 	    counting.countingId,
@@ -202,6 +202,7 @@
 	        <result property="dailyRank" column="dailyRank"/>
 	        <result property="weeklyRank" column="weeklyRank"/>
 	        <result property="monthlyRank" column="monthlyRank"/>
+	      	<result property="itemId" column="rk_itemId"/>
 	    </association>
         
         <!-- 3. 카운팅-->
@@ -250,6 +251,7 @@
 	                <result property="dailyRank" column="dailyRank"/>
 	                <result property="weeklyRank" column="weeklyRank"/>
 	                <result property="monthlyRank" column="monthlyRank"/>
+	                <result property="itemId" column="rk_itemId"/>
 	            </association>
 	            
 	            <!-- 5. 카운팅-->

@@ -7,6 +7,7 @@ public class Ranking {
 	private Long dailyRank;
 	private Long weeklyRank;
 	private Long monthlyRank;
+	private Long itemId;
 	
 	public Long getRankingId() {
 		return rankingId;
@@ -37,5 +38,11 @@ public class Ranking {
 	}
 	public void setMonthlyRank(Long monthlyRank) {
 		this.monthlyRank = monthlyRank;
+	}
+	public Long getItemId() {
+		return itemId;
+	}
+	public void setItemId(Long itemId) {
+		this.itemId = itemId;
 	}
 }
