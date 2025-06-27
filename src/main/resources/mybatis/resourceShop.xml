@@ -40,7 +40,7 @@
 	    ranking.dailyRank,
 	    ranking.weeklyRank,
 	    ranking.monthlyRank,
-	    ranking.itemId AS rk_itemId
+	    ranking.itemId AS rk_itemId,
 	    
 	    <!-- Counting -->
 	    counting.countingId,

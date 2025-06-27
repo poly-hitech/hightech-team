@@ -2,7 +2,7 @@ package com.example.test.Model;
 
 //랭킹 정보 
 public class Ranking {
-	private Long rankingId;
+	private Long rankId;
 	private Long totalRank;
 	private Long dailyRank;
 	private Long weeklyRank;
@@ -10,10 +10,10 @@ public class Ranking {
 	private Long itemId;
 	
 	public Long getRankingId() {
-		return rankingId;
+		return rankId;
 	}
-	public void setRankingId(Long rankingId) {
-		this.rankingId = rankingId;
+	public void setRankingId(Long rankId) {
+		this.rankId = rankId;
 	}
 	public Long getTotalRank() {
 		return totalRank;
