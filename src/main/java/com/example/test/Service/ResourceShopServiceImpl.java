@@ -116,4 +116,10 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 		return dao.myResources(userId);
 	}
 
+	@Override
+	public void updateMyResource(Long itemId, Market market, MultipartFile file, Model model) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

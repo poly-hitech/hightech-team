@@ -211,6 +211,19 @@ public class MarketController {
 		}
 		return path + "myResources";
 	}
+	
+	
+	  //리소스 상품 수정  
+	  @PostMapping("/updateMyResource/{itemId}")
+	  String updateResource(@PathVariable Long itemId,
+	  Market market, @RequestParam MultipartFile file, Model model) throws
+	  Exception {
+	  
+	  resourceShopService.updateMyResource(itemId, market, file, model);
+	  
+	  return path + "updateMyResource";
+	  }
+	 
 
 	/*
 	 * @ResponseBody //responseBody를 사용하면 문자열을 반환하게됨(spring입장에서는 view가 아닌 데이터로 인식하고
@@ -220,18 +233,6 @@ public class MarketController {
 	 * throws Exception { resourceShopService.updateResource(cart); return "OK"; }
 	 */
 
-	/*
-	 * //리소스 상품 수정
-	 * 
-	 * @PostMapping("{roleId}/add/{itemId}")
-	 * String updateResource(@PathVariable Long roleId, @PathVariable Long itemId,
-	 * Market market, @RequestParam MultipartFile file, Model model) throws
-	 * Exception {
-	 * 
-	 * resourceShopService.Resource(itemId, market, file, model);
-	 * 
-	 * return path + roleId + "update";
-	 * }
-	 */
+
 
 }

@@ -42,7 +42,6 @@
     	console.log(JSON.parse('${list2}'));
     	var categories = JSON.parse('${list2}');
     	console.log(categories);
-	    console.log("Categories defined:", categories);
     </script>
     <script src="${root}/js/shopList.js"></script>
 </body>

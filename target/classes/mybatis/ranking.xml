@@ -54,7 +54,7 @@
 		set ranking.dailyRank = (
 			(<include refid="dailyRnum"></include>)
 			where sub.itemId = ranking.itemId
-		);
+		)
 	</update>
 	
 	<update id="updateByWeeklyrankByitemId">
@@ -62,7 +62,7 @@
 		set ranking.weeklyRank = (
 			(<include refid="weeklyRnum"></include>)
 			where sub.itemId = ranking.itemId
-		);
+		)
 	</update>
 
 	<update id="updateByMonthlyrankByitemId">
@@ -70,7 +70,7 @@
 		set ranking.monthlyRank = (
 			(<include refid="monthlyRnum"></include>)
 			where sub.itemId = ranking.itemId
-		);
+		)
 	</update>
 
 	<update id="updateByTotalrankByitemId">
@@ -78,6 +78,6 @@
 		set ranking.totalRank = (
 			(<include refid="totalRnum"></include>)
 			where sub.itemId = ranking.itemId
-		);
+		)
 	</update>
 </mapper>
