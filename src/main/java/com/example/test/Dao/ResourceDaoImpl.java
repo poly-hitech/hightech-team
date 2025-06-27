@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.test.Model.Market;
 import com.example.test.Model.ResourceCategory;
 import com.example.test.Model.ResourceFile;
 import com.example.test.Model.ResourceShop;

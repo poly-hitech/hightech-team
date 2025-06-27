@@ -69,10 +69,18 @@
             	</c:if>
             </li>
             <li class="item">
-              <a href="#" class="link flex">
-                <i class="bx bx-grid-alt"></i>
-                <span>거래 내역</span>
-              </a>
+            	<c:if test="${sessionScope.member!= null}">
+            		<a href="${root}/orders/purchasedResources/${sessionScope.member.userId}" class="link flex">
+                		<i class="bx bx-grid-alt"></i>
+                		<span>거래 내역</span>
+              		</a>
+            	</c:if>
+                <c:if test="${sessionScope.member == null}">
+            		<a href="${root}/login" class="link flex" id="pleaselogin">
+                		<i class="bx bx-grid-alt"></i>
+                		<span>거래 내역</span>
+              		</a>
+            	</c:if>
             </li>
             <li class="item">
               <a href="#" class="link flex">

@@ -13,6 +13,7 @@ import com.example.test.Dao.RankingDao;
 import com.example.test.Dao.ResourceDao;
 import com.example.test.Dao.UsersDao;
 import com.example.test.Model.Counting;
+import com.example.test.Model.Market;
 import com.example.test.Model.Orders;
 import com.example.test.Model.OrdersDetails;
 import com.example.test.Model.Ranking;
@@ -131,6 +132,8 @@ public class OrdersServiceImpl implements OrdersService {
 
 		// 주문 넣기(주문 정보 저장) 저장된 주문의 주문 번호를 가지고 옴
 		Long ordersId = ordersDao.buyResource(orders);
+		
+		log.info("주분번호: {}", ordersId);
 
 		// 주문 상세 저장(리스트로 반복돌리면서 주문상세정보를 저장함)
 		for (OrdersDetails ordersDetails : ordersDetailsList) {
@@ -139,6 +142,12 @@ public class OrdersServiceImpl implements OrdersService {
 			ordersDao.saveOrdersDetails(ordersDetails);
 		}
 
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Market> purchasedResources(Long userId) {
+		return ordersDao.purchasedResources(userId);
 	}
 
 }
