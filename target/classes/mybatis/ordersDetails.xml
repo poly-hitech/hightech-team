@@ -10,6 +10,6 @@
 	<!-- 주문생성 -->
 	<insert id="saveOrdersDetails">
 		insert into OrdersDetails
-		values(ORDERSDETAILS_SEQ.nextval, #{ordersId}, #{itemId}, #{amount})
+		values(ORDERSDETAILS_SEQ.nextval, #{ordersId}, #{itemId}, #{amount}, #{detailitemPrice})
 	</insert>
 </mapper>

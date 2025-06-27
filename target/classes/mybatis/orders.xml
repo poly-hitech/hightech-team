@@ -10,7 +10,7 @@
 	<!-- 주문생성 -->
 	<insert id="buyResource">
 		insert into Orders
-		values(ORDERS_SEQ.nextval, #{ordersDate}, #{ordersUser}, #{userId})
+		values(ORDERS_SEQ.nextval, #{ordersDate}, #{ordersUser}, #{userId}, #{ordersPrice})
 		
 		<selectKey keyProperty="ordersId" resultType="Long" order="AFTER">
 			select ORDERS_SEQ.currval FROM dual

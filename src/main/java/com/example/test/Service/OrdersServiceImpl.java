@@ -124,7 +124,7 @@ public class OrdersServiceImpl implements OrdersService {
 			countingDao.countingUpdateByItemId(counting);
 			
 			//count의 값들이 증가하면 이에 따라서 랭킹도 새로 설정
-			rankingDao.update(singleShop.getItemId());
+//			rankingDao.update(singleShop.getItemId());
 			
 
 		}
