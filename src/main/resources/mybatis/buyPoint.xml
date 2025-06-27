@@ -19,4 +19,11 @@
 		set pointMoney = #{pointMoney}
 		where userId = #{userId}
 	</update>
+	
+	<!-- 생성 -->
+	<!-- 초기 회원가입 시 포인트 생성 -->
+	<insert id="addPoint">
+		insert into BuyPoint
+		values (BUYPOINT_SEQ.nextval, 0, #{userId})
+	</insert>
 </mapper>

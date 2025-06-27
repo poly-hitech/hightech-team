@@ -203,12 +203,14 @@ public class UsersServiceImpl implements UsersService {
 			item.setNickname(item.getUsername());
 		}
 		
-		userdao.add(item);
+		userId = userdao.add(item);
+		log.info("회원가입 된 유저의 userId:{}", userId);
 		//널이 아닐때만 실행
 		if(!list.isEmpty()) {
 			userdao.saveRegexDetail(list);
 		}
 		userdao.saveNewRegex(list2);
+		userdao.addPoint(userId);
 	}
 	
 	@Override
