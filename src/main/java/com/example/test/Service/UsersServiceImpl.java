@@ -199,9 +199,15 @@ public class UsersServiceImpl implements UsersService {
 		item.setPassword(newpassword);
 		item.setRoleId(1L);
 		
-		if(item.getNickname() == null || item.getNickname() == "미입력 시 아이디로 닉네임이 설정됩니다.") {
+		log.info("닉네임: {}", item.getNickname());
+
+		if(item.getNickname() == null || item.getNickname().isEmpty()) {
+			//닉네임이 비어있다면 아이디로 설정
 			item.setNickname(item.getUsername());
 		}
+//		if(item.getNickname() == null) {
+//			item.setNickname(item.getUsername());
+//		}
 		
 		userId = userdao.add(item);
 		log.info("회원가입 된 유저의 userId:{}", userId);
