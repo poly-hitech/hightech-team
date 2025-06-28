@@ -4,7 +4,8 @@
 
 	<insert id="resourceAdd" parameterType="ResourceShop">
 		insert into ResourceShop
-		values (RESOURCESHOP_SEQ.nextval, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceSubCategoryId}, #{userId}, #{resourceDate}, #{resourceContent})
+		(itemId, itemName, itemPrice, itemWriter, resourceSubCategoryId, userId, resourceDate)
+		values (RESOURCESHOP_SEQ.nextval, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceSubCategoryId}, #{userId}, #{resourceDate})
 		
 		<selectKey keyProperty="itemId" resultType="Long" order="AFTER">
        		SELECT RESOURCESHOP_SEQ.CURRVAL FROM DUAL
