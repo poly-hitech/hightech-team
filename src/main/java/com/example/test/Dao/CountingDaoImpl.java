@@ -25,4 +25,9 @@ public class CountingDaoImpl implements CountingDao {
 		sql.update("counting.updateByItemId", counting);
 	}
 
+	@Override
+	public void save(Long itemId) {
+		sql.insert("counting.add", itemId);		
+	}
+
 }

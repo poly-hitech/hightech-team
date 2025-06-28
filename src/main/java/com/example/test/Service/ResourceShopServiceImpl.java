@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.test.Dao.CountingDao;
 import com.example.test.Dao.ResourceDao;
 import com.example.test.Model.Market;
 import com.example.test.Model.Orders;
@@ -30,6 +31,9 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 	
 	@Autowired
 	ResourceDao dao;
+	
+	@Autowired
+	CountingDao countingDao;
 
 	@Autowired
 	FileUploadUtil fileupload;
@@ -83,6 +87,7 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 		
 
 		dao.save(market.getResourceShop());	//리소스 정보 업로드
+		countingDao.save(market.getResourceShop().getItemId());
 		
 		//리소스 정보 등록 후 리소스 파일 등록
 	    if (!rf.isEmpty()) {

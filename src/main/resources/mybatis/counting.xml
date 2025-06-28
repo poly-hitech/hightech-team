@@ -15,6 +15,13 @@
 		where itemId = #{itemId}
 	</update>
 	
+	<!-- 초기 카운트 저장 -->
+	<insert id="add">
+		insert into Counting
+		(countingId, itemId)
+		values(COUNTING_SEQ.nextval, #{itemId})
+	</insert>
+	
 	<!-- 카운트 초기화 -->
 	<update id="resetDailyCount">
 		UPDATE counting

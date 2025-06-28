@@ -8,4 +8,5 @@ public interface CountingDao {
 
 	void countingUpdateByItemId(Counting counting);
 
+	void save(Long itemId);
 }
