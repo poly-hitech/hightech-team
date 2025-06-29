@@ -47,6 +47,12 @@
 		)sub
 	</sql>	
 	
+	<!-- 초기 랭킹 -->
+	<insert id="add" parameterType="Ranking">
+	    INSERT INTO Ranking (rankId, itemId, totalRank, dailyRank, weeklyRank, monthlyRank)
+	    VALUES (RANKING_SEQ.nextval, #{itemId}, #{totalRank}, #{dailyRank}, #{weeklyRank}, #{monthlyRank})
+	</insert>
+	
 	<!-- 수정 -->
 	<!-- 각 아이템 별 랭킹 정보 변경 -->
 	<update id="updateByDailyrankByitemId">

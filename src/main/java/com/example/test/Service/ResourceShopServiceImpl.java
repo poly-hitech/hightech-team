@@ -13,10 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.test.Dao.CountingDao;
+import com.example.test.Dao.RankingDao;
 import com.example.test.Dao.ResourceDao;
 import com.example.test.Model.Market;
 import com.example.test.Model.Orders;
 import com.example.test.Model.OrdersDetails;
+import com.example.test.Model.Ranking;
 import com.example.test.Model.ResourceCategory;
 import com.example.test.Model.ResourceFile;
 import com.example.test.Model.ResourceShop;
@@ -34,6 +36,9 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 	
 	@Autowired
 	CountingDao countingDao;
+	
+	@Autowired
+	RankingDao rankingDao;
 
 	@Autowired
 	FileUploadUtil fileupload;
@@ -88,6 +93,16 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 
 		dao.save(market.getResourceShop());	//리소스 정보 업로드
 		countingDao.save(market.getResourceShop().getItemId());
+		long totalCount = dao.countAllItems(); // 전체 상품 수 조회
+		
+		Ranking ranking = Ranking.builder()
+				.itemId(market.getResourceShop().getItemId())
+				.dailyRank(totalCount)
+				.weeklyRank(totalCount)
+				.monthlyRank(totalCount)
+				.totalRank(totalCount)
+				.build();
+		rankingDao.save(ranking);
 		
 		//리소스 정보 등록 후 리소스 파일 등록
 	    if (!rf.isEmpty()) {

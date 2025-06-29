@@ -1,6 +1,9 @@
 package com.example.test.Model;
 
+import lombok.Builder;
+
 //랭킹 정보 
+@Builder
 public class Ranking {
 	private Long rankId;
 	private Long totalRank;

@@ -25,4 +25,5 @@ public interface ResourceDao {
 
 	List<ResourceCategory> myResources(Long userId);
 
+	Long countAllItems();
 }

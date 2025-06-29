@@ -65,4 +65,9 @@ public class ResourceDaoImpl implements ResourceDao {
 		return sql.selectList("resourceShop.myResources", userId);
 	}
 
+	@Override
+	public Long countAllItems() {
+		return sql.selectOne("resourceShop.countAllItems");
+	}
+
 }

@@ -6,22 +6,27 @@
 		insert into ResourceShop
 		(itemId, itemName, itemPrice, itemWriter, resourceSubCategoryId, userId, resourceDate)
 		values (RESOURCESHOP_SEQ.nextval, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceSubCategoryId}, #{userId}, #{resourceDate})
-		
+
 		<selectKey keyProperty="itemId" resultType="Long" order="AFTER">
        		SELECT RESOURCESHOP_SEQ.CURRVAL FROM DUAL
     	</selectKey>
 	</insert>
-	
+
 	<insert id="addResourceFile" parameterType="map">
 		<foreach collection="resourceFile" item="file" separator=";">
 			insert into ResourceFile
 			values (RESOURCEFILE_SEQ.NEXTVAL, #{file.resourceFileName}, #{itemId})
 		</foreach>
 	</insert>
-	
+
+	<!-- 전체 리소스 개수 -->
+	<select id="countAllItems" resultType="long">
+    	SELECT COUNT(*) FROM ResourceShop
+	</select>
+
 	<!-- 조회 -->
 	<select id="getItemInfo" resultMap="GetItemMap">
-		SELECT		
+		SELECT
 	    <!-- ResourceShop -->
 	    resourceShop.itemId AS rs_itemId,
 	    resourceShop.itemName,
@@ -29,12 +34,12 @@
 	    resourceShop.itemWriter,
 	    resourceShop.resourceDate,
 	    resourceShop.resourceSubCategoryId AS rs_resourceSubCategoryId,
-	    
+
 	    <!-- ResourceFile -->
 	    resourceFile.resourceFileId,
 	    resourceFile.resourceFileName,
 	    resourceFile.itemId AS rf_itemId,
-	    
+
 	    <!-- Ranking -->
 	    ranking.rankId,
 	    ranking.totalRank,
@@ -42,7 +47,7 @@
 	    ranking.weeklyRank,
 	    ranking.monthlyRank,
 	    ranking.itemId AS rk_itemId,
-	    
+
 	    <!-- Counting -->
 	    counting.countingId,
 	    counting.totalcount,
@@ -50,33 +55,33 @@
 	    counting.weeklycount,
 	    counting.monthlycount,
 	    counting.itemId AS ct_itemId
-		
+
 		FROM ResourceShop resourceShop
-        LEFT JOIN ResourceFile resourceFile 
+        LEFT JOIN ResourceFile resourceFile
             ON resourceFile.itemId = resourceShop.itemId
-        LEFT JOIN Ranking ranking 
+        LEFT JOIN Ranking ranking
             ON resourceShop.itemId = ranking.itemId
-        LEFT JOIN OrdersDetails ordersDetails 
+        LEFT JOIN OrdersDetails ordersDetails
             ON ordersDetails.itemId = resourceShop.itemId
-        LEFT JOIN Counting counting 
+        LEFT JOIN Counting counting
             ON counting.itemId = resourceShop.itemId
         WHERE resourceShop.itemId=#{itemId}
         ORDER BY
-	    resourceShop.itemId, 
+	    resourceShop.itemId,
 	    resourceFile.resourceFileId
 	</select>
-	
+
 	<select id="marketList" resultMap="MarketListMap">
-		SELECT 
+		SELECT
 		<!-- ResourceCategory -->
 	    resourceCategory.resourceCategoryId AS rc_resourceCategoryId,
 	    resourceCategory.resourceCategoryName,
-	    
+
 	    <!-- ResourceSubCategory -->
 	    resourceSubCategory.resourceSubCategoryId AS rsc_resourceSubCategoryId,
 	    resourceSubCategory.resourceSubCategoryName,
 	    resourceSubCategory.resourceCategoryId AS rsc_resourceCategoryId,
-	    
+
 	    <!-- ResourceShop -->
 	    resourceShop.itemId AS rs_itemId,
 	    resourceShop.itemName,
@@ -84,12 +89,12 @@
 	    resourceShop.itemWriter,
 	    resourceShop.resourceDate,
 	    resourceShop.resourceSubCategoryId AS rs_resourceSubCategoryId,
-	    
+
 	    <!-- ResourceFile -->
 	    resourceFile.resourceFileId,
 	    resourceFile.resourceFileName,
 	    resourceFile.itemId AS rf_itemId,
-	    
+
 	    <!-- Ranking -->
 	    ranking.rankId,
 	    ranking.totalRank,
@@ -97,7 +102,7 @@
 	    ranking.weeklyRank,
 	    ranking.monthlyRank,
 	    ranking.itemId AS rk_itemId,
-	    
+
 	    <!-- Counting -->
 	    counting.countingId,
 	    counting.totalcount,
@@ -105,37 +110,37 @@
 	    counting.weeklycount,
 	    counting.monthlycount,
 	    counting.itemId AS ct_itemId
-	    
+
         FROM ResourceCategory resourceCategory
-        LEFT JOIN ResourceSubCategory resourceSubCategory 
+        LEFT JOIN ResourceSubCategory resourceSubCategory
             ON resourceSubCategory.resourceCategoryId = resourceCategory.resourceCategoryId
-        LEFT JOIN ResourceShop resourceShop 
+        LEFT JOIN ResourceShop resourceShop
             ON resourceShop.resourceSubCategoryId = resourceSubCategory.resourceSubCategoryId
-        LEFT JOIN ResourceFile resourceFile 
+        LEFT JOIN ResourceFile resourceFile
             ON resourceFile.itemId = resourceShop.itemId
-        LEFT JOIN Ranking ranking 
+        LEFT JOIN Ranking ranking
             ON resourceShop.itemId = ranking.itemId
-        LEFT JOIN Counting counting 
+        LEFT JOIN Counting counting
             ON counting.itemId = resourceShop.itemId
-        ORDER BY 
-	    resourceCategory.resourceCategoryId, 
-	    resourceSubCategory.resourceSubCategoryId, 
-	    resourceShop.itemId, 
+        ORDER BY
+	    resourceCategory.resourceCategoryId,
+	    resourceSubCategory.resourceSubCategoryId,
+	    resourceShop.itemId,
 	    resourceFile.resourceFileId
 	</select>
-	
+
 	<!-- 로그인한 사용자가 등록한 상점 정보 -->
 	<select id="myResources" resultMap="MarketListMap">
-		SELECT 
+		SELECT
 		<!-- ResourceCategory -->
 	    resourceCategory.resourceCategoryId AS rc_resourceCategoryId,
 	    resourceCategory.resourceCategoryName,
-	    
+
 	    <!-- ResourceSubCategory -->
 	    resourceSubCategory.resourceSubCategoryId AS rsc_resourceSubCategoryId,
 	    resourceSubCategory.resourceSubCategoryName,
 	    resourceSubCategory.resourceCategoryId AS rsc_resourceCategoryId,
-	    
+
 	    <!-- ResourceShop -->
 	    resourceShop.itemId AS rs_itemId,
 	    resourceShop.itemName,
@@ -144,12 +149,12 @@
 	    resourceShop.resourceDate,
 	    resourceShop.resourceSubCategoryId AS rs_resourceSubCategoryId,
 	    resourceShop.userId,
-	    
+
 	    <!-- ResourceFile -->
 	    resourceFile.resourceFileId,
 	    resourceFile.resourceFileName,
 	    resourceFile.itemId AS rf_itemId,
-	    
+
 	    <!-- Ranking -->
 	    ranking.rankId,
 	    ranking.totalRank,
@@ -157,7 +162,7 @@
 	    ranking.weeklyRank,
 	    ranking.monthlyRank,
 	    ranking.itemId,
-	    
+
 	    <!-- Counting -->
 	    counting.countingId,
 	    counting.totalcount,
@@ -165,29 +170,29 @@
 	    counting.weeklycount,
 	    counting.monthlycount,
 	    counting.itemId AS ct_itemId
-	    
+
         FROM ResourceCategory resourceCategory
-        LEFT JOIN ResourceSubCategory resourceSubCategory 
+        LEFT JOIN ResourceSubCategory resourceSubCategory
             ON resourceSubCategory.resourceCategoryId = resourceCategory.resourceCategoryId
-        LEFT JOIN ResourceShop resourceShop 
+        LEFT JOIN ResourceShop resourceShop
             ON resourceShop.resourceSubCategoryId = resourceSubCategory.resourceSubCategoryId
-        LEFT JOIN ResourceFile resourceFile 
+        LEFT JOIN ResourceFile resourceFile
             ON resourceFile.itemId = resourceShop.itemId
-        LEFT JOIN Ranking ranking 
+        LEFT JOIN Ranking ranking
             ON resourceShop.rankid = ranking.rankid
-        LEFT JOIN Counting counting 
+        LEFT JOIN Counting counting
             ON counting.itemId = resourceShop.itemId
         WHERE resourceShop.userId = #{userId}
         ORDER BY
-	    resourceCategory.resourceCategoryId, 
-	    resourceSubCategory.resourceSubCategoryId, 
-	    resourceShop.itemId, 
+	    resourceCategory.resourceCategoryId,
+	    resourceSubCategory.resourceSubCategoryId,
+	    resourceShop.itemId,
 	    resourceFile.resourceFileId
 	</select>
-	
+
 	<!-- 내가 구매한 상품 리스트 -->
 	<select id="purchasedResources" resultMap="MarketListMap">
-    	SELECT 
+    	SELECT
         <!-- ResourceCategory -->
         resourceCategory.resourceCategoryId AS rc_resourceCategoryId,
         resourceCategory.resourceCategoryName,
@@ -235,12 +240,12 @@
 	    LEFT JOIN ResourceFile resourceFile ON resourceFile.itemId = resourceShop.itemId
 	    LEFT JOIN Ranking ranking ON ranking.itemId = resourceShop.itemId
 	    LEFT JOIN Counting counting ON counting.itemId = resourceShop.itemId
-	
+
 	    WHERE orders.userId = #{userId}
 	    ORDER BY resourceCategory.resourceCategoryId, resourceSubCategory.resourceSubCategoryId, resourceShop.itemId, resourceFile.resourceFileId
 	</select>
 
-	
+
 	<!-- 상점 정보만 들고 오기 -->
 	<resultMap type="ResourceShop" id="GetItemMap">
 		<id property="itemId" column="rs_itemId"/>
@@ -261,7 +266,7 @@
 	        <result property="monthlyRank" column="monthlyRank"/>
 	      	<result property="itemId" column="rk_itemId"/>
 	    </association>
-        
+
         <!-- 3. 카운팅-->
      	<association property="counting" javaType="Counting">
        		<id property="countingId" column="countingId"/>
@@ -279,18 +284,18 @@
        		<result property="itemId" column="rf_itemId"/>
       	</collection>
 	</resultMap>
-	
+
 	<!-- 카테고리들에 속한 상점 정보 들고오기 -->
 	<resultMap type="ResourceCategory" id="MarketListMap">
 	    <id property="resourceCategoryId" column="rc_resourceCategoryId"/>
 	    <result property="resourceCategoryName" column="resourceCategoryName"/>
-	
+
 	    <!-- 2. 리소스 서브 카테고리 리스트 -->
 	    <collection property="resourceSubCategory" ofType="ResourceSubCategory" javaType="ArrayList" column="rc_resourceCategoryId">
 	        <id property="resourceSubCategoryId" column="rsc_resourceSubCategoryId"/>
 	        <result property="resourceSubCategoryName" column="resourceSubCategoryName"/>
 	        <result property="resourceCategoryId" column="rsc_resourceCategoryId"/>
-	
+
 	        <!-- 3. 리소스 샵 리스트 -->
 	        <collection property="resourceShop" ofType="ResourceShop" javaType="ArrayList" column="rsc_resourceSubCategoryId">
 	            <id property="itemId" column="rs_itemId"/>
@@ -300,7 +305,7 @@
 	            <result property="resourceDate" column="resourceDate"/>
 	            <result property="resourceSubCategoryId" column="rs_resourceSubCategoryId"/>
 	            <result property="userId" column="userId"/>
-	
+
 	            <!-- 4. 랭킹 (단일) -->
 	            <association property="ranking" javaType="Ranking">
 	                <id property="rankId" column="rankId"/>
@@ -310,7 +315,7 @@
 	                <result property="monthlyRank" column="monthlyRank"/>
 	                <result property="itemId" column="rk_itemId"/>
 	            </association>
-	            
+
 	            <!-- 5. 카운팅-->
 		     	<association property="counting" javaType="Counting">
 		       		<id property="countingId" column="countingId"/>
@@ -320,7 +325,7 @@
 		          	<result property="monthlycount" column="monthcount"/>
 		          	<result property="itemId" column="ct_itemId" />
 		        </association>
-	
+
 				<!-- 6. 리소스 파일 리스트 -->
 	            <collection property="resourceFile" ofType="ResourceFile" javaType="ArrayList" column="rs_itemId">
 	                <id property="resourceFileId" column="resourceFileId"/>
