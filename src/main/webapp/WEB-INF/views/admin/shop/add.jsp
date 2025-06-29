@@ -22,13 +22,13 @@
 					<td><label for="resourceCategoryName">카테고리 명:<span
 							class="required">*</span></label></td>
 					<td><input type="text" id="resourceCategoryName"
-						name="resourceCategoryName" required /></td>
+						name="resourceCategory.resourceCategoryName" required /></td>
 				</tr>
 				<tr>
 					<td><label for="resourceSubCategoryName">서브 카테고리 명:<span
 							class="required">*</span></label></td>
 					<td><input type="text" id="resourceSubCategoryName"
-						name="resourceSubCategoryName" required /></td>
+						name="resourceSubCategory[0].resourceSubCategoryName" required /></td>
 				</tr>
 			</table>
 			<div class="btn-wrap">
