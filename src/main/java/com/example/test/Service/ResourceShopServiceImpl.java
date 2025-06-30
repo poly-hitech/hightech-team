@@ -94,15 +94,23 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 		dao.save(market.getResourceShop());	//리소스 정보 업로드
 		countingDao.save(market.getResourceShop().getItemId());
 		long totalCount = dao.countAllItems(); // 전체 상품 수 조회
+
+		Ranking ranking = new Ranking();
+		ranking.setItemId(market.getResourceShop().getItemId());
+		ranking.setDailyRank(totalCount);
+		ranking.setWeeklyRank(totalCount);
+		ranking.setMonthlyRank(totalCount);
+		ranking.setTotalRank(totalCount);
+		rankingDao.save(ranking); //랭킹 정보 저장
 		
-		Ranking ranking = Ranking.builder()
-				.itemId(market.getResourceShop().getItemId())
-				.dailyRank(totalCount)
-				.weeklyRank(totalCount)
-				.monthlyRank(totalCount)
-				.totalRank(totalCount)
-				.build();
-		rankingDao.save(ranking);
+//		Ranking ranking = Ranking.builder()
+//				.itemId(market.getResourceShop().getItemId())
+//				.dailyRank(totalCount)
+//				.weeklyRank(totalCount)
+//				.monthlyRank(totalCount)
+//				.totalRank(totalCount)
+//				.build();
+//		rankingDao.save(ranking);
 		
 		//리소스 정보 등록 후 리소스 파일 등록
 	    if (!rf.isEmpty()) {
