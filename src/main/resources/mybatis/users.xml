@@ -107,7 +107,7 @@
 		
 		<update id="update">
 			update Users
-			set username=#{username}, nickname=#{nickname}, phone=#{phone}, gender=#{gender}, profileImage=#{profileImage}
+			set username=#{username}, nickname=#{nickname}, phone=#{phone}, gender=#{gender}, profileImage=#{profileImage}, birthday=#{birthday}
 			where userId=#{userId}
 		</update>
 		

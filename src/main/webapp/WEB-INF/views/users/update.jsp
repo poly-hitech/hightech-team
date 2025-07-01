@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -21,37 +22,38 @@
 	        	<h2>마이페이지</h2>
 	        </div>
 			<div>
-				<label>아이디:</label>
-				<input type="text" name="username" value="${item.username}" readonly="readonly">						
+				<label for="username">아이디:</label>
+				<input id="username" name="username" value="${item.username}" readonly>						
 			</div>
 
 			<div>
-				<label>비밀번호:</label>
-				<input type="password" name="password">	
+				<label for="password">비밀번호:</label>
+				<input type="password" id="password" name="password">	
 			</div>
 			
 			<div>
-				<label>닉네임:</label>
-				<input type="text" name="nickname" value="${item.nickname}">				
+				<label for="nickname">닉네임:</label>
+				<input id="nickname" name="nickname" value="${item.nickname}">				
 			</div>
 			
 			<div>
-				<label>생일:</label>
-				<input type="text"  value="${item.birthday}">				
+				<label for="birthday">생일:</label>
+    			<input type="date" id="birthday" name="birthday" 
+           			value="<fmt:formatDate value='${item.birthday}' pattern='yyyy-MM-dd' />" />			
 			</div>
 			
 			<div>
-				<label>휴대폰:</label>
-				<input type="text" name="phone" value="${item.phone}">				
+				<label for="phone">휴대폰:</label>
+				<input id="phone" name="phone" value="${item.phone}">				
 			</div>
 			
 			<div>
-				<label>성별:</label>
-				<input type="text" name="gender" value="${item.gender}">
+				<label for="gender">성별:</label>
+				<input id="gender" name="gender" value="${item.gender}">
 			</div>
 			
 			<div>
-				<label>가입일: ${item.signupDay}</label>
+				<label>가입일: <fmt:formatDate value='${item.signupDay}' pattern='yyyy-MM-dd' /></label>
 			</div>
 									
 			<div>
