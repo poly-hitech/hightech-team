@@ -21,6 +21,7 @@
 		<typeAlias type="com.example.test.Model.ResourceFile" alias="ResourceFile"/>
 		<typeAlias type="com.example.test.Model.OrdersDetails" alias="OrdersDetails"/>
 		<typeAlias type="com.example.test.Model.BuyPoint" alias="BuyPoint"/>
+		<typeAlias type="com.example.test.Model.MyOrderList" alias="MyOrderList"/>
 	</typeAliases>
 	
 	<!-- mapper 파일 추가 -->

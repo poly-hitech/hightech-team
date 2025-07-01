@@ -2,13 +2,10 @@ package com.example.test.Dao;
 
 import java.util.List;
 
+import com.example.test.Model.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.example.test.Model.Market;
-import com.example.test.Model.Orders;
-import com.example.test.Model.OrdersDetails;
 
 @Repository
 public class OrdersDaoImpl implements OrdersDao {
@@ -30,7 +27,7 @@ public class OrdersDaoImpl implements OrdersDao {
 	
 	//로그인 한 사용자가 구매한 리소스 리스트
 	@Override
-	public List<Market> purchasedResources(Long userId) {
-		return sql.selectList("resourceShop.purchasedResources", userId);
+	public List<MyOrderList> purchasedResources(Long userId) {
+		return sql.selectList("orders.purchasedList", userId);
 	}
 }

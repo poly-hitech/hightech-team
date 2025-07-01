@@ -3,6 +3,7 @@ package com.example.test.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.test.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,14 +13,6 @@ import com.example.test.Dao.OrdersDao;
 import com.example.test.Dao.RankingDao;
 import com.example.test.Dao.ResourceDao;
 import com.example.test.Dao.UsersDao;
-import com.example.test.Model.Counting;
-import com.example.test.Model.Market;
-import com.example.test.Model.Orders;
-import com.example.test.Model.OrdersDetails;
-import com.example.test.Model.Ranking;
-import com.example.test.Model.BuyPoint;
-import com.example.test.Model.ResourceShop;
-import com.example.test.Model.Users;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -146,7 +139,7 @@ public class OrdersServiceImpl implements OrdersService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<Market> purchasedResources(Long userId) {
+	public List<MyOrderList> purchasedResources(Long userId) {
 		return ordersDao.purchasedResources(userId);
 	}
 
