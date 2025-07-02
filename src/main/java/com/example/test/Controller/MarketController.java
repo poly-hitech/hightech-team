@@ -154,24 +154,21 @@ public class MarketController {
 	@GetMapping("/detail")
 	public String showDetail(@RequestParam("itemId") Long itemId, HttpSession session,Model model) {
 		ResourceShop resourceShop = resourceShopService.getItemById(itemId);
-		/*
-		 * Long resourceSubcategoryId = resourceShop.getResourceSubCategoryId();
-		 * ResourceCategory resourceCategory =
-		 * resourceCategoryService.getResourceCategory(resourceSubcategoryId);
-		 */
 		//로그인한 유저의 유저 번호 호출
 		Users member = (Users)session.getAttribute("member");
-		Long userId = member.getUserId();
-		//로그인 한 유저가 주문한 아이템 번호 호출
-		List<Long> orderItemId = ordersService.getItemIdByLoginUser(userId);
-		for( Long id : orderItemId){
-			log.info("로그인한 유저가 주문한 아이템 번호: {}", id);
-			if(resourceShop.getItemId().equals(id)){
-				model.addAttribute("result",true);
-			} else {
-				model.addAttribute("result",false);
+
+		if(member != null) {
+			Long userId = member.getUserId();
+			//로그인 한 유저가 주문한 아이템 번호 호출
+			List<Long> orderItemId = ordersService.getItemIdByLoginUser(userId);
+			for( Long id : orderItemId){
+				log.info("로그인한 유저가 주문한 아이템 번호: {}", id);
+				if(resourceShop.getItemId().equals(id)){
+					model.addAttribute("result",true);
+				}
 			}
 		}
+		
 		log.info("아이템명 확인: {}", resourceShop.getItemName());
 		log.info("아이템 번호 확인: {}", resourceShop.getItemId());
 

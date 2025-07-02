@@ -2,11 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="root" value="${pageContext.request.contextPath}" />
 <html>
 <head>
 <title>${shop.itemName}</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/shopDetail.css" />
+	href="${root}/css/shopDetail.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -44,12 +45,49 @@
 						낮은 순</input>
 					</div>
 				</div>
+                <c:if test="${result == true}">
+                    <div class="review-form-box">
+                        <div class="user-header">
+                            <img class="user-avatar" src="${root}/images/default-profile.png" alt="사용자" />
+                            <span class="username"> ${sessionScope.loginUser.nickname} </span>
+                            <span class="stars">★★★★★</span> <!-- 별점 선택도 JS로 구현 가능 -->
+                        </div>
+                        <form id="reviewForm" method="post" action="${root}/shop/review">
+                            <input type="hidden" name="itemId" value="${shop.itemId}" />
+                            <textarea name="reviewContent" maxlength="128"
+                                      placeholder="리소스를 구입한 경우에만 평가 등록이 가능합니다.&#10;비방 또는 욕설 등의 유해한 댓글은 고지 없이 삭제될 수 있습니다."></textarea>
+                            <div class="form-footer">
+                                <span class="char-count">0/128</span>
+                                <button type="submit">등록</button>
+                            </div>
+                        </form>
+                    </div>
+                </c:if>
+
+                <!-- 리뷰 목록 -->
+                <div class="review-list">
+                    <c:forEach var="review" items="${reviewList}">
+                        <div class="review-item">
+                            <div class="review-header">
+                                <img class="user-avatar" src="${root}/images/default-profile.png" alt="프로필"/>
+                                <div>
+                                    <span class="username">${review.user.nickname}</span>
+                                    <span class="stars">★★★★★</span>
+                                    <div class="review-date">
+                                        <fmt:formatDate value="${review.createdAt}" pattern="yyyy.MM.dd hh:mm a" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="review-content">${review.content}</div>
+                        </div>
+                    </c:forEach>
+                </div>
 			</div>
 
 			<div class="right-section">
 				<div class="preview-image-box">
 					<img
-						src="${pageContext.request.contextPath}${fn:replace(shop.resourceImage, 'C:/upload', '/upload')}"
+						src="${root}${fn:replace(shop.resourceImage, 'C:/upload', '/upload')}"
 						alt="리소스 이미지">
 				</div>
 
@@ -78,13 +116,18 @@
 							</div>
 						</div>
 					</div>
-
-					<button class="download-btn">다운로드</button>
+					<c:if test="${result == true}">
+						<button class="download-btn">다운로드</button>
+					</c:if>
+					<c:if test="${result != true}">
+						<button class="download-btn">구매하기</button>
+					</c:if>
 					<button class="other-btn">제작자의 다른 리소스 보기</button>
 				</div>
 			</div>
 		</div>
 	</main>
-	<script src="${pageContext.request.contextPath}/js/shopDetail.js"></script>
+	
+	<script src="${root}/js/shopDetail.js"></script>
 </body>
 </html>
