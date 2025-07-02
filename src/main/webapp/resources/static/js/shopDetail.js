@@ -12,7 +12,7 @@ $(document).ready(function () {
         }
 
         shop.resourceFile.forEach(function (file) {
-            var fileName = file.resourceFileName || '';
+            var fileName = file.resourceImage || '';
             if (fileName) {
                 fileName = fileName.split(/[\\/]/).pop();
                 // 추가 이스케이프 처리

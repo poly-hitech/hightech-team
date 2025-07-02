@@ -4,8 +4,8 @@
 
 	<insert id="resourceAdd" parameterType="ResourceShop">
 		insert into ResourceShop
-		(itemId, itemName, itemPrice, itemWriter, resourceSubCategoryId, userId, resourceDate)
-		values (RESOURCESHOP_SEQ.nextval, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceSubCategoryId}, #{userId}, #{resourceDate})
+		(itemId, itemName, itemPrice, itemWriter, resourceSubCategoryId, userId, resourceDate, resourceImage)
+		values (RESOURCESHOP_SEQ.nextval, #{itemName}, #{itemPrice}, #{itemWriter}, #{resourceSubCategoryId}, #{userId}, #{resourceDate}, #{resourceImage})
 
 		<selectKey keyProperty="itemId" resultType="Long" order="AFTER">
        		SELECT RESOURCESHOP_SEQ.CURRVAL FROM DUAL
@@ -34,6 +34,7 @@
 	    resourceShop.itemWriter,
 	    resourceShop.resourceDate,
 	    resourceShop.resourceSubCategoryId AS rs_resourceSubCategoryId,
+		resourceShop.resourceImage,
 
 	    <!-- ResourceFile -->
 	    resourceFile.resourceFileId,
@@ -89,6 +90,7 @@
 	    resourceShop.itemWriter,
 	    resourceShop.resourceDate,
 	    resourceShop.resourceSubCategoryId AS rs_resourceSubCategoryId,
+		resourceShop.resourceImage,
 
 	    <!-- ResourceFile -->
 	    resourceFile.resourceFileId,
@@ -161,7 +163,7 @@
 	    ranking.dailyRank,
 	    ranking.weeklyRank,
 	    ranking.monthlyRank,
-	    ranking.itemId,
+	    ranking.itemId AS rk_itemId,
 
 	    <!-- Counting -->
 	    counting.countingId,
@@ -179,7 +181,7 @@
         LEFT JOIN ResourceFile resourceFile
             ON resourceFile.itemId = resourceShop.itemId
         LEFT JOIN Ranking ranking
-            ON resourceShop.rankid = ranking.rankid
+            ON resourceShop.itemId = ranking.itemId
         LEFT JOIN Counting counting
             ON counting.itemId = resourceShop.itemId
         WHERE resourceShop.userId = #{userId}
@@ -190,62 +192,6 @@
 	    resourceFile.resourceFileId
 	</select>
 
-	<!-- 내가 구매한 상품 리스트 -->
-	<select id="purchasedResources" resultMap="MarketListMap">
-    	SELECT
-        <!-- ResourceCategory -->
-        resourceCategory.resourceCategoryId AS rc_resourceCategoryId,
-        resourceCategory.resourceCategoryName,
-
-        <!-- ResourceSubCategory -->
-        resourceSubCategory.resourceSubCategoryId AS rsc_resourceSubCategoryId,
-        resourceSubCategory.resourceSubCategoryName,
-        resourceSubCategory.resourceCategoryId AS rsc_resourceCategoryId,
-
-        <!-- ResourceShop -->
-        resourceShop.itemId AS rs_itemId,
-        resourceShop.itemName,
-        resourceShop.itemPrice,
-        resourceShop.itemWriter,
-        resourceShop.resourceDate,
-        resourceShop.resourceSubCategoryId AS rs_resourceSubCategoryId,
-        resourceShop.userId,
-
-        <!-- ResourceFile -->
-        resourceFile.resourceFileId,
-        resourceFile.resourceFileName,
-        resourceFile.itemId AS rf_itemId,
-
-        <!-- Ranking -->
-        ranking.rankId,
-        ranking.totalRank,
-        ranking.dailyRank,
-        ranking.weeklyRank,
-        ranking.monthlyRank,
-        ranking.itemId AS rk_itemId,
-
-        <!-- Counting -->
-        counting.countingId,
-        counting.totalcount,
-        counting.dailycount,
-        counting.weeklycount,
-        counting.monthlycount,
-        counting.itemId AS ct_itemId
-
-	    FROM Orders orders
-	    INNER JOIN OrdersDetails od ON orders.ordersId = od.ordersId
-	    INNER JOIN ResourceShop resourceShop ON resourceShop.itemId = od.itemId
-	    LEFT JOIN ResourceSubCategory resourceSubCategory ON resourceSubCategory.resourceSubCategoryId = resourceShop.resourceSubCategoryId
-	    LEFT JOIN ResourceCategory resourceCategory ON resourceCategory.resourceCategoryId = resourceSubCategory.resourceCategoryId
-	    LEFT JOIN ResourceFile resourceFile ON resourceFile.itemId = resourceShop.itemId
-	    LEFT JOIN Ranking ranking ON ranking.itemId = resourceShop.itemId
-	    LEFT JOIN Counting counting ON counting.itemId = resourceShop.itemId
-
-	    WHERE orders.userId = #{userId}
-	    ORDER BY resourceCategory.resourceCategoryId, resourceSubCategory.resourceSubCategoryId, resourceShop.itemId, resourceFile.resourceFileId
-	</select>
-
-
 	<!-- 상점 정보만 들고 오기 -->
 	<resultMap type="ResourceShop" id="GetItemMap">
 		<id property="itemId" column="rs_itemId"/>
@@ -255,6 +201,7 @@
         <result property="resourceDate" column="resourceDate"/>
         <result property="resourceContent" column="resourceContent"/>
         <result property="resourceSubCategoryId" column="rs_resourceSubCategoryId"/>
+		<result property="resourceImage" column="resourceImage"/>
 
         <!-- 2. 랭킹 (단일) -->
 
@@ -304,6 +251,7 @@
 	            <result property="itemWriter" column="itemWriter"/>
 	            <result property="resourceDate" column="resourceDate"/>
 	            <result property="resourceSubCategoryId" column="rs_resourceSubCategoryId"/>
+				<result property="resourceImage" column="resourceImage"/>
 	            <result property="userId" column="userId"/>
 
 	            <!-- 4. 랭킹 (단일) -->

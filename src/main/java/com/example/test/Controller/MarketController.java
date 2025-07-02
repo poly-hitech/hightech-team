@@ -74,6 +74,7 @@ public class MarketController {
 					String itemName = resourceShop.getItemName();
 					log.info("상점 아이템 번호: {}" + shopId);
 					log.info("상점 아이템 이름: {}" + itemName);
+					log.info("상점 아이템 배경이미지: {}", resourceShop.getResourceImage());
 
 					// 해당 상점정보의 랭킹 호출
 					Ranking rank = resourceShop.getRanking();
@@ -145,9 +146,11 @@ public class MarketController {
 	// 리소스 상품 등록
 	@PostMapping("{roleId}/add/{userId}")
 	String uploadResource(@PathVariable Long roleId, @PathVariable Long userId, Market market,
-			@RequestParam("resourceFile") List<MultipartFile> file, Model model) throws Exception {
+			@RequestParam(value = "resourceFile", required = false) List<MultipartFile> file,
+			@RequestParam(value = "resourceImage", required = false) MultipartFile resourceImage,
+						  Model model) throws Exception {
 
-		resourceShopService.addResource(userId, market, file, model);
+		resourceShopService.addResource(userId, market, file, resourceImage, model);
 
 		return path + "add";
 	}

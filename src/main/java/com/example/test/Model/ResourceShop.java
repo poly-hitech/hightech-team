@@ -15,6 +15,7 @@ public class ResourceShop {
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date resourceDate = new Date();
+	private String resourceImage;
 	
 	private List<ResourceFile> resourceFile;
 	private String resourceContent;
@@ -104,4 +105,11 @@ public class ResourceShop {
 		this.counting = counting;
 	}
 
+    public String getResourceImage() {
+        return resourceImage;
+    }
+
+    public void setResourceImage(String resourceImage) {
+        this.resourceImage = resourceImage;
+    }
 }

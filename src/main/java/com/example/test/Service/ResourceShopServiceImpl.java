@@ -57,39 +57,40 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 
 	@Transactional
 	@Override
-	public void addResource(Long userId, Market market, List<MultipartFile> file, Model model) throws Exception{
+	public void addResource(Long userId, Market market, List<MultipartFile> file, MultipartFile resourceImage, Model model) throws Exception{
 		
 		//resourceFile 리스트 초기화
 		List<ResourceFile> rf = new ArrayList<>();
 		
 		// 파일 개수와 ResourceFile 리스트 개수 확인
-	    if (file == null || file.isEmpty()) {
-	    	log.info("업로드된 파일이 없습니다.");
-	        model.addAttribute("message", "업로드된 파일이 없습니다.");
-	        return;
-	    }
-		//파일 업로드(업로드와 경로 추출)
-		for(int loop = 0; loop < file.size() ;loop++) {
-	        MultipartFile singlefile = file.get(loop);
-			String filepath = fileupload.saveFile(singlefile, model);
-			
-            // 파일이 정상적으로 업로드된 경우에만 경로를 설정		
-			if (filepath != null && !filepath.isEmpty()) {
-				//반환된 파일 저장 경로를 가져와 저장
-				ResourceFile resourcefile = new ResourceFile();
-				resourcefile.setResourceFileName(filepath);
-				rf.add(resourcefile);
-				log.info("리소스파일에 파일명이 들어갔는지 확인하기"+resourcefile.getResourceFileName());
-	            
-	        } else {
-	        	log.info("파일 업로드에 실패했습니다.");
-	            model.addAttribute("message", "파일 업로드에 실패하였습니다.");
-	            return;
-	        }
-		}
+//	    if (file == null || file.isEmpty()) {
+//	    	log.info("업로드된 파일이 없습니다.");
+//	        model.addAttribute("message", "업로드된 파일이 없습니다.");
+//	        return;
+//	    }
+//		//파일 업로드(업로드와 경로 추출)
+//		for(int loop = 0; loop < file.size() ;loop++) {
+//	        MultipartFile singlefile = file.get(loop);
+//			String filepath = fileupload.saveFile(singlefile, model);
+//
+//            // 파일이 정상적으로 업로드된 경우에만 경로를 설정
+//			if (filepath != null && !filepath.isEmpty()) {
+//				//반환된 파일 저장 경로를 가져와 저장
+//				ResourceFile resourcefile = new ResourceFile();
+//				resourcefile.setResourceFileName(filepath);
+//				rf.add(resourcefile);
+//				log.info("리소스파일에 파일명이 들어갔는지 확인하기"+resourcefile.getResourceFileName());
+//
+//	        } else {
+//	        	log.info("파일 업로드에 실패했습니다.");
+//	            model.addAttribute("message", "파일 업로드에 실패하였습니다.");
+//	            return;
+//	        }
+//		}
+		String resourceImagePath = fileupload.saveFile(resourceImage, model);
 		market.getResourceShop().setUserId(userId);		//연결 유저 번호
 		market.getResourceShop().setResourceFile(rf);	//리소스 파일 리스트를 리소스마켓에 저장
-		
+		market.getResourceShop().setResourceImage(resourceImagePath);
 
 		dao.save(market.getResourceShop());	//리소스 정보 업로드
 		countingDao.save(market.getResourceShop().getItemId());

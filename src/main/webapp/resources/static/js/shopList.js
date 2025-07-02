@@ -64,7 +64,7 @@ $(document).ready(function () {
                 } else {
                     selectedSubcategory.resourceShop.forEach(function (shop) {
                         shop.resourceFile.forEach(function (file) {
-                            var fileName = file.resourceFileName || '';
+                            var fileName = file.resourceImage || '';
                             if (fileName) {
                                 fileName = fileName.split(/[\\/]/).pop();
                                 // 추가 이스케이프 처리
@@ -136,7 +136,8 @@ $(document).ready(function () {
                             console.log("상점" + shop.itemName + "진입했습니다.")
                             if (shop.resourceFile && shop.resourceFile.length > 0) {
                                 shop.resourceFile.forEach(function (file) {
-                                    var fileName = file.resourceFileName || '';
+                                    var fileName = shop.resourceImage || '';
+                                    console.log("상점 아이템이미지: " + fileName);
                                     if (fileName) {
                                         fileName = fileName.split(/[\\/]/).pop();
                                         // 추가 이스케이프 처리

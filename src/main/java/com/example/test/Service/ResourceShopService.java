@@ -15,7 +15,7 @@ public interface ResourceShopService {
 
 	List<ResourceCategory> list();
 
-	void addResource(Long userId, Market market, List<MultipartFile> file, Model model) throws Exception;
+	void addResource(Long userId, Market market, List<MultipartFile> file, MultipartFile resourceImage, Model model) throws Exception;
 
 	List<ResourceCategory> addResourcePage();
 
