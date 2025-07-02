@@ -30,4 +30,13 @@ public class OrdersDaoImpl implements OrdersDao {
 	public List<MyOrderList> purchasedResources(Long userId) {
 		return sql.selectList("orders.purchasedList", userId);
 	}
+
+	//로그인 한 사용자가 구매한 리소스 번호
+	@Override
+	public List<Long> getItemIdByLoginUser(Long userId) {
+		return sql.selectList("orders.getItemIdByLoginUser", userId);
+	}
+
+
+
 }

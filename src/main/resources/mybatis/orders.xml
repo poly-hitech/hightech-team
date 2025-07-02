@@ -35,6 +35,15 @@
 		ORDER BY rc.resourceCategoryId, rsc.resourceSubCategoryId, rs.itemId, rf.resourceFileId
 	</select>
 
+	<!-- 로그인 유저의 주문 정보에 속한 리소스 번호 -->
+	<select id="getItemIdByLoginUser" resultType="list" parameterType="Long">
+		SELECT od.itemId
+		FROM Orders orders
+		INNER JOIN OrdersDetails od ON orders.ordersId = od.ordersId
+		INNER JOIN ResourceShop rs ON rs.itemId = od.itemId
+		WHERE orders.userId = #{userId}
+	</select>
+
 	<!-- 수정 -->
 	
 	<!-- 주문취소 -->

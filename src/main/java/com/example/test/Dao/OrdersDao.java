@@ -14,4 +14,6 @@ public interface OrdersDao {
 	void saveOrdersDetails(OrdersDetails ordersDetails);
 
 	List<MyOrderList> purchasedResources(Long userId);
+
+	List<Long> getItemIdByLoginUser(Long userId);
 }

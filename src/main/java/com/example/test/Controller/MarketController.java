@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.test.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.test.Model.Market;
-import com.example.test.Model.Ranking;
-import com.example.test.Model.ResourceCategory;
-import com.example.test.Model.ResourceFile;
-import com.example.test.Model.ResourceShop;
-import com.example.test.Model.ResourceSubCategory;
 import com.example.test.Service.OrdersService;
 import com.example.test.Service.ResourceShopService;
 import com.example.test.Service.ShopCategoryService;
@@ -157,11 +152,26 @@ public class MarketController {
 
 	// 리소스 상품 상세
 	@GetMapping("/detail")
-	public String showDetail(@RequestParam("itemId") Long itemId, Model model) {
+	public String showDetail(@RequestParam("itemId") Long itemId, HttpSession session,Model model) {
 		ResourceShop resourceShop = resourceShopService.getItemById(itemId);
-		Long resourceSubcategoryId = resourceShop.getResourceSubCategoryId();
-		ResourceCategory resourceCategory = resourceCategoryService.getResourceCategory(resourceSubcategoryId);
-
+		/*
+		 * Long resourceSubcategoryId = resourceShop.getResourceSubCategoryId();
+		 * ResourceCategory resourceCategory =
+		 * resourceCategoryService.getResourceCategory(resourceSubcategoryId);
+		 */
+		//로그인한 유저의 유저 번호 호출
+		Users member = (Users)session.getAttribute("member");
+		Long userId = member.getUserId();
+		//로그인 한 유저가 주문한 아이템 번호 호출
+		List<Long> orderItemId = ordersService.getItemIdByLoginUser(userId);
+		for( Long id : orderItemId){
+			log.info("로그인한 유저가 주문한 아이템 번호: {}", id);
+			if(resourceShop.getItemId().equals(id)){
+				model.addAttribute("result",true);
+			} else {
+				model.addAttribute("result",false);
+			}
+		}
 		log.info("아이템명 확인: {}", resourceShop.getItemName());
 		log.info("아이템 번호 확인: {}", resourceShop.getItemId());
 

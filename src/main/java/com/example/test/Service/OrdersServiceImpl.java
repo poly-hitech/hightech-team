@@ -143,4 +143,9 @@ public class OrdersServiceImpl implements OrdersService {
 		return ordersDao.purchasedResources(userId);
 	}
 
+	@Override
+	public List<Long> getItemIdByLoginUser(Long userId) {
+		return ordersDao.getItemIdByLoginUser(userId);
+	}
+
 }
