@@ -1,0 +1,206 @@
+body {
+    margin: 0;
+    background-color: #121212;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: white;
+}
+
+main {
+    margin-left: 350px;
+    margin-right: 80px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    min-height: calc(100vh - 160px);
+    transition: margin-left 0.4s ease, box-shadow 0.3s ease;
+}
+
+.shop-detail-container {
+    display: flex;
+    padding: 40px;
+    gap: 40px;
+}
+
+.left-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.file-preview-box {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.file-preview-box ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.file-preview-box li {
+    padding: 6px 0;
+    border-bottom: 1px solid #333;
+}
+
+.section-box {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.section-review-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.section-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.rating-options span {
+    margin-right: 15px;
+    color: #aaa;
+}
+
+.right-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.preview-image-box {
+    width: 180px;
+    height: 180px;
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.preview-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.info-box {
+    width: 100%;
+    text-align: center;
+}
+
+.category {
+    color: #cfcfcf;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.meta-group {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #bbb;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.meta-left, .meta-right {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.meta-left a {
+    font-weight: bold;
+    color: #cfcaff;
+    text-decoration: none;
+}
+
+.meta-left a:hover {
+    text-decoration: underline;
+}
+
+.author {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.meta {
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.download-btn, .other-btn {
+    width: 100%;
+    padding: 12px 0;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.download-btn {
+    background-color: #7c3aed;
+    color: white;
+}
+
+.download-btn:hover {
+    background-color: #6d28d9;
+}
+
+.other-btn {
+    background-color: #333;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    main {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .shop-detail-container {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .left-section, .right-section {
+        flex: none;
+        width: 100%;
+    }
+
+    .preview-image-box {
+        width: 100%;
+        height: 200px;
+    }
+}
