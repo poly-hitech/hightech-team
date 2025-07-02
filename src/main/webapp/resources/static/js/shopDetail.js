@@ -1,13 +1,13 @@
 $(document).ready(function () {
     // 구매 버튼 클릭 이벤트 핸들러
-    $(document).on('click', '#buyButton', function () {
-		if (!userId) {
+    $(document).on('click', '#buy', function () {
+        const userId = $(this).data('userId');
+        const itemId = $(this).data('itemId');
+		if (userId == 0) {
         	alert("로그인이 필요한 서비스입니다.");
         	window.location.href = "/login"; // 로그인 경로로 이동
         	return;
-    	}    
-    
-        var itemId = $(this).closest('.productDetail-card').data('item-id');
+    	}
         //아이템 구매 확인 메시지
         let buycheck = confirm("정말로 구매하시겠습니까?");
 

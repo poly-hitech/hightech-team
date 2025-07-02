@@ -6,8 +6,7 @@
 <html>
 <head>
 <title>${shop.itemName}</title>
-<link rel="stylesheet"
-	href="${root}/css/shopDetail.css" />
+<link rel="stylesheet" href="${root}/css/shopDetail.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -117,17 +116,21 @@
 						</div>
 					</div>
 					<c:if test="${result == true}">
-						<button class="download-btn">다운로드</button>
+						<button id="download" class="download-btn">다운로드</button>
 					</c:if>
 					<c:if test="${result != true}">
-						<button class="download-btn">구매하기</button>
+                        <c:set var="userId" value="${sessionScope.member.userId != null ? sessionScope.member.userId : 0}" />
+                        <c:set var="itemId" value="${shop.itemId}" />
+						<button id="buy" class="download-btn" data-user-id="${userId}" data-item-id="${itemId}">구매하기</button>
 					</c:if>
 					<button class="other-btn">제작자의 다른 리소스 보기</button>
 				</div>
 			</div>
 		</div>
 	</main>
-	
+	<script>
+		const shop = ${shop2};
+	</script>
 	<script src="${root}/js/shopDetail.js"></script>
 </body>
 </html>
