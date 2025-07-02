@@ -33,8 +33,15 @@
 	    resourceShop.itemPrice,
 	    resourceShop.itemWriter,
 	    resourceShop.resourceDate,
-	    resourceShop.resourceSubCategoryId AS rs_resourceSubCategoryId,
 		resourceShop.resourceImage,
+
+		<!-- ResourceCategory -->
+		resourceCategory.resourceCategoryId AS rc_resourceCategoryId,
+		resourceCategory.resourceCategoryName,
+
+		<!-- ResourceSubCategory -->
+		resourceSubCategory.resourceSubCategoryId AS rsc_resourceSubCategoryId,
+		resourceSubCategory.resourceSubCategoryName,
 
 	    <!-- ResourceFile -->
 	    resourceFile.resourceFileId,
@@ -55,17 +62,42 @@
 	    counting.dailycount,
 	    counting.weeklycount,
 	    counting.monthlycount,
-	    counting.itemId AS ct_itemId
+	    counting.itemId AS ct_itemId,
+
+		<!-- Users -->
+		users.userId,
+		users.nickname,
+		users.phone,
+
+		<!-- OrdersDetail -->
+		ordersDetails.ordersDetailsId AS od_ordersDetailsId,
+		ordersDetails.ordersId AS od_ordersIds,
+
+		<!-- ShopReview -->
+		shopReview.reviewId AS sr_reviewId,
+		shopReview.reviewContent AS sr_reviewContent,
+		shopReview.reviewDate AS sr_reviewDate,
+		shopReview.reviewWriter AS sr_reviewWriter,
+		shopReview.ordersDetailsId AS sr_ordersDetailsId
+		
 
 		FROM ResourceShop resourceShop
         LEFT JOIN ResourceFile resourceFile
             ON resourceFile.itemId = resourceShop.itemId
+		LEFT JOIN ResourceSubCategory resourceSubCategory
+			ON resourceShop.resourceSubCategoryId = resourceSubCategory.resourceSubCategoryId
+		LEFT JOIN ResourceCategory resourceCategory
+			ON resourceSubCategory.resourceCategoryId = resourceCategory.resourceCategoryId
         LEFT JOIN Ranking ranking
             ON resourceShop.itemId = ranking.itemId
-        LEFT JOIN OrdersDetails ordersDetails
-            ON ordersDetails.itemId = resourceShop.itemId
         LEFT JOIN Counting counting
             ON counting.itemId = resourceShop.itemId
+		LEFT JOIN Users users
+			ON users.userId = resourceShop.userId
+		LEFT JOIN OrdersDetails ordersDetails
+			ON ordersDetails.itemId = resourceShop.itemId
+ 		LEFT JOIN ShopReview shopReview
+			ON shopReview.itemId = resourceShop.itemId
         WHERE resourceShop.itemId=#{itemId}
         ORDER BY
 	    resourceShop.itemId,
@@ -200,11 +232,20 @@
         <result property="itemWriter" column="itemWriter"/>
         <result property="resourceDate" column="resourceDate"/>
         <result property="resourceContent" column="resourceContent"/>
-        <result property="resourceSubCategoryId" column="rs_resourceSubCategoryId"/>
 		<result property="resourceImage" column="resourceImage"/>
 
-        <!-- 2. 랭킹 (단일) -->
+		<association property="resourceCategory" javaType="ResourceCategory">
+			<id property="resourceCategoryId" column="rc_resourceCategoryId"/>
+			<result property="resourceCategoryName" column="resourceCategoryName"/>
+		</association>
 
+		<association property="resourceSubCategory" javaType="ResourceSubCategory">
+			<id property="resourceSubCategoryId" column="rsc_resourceSubCategoryId"/>
+			<result property="resourceSubCategoryName" column="resourceSubCategoryName"/>
+			<result property="resourceCategoryId" column="rsc_resourceCategoryId"/>
+		</association>
+
+        <!-- 2. 랭킹 (단일) -->
 	    <association property="ranking" javaType="Ranking">
 	    	<id property="rankId" column="rankId"/>
 	        <result property="totalRank" column="totalRank"/>
@@ -223,6 +264,29 @@
           	<result property="monthlycount" column="monthlycount"/>
           	<result property="itemId" column="ct_itemId" />
         </association>
+
+		<!-- 5. 유저 정보 -->
+		<association property="users" javaType="Users">
+			<id property="userId" column="userId"/>
+			<result property="nickname" column="nickname"/>
+			<result property="phone" column="phone"/>
+		</association>
+
+		<!-- 6. 주문 정보 -->
+		<collection property="ordersDetails" ofType="OrdersDetails" javaType="ArrayList" column="itemId">
+			<id property="ordersDetailsId" column="od_ordersDetailsId"/>
+			<result property="ordersId" column="od_ordersIds"/>
+
+
+			<!-- 7. 상점 리뷰 -->
+			<association property="shopReview" javaType="ShopReview">
+				<id property="reviewId" column="sr_reviewId"/>
+				<result property="reviewContent" column="sr_reviewContent"/>
+				<result property="reviewDate" column="sr_reviewDate"/>
+				<result property="reviewWriter" column="sr_reviewWriter"/>
+				<result property="ordersDetailsId" column="sr_ordersDetailsId"/>
+			</association>
+		</collection>
 
 		<!-- 4. 리소스 파일 리스트 -->
       	<collection property="resourceFile" ofType="ResourceFile" javaType="ArrayList" column="rs_itemId">
