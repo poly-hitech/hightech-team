@@ -36,7 +36,7 @@
 	</select>
 
 	<!-- 로그인 유저의 주문 정보에 속한 리소스 번호 -->
-	<select id="getItemIdByLoginUser" resultType="list" parameterType="Long">
+	<select id="getItemIdByLoginUser" resultType="long" parameterType="Long">
 		SELECT od.itemId
 		FROM Orders orders
 		INNER JOIN OrdersDetails od ON orders.ordersId = od.ordersId
