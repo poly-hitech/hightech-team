@@ -159,14 +159,6 @@ public class MarketController {
 
         if (member != null) {
             Long userId = member.getUserId();
-            //로그인 한 유저가 주문한 아이템 번호 호출
-            List<Long> orderItemId = ordersService.getItemIdByLoginUser(userId);
-            for (Long id : orderItemId) {
-                log.info("로그인한 유저가 주문한 아이템 번호: {}", id);
-                if (resourceShop.getItemId().equals(id)) {
-                    model.addAttribute("result", true);
-                }
-            }
             OrdersDetails ordersDetails = ordersService.getOrdersDetailsByUserIdAndItemId(userId, itemId);
             model.addAttribute("ordersDetails", ordersDetails);
             model.addAttribute("ordersDetails2", new ObjectMapper().writeValueAsString(ordersDetails));

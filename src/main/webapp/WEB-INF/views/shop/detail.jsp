@@ -49,7 +49,7 @@
 						<input type="radio" name="rating" value="3" id="rating-3">별점 낮은 순
 					</div>
 				</div>
-				<c:if test="${result == true}">
+				<c:if test="${userId != 0}">
 					<div class="review-form-box">
                         <div class="review-form-header">
                             <img class="user-avatar" src="${pageContext.request.contextPath}/images/default-profile.png" alt="프로필" />

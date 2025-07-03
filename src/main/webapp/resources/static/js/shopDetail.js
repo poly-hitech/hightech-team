@@ -56,11 +56,20 @@ $(document).ready(function () {
             return;
         }
 
+        if(!itemId) {
+            alert("아이템 ID가 없습니다.");
+            return;
+        }
+
+        if(!ordersDetailsId) {
+            alert("리소스를 구매한 경우에만 리뷰를 작성할 수 있습니다.");
+            return;
+        }
+
         if (!reviewContent) {
             alert("리뷰 내용을 입력해주세요.");
             return;
         }
-
 
         if (!reviewRating) {
             alert("별점을 선택해주세요.");
