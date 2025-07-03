@@ -58,7 +58,7 @@
 	<update id="updateByDailyrankByitemId">
 		update Ranking
 		set ranking.dailyRank = (
-			(<include refid="dailyRnum"></include>)
+			<include refid="dailyRnum"></include>
 			where sub.itemId = ranking.itemId
 		)
 	</update>
@@ -66,7 +66,7 @@
 	<update id="updateByWeeklyrankByitemId">
 		update Ranking
 		set ranking.weeklyRank = (
-			(<include refid="weeklyRnum"></include>)
+			<include refid="weeklyRnum"></include>
 			where sub.itemId = ranking.itemId
 		)
 	</update>
@@ -74,7 +74,7 @@
 	<update id="updateByMonthlyrankByitemId">
 		update Ranking
 		set ranking.monthlyRank = (
-			(<include refid="monthlyRnum"></include>)
+			<include refid="monthlyRnum"></include>
 			where sub.itemId = ranking.itemId
 		)
 	</update>
@@ -82,7 +82,7 @@
 	<update id="updateByTotalrankByitemId">
 		update Ranking
 		set ranking.totalRank = (
-			(<include refid="totalRnum"></include>)
+			<include refid="totalRnum"></include>
 			where sub.itemId = ranking.itemId
 		)
 	</update>

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.core.NestedCheckedException;
 import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.dao.DataAccessException;
@@ -28,15 +29,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
-
-//	private String getRootMessage(Throwable e) {
-//	    if (e instanceof NestedCheckedException) {
-//	        Throwable root = ((NestedCheckedException) e).getMostSpecificCause();
-//	        return root != null ? root.getMessage() : e.getMessage();
-//	    } else {
-//	        return e.getMessage();
-//	    }
-//	}
+    /**
+     * 예외의 최상위 원인 메시지를 반환합니다.
+     * @param e 발생한 예외
+     * @return 최상위 원인 메시지
+     */
 	private String getRootCauseMessage(Throwable e) {
 	    Throwable cause = e;
 	    while (cause.getCause() != null) {
@@ -66,7 +63,8 @@ public class GlobalExceptionHandler {
             DataAccessException.class,
             HttpRequestMethodNotSupportedException.class,
             HttpMessageNotReadableException.class,
-            JsonProcessingException.class
+            JsonProcessingException.class,
+            BeanCreationException.class
     })
     public ResponseEntity<String> handleAll(Exception e) {
         String msg = getRootCauseMessage(e);

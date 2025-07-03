@@ -44,9 +44,9 @@
 				<div class="section-review-box">
 					<div class="section-title">리소스 평가하기</div>
 					<div class="rating-options">
-						<input type="radio" name="rating" value="1" id="rating-1">최신순
-						<input type="radio" name="rating" value="2" id="rating-2">별점 높은 순
-						<input type="radio" name="rating" value="3" id="rating-3">별점 낮은 순
+                        <label><input type="radio" name="ratingSort" value="latest" checked> 최신순</label>
+                        <label><input type="radio" name="ratingSort" value="high"> 별점 높은 순</label>
+                        <label><input type="radio" name="ratingSort" value="low"> 별점 낮은 순</label>
 					</div>
 				</div>
 				<c:if test="${userId != 0}">
@@ -82,7 +82,7 @@
 				</c:if>
 
 				<!-- 리뷰 목록 -->
-				<div class="review-list">
+				<%-- <div class="review-list">
                     <c:forEach var="review" items="${reviewList}">
                         <div class="review-item">
                             <div class="review-header">
@@ -111,7 +111,8 @@
                             <div class="review-content">${review.reviewContent}</div>
                         </div>
                     </c:forEach>
-                </div>
+                </div> --%>
+                <c:import url="/WEB-INF/views/shop/fragment/reviewList.jsp" />
 
 			</div>
 
@@ -162,12 +163,12 @@
 	            $('.char-count').text(len + "/128");
 	        });
 	    });
- 		const shop = ${shop2};
+/*  		const shop = ${shop2};
 		const orderDetails = ${ordersDetails2};
 		const reviewList = ${reviewList2};
 		console.log(shop);
 		console.log(orderDetails);
-		console.log(reviewList); 
+		console.log(reviewList);  */
 	</script>
 	<script src="${root}/js/shopDetail.js"></script>
 </body>

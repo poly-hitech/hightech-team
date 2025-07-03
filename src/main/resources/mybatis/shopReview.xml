@@ -20,6 +20,17 @@
         ORDER BY reviewDate DESC
     </select>
 
+    <select id="getReviewsSorted" parameterType="ReviewSort" resultMap="ReviewList">
+        SELECT *
+        FROM shopReview
+        WHERE itemId = #{itemId}
+        ORDER BY
+            CASE WHEN #{sortType} = 'latest' THEN reviewDate END DESC,
+<!--            CASE WHEN #{sortType} = 'oldest' THEN reviewDate END ASC,-->
+            CASE WHEN #{sortType} = 'high' THEN reviewCount END DESC,
+            CASE WHEN #{sortType} = 'low' THEN reviewCount END ASC
+    </select>
+
     <!-- 리뷰 수정 -->
     <update id="updateReview" parameterType="ShopReview">
         UPDATE shopReview

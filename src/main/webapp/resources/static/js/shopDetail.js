@@ -101,4 +101,27 @@ $(document).ready(function () {
             }
         });
     });
+
+   $(document).ready(function () {
+    $('input[name="ratingSort"]').on('change', function () {
+        const sortValue = $(this).val();
+        const itemId = $('#addReview').data('itemId'); // 등록버튼에 있는 값 활용
+
+        $.ajax({
+            url: '/shopReview/sorted/{itemId}',
+            method: 'GET',
+            data: {
+                itemId: itemId,
+                sort: sortValue
+            },
+            success: function (data) {
+                $('.review-list').html(data); // 부분 교체
+            },
+            error: function () {
+                alert("리뷰 정렬에 실패했습니다.");
+            }
+        });
+    });
+});
+
 });
