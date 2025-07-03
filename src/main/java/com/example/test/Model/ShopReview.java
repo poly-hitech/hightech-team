@@ -12,6 +12,7 @@ public class ShopReview {
 	private Long ordersDetailsId;
 	private Long userId;
 	private Long itemId;
+	private Users user;
 	
 	public Long getReviewId() {
 		return reviewId;
@@ -64,5 +65,13 @@ public class ShopReview {
 
     public void setItemId(Long itemId) {
         this.itemId = itemId;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
     }
 }

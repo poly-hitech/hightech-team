@@ -5,6 +5,8 @@ import com.example.test.Model.ShopReview;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ShopReviewServiceImpl implements ShopReviewService{
 
@@ -14,5 +16,10 @@ public class ShopReviewServiceImpl implements ShopReviewService{
     @Override
     public void addReview(ShopReview review) {
         shopReviewDao.addReview(review);
+    }
+
+    @Override
+    public List<ShopReview> getReviewByItemId(Long itemId) {
+        return shopReviewDao.getReviewByItemId(itemId);
     }
 }

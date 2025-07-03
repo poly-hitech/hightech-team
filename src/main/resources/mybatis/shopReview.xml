@@ -12,8 +12,12 @@
     </insert>
 
     <!-- 리뷰 조회 -->
-    <select id="getReviewsByItemId" parameterType="Long" resultType="ShopReview">
-        SELECT * FROM shopReview WHERE itemId = #{itemId} ORDER BY reviewDate DESC
+    <select id="getReviewByItemId" parameterType="Long" resultMap="ReviewList">
+        SELECT *
+        FROM shopReview sr
+        JOIN users u ON sr.userId = u.userId
+        WHERE sr.itemId = #{itemId}
+        ORDER BY reviewDate DESC
     </select>
 
     <!-- 리뷰 수정 -->
@@ -27,4 +31,19 @@
     <delete id="deleteReview" parameterType="Long">
         DELETE FROM shopReview WHERE reviewId = #{reviewId} AND userId = #{userId}
     </delete>
+
+    <resultMap id="ReviewList" type="ShopReview">
+        <id property="reviewId" column="reviewId"/>
+        <result property="itemId" column="itemId"/>
+        <result property="userId" column="userId"/>
+        <result property="reviewContent" column="reviewContent"/>
+        <result property="reviewWriter" column="reviewWriter"/>
+        <result property="reviewCount" column="reviewCount"/>
+        <result property="reviewDate" column="reviewDate"/>
+        <result property="ordersDetailsId" column="ordersDetailsId"/>
+        <association property="user" column="userId">
+            <result property="userId" column="userId"/>
+            <result property="nickname" column="nickname"/>
+        </association>
+    </resultMap>
 </mapper>

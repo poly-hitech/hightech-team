@@ -48,12 +48,7 @@ $(document).ready(function () {
         const reviewWriter = $(this).data('reviewWriter');
         const reviewContent = $('#reviewContent').val();
         const ordersDetailsId = $(this).data('ordersDetailsId');
-
-        console.log("userId:", userId,
-                    "itemId:", itemId,
-                    "reviewWriter:", reviewWriter,
-                    "reviewContent:", reviewContent,
-                    "ordersDetailsId:", ordersDetailsId);
+        const reviewRating = $('input[name="reviewRating"]:checked').val();
 
         if (userId == 0) {
             alert("로그인이 필요한 서비스입니다.");
@@ -66,6 +61,12 @@ $(document).ready(function () {
             return;
         }
 
+
+        if (!reviewRating) {
+            alert("별점을 선택해주세요.");
+            return;
+        }
+
         // 리뷰 등록 요청
         $.ajax({
             url: `/shopReview/review`,
@@ -75,7 +76,7 @@ $(document).ready(function () {
                 userId: userId,
                 itemId: itemId,
                 reviewContent: reviewContent,
-                reviewCount: 0,
+                reviewCount: parseInt(reviewRating),
                 reviewWriter: reviewWriter,
                 ordersDetailsId: ordersDetailsId
             }),
@@ -83,7 +84,7 @@ $(document).ready(function () {
                 console.log("리뷰 등록 성공:", response);
                 alert("리뷰가 등록되었습니다.");
                 // 리뷰 등록 후 페이지 새로고침
-//                window.location.reload();
+                window.location.reload();
             },
             error: function (xhr, status, error) {
                 console.error("리뷰 등록 실패:", error);

@@ -71,15 +71,7 @@
 
 		<!-- OrdersDetail -->
 		ordersDetails.ordersDetailsId AS od_ordersDetailsId,
-		ordersDetails.ordersId AS od_ordersIds,
-
-		<!-- ShopReview -->
-		shopReview.reviewId AS sr_reviewId,
-		shopReview.reviewContent AS sr_reviewContent,
-		shopReview.reviewDate AS sr_reviewDate,
-		shopReview.reviewWriter AS sr_reviewWriter,
-		shopReview.ordersDetailsId AS sr_ordersDetailsId
-		
+		ordersDetails.ordersId AS od_ordersIds
 
 		FROM ResourceShop resourceShop
         LEFT JOIN ResourceFile resourceFile
@@ -96,12 +88,8 @@
 			ON users.userId = resourceShop.userId
 		LEFT JOIN OrdersDetails ordersDetails
 			ON ordersDetails.itemId = resourceShop.itemId
- 		LEFT JOIN ShopReview shopReview
-			ON shopReview.itemId = resourceShop.itemId
         WHERE resourceShop.itemId=#{itemId}
-        ORDER BY
-	    resourceShop.itemId,
-	    resourceFile.resourceFileId
+        ORDER BY resourceShop.itemId, resourceFile.resourceFileId
 	</select>
 
 	<select id="marketList" resultMap="MarketListMap">
@@ -276,16 +264,6 @@
 		<collection property="ordersDetails" ofType="OrdersDetails" javaType="ArrayList" column="itemId">
 			<id property="ordersDetailsId" column="od_ordersDetailsId"/>
 			<result property="ordersId" column="od_ordersIds"/>
-
-
-			<!-- 7. 상점 리뷰 -->
-			<association property="shopReview" javaType="ShopReview">
-				<id property="reviewId" column="sr_reviewId"/>
-				<result property="reviewContent" column="sr_reviewContent"/>
-				<result property="reviewDate" column="sr_reviewDate"/>
-				<result property="reviewWriter" column="sr_reviewWriter"/>
-				<result property="ordersDetailsId" column="sr_ordersDetailsId"/>
-			</association>
 		</collection>
 
 		<!-- 4. 리소스 파일 리스트 -->

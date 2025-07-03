@@ -5,13 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.example.test.Model.*;
+import com.example.test.Service.ShopReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.test.Service.OrdersService;
 import com.example.test.Service.ResourceShopService;
-import com.example.test.Service.ShopCategoryService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -37,6 +36,9 @@ public class MarketController {
 
     @Autowired
     OrdersService ordersService;
+
+    @Autowired
+    ShopReviewService shopReviewService;
 
     // 전체 상점 목록
     @GetMapping("public/list")
@@ -151,6 +153,7 @@ public class MarketController {
     @GetMapping("/detail")
     public String showDetail(@RequestParam("itemId") Long itemId, HttpSession session, Model model) throws JsonProcessingException {
         ResourceShop resourceShop = resourceShopService.getItemById(itemId);
+        List<ShopReview> reviewList = shopReviewService.getReviewByItemId(itemId);
         //로그인한 유저의 유저 번호 호출
         Users member = (Users) session.getAttribute("member");
 
@@ -172,9 +175,11 @@ public class MarketController {
         log.info("아이템명 확인: {}", resourceShop.getItemName());
         log.info("아이템 번호 확인: {}", resourceShop.getItemId());
 
-        // itemId로 상세정보 조회 로직
         model.addAttribute("shop", resourceShop);
         model.addAttribute("shop2", new ObjectMapper().writeValueAsString(resourceShop));
+
+        model.addAttribute("reviewList", reviewList);
+        model.addAttribute("reviewList2", new ObjectMapper().writeValueAsString(reviewList));
         return path + "detail";
     }
 
