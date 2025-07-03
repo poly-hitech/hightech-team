@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="shopReview">
+
+    <!-- 리뷰 작성 -->
+    <insert id="addReview" parameterType="ShopReview">
+        INSERT INTO shopReview (reviewId, itemId, userId, reviewContent, reviewWriter, reviewCount, reviewDate, ordersDetailsId)
+        VALUES (SHOPREVIEW_SEQ.nextval, #{itemId}, #{userId}, #{reviewContent}, #{reviewWriter}, #{reviewCount}, SYSDATE, #{ordersDetailsId})
+<!--        <selectKey keyProperty="reviewId" resultType="Long" order="AFTER">-->
+<!--            SELECT SHOPREVIEW_SEQ.currval FROM dual-->
+<!--        </selectKey>-->
+    </insert>
+
+    <!-- 리뷰 조회 -->
+    <select id="getReviewsByItemId" parameterType="Long" resultType="ShopReview">
+        SELECT * FROM shopReview WHERE itemId = #{itemId} ORDER BY reviewDate DESC
+    </select>
+
+    <!-- 리뷰 수정 -->
+    <update id="updateReview" parameterType="ShopReview">
+        UPDATE shopReview
+        SET reviewContent = #{reviewContent}, reviewDate = SYSDATE
+        WHERE reviewId = #{reviewId} AND userId = #{userId}
+    </update>
+
+    <!-- 리뷰 삭제 -->
+    <delete id="deleteReview" parameterType="Long">
+        DELETE FROM shopReview WHERE reviewId = #{reviewId} AND userId = #{userId}
+    </delete>
+</mapper>

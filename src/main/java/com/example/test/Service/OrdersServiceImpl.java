@@ -148,4 +148,8 @@ public class OrdersServiceImpl implements OrdersService {
 		return ordersDao.getItemIdByLoginUser(userId);
 	}
 
+	@Override
+	public OrdersDetails getOrdersDetailsByUserIdAndItemId(Long userId, Long itemId) {
+		return ordersDao.getOrdersDetailsByUserIdAndItemId(userId, itemId);
+	}
 }

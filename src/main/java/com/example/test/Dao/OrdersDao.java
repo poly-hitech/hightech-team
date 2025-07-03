@@ -5,7 +5,6 @@ import java.util.List;
 import com.example.test.Model.MyOrderList;
 import com.example.test.Model.Orders;
 import com.example.test.Model.OrdersDetails;
-import com.example.test.Model.ResourceCategory;
 
 public interface OrdersDao {
 
@@ -16,4 +15,6 @@ public interface OrdersDao {
 	List<MyOrderList> purchasedResources(Long userId);
 
 	List<Long> getItemIdByLoginUser(Long userId);
+
+	OrdersDetails getOrdersDetailsByUserIdAndItemId(Long userId, Long itemId);
 }

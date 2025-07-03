@@ -1,6 +1,7 @@
 package com.example.test.Dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.example.test.Model.*;
 import org.apache.ibatis.session.SqlSession;
@@ -37,6 +38,10 @@ public class OrdersDaoImpl implements OrdersDao {
 		return sql.selectList("orders.getItemIdByLoginUser", userId);
 	}
 
-
-
+	// 사용자 ID와 아이템 ID로 주문 상세 정보를 조회
+	@Override
+	public OrdersDetails getOrdersDetailsByUserIdAndItemId(Long userId, Long itemId) {
+		Map<String, Long> params = Map.of("userId", userId, "itemId", itemId);
+		return sql.selectOne("ordersDetails.getOrdersDetailsByUserIdAndItemId", params);
+	}
 }

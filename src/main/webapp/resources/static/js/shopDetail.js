@@ -39,4 +39,56 @@ $(document).ready(function () {
             console.error("아이템 ID를 찾을 수 없습니다.");
         }
     });
+
+    // 리뷰 등록 버튼 클릭 핸들러
+    $(document).on('click', '#addReview', function (event) {
+        event.preventDefault(); // 폼 제출 방지
+        const userId = $(this).data('userId');
+        const itemId = $(this).data('itemId');
+        const reviewWriter = $(this).data('reviewWriter');
+        const reviewContent = $('#reviewContent').val();
+        const ordersDetailsId = $(this).data('ordersDetailsId');
+
+        console.log("userId:", userId,
+                    "itemId:", itemId,
+                    "reviewWriter:", reviewWriter,
+                    "reviewContent:", reviewContent,
+                    "ordersDetailsId:", ordersDetailsId);
+
+        if (userId == 0) {
+            alert("로그인이 필요한 서비스입니다.");
+            window.location.href = "/login"; // 로그인 경로로 이동
+            return;
+        }
+
+        if (!reviewContent) {
+            alert("리뷰 내용을 입력해주세요.");
+            return;
+        }
+
+        // 리뷰 등록 요청
+        $.ajax({
+            url: `/shopReview/review`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                userId: userId,
+                itemId: itemId,
+                reviewContent: reviewContent,
+                reviewCount: 0,
+                reviewWriter: reviewWriter,
+                ordersDetailsId: ordersDetailsId
+            }),
+            success: function (response) {
+                console.log("리뷰 등록 성공:", response);
+                alert("리뷰가 등록되었습니다.");
+                // 리뷰 등록 후 페이지 새로고침
+//                window.location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.error("리뷰 등록 실패:", error);
+                alert("리뷰 등록에 실패했습니다. 나중에 다시 시도해주세요.");
+            }
+        });
+    });
 });

@@ -13,6 +13,10 @@
 	<div>
 		<c:import url="/WEB-INF/views/menu.jsp"></c:import>
 	</div>
+    <c:set var="userId" value="${sessionScope.member.userId != null ? sessionScope.member.userId : 0}" />
+    <c:set var="username" value="${sessionScope.member.nickname != null ? sessionScope.member.nickname : 'Guest'}" />
+    <c:set var="itemId" value="${shop.itemId}" />
+    <c:set var="ordersDetailsId" value="${ordersDetails.ordersDetailsId}" />
 	<main>
 		<div class="shop-detail-container">
 			<div class="left-section">
@@ -48,16 +52,18 @@
                     <div class="review-form-box">
                         <div class="user-header">
                             <img class="user-avatar" src="${root}/images/default-profile.png" alt="사용자" />
-                            <span class="username"> ${sessionScope.loginUser.nickname} </span>
-                            <span class="stars">★★★★★</span> <!-- 별점 선택도 JS로 구현 가능 -->
+                            <span class="username"> ${sessionScope.member.nickname} </span>
+                            <span class="stars" name="reviewCount">★★★★★</span> <!-- 별점 선택도 JS로 구현 가능 -->
                         </div>
-                        <form id="reviewForm" method="post" action="${root}/shop/review">
+                        <form id="reviewForm">
                             <input type="hidden" name="itemId" value="${shop.itemId}" />
-                            <textarea name="reviewContent" maxlength="128"
+                            <textarea id="reviewContent" name="reviewContent" maxlength="128"
                                       placeholder="리소스를 구입한 경우에만 평가 등록이 가능합니다.&#10;비방 또는 욕설 등의 유해한 댓글은 고지 없이 삭제될 수 있습니다."></textarea>
                             <div class="form-footer">
                                 <span class="char-count">0/128</span>
-                                <button type="submit">등록</button>
+                                <button id="addReview"
+                                data-user-id="${userId}" data-item-id="${itemId}" data-review-writer="${username}" data-orders-details-id="${ordersDetailsId}"
+                                type="submit">등록</button>
                             </div>
                         </form>
                     </div>
@@ -119,8 +125,6 @@
 						<button id="download" class="download-btn">다운로드</button>
 					</c:if>
 					<c:if test="${result != true}">
-                        <c:set var="userId" value="${sessionScope.member.userId != null ? sessionScope.member.userId : 0}" />
-                        <c:set var="itemId" value="${shop.itemId}" />
 						<button id="buy" class="download-btn" data-user-id="${userId}" data-item-id="${itemId}">구매하기</button>
 					</c:if>
 					<button class="other-btn">제작자의 다른 리소스 보기</button>
@@ -130,6 +134,9 @@
 	</main>
 	<script>
 		const shop = ${shop2};
+		console.log(shop);
+		const orderDetails = ${ordersDetails2};
+		console.log(orderDetails);
 	</script>
 	<script src="${root}/js/shopDetail.js"></script>
 </body>
