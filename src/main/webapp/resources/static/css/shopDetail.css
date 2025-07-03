@@ -25,7 +25,7 @@ main {
 }
 
 .left-section {
-	flex: 2;
+	flex: 3;
 	display: flex;
 	flex-direction: column;
 	gap: 30px;
@@ -76,61 +76,133 @@ main {
 }
 
 .right-section {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: #1e1e1e;
-	padding: 20px;
-	border-radius: 10px;
+    position: sticky;
+    top: 40px;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    height: fit-content;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.preview-header {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.preview-image {
+    width: 110px;
+    height: 110px;
+    border-radius: 8px;
+    object-fit: cover;
+    background-color: #222;
 }
 
 .preview-image-box {
-	width: 180px;
-	height: 180px;
-	background-color: #222;
-	border-radius: 8px;
-	overflow: hidden;
-	margin-bottom: 20px;
+    width: 180px;
+    height: 180px;
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .preview-image-box img {
-	width: 100%;
-	height: 100%;
-	object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .info-box {
-	width: 100%;
-	text-align: center;
+    width: 100%;
+    text-align: center;
 }
 
-.category {
-	color: #cfcfcf;
-	font-size: 14px;
-	margin-bottom: 10px;
+.preview-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
 }
 
-.title {
-	font-size: 22px;
-	font-weight: bold;
-	margin-bottom: 20px;
-	color: white;
+.preview-meta .category {
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 4px;
+}
+
+.preview-meta .title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.icon-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.icon-btn {
+    background: none;
+    border: 1px solid #444;
+    color: #ccc;
+    padding: 4px 6px;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+    background-color: #333;
+    color: #a78bfa;
+}
+
+.counts {
+    font-size: 13px;
+    color: #bbb;
+    display: flex;
+    gap: 12px;
+}
+
+.icons {
+    font-size: 14px;
+    color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.icons i {
+    cursor: pointer;
+    color: #a78bfa;
 }
 
 .meta-group {
-	display: flex;
-	justify-content: space-between;
-	font-size: 13px;
-	color: #bbb;
-	margin-bottom: 25px;
-	text-align: left;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #bbb;
+    margin-bottom: 20px;
 }
 
 .meta-left, .meta-right {
-	display: flex;
-	flex-direction: column;
-	gap: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.meta-group span {
+	color: white;
 }
 
 .meta-left a {
@@ -143,13 +215,9 @@ main {
 	text-decoration: underline;
 }
 
-.author {
-	font-size: 14px;
-	margin-bottom: 10px;
-}
-
-.bold {
-	font-weight: bold;
+.creator {
+    font-weight: bold;
+    color: #cfcaff;
 }
 
 .meta {
@@ -159,19 +227,28 @@ main {
 	line-height: 1.8;
 }
 
-.download-btn, .other-btn {
-	width: 100%;
-	padding: 12px 0;
-	margin-bottom: 10px;
-	border: none;
-	border-radius: 6px;
-	font-size: 16px;
-	cursor: pointer;
+.download-btn {
+    background-color: #7c3aed;
+    color: white;
+    border: none;
+    padding: 12px 0;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    width: 100%;
+    font-weight: bold;
 }
 
-.download-btn {
-	background-color: #7c3aed;
-	color: white;
+.other-btn {
+    background-color: transparent;
+    border: 1px solid #444;
+    color: white;
+    padding: 12px 0;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
 }
 
 .download-btn:hover {
@@ -255,7 +332,6 @@ main {
 .star {
 	color: #555; /* 비활성 별 */
 }
-
 
 .star-display .star {
     font-size: 14px;

@@ -9,6 +9,7 @@
 <title>${shop.itemName}</title>
 <link rel="stylesheet" href="${root}/css/shopDetail.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 	<div>
@@ -115,33 +116,31 @@
 			</div>
 
 			<div class="right-section">
-				<div class="preview-image-box">
-					<img src="${root}${fn:replace(shop.resourceImage, 'C:/upload', '/upload')}" alt="리소스 이미지">
-				</div>
-
+                <div class="preview-header">
+                    <img class="preview-image" src="${pageContext.request.contextPath}${fn:replace(shop.resourceImage, 'C:/upload', '/upload')}" alt="리소스 이미지">
+                        <div class="preview-meta">
+                            <div class="category">${shop.resourceCategory.resourceCategoryName} > ${shop.resourceSubCategory.resourceSubCategoryName}</div>
+                            <div class="title">${shop.itemName}</div>
+                            <div class="icon-buttons">
+                                <button class="icon-btn"><i class="fa fa-heart"></i></button>
+                                <button class="icon-btn"><i class="fa fa-share-alt"></i></button>
+                            </div>
+                            <div class="counts">
+                                <span><i class="fa fa-heart"></i> 21</span>
+                                <span><i class="fa fa-star"></i> 5</span>
+                            </div>
+                        </div>
+                    </div>
 				<div class="info-box">
-					<div class="category">${shop.resourceCategory.resourceCategoryName}
-						&gt; ${shop.resourceSubCategory.resourceSubCategoryName}</div>
-
-					<div class="title">${shop.itemName}</div>
 
 					<div class="meta-group">
 						<div class="meta-left">
-							<div>
-								제작자 <a href="#">${shop.users.nickname}</a>
-							</div>
-							<div>
-								구매 <strong>${shop.counting.totalcount}</strong>
-							</div>
+							<div>제작자 <a href="#">${shop.users.nickname}</a></div>
+							<div>구매 <span>${shop.counting.totalcount}</span></div>
 						</div>
 						<div class="meta-right">
-							<div>
-								파일 사이즈 <strong> MB</strong>
-							</div>
-							<div>
-								업로드일
-								<fmt:formatDate value="${shop.resourceDate}" pattern="yyyy.MM.dd" />
-							</div>
+							<div>파일 사이즈 <span> MB</span></div>
+							<div>업로드일 <span><fmt:formatDate value="${shop.resourceDate}" pattern="yyyy.MM.dd" /></span></div>
 						</div>
 					</div>
 					<c:if test="${result == true}">
