@@ -29,15 +29,15 @@ public class ShopReviewController {
     
     @GetMapping("/sorted/{itemId}")
     public String getSortedReviews(@PathVariable("itemId") Long itemId,
-                                   @RequestParam("sort") String sort,
+                                   @RequestParam("sortType") String sort,
                                    Model model) {
+        log.info("=== getSortedReviews 호출: itemId={}, sort={}", itemId, sort);
         ReviewSort reviewSort = ReviewSort.builder()
                 .itemId(itemId)
-                .sort(sort)
+                .sortType(sort)
                 .build();
         List<ShopReview> sortedList = shopReviewService.getReviewsSorted(reviewSort);
         model.addAttribute("reviewList", sortedList);
-        return "shop/fragment/reviewList :: reviewList"; // JSP fragment 반환
+        return "shop/fragment/reviewList"; // JSP fragment 반환
     }
-
 }

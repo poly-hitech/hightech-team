@@ -49,7 +49,7 @@
                         <label><input type="radio" name="ratingSort" value="low"> 별점 낮은 순</label>
 					</div>
 				</div>
-				<c:if test="${userId != 0}">
+				<%-- <c:if test="${userId != 0}"> --%>
 					<div class="review-form-box">
                         <div class="review-form-header">
                             <img class="user-avatar" src="${pageContext.request.contextPath}/images/default-profile.png" alt="프로필" />
@@ -79,10 +79,10 @@
                             </div>
                         </form>
                     </div>
-				</c:if>
+				<%-- </c:if> --%>
 
 				<!-- 리뷰 목록 -->
-				<%-- <div class="review-list">
+				<div class="review-list">
                     <c:forEach var="review" items="${reviewList}">
                         <div class="review-item">
                             <div class="review-header">
@@ -111,8 +111,8 @@
                             <div class="review-content">${review.reviewContent}</div>
                         </div>
                     </c:forEach>
-                </div> --%>
-                <c:import url="/WEB-INF/views/shop/fragment/reviewList.jsp" />
+                </div>
+                <%-- <c:import url="/WEB-INF/views/shop/fragment/reviewList.jsp" /> --%>
 
 			</div>
 

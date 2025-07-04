@@ -1,7 +1,6 @@
 package com.example.test.Model;
 
 import lombok.*;
-import org.springframework.stereotype.Service;
 
 @Getter
 @Setter
@@ -10,5 +9,5 @@ import org.springframework.stereotype.Service;
 @Builder
 public class ReviewSort {
     Long itemId;
-    String sort;
+    String sortType;
 }

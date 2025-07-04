@@ -108,11 +108,10 @@ $(document).ready(function () {
         const itemId = $('#addReview').data('itemId'); // 등록버튼에 있는 값 활용
 
         $.ajax({
-            url: '/shopReview/sorted/{itemId}',
+            url: '/shopReview/sorted/' + itemId, // 정렬된 리뷰를 가져오는 엔드포인트
             method: 'GET',
             data: {
-                itemId: itemId,
-                sort: sortValue
+                sortType: sortValue
             },
             success: function (data) {
                 $('.review-list').html(data); // 부분 교체
