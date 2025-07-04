@@ -144,13 +144,15 @@
 							<div>업로드일 <span><fmt:formatDate value="${shop.resourceDate}" pattern="yyyy.MM.dd" /></span></div>
 						</div>
 					</div>
-					<c:if test="${result == true}">
-						<button id="download" class="download-btn">다운로드</button>
-					</c:if>
-					<c:if test="${result != true}">
-						<button id="buy" class="download-btn" data-user-id="${userId}"
-							data-item-id="${itemId}">구매하기</button>
-					</c:if>
+					<c:choose>
+						<c:when test="${ordersDetailsId != null}">
+							<button id="download" class="download-btn">다운로드</button>
+						</c:when>
+						<c:otherwise>
+							<button id="buy" class="download-btn" data-user-id="${userId}"
+								data-item-id="${itemId}">구매하기</button>
+						</c:otherwise>
+					</c:choose>
 					<button class="other-btn">제작자의 다른 리소스 보기</button>
 				</div>
 			</div>
@@ -163,12 +165,12 @@
 	            $('.char-count').text(len + "/128");
 	        });
 	    });
-/*  		const shop = ${shop2};
-		const orderDetails = ${ordersDetails2};
+ 		const shop = ${shop2};
+/* 		const orderDetails = ${ordersDetails2};
 		const reviewList = ${reviewList2};
 		console.log(shop);
 		console.log(orderDetails);
-		console.log(reviewList);  */
+		console.log(reviewList); */
 	</script>
 	<script src="${root}/js/shopDetail.js"></script>
 </body>
