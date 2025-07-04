@@ -15,7 +15,7 @@ public class RankingDaoImpl implements RankingDao {
 	@Override
 	public void update(Long itemId) {
 		sql.update("ranking.updateByDailyrankByitemId", itemId);
-		sql.update("ranking.updateByWeeklylyrankByitemId", itemId);
+		sql.update("ranking.updateByWeeklyrankByitemId", itemId);
 		sql.update("ranking.updateByMonthlyrankByitemId", itemId);
 		sql.update("ranking.updateByTotalrankByitemId", itemId);
 	}

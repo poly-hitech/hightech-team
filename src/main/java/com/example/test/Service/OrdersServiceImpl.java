@@ -94,7 +94,7 @@ public class OrdersServiceImpl implements OrdersService {
 			userDao.disPointByUserId(orderUserPoint);
 
 			// 판매자 정보를 기준으로 포인트 증가
-			BuyPoint saleUserPoint = userDao.getPointByNickname(singleShop.getItemWriter());
+			BuyPoint saleUserPoint = userDao.getPointByUserId(singleShop.getUsers().getUserId());
 			saleUserPoint.setPointMoney(saleUserPoint.getPointMoney() + itemPrice);
 			log.info("판매자의 포인트가 증가되었는지 확인: {}" , saleUserPoint.getPointMoney());
 			// 닉네임 기반으로 가져온 포인트 객체를 전달해서 다시 해당 정보안에 있는 유저번호와 함께 객체를 전달하여 수정
@@ -118,9 +118,7 @@ public class OrdersServiceImpl implements OrdersService {
 			countingDao.countingUpdateByItemId(counting);
 			
 			//count의 값들이 증가하면 이에 따라서 랭킹도 새로 설정
-//			rankingDao.update(singleShop.getItemId());
-			
-
+			rankingDao.update(singleShop.getItemId());
 		}
 
 		// 주문 넣기(주문 정보 저장) 저장된 주문의 주문 번호를 가지고 옴
