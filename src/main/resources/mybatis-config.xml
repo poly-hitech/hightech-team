@@ -24,6 +24,7 @@
 		<typeAlias type="com.example.test.Model.MyOrderList" alias="MyOrderList"/>
 		<typeAlias type="com.example.test.Model.ShopReview" alias="ShopReview"/>
 		<typeAlias type="com.example.test.Model.ReviewSort" alias="ReviewSort"/>
+		<typeAlias type="com.example.test.Model.UserAttendance" alias="UserAttendance"/>
 	</typeAliases>
 	
 	<!-- mapper 파일 추가 -->
@@ -38,5 +39,6 @@
 		<mapper resource="mybatis/ordersDetails.xml"/>
 		<mapper resource="mybatis/ranking.xml" />
 		<mapper resource="mybatis/shopReview.xml"/>
+		<mapper resource="mybatis/userAttendance.xml"/>
 	</mappers>
 </configuration>

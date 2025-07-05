@@ -55,6 +55,8 @@
 		<task:scheduled ref="Counting" method="resetWeekCount" cron = "0 0 0 * * MON"/>
 		<task:scheduled ref="Counting" method="resetMonthCount" cron = "0 0 0 1 * *"/>
 	</task:scheduled-tasks> -->
+
+	<task:annotation-driven />
 	
 	<!-- interceptor작성 -->
 	<interceptors>

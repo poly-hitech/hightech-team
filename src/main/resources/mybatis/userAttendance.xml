@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="userAttendance">
+    <!-- 조회 -->
+    <select id="selectByUserId" parameterType="long" resultType="UserAttendance">
+        SELECT * FROM USER_ATTENDANCE WHERE USERID = #{userId}
+    </select>
+
+    <insert id="insert" parameterType="UserAttendance">
+        INSERT INTO USER_ATTENDANCE (userId, LAST_CHECK_DATE, CONSECUTIVE_DAYS)
+        VALUES (#{userId}, #{lastCheckDate}, #{consecutiveDays})
+    </insert>
+
+    <update id="update" parameterType="UserAttendance">
+        UPDATE USER_ATTENDANCE
+        SET LAST_CHECK_DATE = #{lastCheckDate},
+        CONSECUTIVE_DAYS = #{consecutiveDays}
+        WHERE USERID = #{userId}
+    </update>
+
+    <select id="selectAll" resultType="UserAttendance">
+        SELECT * FROM USER_ATTENDANCE
+    </select>
+</mapper>
