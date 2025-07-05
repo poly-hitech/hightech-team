@@ -1,11 +1,14 @@
 package com.example.test.Dao;
 
-import com.example.test.Model.UserAttendance;
+import com.example.test.Model.UserAttendanceDetail;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class AttendanceDaoImpl implements AttendanceDao {
@@ -13,22 +16,27 @@ public class AttendanceDaoImpl implements AttendanceDao {
     SqlSession sqlSession;
 
     @Override
-    public UserAttendance selectByUserId(Long userId) {
-        return sqlSession.selectOne("userAttendance.selectByUserId", userId);
+    public List<UserAttendanceDetail> selectMonthAttendance(Long userId, Date startDate, Date endDate) {
+        Map<String, Object> param = new HashMap<>();
+        param.put("userId", userId);
+        param.put("startDate", startDate);
+        param.put("endDate", endDate);
+        return sqlSession.selectList("userAttendance.selectMonthAttendance", param);
     }
 
     @Override
-    public void insert(UserAttendance attendance) {
-        sqlSession.insert("userAttendance.insert", attendance);
+    public int countTodayAttendance(Long userId, Date today) {
+        Map<String, Object> param = new HashMap<>();
+        param.put("userId", userId);
+        param.put("today", today);
+        return sqlSession.selectOne("userAttendance.countTodayAttendance", param);
     }
 
     @Override
-    public void update(UserAttendance attendance) {
-        sqlSession.update("userAttendance.update", attendance);
-    }
-
-    @Override
-    public List<UserAttendance> selectAll() {
-        return sqlSession.selectList("userAttendance.selectAll");
+    public void insertAttendance(Long userId, Date attendDate) {
+        Map<String, Object> param = new HashMap<>();
+        param.put("userId", userId);
+        param.put("attendDate", attendDate);
+        sqlSession.insert("userAttendance.insertAttendance", param);
     }
 }

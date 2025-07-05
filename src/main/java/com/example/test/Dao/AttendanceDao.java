@@ -1,12 +1,12 @@
 package com.example.test.Dao;
 
-import com.example.test.Model.UserAttendance;
+import com.example.test.Model.UserAttendanceDetail;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface AttendanceDao {
-    UserAttendance selectByUserId(Long userId);
-    void insert(UserAttendance attendance);
-    void update(UserAttendance attendance);
-    List<UserAttendance> selectAll();
+    List<UserAttendanceDetail> selectMonthAttendance(Long userId, Date startDate, Date endDate);
+    int countTodayAttendance(Long userId, Date today);
+    void insertAttendance(Long userId, Date attendDate);
 }

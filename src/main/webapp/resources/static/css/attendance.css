@@ -1,0 +1,150 @@
+body {
+    background: linear-gradient(120deg, #f6ffe5 0%, #ffe8f1 100%);
+    font-family: 'Segoe UI', '맑은 고딕', 'Malgun Gothic', sans-serif;
+}
+
+.maple-attd-wrapper {
+    width: 880px;
+    margin: 44px auto 0 auto;
+    background: #27292f;
+    border-radius: 24px;
+    box-shadow: 0 10px 36px #00000038;
+    padding: 0 0 50px 0;
+    position: relative;
+}
+
+.maple-titlebar {
+    background: linear-gradient(90deg, #d1ff82 0%, #e0ffef 100%);
+    border-radius: 22px 22px 0 0;
+    padding: 28px 0 10px 0;
+    text-align: center;
+    position: relative;
+    border-bottom: 5px solid #59b542;
+    box-shadow: 0 2px 10px #0d7f4340;
+}
+.maple-title {
+    font-size: 34px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #296800;
+    text-shadow: 0 2px 0 #fff9b6, 0 4px 12px #c3ffb6b0;
+}
+.maple-period {
+    font-size: 18px;
+    color: #1f534d;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.maple-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 12px;
+    padding: 30px 34px 20px 34px;
+    background: #343943;
+    border-radius: 0 0 24px 24px;
+    min-height: 340px;
+}
+.maple-cell {
+    background: #f6ffe8;
+    border: 2.3px solid #8ad368;
+    border-radius: 13px;
+    text-align: center;
+    padding: 8px 3px 4px 3px;
+    min-height: 92px;
+    position: relative;
+    box-shadow: 0 2px 12px #a7ff95a3;
+    transition: 0.17s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.maple-cell.today {
+    border: 3.8px solid #ffc904;
+    background: linear-gradient(135deg, #fff8db 60%, #fffbe4 100%);
+    box-shadow: 0 0 18px #ffe09f86;
+}
+.maple-cell.attended {
+    background: linear-gradient(120deg, #e5ffe3 0%, #c3ffb6 100%);
+    border: 2.5px solid #3ac13a;
+    box-shadow: 0 0 14px #d6ffec;
+    color: #19581d;
+    opacity: 0.93;
+}
+.cell-header {
+    font-size: 15px;
+    color: #5b7210;
+    font-weight: bold;
+    margin-bottom: 7px;
+    margin-top: 1px;
+}
+.cell-reward {
+    font-size: 16px;
+    color: #1b3c18;
+    margin-bottom: 3px;
+    font-weight: bold;
+    min-height: 18px;
+    word-break: keep-all;
+    white-space: pre-line;
+}
+.cell-check {
+    font-size: 29px;
+    margin-top: 3px;
+    color: #33c827;
+    font-weight: bold;
+    text-shadow: 0 0 7px #caffc3;
+}
+.cell-today {
+    margin-top: 3px;
+    color: #ffb607;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 3px #fffde0b5;
+}
+
+.maple-btn-area {
+    width: 100%;
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+}
+.maple-big-btn {
+    padding: 22px 90px;
+    font-size: 25px;
+    background: linear-gradient(90deg, #41e273 10%, #3cd9e8 100%);
+    color: #fff;
+    border: none;
+    border-radius: 22px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 6px 28px #3eeddc48, 0 0 0 5px #fffdb3;
+    transition: 0.15s;
+    outline: none;
+    margin: 0 auto;
+    margin-top: 16px;
+    letter-spacing: 1.5px;
+    text-shadow: 0 2px 10px #49c3939c;
+}
+.maple-big-btn:disabled {
+    background: #b1b1b1;
+    color: #eee;
+    cursor: not-allowed;
+    opacity: 0.59;
+    box-shadow: none;
+}
+
+.maple-desc {
+    margin: 30px 38px 0 38px;
+    padding: 18px 22px;
+    background: #f9ffe8;
+    border-radius: 11px;
+    color: #434300;
+    font-size: 15px;
+    list-style: disc inside;
+    box-shadow: 0 2px 12px #fffbab36;
+    border: 1.5px solid #c0e882;
+    font-weight: 500;
+    line-height: 1.9;
+}

@@ -112,8 +112,6 @@
                         </div>
                     </c:forEach>
                 </div>
-                <%-- <c:import url="/WEB-INF/views/shop/fragment/reviewList.jsp" /> --%>
-
 			</div>
 
 			<div class="right-section">
@@ -133,7 +131,6 @@
                         </div>
                     </div>
 				<div class="info-box">
-
 					<div class="meta-group">
 						<div class="meta-left">
 							<div>제작자 <a href="#">${shop.users.nickname}</a></div>
@@ -157,7 +154,15 @@
 				</div>
 			</div>
 		</div>
+		<button onclick="checkIn()">출석하기</button>
 	</main>
+	<script>
+function checkIn() {
+    fetch("/attendance/check-in", {method: 'POST'})
+      .then(res => res.text())
+      .then(txt => alert("출석 처리됨!"));
+}
+</script>
 	<script>
 	    $(document).ready(function () {
 	        $('#reviewContent').on('input', function () {

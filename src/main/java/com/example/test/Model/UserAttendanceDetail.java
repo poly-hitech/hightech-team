@@ -5,14 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserAttendance {
+public class UserAttendanceDetail {
+    private Long attendId;
     private Long userId;
-    private Date lastCheckDate;
-    private Integer consecutiveDays;
+    private java.sql.Date attendDate;
 }
