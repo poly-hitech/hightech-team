@@ -382,50 +382,6 @@ button#addReview:hover {
     background-color: #6b21a8;
 }
 
-.review-list {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-}
-
-.review-item {
-	background-color: #1e1e1e;
-    padding: 16px 20px;
-	border-radius: 10px;
-}
-
-.review-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 8px;
-}
-
-.review-date {
-	font-size: 12px;
-	color: #888;
-	margin-top: 2px;
-}
-
-.review-content {
-	font-size: 14px;
-	color: #ddd;
-	margin-left: 48px; /* 프로필 이미지 너비만큼 들여쓰기 */
-}
-
-.review-meta {
-    display: flex;
-    flex-direction: column;
-}
-
-.nickname {
-    font-weight: bold;
-    color: #cfcfcf;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
 @media ( max-width : 768px) {
 	main {
 		margin-left: 20px;

@@ -8,6 +8,7 @@
 <head>
 <title>${shop.itemName}</title>
 <link rel="stylesheet" href="${root}/css/shopDetail.css" />
+<link rel="stylesheet" href="${root}/css/reviewList.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -83,35 +84,45 @@
 
 				<!-- 리뷰 목록 -->
 				<div class="review-list">
-                    <c:forEach var="review" items="${reviewList}">
-                        <div class="review-item">
-                            <div class="review-header">
-                                <img class="user-avatar" src="${fn:replace(review.user.profileImage, 'C:/upload', '/upload')}" alt="프로필" />
-                                <div class="review-meta">
-                                    <div class="nickname">
-                                        ${review.user.nickname}
-                                        <span class="star-display">
-                                            <c:forEach var="i" begin="1" end="5">
-                                                <c:choose>
-                                                    <c:when test="${i <= review.reviewCount}">
-                                                        <span class="star filled">★</span>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <span class="star">★</span>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </c:forEach>
-                                        </span>
-                                    </div>
-                                    <div class="review-date">
-                                        <fmt:formatDate value="${review.reviewDate}" pattern="yyyy.MM.dd hh:mm a" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="review-content">${review.reviewContent}</div>
-                        </div>
-                    </c:forEach>
+    <c:forEach var="review" items="${reviewList}">
+        <div class="review-item">
+            <div class="review-header">
+                <img class="user-avatar" src="${fn:replace(review.user.profileImage, 'C:/upload', '/upload')}" alt="프로필" />
+                <div class="review-meta">
+                    <div class="nickname">
+                        ${review.user.nickname}
+                        <span class="star-display">
+                            <c:forEach var="i" begin="1" end="5">
+                                <c:choose>
+                                    <c:when test="${i <= review.reviewCount}">
+                                        <span class="star filled">★</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="star">★</span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </span>
+                    </div>
+                    <div class="review-date">
+                        <fmt:formatDate value="${review.reviewDate}" pattern="yyyy.MM.dd hh:mm a" />
+                    </div>
                 </div>
+                <!-- 더보기 버튼 -->
+                <button class="more-menu-btn" data-review-id="${review.reviewId}" aria-label="더보기"></button>
+                <!-- 더보기 메뉴 -->
+                <div class="more-menu" id="moreMenu-${review.reviewId}">
+                    <ul>
+                        <li><a href="#" class="review-edit" data-review-id="${review.reviewId}">수정</a></li>
+                        <li><a href="#" class="review-delete" data-review-id="${review.reviewId}">삭제</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="review-content">${review.reviewContent}</div>
+        </div>
+    </c:forEach>
+</div>
+
 			</div>
 
 			<div class="right-section">
@@ -154,7 +165,6 @@
 				</div>
 			</div>
 		</div>
-		<button onclick="checkIn()">출석하기</button>
 	</main>
 	<script>
 	    $(document).ready(function () {
@@ -168,5 +178,6 @@
  		console.log(review)
 	</script>
 	<script src="${root}/js/shopDetail.js"></script>
+	<script src="${root}/js/reviewList.js"></script>
 </body>
 </html>

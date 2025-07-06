@@ -103,24 +103,23 @@ $(document).ready(function () {
     });
 
    $(document).ready(function () {
-    $('input[name="ratingSort"]').on('change', function () {
-        const sortValue = $(this).val();
-        const itemId = $('#addReview').data('itemId'); // 등록버튼에 있는 값 활용
+       $('input[name="ratingSort"]').on('change', function () {
+           const sortValue = $(this).val();
+           const itemId = $('#addReview').data('itemId'); // 등록버튼에 있는 값 활용
 
-        $.ajax({
-            url: '/shopReview/sorted/' + itemId, // 정렬된 리뷰를 가져오는 엔드포인트
-            method: 'GET',
-            data: {
-                sortType: sortValue
-            },
-            success: function (data) {
-                $('.review-list').html(data); // 부분 교체
-            },
-            error: function () {
-                alert("리뷰 정렬에 실패했습니다.");
-            }
+           $.ajax({
+               url: '/shopReview/sorted/' + itemId, // 정렬된 리뷰를 가져오는 엔드포인트
+               method: 'GET',
+               data: {
+                   sortType: sortValue
+               },
+               success: function (data) {
+                   $('.review-list').html(data); // 부분 교체
+               },
+               error: function () {
+                   alert("리뷰 정렬에 실패했습니다.");
+               }
+            });
         });
     });
-});
-
 });
