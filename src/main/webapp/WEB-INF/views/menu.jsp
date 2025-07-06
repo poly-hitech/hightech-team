@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- 메뉴바는 어디에서든 동일하게 경로가 잡혀야 하기 때문에 절대 경로를 잡아줌 -->
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
@@ -133,7 +134,7 @@
 
         <div class="sidebar_profile flex">
           <span class="nav_image">
-            <img src="images/profile.jpg" alt="logo_img" />
+            <img src="${fn:replace(sessionScope.member.profileImage, 'C:/upload', '/upload')}" alt="logo_img" />
           </span>
           <div class="data_text">
           	<c:if test="${sessionScope.member != null}">

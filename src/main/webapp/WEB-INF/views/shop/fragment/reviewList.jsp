@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="root" value="${pageContext.request.contextPath}" />
 
 <div class="review-list">
@@ -8,7 +9,7 @@
 		<div class="review-item">
 			<div class="review-header">
 				<img class="user-avatar"
-					src="${root}/images/default-profile.png"
+					src="${fn:replace(review.user.profileImage, 'C:/upload', '/upload')}"
 					alt="프로필" />
 				<div class="review-meta">
 					<div class="nickname">

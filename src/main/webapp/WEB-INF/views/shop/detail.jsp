@@ -52,7 +52,7 @@
 				<%-- <c:if test="${userId != 0}"> --%>
 					<div class="review-form-box">
                         <div class="review-form-header">
-                            <img class="user-avatar" src="${pageContext.request.contextPath}/images/default-profile.png" alt="프로필" />
+                            <img class="user-avatar" src="${fn:replace(sessionScope.member.profileImage, 'C:/upload', '/upload')}" alt="프로필" />
                             <div class="username">${sessionScope.member.nickname}</div>
                             <div class="star-select">
                                 <input type="radio" id="star5" name="reviewRating" value="5"><label for="star5">★</label>
@@ -86,7 +86,7 @@
                     <c:forEach var="review" items="${reviewList}">
                         <div class="review-item">
                             <div class="review-header">
-                                <img class="user-avatar" src="${pageContext.request.contextPath}/images/default-profile.png" alt="프로필" />
+                                <img class="user-avatar" src="${fn:replace(review.user.profileImage, 'C:/upload', '/upload')}" alt="프로필" />
                                 <div class="review-meta">
                                     <div class="nickname">
                                         ${review.user.nickname}
@@ -157,13 +157,6 @@
 		<button onclick="checkIn()">출석하기</button>
 	</main>
 	<script>
-function checkIn() {
-    fetch("/attendance/check-in", {method: 'POST'})
-      .then(res => res.text())
-      .then(txt => alert("출석 처리됨!"));
-}
-</script>
-	<script>
 	    $(document).ready(function () {
 	        $('#reviewContent').on('input', function () {
 	            const len = $(this).val().length;
@@ -171,11 +164,8 @@ function checkIn() {
 	        });
 	    });
  		const shop = ${shop2};
-/* 		const orderDetails = ${ordersDetails2};
-		const reviewList = ${reviewList2};
-		console.log(shop);
-		console.log(orderDetails);
-		console.log(reviewList); */
+ 		const review = ${reviewList2};
+ 		console.log(review)
 	</script>
 	<script src="${root}/js/shopDetail.js"></script>
 </body>

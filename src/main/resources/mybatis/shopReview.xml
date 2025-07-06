@@ -12,12 +12,22 @@
     </insert>
 
     <!-- 리뷰 조회 -->
+<!--    <select id="getReviewByItemId" parameterType="Long" resultMap="ReviewList">-->
+<!--        SELECT *-->
+<!--        FROM shopReview sr-->
+<!--        JOIN users u ON sr.userId = u.userId-->
+<!--        WHERE sr.itemId = #{itemId}-->
+<!--        ORDER BY reviewDate DESC-->
+<!--    </select>-->
     <select id="getReviewByItemId" parameterType="Long" resultMap="ReviewList">
-        SELECT *
+        SELECT
+        sr.reviewId, sr.itemId, sr.userId, sr.reviewContent, sr.reviewWriter,
+        sr.reviewCount, sr.reviewDate, sr.ordersDetailsId,
+        u.userId AS u_userId, u.nickname AS u_nickname, u.profileImage AS u_profileImage
         FROM shopReview sr
         JOIN users u ON sr.userId = u.userId
         WHERE sr.itemId = #{itemId}
-        ORDER BY reviewDate DESC
+        ORDER BY sr.reviewDate DESC
     </select>
 
     <select id="getReviewsSorted" resultMap="ReviewList">
@@ -52,9 +62,10 @@
         <result property="reviewCount" column="reviewCount"/>
         <result property="reviewDate" column="reviewDate"/>
         <result property="ordersDetailsId" column="ordersDetailsId"/>
-        <association property="user" column="userId">
-            <result property="userId" column="userId"/>
-            <result property="nickname" column="nickname"/>
+        <association property="user" javaType="Users">
+            <result property="userId" column="u_userId"/>
+            <result property="nickname" column="u_nickname"/>
+            <result property="profileImage" column="u_profileImage"/>
         </association>
     </resultMap>
 </mapper>
