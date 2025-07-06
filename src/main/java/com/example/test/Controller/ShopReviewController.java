@@ -1,6 +1,5 @@
 package com.example.test.Controller;
 
-import com.example.test.Model.ReviewSort;
 import com.example.test.Model.ShopReview;
 import com.example.test.Service.ShopReviewService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,14 +28,9 @@ public class ShopReviewController {
     
     @GetMapping("/sorted/{itemId}")
     public String getSortedReviews(@PathVariable("itemId") Long itemId,
-                                   @RequestParam("sortType") String sort,
+                                   @RequestParam("sortType") String sortType,
                                    Model model) {
-        log.info("=== getSortedReviews 호출: itemId={}, sort={}", itemId, sort);
-        ReviewSort reviewSort = ReviewSort.builder()
-                .itemId(itemId)
-                .sortType(sort)
-                .build();
-        List<ShopReview> sortedList = shopReviewService.getReviewsSorted(reviewSort);
+        List<ShopReview> sortedList = shopReviewService.getReviewsSorted(itemId, sortType);
         model.addAttribute("reviewList", sortedList);
         return "shop/fragment/reviewList"; // JSP fragment 반환
     }

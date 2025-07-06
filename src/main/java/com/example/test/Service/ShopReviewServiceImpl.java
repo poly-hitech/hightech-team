@@ -1,7 +1,6 @@
 package com.example.test.Service;
 
 import com.example.test.Dao.ShopReviewDao;
-import com.example.test.Model.ReviewSort;
 import com.example.test.Model.ShopReview;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,7 @@ public class ShopReviewServiceImpl implements ShopReviewService{
     }
 
 	@Override
-	public List<ShopReview> getReviewsSorted(ReviewSort sort) {
-		return shopReviewDao.getReviewsSorted(sort);
+	public List<ShopReview> getReviewsSorted(Long itemId, String sortType) {
+		return shopReviewDao.getReviewsSorted(itemId, sortType);
 	}
 }

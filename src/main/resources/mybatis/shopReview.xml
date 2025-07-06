@@ -20,7 +20,7 @@
         ORDER BY reviewDate DESC
     </select>
 
-    <select id="getReviewsSorted" parameterType="ReviewSort" resultMap="ReviewList">
+    <select id="getReviewsSorted" resultMap="ReviewList">
         SELECT *
         FROM shopReview
         WHERE itemId = #{itemId}

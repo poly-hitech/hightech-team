@@ -23,7 +23,6 @@
 		<typeAlias type="com.example.test.Model.BuyPoint" alias="BuyPoint"/>
 		<typeAlias type="com.example.test.Model.MyOrderList" alias="MyOrderList"/>
 		<typeAlias type="com.example.test.Model.ShopReview" alias="ShopReview"/>
-		<typeAlias type="com.example.test.Model.ReviewSort" alias="ReviewSort"/>
 		<typeAlias type="com.example.test.Model.UserAttendanceDetail" alias="UserAttendanceDetail"/>
 	</typeAliases>
 	
