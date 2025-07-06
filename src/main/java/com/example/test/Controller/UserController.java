@@ -3,15 +3,13 @@ package com.example.test.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.test.Model.Users;
 import com.example.test.Service.UsersService;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @Controller
@@ -35,10 +33,11 @@ public class UserController {
 	}
 
 	@PostMapping("/update/{userId:.+}")
-	String update(@PathVariable Long userId, Users item) {
+	String update(@PathVariable Long userId, @RequestParam(value = "image", required = false) MultipartFile profileImage, 
+			Users item, Model model) throws Exception {
 		item.setUserId(userId);
 		
-		userService.update(item);
+		userService.update(item, profileImage, model);
 		
 		return "redirect:{userId}";
 	}
