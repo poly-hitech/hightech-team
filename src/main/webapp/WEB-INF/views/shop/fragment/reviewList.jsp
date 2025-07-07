@@ -8,6 +8,7 @@
     <c:forEach var="review" items="${reviewList}">
         <c:set var="sortType" value="${param.sortType != null ? param.sortType : 'latest'}" />
         <c:set var="itemId" value="${review.itemId}" />
+        <c:set var="userId" value="${review.user.userId}" />
         <div class="review-item">
             <div class="review-header">
                 <img class="user-avatar" src="${fn:replace(review.user.profileImage, 'C:/upload', '/upload')}" alt="프로필" />
@@ -50,16 +51,18 @@
                 <!-- 수정 폼 (처음엔 숨김) -->
                 <div class="edit-form" id="edit-form-${review.reviewId}" style="display: none;">
 	                <div class="edit-stars">
-					    <c:forEach var="i" begin="1" end="5">
-					        <input type="radio" name="editRating-${review.reviewId}" id="edit-star-${review.reviewId}-${i}" value="${i}"
-					            <c:if test="${i == review.reviewCount}">checked</c:if> />
-					        <label for="edit-star-${review.reviewId}-${i}">★</label>
-					    </c:forEach>
+					        <div class="star-select">
+                                <input type="radio" id="5" name="newRating" value="5"><label for="5">★</label>
+                                <input type="radio" id="4" name="newRating" value="4"><label for="4">★</label>
+                                <input type="radio" id="3" name="newRating" value="3"><label for="3">★</label>
+                                <input type="radio" id="2" name="newRating" value="2"><label for="2">★</label>
+                                <input type="radio" id="1" name="newRating" value="1"><label for="1">★</label>
+                            </div>
 					</div>
                     <textarea class="edit-textarea" id="edit-text-${review.reviewId}" maxlength="128">${review.reviewContent}</textarea>
                     <span class="char-count">${fn:length(review.reviewContent)}/128</span>
                     <div class="edit-buttons">
-                        <button class="save-edit" data-review-id="${review.reviewId}">저장</button>
+                        <button class="save-edit" data-review-id="${review.reviewId}" data-user-id="${userId}">저장</button>
                         <button class="cancel-edit" data-review-id="${review.reviewId}">취소</button>
                     </div>
                 </div>

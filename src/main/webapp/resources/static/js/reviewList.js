@@ -33,7 +33,18 @@ $(document).ready(function () {
     $(document).on('click', '.save-edit', function () {
         const reviewId = $(this).data('reviewId');
         const newContent = $('#edit-text-' + reviewId).val();
-        const newRating = $('input[name="editRating-' + reviewId + '"]:checked').val();
+        const newRating = $('input[name="newRating"]:checked').val();
+        const userId = $(this).data('userId');
+
+        console.log("reviewId: " + reviewId);
+        console.log("newContent: " + newContent);
+        console.log("newRating: " + newRating);
+        console.log("userId: " + userId);
+
+        let isConfirm = confirm("리뷰을 수정하시겠습니까?");
+        if (!isConfirm) {
+            return; // 사용자가 취소를 선택한 경우 함수 종료
+        }
 
         if (!newContent.trim()) {
             alert("내용을 입력해주세요.");
@@ -47,7 +58,8 @@ $(document).ready(function () {
             data: JSON.stringify({
                 reviewId: reviewId,
                 reviewContent: newContent,
-                reviewCount: parseInt(newRating) // 별점도 같이 전달
+                reviewCount: parseInt(newRating), // 별점도 같이 전달
+                userId: userId
             }),
             success: function (response) {
                 if (response === 'success') {

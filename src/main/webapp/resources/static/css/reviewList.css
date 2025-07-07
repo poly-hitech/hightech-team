@@ -152,11 +152,11 @@
 
 /* 별점 선택 */
 .edit-stars {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-start;
-    font-size: 18px;
-    margin-bottom: 10px;
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-start;
+	font-size: 18px;
+	margin-bottom: 10px;
 }
 
 .edit-stars input[type="radio"] {
@@ -170,10 +170,9 @@
 	transition: color 0.2s;
 }
 
-.edit-stars input[type="radio"]:checked ~ label,
-.edit-stars label:hover,
-.edit-stars label:hover ~ label {
-	color: #a78bfa; /* 보라색 강조 */
+.edit-stars input[type="radio"]:checked ~ label, .edit-stars label:hover,
+	.edit-stars label:hover ~ label {
+	color: #7358FF;
 }
 
 /* 저장/취소 버튼 */
@@ -211,30 +210,30 @@
 }
 
 .pagination {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	margin-top: 20px;
 }
 
 .page-btn {
-    padding: 8px 14px;
-    font-size: 14px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    color: #333;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
+	padding: 8px 14px;
+	font-size: 14px;
+	background-color: #f0f0f0;
+	border: 1px solid #ccc;
+	color: #333;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.2s, color 0.2s;
 }
 
 .page-btn:hover {
-    background-color: #ddd;
-    color: #000;
+	background-color: #ddd;
+	color: #000;
 }
 
 .page-btn.active {
-    background: #7358FF;
-    color: white;
-    border: 1px solid #7358FF;
+	background: #7358FF;
+	color: white;
+	border: 1px solid #7358FF;
 }
