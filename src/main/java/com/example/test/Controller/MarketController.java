@@ -152,8 +152,14 @@ public class MarketController {
     // 리소스 상품 상세
     @GetMapping("/detail")
     public String showDetail(@RequestParam("itemId") Long itemId, HttpSession session, Model model) throws JsonProcessingException {
+        int page = 1;
+        int pageSize = 5;
+        int startRow = 0;
+        int endRow = page * pageSize;
         ResourceShop resourceShop = resourceShopService.getItemById(itemId);
-        List<ShopReview> reviewList = shopReviewService.getReviewByItemId(itemId);
+        List<ShopReview> reviewList = shopReviewService.getReviewsSorted(itemId, "latest", startRow, endRow);
+        Integer totalCount = shopReviewService.getReviewCountByItemId(itemId);
+        Integer totalPages = (int) Math.ceil(totalCount / 10.0);
         //로그인한 유저의 유저 번호 호출
         Users member = (Users) session.getAttribute("member");
 
@@ -172,6 +178,8 @@ public class MarketController {
 
         model.addAttribute("reviewList", reviewList);
         model.addAttribute("reviewList2", new ObjectMapper().writeValueAsString(reviewList));
+        model.addAttribute("currentPage", 1); // 현재 페이지는 1로 설정
+        model.addAttribute("totalPages", totalPages);
         return path + "detail";
     }
 

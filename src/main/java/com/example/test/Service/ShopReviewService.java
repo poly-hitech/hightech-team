@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ShopReviewService {
     void addReview(ShopReview review);
-    List<ShopReview> getReviewByItemId(Long itemId);
-	List<ShopReview> getReviewsSorted(Long itemId, String sortType);
+	List<ShopReview> getReviewsSorted(Long itemId, String sortType, int startRow, int endRow);
     void deleteReview(Long reviewId, Long userId, Long id);
+    Integer getReviewCountByItemId(Long itemId);
 }

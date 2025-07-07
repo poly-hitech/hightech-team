@@ -6,6 +6,8 @@
 
 <div class="review-list">
     <c:forEach var="review" items="${reviewList}">
+        <c:set var="sortType" value="${param.sortType != null ? param.sortType : 'latest'}" />
+        <c:set var="itemId" value="${review.itemId}" />
         <div class="review-item">
             <div class="review-header">
                 <img class="user-avatar" src="${fn:replace(review.user.profileImage, 'C:/upload', '/upload')}" alt="프로필" />
@@ -44,4 +46,9 @@
             <div class="review-content">${review.reviewContent}</div>
         </div>
     </c:forEach>
+    <div class="pagination">
+        <c:forEach var="i" begin="1" end="${totalPages}">
+            <a href="#" class="page-btn" data-page="${i}" data-sort="${sortType}">${i}</a>
+        </c:forEach>
+    </div>
 </div>

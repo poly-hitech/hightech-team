@@ -18,18 +18,18 @@ public class ShopReviewServiceImpl implements ShopReviewService{
         shopReviewDao.addReview(review);
     }
 
-    @Override
-    public List<ShopReview> getReviewByItemId(Long itemId) {
-        return shopReviewDao.getReviewByItemId(itemId);
-    }
-
 	@Override
-	public List<ShopReview> getReviewsSorted(Long itemId, String sortType) {
-		return shopReviewDao.getReviewsSorted(itemId, sortType);
+	public List<ShopReview> getReviewsSorted(Long itemId, String sortType, int startRow, int endRow) {
+		return shopReviewDao.getReviewsSorted(itemId, sortType, startRow, endRow);
 	}
 
     @Override
     public void deleteReview(Long reviewId, Long itemId, Long userId) {
         shopReviewDao.deleteReview(reviewId, itemId, userId);
+    }
+
+    @Override
+    public Integer getReviewCountByItemId(Long itemId) {
+        return shopReviewDao.getReviewCountByItemId(itemId);
     }
 }

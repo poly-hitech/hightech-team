@@ -21,15 +21,12 @@ public class ShopReviewDaoImpl implements ShopReviewDao{
     }
 
     @Override
-    public List<ShopReview> getReviewByItemId(Long itemId) {
-        return sql.selectList("shopReview.getReviewByItemId", itemId);
-    }
-
-    @Override
-    public List<ShopReview> getReviewsSorted(Long itemId, String sortType) {
+    public List<ShopReview> getReviewsSorted(Long itemId, String sortType, int startRow, int endRow) {
         Map<String, Object> map = new HashMap<>();
         map.put("itemId", itemId);
         map.put("sortType", sortType);
+        map.put("startRow", startRow);
+        map.put("endRow", endRow);
         return sql.selectList("shopReview.getReviewsSorted", map);
     }
 
@@ -40,5 +37,10 @@ public class ShopReviewDaoImpl implements ShopReviewDao{
         map.put("itemId", itemId);
         map.put("userId", userId);
         sql.delete("shopReview.deleteReview", map);
+    }
+
+    @Override
+    public Integer getReviewCountByItemId(Long itemId) {
+        return sql.selectOne("shopReview.getReviewCountByItemId", itemId);
     }
 }

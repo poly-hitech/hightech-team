@@ -11,19 +11,15 @@
 <!--        </selectKey>-->
     </insert>
 
-    <!-- 리뷰 조회 -->
-    <select id="getReviewByItemId" parameterType="Long" resultMap="ReviewList">
-        SELECT
-        sr.reviewId, sr.itemId, sr.userId, sr.reviewContent, sr.reviewWriter,
-        sr.reviewCount, sr.reviewDate, sr.ordersDetailsId,
-        u.userId AS u_userId, u.nickname AS u_nickname, u.profileImage AS u_profileImage
-        FROM shopReview sr
-        JOIN users u ON sr.userId = u.userId
-        WHERE sr.itemId = #{itemId}
-        ORDER BY sr.reviewDate DESC
+    <select id="getReviewCountByItemId" parameterType="long" resultType="int">
+        SELECT COUNT(*) FROM shopReview WHERE itemId = #{itemId}
     </select>
 
-    <select id="getReviewsSorted" resultMap="ReviewList">
+    <!-- 리뷰 목록 조회 (정렬 기능 추가) -->
+    <select id="getReviewsSorted" resultMap="ReviewList" parameterType="map">
+        SELECT * FROM (
+        SELECT inner_query.*, ROWNUM AS rn
+        FROM (
         SELECT
         sr.reviewId, sr.itemId, sr.userId, sr.reviewContent, sr.reviewWriter,
         sr.reviewCount, sr.reviewDate, sr.ordersDetailsId,
@@ -32,10 +28,13 @@
         JOIN users u ON sr.userId = u.userId
         WHERE sr.itemId = #{itemId}
         ORDER BY
-            CASE WHEN #{sortType} = 'latest' THEN reviewDate END DESC,
-<!--            CASE WHEN #{sortType} = 'oldest' THEN reviewDate END ASC,-->
-            CASE WHEN #{sortType} = 'high' THEN reviewCount END DESC,
-            CASE WHEN #{sortType} = 'low' THEN reviewCount END ASC
+        CASE WHEN #{sortType} = 'latest' THEN sr.reviewDate END DESC,
+        CASE WHEN #{sortType} = 'high' THEN sr.reviewCount END DESC,
+        CASE WHEN #{sortType} = 'low' THEN sr.reviewCount END ASC
+        ) inner_query
+        WHERE ROWNUM &lt;= #{endRow}
+        )
+        WHERE rn &gt; #{startRow}
     </select>
 
     <!-- 리뷰 수정 -->

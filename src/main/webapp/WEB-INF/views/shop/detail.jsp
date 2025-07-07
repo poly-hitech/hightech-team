@@ -50,7 +50,6 @@
                         <label><input type="radio" name="ratingSort" value="low"> 별점 낮은 순</label>
 					</div>
 				</div>
-				<%-- <c:if test="${userId != 0}"> --%>
 					<div class="review-form-box">
                         <div class="review-form-header">
                             <img class="user-avatar" src="${fn:replace(sessionScope.member.profileImage, 'C:/upload', '/upload')}" alt="프로필" />
@@ -80,52 +79,8 @@
                             </div>
                         </form>
                     </div>
-				<%-- </c:if> --%>
-
 				<!-- 리뷰 목록 -->
-				<div class="review-list">
-                    <c:forEach var="review" items="${reviewList}">
-                        <div class="review-item">
-                            <div class="review-header">
-                                <img class="user-avatar" src="${fn:replace(review.user.profileImage, 'C:/upload', '/upload')}" alt="프로필" />
-                                <div class="review-meta">
-                                    <div class="nickname">
-                                        ${review.user.nickname}
-                                        <span class="star-display">
-                                            <c:forEach var="i" begin="1" end="5">
-                                                <c:choose>
-                                                    <c:when test="${i <= review.reviewCount}">
-                                                        <span class="star filled">★</span>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <span class="star">★</span>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </c:forEach>
-                                        </span>
-                                    </div>
-                                    <div class="review-date">
-                                        <fmt:formatDate value="${review.reviewDate}" pattern="yyyy.MM.dd hh:mm a" />
-                                    </div>
-                                </div>
-                                <c:if test="${review.user.userId == sessionScope.member.userId}">
-                                    <!-- 더보기 버튼 -->
-                                    <button class="more-menu-btn" data-review-id="${review.reviewId}" aria-label="더보기"></button>
-                                </c:if>
-                                <!-- 더보기 메뉴 -->
-                                <div class="more-menu" id="moreMenu-${review.reviewId}">
-                                    <ul>
-                                        <li><a href="#" id="review-edit" class="review-edit" data-review-id="${review.reviewId}">수정</a></li>
-                                        <li><a href="#" id="review-delete" class="review-delete"
-                                               data-review-id="${review.reviewId}"
-                                               data-item-id="${itemId}">삭제</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="review-content">${review.reviewContent}</div>
-                        </div>
-                    </c:forEach>
-                </div>
+                <jsp:include page="fragment/reviewList.jsp" />
 			</div>
 
 			<div class="right-section">

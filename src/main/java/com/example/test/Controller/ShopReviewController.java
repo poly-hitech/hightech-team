@@ -32,9 +32,20 @@ public class ShopReviewController {
     @GetMapping("/sorted/{itemId}")
     public String getSortedReviews(@PathVariable("itemId") Long itemId,
                                    @RequestParam("sortType") String sortType,
+                                   @RequestParam(value = "page", defaultValue = "1") int page,
                                    Model model) {
-        List<ShopReview> sortedList = shopReviewService.getReviewsSorted(itemId, sortType);
+        int pageSize = 5; // 페이지당 리뷰 수
+        int startRow = (page - 1) * pageSize;
+        int endRow = page * pageSize;
+        List<ShopReview> sortedList = shopReviewService.getReviewsSorted(itemId, sortType, startRow, endRow);
         model.addAttribute("reviewList", sortedList);
+
+        Integer totalCount = shopReviewService.getReviewCountByItemId(itemId);
+        Integer totalPages = (int) Math.ceil(totalCount / 10.0);
+
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("sortType", sortType);
         return "shop/fragment/reviewList"; // JSP fragment 반환
     }
 

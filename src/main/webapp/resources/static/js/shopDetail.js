@@ -122,4 +122,26 @@ $(document).ready(function () {
             });
         });
     });
+
+    $(document).on('click', '.page-btn', function(e) {
+        e.preventDefault();
+        const page = $(this).data('page');
+        const sortType = $(this).data('sort') || 'latest';
+        const itemId = $('#addReview').data('itemId');
+
+        $.ajax({
+            url: '/shopReview/sorted/' + itemId,
+            type: 'GET',
+            data: {
+                sortType: sortType,
+                page: page
+            },
+            success: function(data) {
+                $('.review-list').html(data);
+            },
+            error: function() {
+                alert("페이지 이동에 실패했습니다.");
+            }
+        });
+    });
 });
