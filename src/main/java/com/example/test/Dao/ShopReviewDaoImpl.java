@@ -34,4 +34,9 @@ public class ShopReviewDaoImpl implements ShopReviewDao{
     public Integer getReviewCountByItemId(Long itemId) {
         return sql.selectOne("shopReview.getReviewCountByItemId", itemId);
     }
+
+    @Override
+    public void updateReview(ShopReview review) {
+        sql.update("shopReview.updateReview", review);
+    }
 }

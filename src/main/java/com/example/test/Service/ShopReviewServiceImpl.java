@@ -33,4 +33,9 @@ public class ShopReviewServiceImpl implements ShopReviewService{
     public Integer getReviewCountByItemId(Long itemId) {
         return shopReviewDao.getReviewCountByItemId(itemId);
     }
+
+    @Override
+    public void updateReview(ShopReview review) {
+        shopReviewDao.updateReview(review);
+    }
 }

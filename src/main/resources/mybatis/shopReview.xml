@@ -40,7 +40,7 @@
     <!-- 리뷰 수정 -->
     <update id="updateReview" parameterType="ShopReview">
         UPDATE shopReview
-        SET reviewContent = #{reviewContent}, reviewDate = SYSDATE
+        SET reviewContent = #{reviewContent}, reviewCount = #{reviewCount}, reviewDate = SYSDATE
         WHERE reviewId = #{reviewId} AND userId = #{userId}
     </update>
 

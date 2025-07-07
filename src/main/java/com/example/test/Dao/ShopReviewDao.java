@@ -10,4 +10,5 @@ public interface ShopReviewDao {
     List<ShopReview> getReviewsSorted(Map<String, Object> params);
     void deleteReview(Map<String, Object> params);
     Integer getReviewCountByItemId(Long itemId);
+    void updateReview(ShopReview review);
 }

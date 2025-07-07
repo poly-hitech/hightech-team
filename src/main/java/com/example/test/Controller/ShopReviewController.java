@@ -65,6 +65,14 @@ public class ShopReviewController {
         return "shop/fragment/reviewList"; // JSP fragment 반환
     }
 
+    @PostMapping("/update")
+    @ResponseBody
+    public String updateReview(@RequestBody ShopReview review) {
+        log.info("리뷰 수정 요청: {}", review.getReviewCount());
+        shopReviewService.updateReview(review);
+        return "success";
+    }
+
     @PostMapping("/delete/{reviewId}/{itemId}")
     @ResponseBody
     public String deleteReview(@PathVariable("reviewId") Long reviewId,
