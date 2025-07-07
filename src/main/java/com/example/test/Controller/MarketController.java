@@ -1,31 +1,22 @@
 package com.example.test.Controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
 import com.example.test.Model.*;
+import com.example.test.Service.OrdersService;
+import com.example.test.Service.ResourceShopService;
 import com.example.test.Service.ShopReviewService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.test.Service.OrdersService;
-import com.example.test.Service.ResourceShopService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import lombok.extern.slf4j.Slf4j;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -168,7 +159,18 @@ public class MarketController {
         ResourceShop resourceShop = resourceShopService.getItemById(itemId);
         List<ShopReview> reviewList = shopReviewService.getReviewsSorted(params);
         Integer totalCount = shopReviewService.getReviewCountByItemId(itemId);
-        Integer totalPages = (int) Math.ceil(totalCount / 10.0);
+
+        int totalPages = (int) Math.ceil((double) totalCount / pageSize);
+
+        // 페이지 그룹 설정
+        int pageGroupSize = 10;
+        int startPage = 1;
+        int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
+
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("hasPrev", false);
+        model.addAttribute("hasNext", endPage < totalPages);
         //로그인한 유저의 유저 번호 호출
         Users member = (Users) session.getAttribute("member");
 

@@ -43,12 +43,49 @@
                     </ul>
                 </div>
             </div>
-            <div class="review-content">${review.reviewContent}</div>
+            <div class="review-content">
+                <!-- 기존 내용 표시 -->
+                <p id="content-${review.reviewId}" class="review-text">${review.reviewContent}</p>
+
+                <!-- 수정 폼 (처음엔 숨김) -->
+                <div class="edit-form" id="edit-form-${review.reviewId}" style="display: none;">
+	                <div class="edit-stars">
+					    <c:forEach var="i" begin="1" end="5">
+					        <input type="radio" name="editRating-${review.reviewId}" id="edit-star-${review.reviewId}-${i}" value="${i}"
+					            <c:if test="${i == review.reviewCount}">checked</c:if> />
+					        <label for="edit-star-${review.reviewId}-${i}">★</label>
+					    </c:forEach>
+					</div>
+                    <textarea class="edit-textarea" id="edit-text-${review.reviewId}" maxlength="128">${review.reviewContent}</textarea>
+                    <span class="char-count">${fn:length(review.reviewContent)}/128</span>
+                    <div class="edit-buttons">
+                        <button class="save-edit" data-review-id="${review.reviewId}">저장</button>
+                        <button class="cancel-edit" data-review-id="${review.reviewId}">취소</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </c:forEach>
     <div class="pagination">
+        <c:if test="${hasPrev}">
+            <button class="page-btn" data-page="${startPage - 1}" data-sort="${sortType}">이전</button>
+        </c:if>
         <c:forEach var="i" begin="1" end="${totalPages}">
-            <a href="#" class="page-btn" data-page="${i}" data-sort="${sortType}">${i}</a>
+            <button class="page-btn ${i == currentPage ? 'active' : ''}" data-page="${i}" data-sort="${sortType}">
+                ${i}
+            </button>
         </c:forEach>
+        <c:if test="${hasNext}">
+        	<button class="page-btn" data-page="${endPage + 1}" data-sort="${sortType}">다음</button>
+        </c:if>
     </div>
 </div>
+	<script>
+	    $(document).ready(function () {
+	        $('.edit-textarea').on('input', function () {
+	            const len = $(this).val().length;
+	            $('.char-count').text(len + "/128");
+	        });
+	    });
+	</script>

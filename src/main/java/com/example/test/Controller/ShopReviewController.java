@@ -50,8 +50,15 @@ public class ShopReviewController {
         model.addAttribute("reviewList", sortedList);
 
         Integer totalCount = shopReviewService.getReviewCountByItemId(itemId);
-        Integer totalPages = (int) Math.ceil(totalCount / 10.0);
+        int totalPages = (int) Math.ceil((double) totalCount / pageSize);
+        int pageGroupSize = 10;
+        int startPage = ((page - 1) / pageGroupSize) * pageGroupSize + 1;
+        int endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
 
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("hasPrev", startPage > 1);
+        model.addAttribute("hasNext", endPage < totalPages);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("currentPage", page);
         model.addAttribute("sortType", sortType);

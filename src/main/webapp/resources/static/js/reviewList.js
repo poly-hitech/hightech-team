@@ -15,13 +15,53 @@ $(document).ready(function () {
 	    $('.more-menu').hide();
 	});
 
-//	$(document).on('click', '.review-edit', function(e) {
-//        const reviewId = $(this).data('reviewId');
-//        const reviewContent = $('#reviewContent-' + reviewId).text();
-//        $('#editReviewId').val(reviewId);
-//        $('#editReviewContent').val(reviewContent);
-//        $('#editReviewModal').modal('show');
-//    });
+    // 수정 버튼
+    $(document).on('click', '.review-edit', function () {
+        const reviewId = $(this).data('reviewId');
+        $('#content-' + reviewId).hide();
+        $('#edit-form-' + reviewId).show();
+    });
+
+    // 취소 버튼
+    $(document).on('click', '.cancel-edit', function () {
+        const reviewId = $(this).data('reviewId');
+        $('#edit-form-' + reviewId).hide();
+        $('#content-' + reviewId).show();
+    });
+
+    // 저장 버튼
+    $(document).on('click', '.save-edit', function () {
+        const reviewId = $(this).data('reviewId');
+        const newContent = $('#edit-text-' + reviewId).val();
+        const newRating = $('input[name="editRating-' + reviewId + '"]:checked').val();
+
+        if (!newContent.trim()) {
+            alert("내용을 입력해주세요.");
+            return;
+        }
+
+        $.ajax({
+            url: '/shopReview/update',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                reviewId: reviewId,
+                reviewContent: newContent,
+                reviewCount: parseInt(newRating) // 별점도 같이 전달
+            }),
+            success: function (response) {
+                if (response === 'success') {
+                    location.reload(); // 새로고침해서 반영
+                } else {
+                    alert("수정 실패");
+                }
+            },
+            error: function () {
+                alert("서버 오류");
+            }
+        });
+    });
+
 
     $(document).on('click', '#review-delete', function(e) {
         e.preventDefault();
