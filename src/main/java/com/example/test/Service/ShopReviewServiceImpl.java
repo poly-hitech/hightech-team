@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ShopReviewServiceImpl implements ShopReviewService{
@@ -19,13 +20,13 @@ public class ShopReviewServiceImpl implements ShopReviewService{
     }
 
 	@Override
-	public List<ShopReview> getReviewsSorted(Long itemId, String sortType, int startRow, int endRow) {
-		return shopReviewDao.getReviewsSorted(itemId, sortType, startRow, endRow);
+	public List<ShopReview> getReviewsSorted(Map<String, Object> params) {
+		return shopReviewDao.getReviewsSorted(params);
 	}
 
     @Override
-    public void deleteReview(Long reviewId, Long itemId, Long userId) {
-        shopReviewDao.deleteReview(reviewId, itemId, userId);
+    public void deleteReview(Map<String, Object> params) {
+        shopReviewDao.deleteReview(params);
     }
 
     @Override

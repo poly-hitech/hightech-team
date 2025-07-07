@@ -1,6 +1,7 @@
 package com.example.test.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.example.test.Model.MyOrderList;
 import com.example.test.Model.OrdersDetails;
@@ -14,5 +15,5 @@ public interface OrdersService {
 
     List<Long> getItemIdByLoginUser(Long userId);
 
-	OrdersDetails getOrdersDetailsByUserIdAndItemId(Long userId, Long itemId);
+	OrdersDetails getOrdersDetailsByUserIdAndItemId(Map<String, Object> params);
 }

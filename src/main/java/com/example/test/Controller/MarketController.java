@@ -1,6 +1,8 @@
 package com.example.test.Controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -156,8 +158,15 @@ public class MarketController {
         int pageSize = 5;
         int startRow = 0;
         int endRow = page * pageSize;
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("itemId", itemId);
+        params.put("sortType", "latest");
+        params.put("startRow", startRow);
+        params.put("endRow", endRow);
+
         ResourceShop resourceShop = resourceShopService.getItemById(itemId);
-        List<ShopReview> reviewList = shopReviewService.getReviewsSorted(itemId, "latest", startRow, endRow);
+        List<ShopReview> reviewList = shopReviewService.getReviewsSorted(params);
         Integer totalCount = shopReviewService.getReviewCountByItemId(itemId);
         Integer totalPages = (int) Math.ceil(totalCount / 10.0);
         //로그인한 유저의 유저 번호 호출
@@ -165,7 +174,10 @@ public class MarketController {
 
         if (member != null) {
             Long userId = member.getUserId();
-            OrdersDetails ordersDetails = ordersService.getOrdersDetailsByUserIdAndItemId(userId, itemId);
+            Map<String, Object> userParams = new HashMap<>();
+            userParams.put("userId", userId);
+            userParams.put("itemId", itemId);
+            OrdersDetails ordersDetails = ordersService.getOrdersDetailsByUserIdAndItemId(userParams);
             model.addAttribute("ordersDetails", ordersDetails);
             model.addAttribute("ordersDetails2", new ObjectMapper().writeValueAsString(ordersDetails));
         }

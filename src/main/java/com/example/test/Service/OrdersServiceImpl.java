@@ -2,6 +2,7 @@ package com.example.test.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.example.test.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,7 +148,7 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public OrdersDetails getOrdersDetailsByUserIdAndItemId(Long userId, Long itemId) {
-		return ordersDao.getOrdersDetailsByUserIdAndItemId(userId, itemId);
+	public OrdersDetails getOrdersDetailsByUserIdAndItemId(Map<String, Object> params) {
+		return ordersDao.getOrdersDetailsByUserIdAndItemId(params);
 	}
 }

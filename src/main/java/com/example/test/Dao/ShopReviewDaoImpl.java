@@ -21,22 +21,13 @@ public class ShopReviewDaoImpl implements ShopReviewDao{
     }
 
     @Override
-    public List<ShopReview> getReviewsSorted(Long itemId, String sortType, int startRow, int endRow) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("itemId", itemId);
-        map.put("sortType", sortType);
-        map.put("startRow", startRow);
-        map.put("endRow", endRow);
-        return sql.selectList("shopReview.getReviewsSorted", map);
+    public List<ShopReview> getReviewsSorted(Map<String, Object> params) {
+        return sql.selectList("shopReview.getReviewsSorted", params);
     }
 
     @Override
-    public void deleteReview(Long reviewId, Long itemId, Long userId) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("reviewId", reviewId);
-        map.put("itemId", itemId);
-        map.put("userId", userId);
-        sql.delete("shopReview.deleteReview", map);
+    public void deleteReview(Map<String, Object> params) {
+        sql.delete("shopReview.deleteReview", params);
     }
 
     @Override

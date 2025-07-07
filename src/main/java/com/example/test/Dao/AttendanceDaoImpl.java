@@ -25,11 +25,8 @@ public class AttendanceDaoImpl implements AttendanceDao {
     }
 
     @Override
-    public int countTodayAttendance(Long userId, Date today) {
-        Map<String, Object> param = new HashMap<>();
-        param.put("userId", userId);
-        param.put("today", today);
-        return sqlSession.selectOne("userAttendance.countTodayAttendance", param);
+    public int countTodayAttendance(Map<String, Object> params) {
+        return sqlSession.selectOne("userAttendance.countTodayAttendance", params);
     }
 
     @Override

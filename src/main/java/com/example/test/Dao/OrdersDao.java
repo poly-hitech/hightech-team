@@ -1,6 +1,7 @@
 package com.example.test.Dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.example.test.Model.MyOrderList;
 import com.example.test.Model.Orders;
@@ -16,5 +17,5 @@ public interface OrdersDao {
 
 	List<Long> getItemIdByLoginUser(Long userId);
 
-	OrdersDetails getOrdersDetailsByUserIdAndItemId(Long userId, Long itemId);
+	OrdersDetails getOrdersDetailsByUserIdAndItemId(Map<String, Object> params);
 }

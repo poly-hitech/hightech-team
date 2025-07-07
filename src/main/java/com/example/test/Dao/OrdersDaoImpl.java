@@ -40,8 +40,7 @@ public class OrdersDaoImpl implements OrdersDao {
 
 	// 사용자 ID와 아이템 ID로 주문 상세 정보를 조회
 	@Override
-	public OrdersDetails getOrdersDetailsByUserIdAndItemId(Long userId, Long itemId) {
-		Map<String, Long> params = Map.of("userId", userId, "itemId", itemId);
+	public OrdersDetails getOrdersDetailsByUserIdAndItemId(Map<String, Object> params) {
 		return sql.selectOne("ordersDetails.getOrdersDetailsByUserIdAndItemId", params);
 	}
 }

@@ -40,7 +40,12 @@ public class AttendanceServiceImpl implements AttendanceService {
     public boolean checkTodayAttendance(Long userId) {
         Date today = new Date(System.currentTimeMillis());
 //        today = Date.valueOf(today.toLocalDate().plusDays(1));
-        int count = attendanceDao.countTodayAttendance(userId, today);
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("userId", userId);
+        params.put("today", today);
+
+        int count = attendanceDao.countTodayAttendance(params);
         if (count > 0) return false; // 이미 출석함
         attendanceDao.insertAttendance(userId, today);
         return true;

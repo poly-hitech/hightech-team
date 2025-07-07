@@ -5,7 +5,9 @@ import com.example.test.Model.Users;
 import com.example.test.Service.ShopReviewService;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +30,7 @@ public class ShopReviewController {
         shopReviewService.addReview(review);
         return "success";
     }
-    
+
     @GetMapping("/sorted/{itemId}")
     public String getSortedReviews(@PathVariable("itemId") Long itemId,
                                    @RequestParam("sortType") String sortType,
@@ -37,7 +39,14 @@ public class ShopReviewController {
         int pageSize = 5; // 페이지당 리뷰 수
         int startRow = (page - 1) * pageSize;
         int endRow = page * pageSize;
-        List<ShopReview> sortedList = shopReviewService.getReviewsSorted(itemId, sortType, startRow, endRow);
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("itemId", itemId);
+        params.put("sortType", sortType);
+        params.put("startRow", startRow);
+        params.put("endRow", endRow);
+
+        List<ShopReview> sortedList = shopReviewService.getReviewsSorted(params);
         model.addAttribute("reviewList", sortedList);
 
         Integer totalCount = shopReviewService.getReviewCountByItemId(itemId);
@@ -56,7 +65,11 @@ public class ShopReviewController {
                                HttpSession session) {
         Users user = (Users) session.getAttribute("member");
         Long userId = user.getUserId();
-        shopReviewService.deleteReview(reviewId, itemId, userId);
+        Map<String, Object> params = new HashMap<>();
+        params.put("reviewId", reviewId);
+        params.put("itemId", itemId);
+        params.put("userId", userId);
+        shopReviewService.deleteReview(params);
         return "success";
     }
 }
