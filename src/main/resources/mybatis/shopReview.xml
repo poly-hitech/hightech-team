@@ -46,8 +46,8 @@
     </update>
 
     <!-- 리뷰 삭제 -->
-    <delete id="deleteReview" parameterType="Long">
-        DELETE FROM shopReview WHERE reviewId = #{reviewId} AND userId = #{userId}
+    <delete id="deleteReview">
+        DELETE FROM shopReview WHERE reviewId = #{reviewId} AND userId = #{userId} AND itemId = #{itemId}
     </delete>
 
     <resultMap id="ReviewList" type="ShopReview">

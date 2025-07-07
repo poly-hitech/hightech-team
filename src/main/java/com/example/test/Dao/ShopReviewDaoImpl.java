@@ -32,4 +32,13 @@ public class ShopReviewDaoImpl implements ShopReviewDao{
         map.put("sortType", sortType);
         return sql.selectList("shopReview.getReviewsSorted", map);
     }
+
+    @Override
+    public void deleteReview(Long reviewId, Long itemId, Long userId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("reviewId", reviewId);
+        map.put("itemId", itemId);
+        map.put("userId", userId);
+        sql.delete("shopReview.deleteReview", map);
+    }
 }

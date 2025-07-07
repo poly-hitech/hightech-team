@@ -8,4 +8,5 @@ public interface ShopReviewService {
     void addReview(ShopReview review);
     List<ShopReview> getReviewByItemId(Long itemId);
 	List<ShopReview> getReviewsSorted(Long itemId, String sortType);
+    void deleteReview(Long reviewId, Long userId, Long id);
 }

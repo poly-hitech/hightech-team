@@ -27,4 +27,9 @@ public class ShopReviewServiceImpl implements ShopReviewService{
 	public List<ShopReview> getReviewsSorted(Long itemId, String sortType) {
 		return shopReviewDao.getReviewsSorted(itemId, sortType);
 	}
+
+    @Override
+    public void deleteReview(Long reviewId, Long itemId, Long userId) {
+        shopReviewDao.deleteReview(reviewId, itemId, userId);
+    }
 }

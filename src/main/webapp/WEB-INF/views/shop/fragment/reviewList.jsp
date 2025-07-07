@@ -29,8 +29,10 @@
                         <fmt:formatDate value="${review.reviewDate}" pattern="yyyy.MM.dd hh:mm a" />
                     </div>
                 </div>
-                <!-- 더보기 버튼 -->
-                <button class="more-menu-btn" data-review-id="${review.reviewId}" aria-label="더보기"></button>
+                <c:if test="${review.user.userId == sessionScope.member.userId}">
+                    <!-- 더보기 버튼 -->
+                    <button class="more-menu-btn" data-review-id="${review.reviewId}" aria-label="더보기"></button>
+                </c:if>
                 <!-- 더보기 메뉴 -->
                 <div class="more-menu" id="moreMenu-${review.reviewId}">
                     <ul>
