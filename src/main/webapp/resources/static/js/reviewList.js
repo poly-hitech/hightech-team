@@ -33,7 +33,7 @@ $(document).ready(function () {
     $(document).on('click', '.save-edit', function () {
         const reviewId = $(this).data('reviewId');
         const newContent = $('#edit-text-' + reviewId).val();
-        const newRating = $('input[name="newRating"]:checked').val();
+        const newRating = $('input[name="editRating-' + reviewId + '"]:checked').val();
         const userId = $(this).data('userId');
 
         console.log("reviewId: " + reviewId);

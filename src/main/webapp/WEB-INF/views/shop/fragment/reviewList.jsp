@@ -50,15 +50,15 @@
 
                 <!-- 수정 폼 (처음엔 숨김) -->
                 <div class="edit-form" id="edit-form-${review.reviewId}" style="display: none;">
-	                <div class="edit-stars">
-					        <div class="star-select">
-                                <input type="radio" id="5" name="newRating" value="5"><label for="5">★</label>
-                                <input type="radio" id="4" name="newRating" value="4"><label for="4">★</label>
-                                <input type="radio" id="3" name="newRating" value="3"><label for="3">★</label>
-                                <input type="radio" id="2" name="newRating" value="2"><label for="2">★</label>
-                                <input type="radio" id="1" name="newRating" value="1"><label for="1">★</label>
-                            </div>
-					</div>
+                    <div class="edit-stars">
+                        <c:forEach var="i" begin="1" end="5">
+                            <c:set var="score" value="${6 - i}" />
+                            <input type="radio" id="edit-star-${review.reviewId}-${score}"
+                                   name="editRating-${review.reviewId}" value="${score}"
+                                   <c:if test="${score eq review.reviewCount}">checked</c:if> />
+                            <label for="edit-star-${review.reviewId}-${score}">★</label>
+                        </c:forEach>
+                    </div>
                     <textarea class="edit-textarea" id="edit-text-${review.reviewId}" maxlength="128">${review.reviewContent}</textarea>
                     <span class="char-count">${fn:length(review.reviewContent)}/128</span>
                     <div class="edit-buttons">
@@ -67,7 +67,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </c:forEach>
     <div class="pagination">
