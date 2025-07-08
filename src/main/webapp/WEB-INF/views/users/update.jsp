@@ -65,7 +65,7 @@
                     <span class="dropzone-cancel" onclick="event.stopPropagation(); clearFile();">×</span>
 
                     <span class="dropzone-text" id="dropzone-text">파일을 선택하거나 여기로 끌어놓으세요</span>
-                    <input type="file" name="image" id="fileInput" style="display: none;" onchange="handleFileChange(event)" />
+                    <input type="file" value="${item.profileImage}" name="image" id="fileInput" style="display: none;" onchange="handleFileChange(event)" />
                 </div>
             </div>
 
@@ -80,5 +80,17 @@
 		</form>	
 	</div>
     <script src="${root}/js/addResource.js"></script>
+	<script>
+	    window.addEventListener('DOMContentLoaded', () => {
+	        const fullPath = "${item.profileImage}";
+	        if (fullPath) {
+	            // 경로 분리 후 파일명 추출
+	            const fileNameWithUuid = fullPath.split('\\').pop().split('/').pop();
+	            // UUID (xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_) 제거
+	            const fileName = fileNameWithUuid.replace(/^[0-9a-fA-F-]{36}_/, '');
+	            document.getElementById('dropzone-text').textContent = fileName;
+	        }
+	    });
+	</script>
 </body>
 </html>

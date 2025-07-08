@@ -71,6 +71,7 @@
 		
 		<insert id="add">
 			insert into Users
+			(userId, username, password, nickname, birthday, phone, gender, profileImage, agreeStatus, signupDay, roleId, name)
 			values (USERS_SEQ.nextval, #{username}, #{password},#{nickname}, #{birthday}, #{phone}, #{gender}, #{profileImage}, #{agreeStatus}, #{signupDay}, #{roleId}, #{name})
 			<selectKey keyProperty="userId" resultType="Long" order="AFTER">
        			SELECT USERS_SEQ.CURRVAL FROM DUAL
