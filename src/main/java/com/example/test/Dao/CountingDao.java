@@ -8,4 +8,10 @@ public interface CountingDao {
 
 	void countingUpdateByItemId(Counting counting);
 
+	void resetDailyCount();
+
+	void resetWeeklyCount();
+
+	void resetMonthlyCount();
+
 }

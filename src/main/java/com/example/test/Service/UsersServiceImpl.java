@@ -100,10 +100,7 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public void add(Users item) {
 		String username = userdao.search(item.getUsername());
-		//저장된 유저정보 중 최신의 userId 호출
-		Long userId = userdao.selectUserId() != null ? userdao.selectUserId() + 1 : 1L;
-		item.setUserId(userId);
-		log.info("사용자 순번 확인: " + userId);
+		
 		if(username != null) {
 			throw new IllegalArgumentException("중복된 아이디 입니다.");
 		}
@@ -111,6 +108,17 @@ public class UsersServiceImpl implements UsersService {
 		if (item.getPassword() == null || item.getPassword().isEmpty()) {
             throw new IllegalArgumentException("비밀번호는 필수 입력 항목입니다.");
         }
+		
+		item.setRoleId(1L);
+		if(item.getNickname() == null) {
+			item.setNickname(item.getUsername());
+		}
+		
+		//유저 정보 생성 후 기본키 호출
+		Long userId = userdao.add(item);
+
+		log.info("사용자 순번 확인: " + userId);
+		item.setUserId(userId);
 		
 
 		// 리스트 초기화
@@ -197,13 +205,9 @@ public class UsersServiceImpl implements UsersService {
 		
 		//변환된 문자열을 패스워드로 새로 저장
 		item.setPassword(newpassword);
-		item.setRoleId(1L);
 		
-		if(item.getNickname() == null || item.getNickname() == "미입력 시 아이디로 닉네임이 설정됩니다.") {
-			item.setNickname(item.getUsername());
-		}
-		
-		userdao.add(item);
+		userdao.updateIncludeNewPassword(item);
+
 		//널이 아닐때만 실행
 		if(!list.isEmpty()) {
 			userdao.saveRegexDetail(list);

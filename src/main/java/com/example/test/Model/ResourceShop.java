@@ -24,6 +24,7 @@ public class ResourceShop {
 	private List<OrdersDetails> ordersDetails;
 	private List<ShopReview> shopReview;
 	private Counting counting;
+	private String resourceImage;
 	
 	public Long getItemId() {
 		return itemId;
@@ -102,6 +103,12 @@ public class ResourceShop {
 	}
 	public void setCounting(Counting counting) {
 		this.counting = counting;
+	}
+	public String getResourceImage() {
+		return resourceImage;
+	}
+	public void setResourceImage(String resourceImage) {
+		this.resourceImage = resourceImage;
 	}
 
 }

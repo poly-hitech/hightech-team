@@ -4,4 +4,10 @@ public interface RankingDao {
 
 	void update(Long itemId);
 
+	void resetDailyRank();
+
+	void resetWeeklyRank();
+
+	void resetMonthlyRank();
+
 }

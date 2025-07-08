@@ -131,6 +131,7 @@ public class OrdersServiceImpl implements OrdersService {
 
 		// 주문 넣기(주문 정보 저장) 저장된 주문의 주문 번호를 가지고 옴
 		Long ordersId = ordersDao.buyResource(orders);
+		log.info("생성된 주문의 주문번호" + ordersId);
 
 		// 주문 상세 저장(리스트로 반복돌리면서 주문상세정보를 저장함)
 		for (OrdersDetails ordersDetails : ordersDetailsList) {

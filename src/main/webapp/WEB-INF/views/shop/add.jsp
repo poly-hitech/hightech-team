@@ -48,6 +48,11 @@
                 <label for="itemPrice">가격: </label>
                 <input type="number" id="itemPrice" name="resourceShop.itemPrice">
             </div>
+            
+           	<div>
+            	<label for="resourceFile">대표이미지: </label>
+            	<input type="file" id="resourceImage" name="resourceFile">
+            </div>
             <div>
             	<label for="resourceFile">첨부파일: </label>
             	<input type="file" id="resourceFile" name="resourceFile" multiple="multiple">

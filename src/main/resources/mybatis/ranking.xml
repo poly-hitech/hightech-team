@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ranking">
 	<!-- sql -->
-	<!-- 일간, 주간, 월간, 전체 카운트의 rnum 및 itemId 조회 -->
+	<!-- 일간, 주간, 월간, 전체 카운트의 rnum 조회 -->
 	<sql id="dailyRnum">
 		select sub.rnum
 		from (
@@ -52,32 +52,48 @@
 	<update id="updateByDailyrankByitemId">
 		update Ranking
 		set ranking.dailyRank = (
-			(<include refid="dailyRnum"></include>)
+			<include refid="dailyRnum"></include>
 			where sub.itemId = ranking.itemId
-		);
+		)
 	</update>
 	
-	<update id="updateByWeeklyrankByitemId">
+	<update id="updateByWeeklylyrankByitemId">
 		update Ranking
 		set ranking.weeklyRank = (
-			(<include refid="weeklyRnum"></include>)
+			<include refid="weeklyRnum"></include>
 			where sub.itemId = ranking.itemId
-		);
+		)
 	</update>
 
 	<update id="updateByMonthlyrankByitemId">
 		update Ranking
 		set ranking.monthlyRank = (
-			(<include refid="monthlyRnum"></include>)
+			<include refid="monthlyRnum"></include>
 			where sub.itemId = ranking.itemId
-		);
+		)
 	</update>
 
 	<update id="updateByTotalrankByitemId">
 		update Ranking
 		set ranking.totalRank = (
-			(<include refid="totalRnum"></include>)
+			<include refid="totalRnum"></include>
 			where sub.itemId = ranking.itemId
-		);
+		)
+	</update>
+	
+	<!-- 랭킹정보 초기화 -->
+	<update id="resetDailyRank">
+		update Ranking
+		set ranking.dailyRank = 0
+	</update>
+	
+	<update id="resetWeeklyRank">
+		update Ranking
+		set ranking.weeklyRank = 0
+	</update>
+	
+	<update id="resetMonthlyRank">
+		update Ranking
+		set ranking.monthlyRank = 0
 	</update>
 </mapper>

@@ -18,4 +18,24 @@ public class RankingDaoImpl implements RankingDao {
 		sql.update("ranking.updateByTotalrankByitemId", itemId);
 	}
 
+	//------------------랭킹 초기화-----------------
+	@Override
+	public void resetDailyRank() {
+		// TODO Auto-generated method stub
+		sql.update("ranking.resetDailyRank");
+	}
+
+	@Override
+	public void resetWeeklyRank() {
+		// TODO Auto-generated method stub
+		sql.update("ranking.resetWeeklyRank");
+	}
+
+	@Override
+	public void resetMonthlyRank() {
+		// TODO Auto-generated method stub
+		sql.update("ranking.resetMonthlyRank");
+	}
+	//--------------------------------------------
+	
 }

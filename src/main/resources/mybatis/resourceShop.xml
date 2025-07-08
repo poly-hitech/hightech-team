@@ -173,7 +173,7 @@
         LEFT JOIN ResourceFile resourceFile 
             ON resourceFile.itemId = resourceShop.itemId
         LEFT JOIN Ranking ranking 
-            ON resourceShop.rankid = ranking.rankid
+            ON resourceShop.itemId = ranking.itemId
         LEFT JOIN Counting counting 
             ON counting.itemId = resourceShop.itemId
         WHERE resourceShop.userId = #{userId}

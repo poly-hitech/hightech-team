@@ -36,7 +36,7 @@
 			
 			<div>
 				<label>닉네임:</label>
-				<input type="text" name="nickname" value="미입력 시 아이디로 닉네임이 설정됩니다.">				
+				<input type="text" name="nickname" placeholder="미입력 시 아이디로 닉네임이 설정됩니다.">				
 			</div>
 			
 			<div>

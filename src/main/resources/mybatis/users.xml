@@ -72,6 +72,9 @@
 		<insert id="add">
 			insert into Users
 			values (USERS_SEQ.nextval, #{username}, #{password},#{nickname}, #{birthday}, #{phone}, #{gender}, #{profileImage}, #{agreeStatus}, #{signupDay}, #{roleId}, #{name})
+			<selectKey keyProperty="userId" resultType="Long" order="AFTER">
+       			SELECT USERS_SEQ.CURRVAL FROM DUAL
+    		</selectKey>
 		</insert>
 		
 		<insert id="addRegex" parameterType="java.util.List">

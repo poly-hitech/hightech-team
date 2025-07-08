@@ -59,6 +59,7 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 	        model.addAttribute("message", "업로드된 파일이 없습니다.");
 	        return;
 	    }
+	    
 		//파일 업로드(업로드와 경로 추출)
 		for(int loop = 0; loop < file.size() ;loop++) {
 	        MultipartFile singlefile = file.get(loop);
@@ -66,6 +67,10 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 			
             // 파일이 정상적으로 업로드된 경우에만 경로를 설정		
 			if (filepath != null && !filepath.isEmpty()) {
+				//배경이미지 등록
+				if(loop == 0) {
+					market.getResourceShop().setResourceImage(filepath);
+				}
 				//반환된 파일 저장 경로를 가져와 저장
 				ResourceFile resourcefile = new ResourceFile();
 				resourcefile.setResourceFileName(filepath);
