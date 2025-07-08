@@ -4,6 +4,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.example.test.Model.Ranking;
+
 @Repository
 public class RankingDaoImpl implements RankingDao {
 
@@ -13,7 +15,7 @@ public class RankingDaoImpl implements RankingDao {
 	@Override
 	public void update(Long itemId) {
 		sql.update("ranking.updateByDailyrankByitemId", itemId);
-		sql.update("ranking.updateByWeeklylyrankByitemId", itemId);
+		sql.update("ranking.updateByWeeklyrankByitemId", itemId);
 		sql.update("ranking.updateByMonthlyrankByitemId", itemId);
 		sql.update("ranking.updateByTotalrankByitemId", itemId);
 	}
@@ -38,4 +40,9 @@ public class RankingDaoImpl implements RankingDao {
 	}
 	//--------------------------------------------
 	
+	@Override
+	public void save(Ranking ranking) {
+		sql.insert("ranking.add", ranking);		
+	}
+
 }

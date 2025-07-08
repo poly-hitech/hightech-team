@@ -2,7 +2,9 @@ package com.example.test.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import com.example.test.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,13 +14,6 @@ import com.example.test.Dao.OrdersDao;
 import com.example.test.Dao.RankingDao;
 import com.example.test.Dao.ResourceDao;
 import com.example.test.Dao.UsersDao;
-import com.example.test.Model.Counting;
-import com.example.test.Model.Orders;
-import com.example.test.Model.OrdersDetails;
-import com.example.test.Model.Ranking;
-import com.example.test.Model.BuyPoint;
-import com.example.test.Model.ResourceShop;
-import com.example.test.Model.Users;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -100,11 +95,11 @@ public class OrdersServiceImpl implements OrdersService {
 			userDao.disPointByUserId(orderUserPoint);
 
 			// 판매자 정보를 기준으로 포인트 증가
-			BuyPoint saleUserPoint = userDao.getPointByNickname(singleShop.getItemWriter());
+			BuyPoint saleUserPoint = userDao.getPointByUserId(singleShop.getUsers().getUserId());
 			saleUserPoint.setPointMoney(saleUserPoint.getPointMoney() + itemPrice);
 			log.info("판매자의 포인트가 증가되었는지 확인: {}" , saleUserPoint.getPointMoney());
 			// 닉네임 기반으로 가져온 포인트 객체를 전달해서 다시 해당 정보안에 있는 유저번호와 함께 객체를 전달하여 수정
-			userDao.earnPointByNickname(saleUserPoint);
+			userDao.earnPointByUserId(saleUserPoint);
 
 			//CQRS 혹은 캐시(대용량 트래픽 처리에 있어서 캐시로 저장해뒀다가 한번에 처리 하는 것이 용이함.)
 			//(쓰기, 변경, 삭제는 자주하는 것이 대용량 트래픽 발생으로 이어지기 때문에 좋지않은 방식임.)
@@ -125,8 +120,6 @@ public class OrdersServiceImpl implements OrdersService {
 			
 			//count의 값들이 증가하면 이에 따라서 랭킹도 새로 설정
 			rankingDao.update(singleShop.getItemId());
-			
-
 		}
 
 		// 주문 넣기(주문 정보 저장) 저장된 주문의 주문 번호를 가지고 옴
@@ -141,5 +134,20 @@ public class OrdersServiceImpl implements OrdersService {
 		}
 
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<MyOrderList> purchasedResources(Long userId) {
+		return ordersDao.purchasedResources(userId);
+	}
 
+	@Override
+	public List<Long> getItemIdByLoginUser(Long userId) {
+		return ordersDao.getItemIdByLoginUser(userId);
+	}
+
+	@Override
+	public OrdersDetails getOrdersDetailsByUserIdAndItemId(Map<String, Object> params) {
+		return ordersDao.getOrdersDetailsByUserIdAndItemId(params);
+	}
 }

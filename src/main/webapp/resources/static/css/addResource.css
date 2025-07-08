@@ -1,5 +1,4 @@
 @charset "UTF-8";
-/* Import Google font - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 * {
   margin: 0;
@@ -82,4 +81,52 @@
     .container button {
         padding: 10px;
     }
+}
+
+/* PrettyDropzone 스타일 */
+.dropzone-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem; /* 24px */
+    border: 2px dashed #ccc;
+    border-radius: 0.5rem; /* 8px */
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background 0.2s, border 0.2s;
+    position: relative;
+}
+
+.dropzone-wrapper:hover {
+    background-color: #f0f0f0;
+}
+
+.dropzone-wrapper.drag-active {
+    background-color: #e0f2ff;
+    border-color: #60a5fa;
+}
+
+.dropzone-text {
+    color: #1d4ed8;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.dropzone-cancel {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    color: #999;
+    cursor: pointer;
+    z-index: 2;
+    transition: color 0.2s ease;
+}
+
+.dropzone-cancel:hover {
+    color: #e74c3c;
 }

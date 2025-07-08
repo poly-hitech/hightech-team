@@ -1,6 +1,14 @@
 package com.example.test.Model;
 
-//랭킹 정보 
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+//랭킹 정보
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Ranking {
 	private Long rankId;
 	private Long totalRank;
@@ -45,4 +53,5 @@ public class Ranking {
 	public void setItemId(Long itemId) {
 		this.itemId = itemId;
 	}
+
 }

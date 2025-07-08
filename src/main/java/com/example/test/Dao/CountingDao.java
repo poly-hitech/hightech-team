@@ -14,4 +14,5 @@ public interface CountingDao {
 
 	void resetMonthlyCount();
 
+	void save(Long itemId);
 }

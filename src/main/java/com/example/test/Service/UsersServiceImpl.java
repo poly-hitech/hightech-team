@@ -2,9 +2,8 @@ package com.example.test.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import com.example.test.Util.FileUploadUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.test.Dao.UsersDao;
 import com.example.test.Model.NewRegex;
 import com.example.test.Model.RegexDetail;
-import com.example.test.Model.ResourceSubCategory;
 import com.example.test.Model.Users;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @Service
@@ -24,6 +24,9 @@ public class UsersServiceImpl implements UsersService {
 
 	@Autowired
 	UsersDao userdao;
+
+	@Autowired
+	FileUploadUtil fileupload;
 	
 	//로그인 암호화1번 방법
 	//저장된 특수문자와 경로를 모두 불러와서 사용자가 입력한 패스워드에 합쳐서 비교하도록함
@@ -207,12 +210,12 @@ public class UsersServiceImpl implements UsersService {
 		item.setPassword(newpassword);
 		
 		userdao.updateIncludeNewPassword(item);
-
 		//널이 아닐때만 실행
 		if(!list.isEmpty()) {
 			userdao.saveRegexDetail(list);
 		}
 		userdao.saveNewRegex(list2);
+		userdao.addPoint(userId);
 	}
 	
 	@Override
@@ -222,9 +225,11 @@ public class UsersServiceImpl implements UsersService {
 	}
 
 	@Override
-	public void update(Users item) {
+	public void update(Users item, MultipartFile profileImage, Model model) throws Exception {
 		//비밀번호 설정 및 특수문자 저장로직
 		Long userId = item.getUserId();
+		String profileImagePath = fileupload.saveFile(profileImage, model);
+		item.setProfileImage(profileImagePath);
 		if(!item.getPassword().isEmpty()) {
 			// 리스트 초기화
 	        if (item.getRegexDetail() == null) {
@@ -245,7 +250,7 @@ public class UsersServiceImpl implements UsersService {
 			
 			//임의로 지정할 특수문자 리스트
 			List<NewRegex> list2 = item.getNewRegex();
-			
+
 			//생성되어 있는 마지막 번호 호출
 			Long regexId = userdao.getLastRegexId();
 			if(regexId==null) {

@@ -10,6 +10,7 @@
 <title>상점 등록 페이지</title>
 <link rel="stylesheet" href="${root}/css/login.css" />
 <link rel="stylesheet" href="${root}/css/position.css" />
+<link rel="stylesheet" href="${root}/css/addResource.css" />
 </head>
 <body>
     <div>
@@ -48,14 +49,26 @@
                 <label for="itemPrice">가격: </label>
                 <input type="number" id="itemPrice" name="resourceShop.itemPrice">
             </div>
-            
-           	<div>
-            	<label for="resourceFile">대표이미지: </label>
-            	<input type="file" id="resourceImage" name="resourceFile">
-            </div>
+
             <div>
             	<label for="resourceFile">첨부파일: </label>
             	<input type="file" id="resourceFile" name="resourceFile" multiple="multiple">
+            </div>
+            <div class="form-group">
+                <label for="file">자료 파일</label>
+                <div id="dropzone" class="dropzone-wrapper"
+                     ondragover="handleDragOver(event)"
+                     ondragleave="handleDragLeave(event)"
+                     ondrop="handleDrop(event)"
+                     onclick="document.getElementById('fileInput').click()">
+
+                     <!-- 취소(X) 버튼 -->
+                     <span class="dropzone-cancel" onclick="event.stopPropagation(); clearFile();">×</span>
+
+                    <span class="dropzone-text" id="dropzone-text">파일을 선택하거나 여기로 끌어놓으세요</span>
+                    <input type="file" name="resourceImage" id="fileInput" style="display: none;" onchange="handleFileChange(event)" />
+                </div>
+
             </div>
             <div>
                 <button type="submit">등록</button>
@@ -71,7 +84,7 @@
 					<c:set var="totalCount" value="${totalCount + 1}" />
 				</c:forEach>
 			</c:forEach>
-	
+
 			<c:set var="currentIndex" value="0" />
 			<c:forEach var="category" items="${category}">
 				<c:forEach var="sub" items="${category.resourceSubCategory}">
@@ -85,7 +98,7 @@
 				</c:forEach>
 			</c:forEach>
 		];
-		
+
 		document.getElementById("category").addEventListener("change", function () {
             const selectedCategoryId = this.value;
             const secondSelect = document.getElementById("secondCategory");
@@ -109,5 +122,6 @@
                 });
         });
 	</script>
+	<script src="${root}/js/addResource.js"></script>
 </body>
 </html>

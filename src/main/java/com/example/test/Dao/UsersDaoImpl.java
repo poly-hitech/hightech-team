@@ -139,9 +139,15 @@ public class UsersDaoImpl implements UsersDao {
 
 	//판매자 포인트 증가
 	@Override
-	public void earnPointByNickname(BuyPoint saleUserPoint) {
+	public void earnPointByUserId(BuyPoint saleUserPoint) {
 		// TODO Auto-generated method stub
 		sql.update("buyPoint.updatePointByUserId", saleUserPoint);
+	}
+	
+	//초기 회원가입 포인트 세팅
+	@Override
+	public void addPoint(Long userId) {
+		sql.insert("buyPoint.addPoint", userId);
 	}
 	//----------------------------------------------------------------------------------
 

@@ -8,6 +8,7 @@ public class OrdersDetails {
 	private Long detailitemPrice;
 	private Long ordersId;
 	private Counting counting;
+	private	ShopReview shopReview;
 	
 	public Long getOrdersDetailsId() {
 		return ordersDetailsId;
@@ -44,6 +45,12 @@ public class OrdersDetails {
 	}
 	public void setDetailitemPrice(Long detailitemPrice) {
 		this.detailitemPrice = detailitemPrice;
+	}
+	public ShopReview getShopReview() {
+		return shopReview;
+	}
+	public void setShopReview(ShopReview shopReview) {
+		this.shopReview = shopReview;
 	}
 
 }

@@ -7,9 +7,12 @@ public class ShopReview {
 	private Long reviewId;
 	private String reviewContent;
 	private Date reviewDate;
+	private Double reviewCount; // 별점
 	private String reviewWriter;
-	private Long ordersDetailId;
+	private Long ordersDetailsId;
 	private Long userId;
+	private Long itemId;
+	private Users user;
 	
 	public Long getReviewId() {
 		return reviewId;
@@ -35,11 +38,11 @@ public class ShopReview {
 	public void setReviewWriter(String reviewWriter) {
 		this.reviewWriter = reviewWriter;
 	}
-	public Long getOrdersDetailId() {
-		return ordersDetailId;
+	public Long getOrdersDetailsId() {
+		return ordersDetailsId;
 	}
-	public void setOrdersDetailId(Long ordersDetailId) {
-		this.ordersDetailId = ordersDetailId;
+	public void setOrdersDetailsId(Long ordersDetailsId) {
+		this.ordersDetailsId = ordersDetailsId;
 	}
 	public Long getUserId() {
 		return userId;
@@ -47,4 +50,28 @@ public class ShopReview {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+
+    public Double getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(Double reviewCount) {
+        this.reviewCount = reviewCount;
+    }
+
+    public Long getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
 }

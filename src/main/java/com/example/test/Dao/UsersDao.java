@@ -45,6 +45,8 @@ public interface UsersDao {
 
 	void disPointByUserId(BuyPoint orderUserPoint);
 
-	void earnPointByNickname(BuyPoint saleUserPoint);
+	void earnPointByUserId(BuyPoint saleUserPoint);
+
+	void addPoint(Long userId);
 
 }

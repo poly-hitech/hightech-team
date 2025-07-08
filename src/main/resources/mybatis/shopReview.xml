@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="shopReview">
+
+    <!-- 리뷰 작성 -->
+    <insert id="addReview" parameterType="ShopReview">
+        INSERT INTO shopReview (reviewId, itemId, userId, reviewContent, reviewWriter, reviewCount, reviewDate, ordersDetailsId)
+        VALUES (SHOPREVIEW_SEQ.nextval, #{itemId}, #{userId}, #{reviewContent}, #{reviewWriter}, #{reviewCount}, SYSDATE, #{ordersDetailsId})
+<!--        <selectKey keyProperty="reviewId" resultType="Long" order="AFTER">-->
+<!--            SELECT SHOPREVIEW_SEQ.currval FROM dual-->
+<!--        </selectKey>-->
+    </insert>
+
+    <select id="getReviewCountByItemId" parameterType="long" resultType="int">
+        SELECT COUNT(*) FROM shopReview WHERE itemId = #{itemId}
+    </select>
+
+    <!-- 리뷰 목록 조회 (정렬 기능 추가) -->
+    <select id="getReviewsSorted" resultMap="ReviewList" parameterType="map">
+        SELECT * FROM (
+        SELECT inner_query.*, ROWNUM AS rn
+        FROM (
+        SELECT
+        sr.reviewId, sr.itemId, sr.userId, sr.reviewContent, sr.reviewWriter,
+        sr.reviewCount, sr.reviewDate, sr.ordersDetailsId,
+        u.userId AS u_userId, u.nickname AS u_nickname, u.profileImage AS u_profileImage
+        FROM shopReview sr
+        JOIN users u ON sr.userId = u.userId
+        WHERE sr.itemId = #{itemId}
+        ORDER BY
+        CASE WHEN #{sortType} = 'latest' THEN sr.reviewDate END DESC,
+        CASE WHEN #{sortType} = 'high' THEN sr.reviewCount END DESC,
+        CASE WHEN #{sortType} = 'low' THEN sr.reviewCount END ASC
+        ) inner_query
+        WHERE ROWNUM &lt;= #{endRow}
+        )
+        WHERE rn &gt; #{startRow}
+    </select>
+
+    <!-- 리뷰 수정 -->
+    <update id="updateReview" parameterType="ShopReview">
+        UPDATE shopReview
+        SET reviewContent = #{reviewContent}, reviewCount = #{reviewCount}, reviewDate = SYSDATE
+        WHERE reviewId = #{reviewId} AND userId = #{userId}
+    </update>
+
+    <!-- 리뷰 삭제 -->
+    <delete id="deleteReview">
+        DELETE FROM shopReview WHERE reviewId = #{reviewId} AND userId = #{userId} AND itemId = #{itemId}
+    </delete>
+
+    <resultMap id="ReviewList" type="ShopReview">
+        <id property="reviewId" column="reviewId"/>
+        <result property="itemId" column="itemId"/>
+        <result property="userId" column="userId"/>
+        <result property="reviewContent" column="reviewContent"/>
+        <result property="reviewWriter" column="reviewWriter"/>
+        <result property="reviewCount" column="reviewCount"/>
+        <result property="reviewDate" column="reviewDate"/>
+        <result property="ordersDetailsId" column="ordersDetailsId"/>
+        <association property="user" javaType="Users">
+            <result property="userId" column="u_userId"/>
+            <result property="nickname" column="u_nickname"/>
+            <result property="profileImage" column="u_profileImage"/>
+        </association>
+    </resultMap>
+</mapper>

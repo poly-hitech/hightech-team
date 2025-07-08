@@ -15,16 +15,19 @@ public class ResourceShop {
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date resourceDate = new Date();
-	
+	private String resourceImage;
+	private Long resourceSubCategoryId;
+	private ResourceCategory resourceCategory;
+	private ResourceSubCategory resourceSubCategory;
+
 	private List<ResourceFile> resourceFile;
 	private String resourceContent;
-	private Long resourceSubCategoryId;
-	private Long userId;
 	private Ranking ranking;
 	private List<OrdersDetails> ordersDetails;
 	private List<ShopReview> shopReview;
 	private Counting counting;
-	private String resourceImage;
+	private Long userId;
+	private Users users;
 	
 	public Long getItemId() {
 		return itemId;
@@ -44,23 +47,11 @@ public class ResourceShop {
 	public void setItemPrice(Long itemPrice) {
 		this.itemPrice = itemPrice;
 	}
-	public Long getUserId() {
-		return userId;
-	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
 	public Date getResourceDate() {
 		return resourceDate;
 	}
 	public void setResourceDate(Date resourceDate) {
 		this.resourceDate = resourceDate;
-	}
-	public Long getResourceSubCategoryId() {
-		return resourceSubCategoryId;
-	}
-	public void setResourceSubCategoryId(Long resourceSubCategoryId) {
-		this.resourceSubCategoryId = resourceSubCategoryId;
 	}
 	public String getItemWriter() {
 		return itemWriter;
@@ -104,11 +95,48 @@ public class ResourceShop {
 	public void setCounting(Counting counting) {
 		this.counting = counting;
 	}
+
+    public ResourceCategory getResourceCategory() {
+        return resourceCategory;
+    }
+
+    public void setResourceCategory(ResourceCategory resourceCategory) {
+        this.resourceCategory = resourceCategory;
+    }
+
+    public ResourceSubCategory getResourceSubCategory() {
+        return resourceSubCategory;
+    }
+
+    public void setResourceSubCategory(ResourceSubCategory resourceSubCategory) {
+        this.resourceSubCategory = resourceSubCategory;
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+    public Long getResourceSubCategoryId() {
+        return resourceSubCategoryId;
+    }
+
+    public void setResourceSubCategoryId(Long resourceSubCategoryId) {
+        this.resourceSubCategoryId = resourceSubCategoryId;
+    }
 	public String getResourceImage() {
 		return resourceImage;
 	}
 	public void setResourceImage(String resourceImage) {
 		this.resourceImage = resourceImage;
 	}
-
 }

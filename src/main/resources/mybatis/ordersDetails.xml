@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ordersDetails">
 	<!-- 주문 상세 조회 -->
+	<select id="getOrdersDetailsByUserIdAndItemId" parameterType="map" resultType="OrdersDetails">
+		select
+		od.*
+		from OrdersDetails od
+		inner join Orders o on od.ordersId = o.ordersId
+		where o.userId = #{userId} and od.itemId = #{itemId}
+	</select>
 
 	<!-- 수정 -->
 	
@@ -10,6 +17,6 @@
 	<!-- 주문생성 -->
 	<insert id="saveOrdersDetails">
 		insert into OrdersDetails
-		values(ORDERSDETAILS_SEQ.nextval, #{ordersId}, #{itemId}, #{amount})
+		values(ORDERSDETAILS_SEQ.nextval, #{ordersId}, #{itemId}, #{amount}, #{detailitemPrice})
 	</insert>
 </mapper>
