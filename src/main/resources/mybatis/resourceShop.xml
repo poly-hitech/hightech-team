@@ -33,47 +33,8 @@
 	    resourceShop.itemPrice,
 	    resourceShop.itemWriter,
 	    resourceShop.resourceDate,
-	    resourceShop.resourceSubCategoryId AS rs_resourceSubCategoryId,
-	    
-	    <!-- ResourceFile -->
-	    resourceFile.resourceFileId,
-	    resourceFile.resourceFileName,
-	    resourceFile.itemId AS rf_itemId,
-	    
-	    <!-- Ranking -->
-	    ranking.rankId,
-	    ranking.totalRank,
-	    ranking.dailyRank,
-	    ranking.weeklyRank,
-	    ranking.monthlyRank,
-	    ranking.itemId AS rk_itemId,
-	    
-	    <!-- Counting -->
-	    counting.countingId,
-	    counting.totalcount,
-	    counting.dailycount,
-	    counting.weeklycount,
-	    counting.monthlycount,
-	    counting.itemId AS ct_itemId
-		
-		FROM ResourceShop resourceShop
-        LEFT JOIN ResourceFile resourceFile 
-            ON resourceFile.itemId = resourceShop.itemId
-        LEFT JOIN Ranking ranking 
-            ON resourceShop.itemId = ranking.itemId
-        LEFT JOIN OrdersDetails ordersDetails 
-            ON ordersDetails.itemId = resourceShop.itemId
-        LEFT JOIN Counting counting 
-            ON counting.itemId = resourceShop.itemId
-        WHERE resourceShop.itemId=#{itemId}
-        ORDER BY
-	    resourceShop.itemId, 
-	    resourceFile.resourceFileId
-	</select>
-	
-	<select id="marketList" resultMap="MarketListMap">
-		SELECT 
 		resourceShop.resourceImage,
+
 		<!-- ResourceCategory -->
 		resourceCategory.resourceCategoryId AS rc_resourceCategoryId,
 		resourceCategory.resourceCategoryName,
