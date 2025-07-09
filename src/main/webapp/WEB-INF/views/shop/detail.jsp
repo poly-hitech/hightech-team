@@ -88,7 +88,7 @@
                     <img class="preview-image" src="${pageContext.request.contextPath}${fn:replace(shop.resourceImage, 'C:/upload', '/upload')}" alt="리소스 이미지">
                         <div class="preview-meta">
                             <div class="category">${shop.resourceCategory.resourceCategoryName} > ${shop.resourceSubCategory.resourceSubCategoryName}</div>
-                            <div class="title">${shop.itemName}</div>
+                            <div class="resource-title">${shop.itemName}</div>
                             <div class="icon-buttons">
                                 <button class="icon-btn"><i class="fa fa-heart"></i></button>
                                 <button class="icon-btn"><i class="fa fa-share-alt"></i></button>
