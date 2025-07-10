@@ -20,6 +20,6 @@
     <!-- 출석 기록 추가 -->
     <insert id="insertAttendance">
         INSERT INTO USERATTENDANCEDETAIL (ATTENDID, USERID, ATTENDDATE)
-        VALUES (USERATTENDANCE_SEQ.NEXTVAL, #{userId}, #{attendDate})
+        VALUES (USERATTENDANCEDETAIL_SEQ.NEXTVAL, #{userId}, #{attendDate})
     </insert>
 </mapper>

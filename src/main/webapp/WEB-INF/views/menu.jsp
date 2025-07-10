@@ -12,11 +12,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>메뉴바</title>
     <link rel="stylesheet" href="${root}/css/mainmenu.css" />
+    <link rel="stylesheet" href="${root}/css/attendance.css" />
     <!-- Boxicons CSS -->
     <link flex href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <script src="${root}/js/mainmenu.js" defer></script>
 </head>
   <body>
+  <div id="attendance-modal" class="attd-modal" style="display:none;">
+    <div class="attd-modal-bg"></div>
+    <div class="attd-modal-content">
+      <span class="attd-modal-close">✖</span>
+      <div id="attendance-modal-body">
+        <jsp:include page="attendance.jsp"/>
+      </div>
+    </div>
+  </div>
   <!-- 일반 회원, 판매 회원, 관리자 회원에 따라 UI/UX가 달라짐 -->
     <nav class="sidebar locked">
       <div class="logo_items flex">
@@ -114,8 +123,15 @@
                 <span>자유 게시판</span>
               </a>
             </li>
+            <c:if test="${sessionScope.member != null}">
+            <li class="item">
+      			<a href="#" id="open-attendance-modal" class="link flex">
+      			    <i class="bx bx-calendar"></i>
+        			<span>출석체크</span>
+      			</a>
+    		</li>
+    		</c:if>
           </ul>
-
           <ul class="menu_item">
             <div class="menu_title flex">
               <span class="title">랭킹</span>
@@ -128,8 +144,6 @@
               </a>
             </li>
           </ul>
-          
-          
         </div>
 
         <div class="sidebar_profile flex">
@@ -141,12 +155,12 @@
             	<span class="name">${sessionScope.member.nickname}</span>
             	<span class="email">${sessionScope.member.username}</span>
             	<br>
-			
+
 				<span class="userInfo"><a href="${root}/logout">로그아웃</a></span>
 				<span class="userInfo"> / </span>
 				<span class="userInfo"><a href="${root}/users/update/${sessionScope.member.userId}">마이페이지</a></span>
 			</c:if>
-			
+
 			<c:if test="${sessionScope.member == null}">
 				<span class="userInfo"><a href="${root}/login">로그인</a></span>
 				<span class="userInfo"> / </span>
@@ -156,5 +170,40 @@
         </div>
       </div>
     </nav>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById("open-attendance-modal").onclick = function (e) {
+            e.preventDefault();
+            // 모달 보이기
+            document.getElementById("attendance-modal").style.display = "flex";
+            // 달력 내용 ajax로 불러오기 (모달용 url 필요)
+            fetch("/attendance/calendar?modal=1")
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById("attendance-modal-body").innerHTML = html;
+                });
+        };
+
+        // 닫기 버튼 클릭 시 모달 닫기
+        document.querySelectorAll(".attd-modal-close").forEach(function (el) {
+            el.onclick = function () {
+                document.getElementById("attendance-modal").style.display = "none";
+                document.getElementById("attendance-modal-body").innerHTML = "";
+            };
+        });
+
+        // ESC 키로 모달 닫기
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") {
+                const modal = document.getElementById("attendance-modal");
+                if (modal.style.display === "flex") {
+                    modal.style.display = "none";
+                    document.getElementById("attendance-modal-body").innerHTML = "";
+                }
+            }
+        });
+    });
+    </script>
+    <script src="${root}/js/mainmenu.js" defer></script>
   </body>
 </html>
