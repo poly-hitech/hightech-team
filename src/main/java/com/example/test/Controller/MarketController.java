@@ -33,6 +33,7 @@ public class MarketController {
     @Autowired
     ShopReviewService shopReviewService;
 
+    //--------------------------------조회---------------------------------------------
     // 전체 상점 목록
     @GetMapping("public/list")
     String shopList(Model model, HttpSession session) {
@@ -106,42 +107,7 @@ public class MarketController {
 
         return path + "list";
     }
-
-    @GetMapping("{roleId}/add/{userId}")
-    String addResourcePage(@PathVariable Long roleId, @PathVariable Long userId, Model model, HttpSession session) {
-        List<ResourceCategory> category = resourceShopService.addResourcePage();
-
-        // 단순 값넘어오는거 확인용 -------------------------------------------------------
-        for (int a = 0; a < category.size(); a++) {
-            ResourceCategory rc = category.get(a);
-            log.info("리소스 사이즈 : {}" + category.size() + "리소스 1차 번호: {}" + rc.getResourceCategoryId());
-            List<ResourceSubCategory> sc = rc.getResourceSubCategory();
-            for (ResourceSubCategory rsc : sc) {
-                Long id = rsc.getResourceSubCategoryId();
-                String name = rsc.getResourceSubCategoryName();
-
-                log.info("2차 카테고리 번호: {}" + id);
-                log.info("2차 카테고리 이름: {}" + name);
-            }
-        }
-        // --------------------------------------------------------------------------
-
-        model.addAttribute("category", category);
-        return path + "add";
-    }
-
-    // 리소스 상품 등록
-    @PostMapping("{roleId}/add/{userId}")
-    String uploadResource(@PathVariable Long roleId, @PathVariable Long userId, Market market,
-                          @RequestParam(value = "resourceFile", required = false) List<MultipartFile> file,
-                          @RequestParam(value = "resourceImage", required = false) MultipartFile resourceImage,
-                          Model model) throws Exception {
-
-        resourceShopService.addResource(userId, market, file, resourceImage, model);
-
-        return path + "add";
-    }
-
+    
     // 리소스 상품 상세
     @GetMapping("/detail")
     public String showDetail(@RequestParam("itemId") Long itemId, HttpSession session, Model model) throws JsonProcessingException {
@@ -196,8 +162,59 @@ public class MarketController {
         model.addAttribute("totalPages", totalPages);
         return path + "detail";
     }
+    //--------------------------------조회--------------------------------------------------
 
-    // 리소스 상품 구매
+    //-----------------------------------상품 등록 및 수정-----------------------------------------------
+    @GetMapping("{roleId}/add/{userId}")
+    String addResourcePage(@PathVariable Long roleId, @PathVariable Long userId, Model model, HttpSession session) {
+        List<ResourceCategory> category = resourceShopService.addResourcePage();
+
+        // 단순 값넘어오는거 확인용 -------------------------------------------------------
+        for (int a = 0; a < category.size(); a++) {
+            ResourceCategory rc = category.get(a);
+            log.info("리소스 사이즈 : {}" + category.size() + "리소스 1차 번호: {}" + rc.getResourceCategoryId());
+            List<ResourceSubCategory> sc = rc.getResourceSubCategory();
+            for (ResourceSubCategory rsc : sc) {
+                Long id = rsc.getResourceSubCategoryId();
+                String name = rsc.getResourceSubCategoryName();
+
+                log.info("2차 카테고리 번호: {}" + id);
+                log.info("2차 카테고리 이름: {}" + name);
+            }
+        }
+        // --------------------------------------------------------------------------
+
+        model.addAttribute("category", category);
+        return path + "add";
+    }
+
+    // 리소스 상품 등록
+    @PostMapping("{roleId}/add/{userId}")
+    String uploadResource(@PathVariable Long roleId, @PathVariable Long userId, Market market,
+                          @RequestParam(value = "resourceFile", required = false) List<MultipartFile> file,
+                          @RequestParam(value = "resourceImage", required = false) MultipartFile resourceImage,
+                          Model model) throws Exception {
+
+        resourceShopService.addResource(userId, market, file, resourceImage, model);
+
+        return path + "add";
+    }
+    
+    //리소스 상품 수정
+    @PostMapping("/updateMyResource/{itemId}")
+    String updateResource(@PathVariable Long itemId,
+                          Market market, @RequestParam MultipartFile file, Model model) throws
+            Exception {
+
+        resourceShopService.updateMyResource(itemId, market, file, model);
+
+        return path + "updateMyResource";
+    }
+    //-----------------------------------상품 등록 및 수정-----------------------------------------------
+    
+    
+
+    //-----------------------------------리소스 상품 구매----------------------------------------------
     @PostMapping("/detail/{userId}/{itemId}")
     @ResponseBody // responseBody를 사용하면 문자열을 반환하게됨
     public String buyResource(@PathVariable Long userId, @PathVariable Long itemId,
@@ -210,15 +227,10 @@ public class MarketController {
         log.info("구매 완료");
         return "success";
     }
+    //-----------------------------------리소스 상품 구매----------------------------------------------
+    
 
-    // 판매 물품 및 내역
-    @GetMapping("/salesDetail/{roleId}")
-    public String salesResources() {
-
-        return path + "salesDetail";
-    }
-
-    //로그인 한 유저가 등록한 상품
+    //--------------------------------로그인 한 유저가 등록한 상품-------------------------------------
     @GetMapping("myResources/{userId}")
     public String myResources(@PathVariable Long userId, Model model) {
         List<ResourceCategory> category = resourceShopService.myResources(userId);
@@ -235,18 +247,26 @@ public class MarketController {
         }
         return path + "myResources";
     }
+    
+    // 내 상품 상세
+    @GetMapping("/salesDetail/{itemId}")
+    public String salesResources() {
 
-
-    //리소스 상품 수정
-    @PostMapping("/updateMyResource/{itemId}")
-    String updateResource(@PathVariable Long itemId,
-                          Market market, @RequestParam MultipartFile file, Model model) throws
-            Exception {
-
-        resourceShopService.updateMyResource(itemId, market, file, model);
-
-        return path + "updateMyResource";
+        return path + "salesDetail";
     }
+    
+    //내 판매 내역(내 상품에 대해서 판매된 최근순으로 조회)
+    // 내 상품 상세
+    @GetMapping("/mySalesList/{userId}")
+    public String mySalesList() {
+
+        return path + "mySalesList";
+    }
+    
+    //----------------------------------로그인 한 유저가 등록한 상품-----------------------------------
+
+
+
 
 
     /*

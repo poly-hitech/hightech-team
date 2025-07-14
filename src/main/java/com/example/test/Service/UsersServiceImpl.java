@@ -113,7 +113,7 @@ public class UsersServiceImpl implements UsersService {
         }
 		
 		item.setRoleId(1L);
-		if(item.getNickname() == null) {
+		if(item.getNickname() == null || item.getNickname().isEmpty()) {
 			item.setNickname(item.getUsername());
 		}
 		

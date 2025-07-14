@@ -63,7 +63,7 @@
 		)
 	</update>
 	
-	<update id="updateByWeeklylyrankByitemId">
+	<update id="updateByWeeklyrankByitemId">
 		update Ranking
 		set ranking.weeklyRank = (
 			<include refid="weeklyRnum"></include>
