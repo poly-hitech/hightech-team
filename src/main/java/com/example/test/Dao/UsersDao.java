@@ -47,6 +47,6 @@ public interface UsersDao {
 
 	void earnPointByUserId(BuyPoint saleUserPoint);
 
-	void addPoint(Long userId);
+	void addPoint(BuyPoint buyPoint);
 
 }

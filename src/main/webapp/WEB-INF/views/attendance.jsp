@@ -11,13 +11,24 @@
     <c:forEach begin="1" end="${lastDay}" var="day">
         <c:set var="isToday" value="${isThisMonth and today == day}" />
         <c:set var="attended" value="${attendanceMap[day] eq true}" />
-        <c:set var="reward" value="${not empty rewardList and rewardList.size() >= day ? rewardList[day-1] : (day + '일차 보상')}" />
+        <c:choose>
+            <c:when test="${day == 7 or day == 14 or day == 21 or day == 28}">
+                <c:set var="pointValue" value="300" />
+                <c:set var="reward" value="<i class='fas fa-coins coin-icon'></i> ${pointValue}" />
+            </c:when>
+            <c:otherwise>
+                <c:set var="pointValue" value="100" />
+                <c:set var="reward" value="<i class='fas fa-coins coin-icon'></i> ${pointValue}" />
+            </c:otherwise>
+        </c:choose>
         <div class="cell
             <c:if test='${attended}'>attended</c:if>
             <c:if test='${isToday}'> today</c:if>
         ">
             <div class="cell-header"><c:out value="${day}"/>일차</div>
-            <div class="cell-reward"><c:out value="${reward}"/></div>
+            <div class="cell-reward">
+                <c:out value="${reward}" escapeXml="false"/>
+            </div>
             <c:choose>
                 <c:when test="${attended}">
                     <div class="cell-check">✔️</div>
@@ -37,6 +48,7 @@
     <form id="attendance-form" class="btn-area">
     		    <input type="hidden" name="year" value="${year}"/>
     		    <input type="hidden" name="month" value="${month}"/>
+    		    <input type="hidden" name="point" value="${pointValue}"/>
     		    <button type="submit"
     		            class="big-btn"
     		            <c:if test='${isThisMonth and attendedToday}'>disabled</c:if>>

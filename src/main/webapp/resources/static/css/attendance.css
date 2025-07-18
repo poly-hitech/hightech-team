@@ -4,14 +4,14 @@
 }
  */
 .attd-wrapper {
-    width: 95vw;
-    max-width: 1100px;
-    min-width: 310px;
-    height: 900px;
-    background: #27292f;
-    border-radius: 24px;
-    box-shadow: 0 10px 36px #00000038;
-    position: relative;
+	width: 95vw;
+	width: 1250px;
+	min-width: 310px;
+	height: 900px;
+	background: #27292f;
+	border-radius: 24px;
+	box-shadow: 0 10px 36px #00000038;
+	position: relative;
 }
 
 .titlebar {
@@ -40,14 +40,13 @@
 }
 
 .grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-    padding: 16px 7px 10px 7px;
-    background: #343943;
-    border-radius: 0 0 24px 24px;
-    min-height: 340px;
-    
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 8px;
+	padding: 16px 20px 10px 20px;
+	background: #343943;
+	border-radius: 0 0 24px 24px;
+	min-height: 340px;
 }
 
 .cell {
@@ -96,7 +95,6 @@
 	font-weight: bold;
 	min-height: 18px;
 	word-break: keep-all;
-	white-space: pre-line;
 }
 
 .cell-check {
@@ -186,17 +184,17 @@
 
 .attd-modal-content {
 	position: relative;
-    background: transparent;
-    border: none;
-    box-shadow: 0 10px 36px #00000048;
-    border-radius: 28px;
-    width: 1250px;
-    max-height: 96vh;
-    overflow-y: auto;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	background: transparent;
+	border: none;
+	box-shadow: 0 10px 36px #00000048;
+	border-radius: 28px;
+	width: 1250px;
+	max-height: 96vh;
+	overflow-y: auto;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .attd-modal-close {
@@ -224,4 +222,9 @@
 #attendance-modal-body .attd-wrapper {
 	margin: 0 !important;
 	/* 필요시 width만 조정 */
+}
+
+.coin-icon {
+	color: gold;
+	margin-right: 4px;
 }

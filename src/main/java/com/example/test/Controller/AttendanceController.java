@@ -45,11 +45,6 @@ public class AttendanceController {
 
         boolean attendedToday = isThisMonth && attendanceMap.getOrDefault(today, false);
 
-        List<String> rewardList = new ArrayList<>();
-        for (int i = 1; i <= lastDay; i++) {
-            rewardList.add(i + "일차 보상");
-        }
-
         model.addAttribute("year", year);
         model.addAttribute("month", month);
         model.addAttribute("lastDay", lastDay);
@@ -57,7 +52,6 @@ public class AttendanceController {
         model.addAttribute("isThisMonth", isThisMonth);
         model.addAttribute("attendedToday", attendedToday);
         model.addAttribute("attendanceMap", attendanceMap);
-        model.addAttribute("rewardList", rewardList);
 
         log.info("출석 {}", attendanceMap);
 
@@ -72,10 +66,11 @@ public class AttendanceController {
     // 오늘 출석체크
     @PostMapping("/check-in")
     @ResponseBody 
-    public String checkIn(HttpSession session, @RequestParam int year, @RequestParam int month, Model model) {
+    public String checkIn(HttpSession session, @RequestParam int year, @RequestParam int month, @RequestParam String point, Model model) {
+        int pointValue = Integer.parseInt(point);
         Users user = (Users) session.getAttribute("member");
         Long userId = user.getUserId();
-        attendanceService.checkTodayAttendance(userId);
+        attendanceService.checkTodayAttendance(userId, pointValue);
         return "success";
     }
 }

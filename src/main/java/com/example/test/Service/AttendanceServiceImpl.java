@@ -1,6 +1,8 @@
 package com.example.test.Service;
 
 import com.example.test.Dao.AttendanceDao;
+import com.example.test.Dao.UsersDao;
+import com.example.test.Model.BuyPoint;
 import com.example.test.Model.UserAttendanceDetail;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +17,12 @@ import java.util.Map;
 @Slf4j
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
+
     @Autowired
     AttendanceDao attendanceDao;
+
+    @Autowired
+    UsersDao usersDao;
 
     @Override
     public Map<Integer, Boolean> getMonthAttendance(Long userId, int year, int month) {
@@ -37,9 +41,8 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     // 오늘 출석 체크 (중복방지)
     @Override
-    public boolean checkTodayAttendance(Long userId) {
+    public boolean checkTodayAttendance(Long userId, int point) {
         Date today = new Date(System.currentTimeMillis());
-//        today = Date.valueOf(today.toLocalDate().plusDays(1));
 
         Map<String, Object> params = new HashMap<>();
         params.put("userId", userId);
@@ -48,6 +51,9 @@ public class AttendanceServiceImpl implements AttendanceService {
         int count = attendanceDao.countTodayAttendance(params);
         if (count > 0) return false; // 이미 출석함
         attendanceDao.insertAttendance(userId, today);
+        BuyPoint myPoint = usersDao.getPointByUserId(userId);
+        myPoint.setPointMoney(myPoint.getPointMoney() + point);
+        usersDao.earnPointByUserId(myPoint); // 출석시 10포인트 지급
         return true;
     }
 }
