@@ -33,45 +33,41 @@
         <li>매일 첫 로그인 시 출석 가능합니다.</li>
         <li>출석 완료 시 각 칸의 선물 아이콘이 활성화됩니다.</li>
         <li>이번 달 <span style="color:#34db63;font-weight:bold;"><c:out value="${lastDay}"/></span>일 모두 출석시 추가 보상이 지급됩니다.</li>
-		<form id="attendance-form" class="btn-area">
-		    <input type="hidden" name="year" value="${year}"/>
-		    <input type="hidden" name="month" value="${month}"/>
-		    <button type="submit"
-		            class="big-btn"
-		            <c:if test='${isThisMonth and attendedToday}'>disabled</c:if>>
-		        선물받기
-		    </button>
-		</form>
     </ul>
-    <script>
-	document.addEventListener('DOMContentLoaded', function(){
-	    var form = document.getElementById('attendance-form');
-	    if(form) {
-	        form.onsubmit = function(e){
-	            e.preventDefault();
-	            var xhr = new XMLHttpRequest();
-	            xhr.open("POST", form.action);
-	            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	            xhr.onload = function(){
-	                if(xhr.status === 200 && xhr.responseText === "success") {
-	                    alert('출석이 완료되었습니다!');
-	                    fetch("/attendance/calendar?modal=1")
-	                        .then(res=>res.text())
-	                        .then(html=>{
-	                            document.getElementById("attendance-modal-body").innerHTML = html;
-	                        });
-	                } else {
-	                    alert('출석에 실패했습니다.');
-	                }
-	            };
-	            var params = Array.from(new FormData(form)).map(
-	                e => encodeURIComponent(e[0])+'='+encodeURIComponent(e[1])
-	            ).join('&');
-	            xhr.send(params);
-	        };
-	    }
-	});
-</script>
-    
+    <form id="attendance-form" class="btn-area">
+    		    <input type="hidden" name="year" value="${year}"/>
+    		    <input type="hidden" name="month" value="${month}"/>
+    		    <button type="submit"
+    		            class="big-btn"
+    		            <c:if test='${isThisMonth and attendedToday}'>disabled</c:if>>
+    		        선물받기
+    		    </button>
+    		</form>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+	$(document).on('submit', '#attendance-form', function(event) {
+	    event.preventDefault(); // 폼 제출 방지
+	    alert('출석 체크를 진행합니다!');
+	    $.ajax({
+	        type: 'POST',
+	        url: '/attendance/check-in',
+	        data: $(this).serialize(),
+	        success: function(response) {
+	            if (response == 'success') {
+	                alert('선물을 받았습니다!');
+	                $(".attd-wrapper").load("/attendance/calendar?modal=1");
+	            } else {
+	                alert('이미 선물을 받으셨습니다.');
+	            }
+	        },
+	        error: function() {
+	            alert('오류가 발생했습니다. 다시 시도해주세요.');
+	        }
+	    });
+	});
+});
+</script>
+
 

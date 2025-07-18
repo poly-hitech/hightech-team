@@ -56,7 +56,7 @@
 	border-radius: 13px;
 	text-align: center;
 	padding: 8px 3px 4px 3px;
-	min-height: 101px;
+	min-height: 104px;
 	position: relative;
 	box-shadow: 0 2px 12px #a7ff95a3;
 	transition: 0.17s;
@@ -67,6 +67,7 @@
 }
 
 .cell.today {
+	font-size: 15px;
 	border: 3.8px solid #ffc904;
 	background: linear-gradient(135deg, #fff8db 60%, #fffbe4 100%);
 	box-shadow: 0 0 18px #ffe09f86;
@@ -110,7 +111,7 @@
 	margin-top: 3px;
 	color: #ffb607;
 	font-weight: bold;
-	font-size: 16px;
+	font-size: 14px;
 	letter-spacing: 1px;
 	text-shadow: 0 1px 3px #fffde0b5;
 }
@@ -189,7 +190,7 @@
     border: none;
     box-shadow: 0 10px 36px #00000048;
     border-radius: 28px;
-    max-width: 96vw;
+    width: 1250px;
     max-height: 96vh;
     overflow-y: auto;
     padding: 0;

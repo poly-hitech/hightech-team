@@ -72,7 +72,7 @@ public class AttendanceController {
     // 오늘 출석체크
     @PostMapping("/check-in")
     @ResponseBody 
-    public String checkIn(HttpSession session, @RequestParam Integer year, @RequestParam Integer month, Model model) {
+    public String checkIn(HttpSession session, @RequestParam int year, @RequestParam int month, Model model) {
         Users user = (Users) session.getAttribute("member");
         Long userId = user.getUserId();
         attendanceService.checkTodayAttendance(userId);
