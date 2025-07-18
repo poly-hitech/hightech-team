@@ -65,7 +65,7 @@ public class AttendanceController {
 
     // 오늘 출석체크
     @PostMapping("/check-in")
-    @ResponseBody 
+    @ResponseBody
     public String checkIn(HttpSession session, @RequestParam int year, @RequestParam int month, @RequestParam String point, Model model) {
         int pointValue = Integer.parseInt(point);
         Users user = (Users) session.getAttribute("member");
