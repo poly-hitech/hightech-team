@@ -182,7 +182,7 @@ public class UsersServiceImpl implements UsersService {
 			int random = (int)(Math.random()*7);
 			
 			//0부터 시작하여 그 이후엔 2의 배수의 위치에 특수문자 랜덤 저장
-			String charpass = stringPass[random];
+			String charpass = stringPass[random-1];
 			log.info("임의 생성된 특수문자 확인: {}" + charpass);
 		    if (passEncode[a*2] == null) {
 		        passEncode[a*2] = "";  // null을 빈 문자열로 대체
