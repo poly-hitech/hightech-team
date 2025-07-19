@@ -71,6 +71,7 @@ public class AttendanceController {
         Users user = (Users) session.getAttribute("member");
         Long userId = user.getUserId();
         attendanceService.checkTodayAttendance(userId, pointValue);
+        attendanceService.giveBonusIfEligible(userId, year, month);
         return "success";
     }
 }

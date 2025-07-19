@@ -36,4 +36,15 @@ public class AttendanceDaoImpl implements AttendanceDao {
         param.put("attendDate", attendDate);
         sqlSession.insert("userAttendance.insertAttendance", param);
     }
+
+    @Override
+    public void insertBonusRecord(Map<String, Object> params) {
+        sqlSession.insert("userAttendance.insertBonusRecord", params);
+    }
+
+    @Override
+    public boolean hasReceivedBonus(Map<String, Object> params) {
+        Integer count = sqlSession.selectOne("userAttendance.hasReceivedBonus", params);
+        return count != null && count > 0;
+    }
 }
