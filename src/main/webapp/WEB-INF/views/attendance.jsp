@@ -8,53 +8,56 @@
         </div>
     </div>
     <div class="grid">
-    <c:forEach begin="1" end="${lastDay}" var="day">
-        <c:set var="isToday" value="${isThisMonth and today == day}" />
-        <c:set var="attended" value="${attendanceMap[day] eq true}" />
-        <c:choose>
-            <c:when test="${day == 7 or day == 14 or day == 21 or day == 28}">
-                <c:set var="pointValue" value="300" />
-                <c:set var="reward" value="<i class='fas fa-coins coin-icon'></i> ${pointValue}" />
-            </c:when>
-            <c:otherwise>
-                <c:set var="pointValue" value="100" />
-                <c:set var="reward" value="<i class='fas fa-coins coin-icon'></i> ${pointValue}" />
-            </c:otherwise>
-        </c:choose>
-        <div class="cell
-            <c:if test='${attended}'>attended</c:if>
-            <c:if test='${isToday}'> today</c:if>
-        ">
-            <div class="cell-header"><c:out value="${day}"/>일차</div>
-            <div class="cell-reward">
-                <c:out value="${reward}" escapeXml="false"/>
-            </div>
+        <c:forEach begin="1" end="${lastDay}" var="day">
+            <c:set var="isToday" value="${isThisMonth and today == day}" />
+            <c:set var="attended" value="${attendanceMap[day] eq true}" />
             <c:choose>
-                <c:when test="${attended}">
-                    <div class="cell-check">✔️</div>
+                <c:when test="${day == 7 or day == 14 or day == 21 or day == 28}">
+                    <c:set var="pointValue" value="300" />
+                    <c:set var="reward" value="<i class='fas fa-coins coin-icon'></i> ${pointValue}" />
                 </c:when>
-                <c:when test="${isToday}">
-                    <div class="cell-today">오늘!</div>
-                </c:when>
+                <c:otherwise>
+                    <c:set var="pointValue" value="100" />
+                    <c:set var="reward" value="<i class='fas fa-coins coin-icon'></i> ${pointValue}" />
+                </c:otherwise>
             </c:choose>
-        </div>
-    </c:forEach>
+            <div class="cell
+                <c:if test='${attended}'>attended</c:if>
+                <c:if test='${isToday}'> today</c:if>
+            ">
+                <div class="cell-header"><c:out value="${day}"/>일차</div>
+                <div class="cell-reward">
+                    <c:out value="${reward}" escapeXml="false"/>
+                </div>
+                <c:choose>
+                    <c:when test="${attended}">
+                        <div class="cell-check">✔️</div>
+                    </c:when>
+                    <c:when test="${isToday}">
+                        <div class="cell-today">오늘!</div>
+                    </c:when>
+                </c:choose>
+            </div>
+        </c:forEach>
     </div>
     <ul class="desc">
-        <li>매일 첫 로그인 시 출석 가능합니다.</li>
-        <li>출석 완료 시 각 칸의 선물 아이콘이 활성화됩니다.</li>
-        <li>이번 달 <span style="color:#34db63;font-weight:bold;"><c:out value="${lastDay}"/></span>일 모두 출석시 추가 보상이 지급됩니다.</li>
+        <div>
+            <li>매일 첫 로그인 시 출석 가능합니다.</li>
+            <li>출석 완료 시 각 칸의 선물 아이콘이 활성화됩니다.</li>
+            <li>이번 달 <span style="color:#34db63;font-weight:bold;"><c:out value="${lastDay}"/></span>일 모두 출석 시 추가 보상이 지급됩니다.</li>
+        </div>
+        <div>
+            <form id="attendance-form" class="desc-form">
+                <input type="hidden" name="year" value="${year}"/>
+                <input type="hidden" name="month" value="${month}"/>
+                <input type="hidden" name="point" value="${pointValue}"/>
+                <button type="submit" class="big-btn"
+                        <c:if test='${isThisMonth and attendedToday}'>disabled</c:if>>
+                    선물받기
+                </button>
+            </form>
+        </div>
     </ul>
-    <form id="attendance-form" class="btn-area">
-    		    <input type="hidden" name="year" value="${year}"/>
-    		    <input type="hidden" name="month" value="${month}"/>
-    		    <input type="hidden" name="point" value="${pointValue}"/>
-    		    <button type="submit"
-    		            class="big-btn"
-    		            <c:if test='${isThisMonth and attendedToday}'>disabled</c:if>>
-    		        선물받기
-    		    </button>
-    		</form>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
