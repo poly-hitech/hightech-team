@@ -14,10 +14,13 @@
     <link rel="stylesheet" href="${root}/css/mainmenu.css" />
     <link rel="stylesheet" href="${root}/css/attendance.css" />
     <!-- Boxicons CSS -->
-    <link flex href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
   <body>
+  <c:if test="${sessionScope.member != null}">
+    <c:set var="userId" value="${sessionScope.member.userId}" />
+  </c:if>
   <div id="attendance-modal" class="attd-modal" style="display:none;">
     <div class="attd-modal-bg"></div>
     <div class="attd-modal-content">
@@ -124,14 +127,12 @@
                 <span>자유 게시판</span>
               </a>
             </li>
-            <c:if test="${sessionScope.member != null}">
             <li class="item">
       			<a href="#" id="open-attendance-modal" class="link flex">
       			    <i class="bx bx-calendar"></i>
         			<span>출석체크</span>
       			</a>
     		</li>
-    		</c:if>
           </ul>
           <ul class="menu_item">
             <div class="menu_title flex">
@@ -173,8 +174,14 @@
     </nav>
     <script>
     document.addEventListener('DOMContentLoaded', function () {
+        const userId = "${userId}" || null;
         document.getElementById("open-attendance-modal").onclick = function (e) {
             e.preventDefault();
+            if(userId == null) {
+                alert("로그인이 필요합니다.");
+                window.location.href = "${root}/login";
+                return;
+            }
             // 모달 보이기
             document.getElementById("attendance-modal").style.display = "flex";
             // 달력 내용 ajax로 불러오기 (모달용 url 필요)
