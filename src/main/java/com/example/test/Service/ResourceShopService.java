@@ -25,4 +25,6 @@ public interface ResourceShopService {
 
 	void updateMyResource(Long itemId, Market market, MultipartFile file, Model model) throws Exception;
 
+	List<ResourceShop> getTopFromResource();
+
 }

@@ -70,4 +70,10 @@ public class ResourceDaoImpl implements ResourceDao {
 		return sql.selectOne("resourceShop.countAllItems");
 	}
 
+	@Override
+	public List<ResourceShop> getTopFromResource() {
+		// TODO Auto-generated method stub
+		return sql.selectList("resourceShop.getTopFromResource");
+	}
+
 }

@@ -109,8 +109,8 @@ public class MarketController {
     }
     
     // 리소스 상품 상세
-    @GetMapping("/detail")
-    public String showDetail(@RequestParam("itemId") Long itemId, HttpSession session, Model model) throws JsonProcessingException {
+    @GetMapping("/detail/{itemId}")
+    public String showDetail(@PathVariable Long itemId, HttpSession session, Model model) throws JsonProcessingException {
         int page = 1;
         int pageSize = 5;
         int startRow = 0;

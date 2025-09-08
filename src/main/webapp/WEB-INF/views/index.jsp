@@ -64,7 +64,11 @@
         .section-title {
             font-size: 2rem;
             font-weight: bold;
-            color: #333;
+            color: #D275D9;
+            text-align: center;
+        }
+        .section-subtitle {
+        	color: rgba(220, 140, 230, 0.4);
             text-align: center;
             margin-bottom: 20px;
         }
@@ -79,8 +83,11 @@
             }
         }
         @media (min-width: 1024px) {
+        	.resource-slider {
+                width: calc(250px * 5);
+            }
             .resource-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(5, 1fr);
             }
         }
 
@@ -89,6 +96,8 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             overflow: hidden;
+            margin: 0 auto;
+            width: 250px;
         }
         .resource-image {
             width: 100%;
@@ -186,7 +195,8 @@
 
         <!-- Resource Market Section -->
         <div class="resource-section">
-            <h2 class="section-title">Popular Resources</h2>
+            <h2 class="section-title">오늘의 인기 리소스</h2>
+            <p class="section-subtitle">당신도 지금 이 순간 오늘의 판매왕이 될 수 있습니다.</p>
             <div class="resource-grid">
                 <c:forEach var="resource" items="${popularResources}">
                     <div class="resource-card">
@@ -194,7 +204,7 @@
                         <div class="resource-details">
                             <h3 class="resource-title">${resource.itemName}</h3>
                             <p class="resource-price">${resource.itemPrice}</p>
-                            <a href="${root}/shop/detail?itemId=${resource.itemId}" class="resource-button">Add to Cart</a>
+                            <a href="${root}/shop/detail/${resource.itemId}" class="resource-button">리소스 정보</a>
                         </div>
                     </div>
                 </c:forEach>
@@ -203,7 +213,8 @@
 
         <!-- Community Section -->
         <div class="community-section">
-            <h2 class="section-title">Latest Community Posts</h2>
+            <h2 class="section-title">최근 게시물</h2>
+            <p class="section-subtitle">공지사항부터 최근 게시물까지 확인해보세요.</p>
             <div class="community-grid">
                 <c:forEach var="post" items="${latestPosts}">
                     <div class="community-card">

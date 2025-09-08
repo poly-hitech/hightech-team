@@ -18,6 +18,7 @@
 			values (RESOURCEFILE_SEQ.NEXTVAL, #{file.resourceFileName}, #{itemId})
 		</foreach>
 	</insert>
+	
 
 	<!-- 전체 리소스 개수 -->
 	<select id="countAllItems" resultType="long">
@@ -149,6 +150,35 @@
 	    resourceSubCategory.resourceSubCategoryId,
 	    resourceShop.itemId,
 	    resourceFile.resourceFileId
+	</select>
+	
+	<!-- 상위 판매량의 리소스 정보 -->
+	<select id="getTopFromResource" resultType="ResourceShop">
+	<!-- cdata를 사용해서 특수문자를 무시하고 쿼리 그대로를 날려줌 -->
+		<![CDATA[
+		    SELECT * FROM
+		    (
+		        SELECT sub.* FROM
+		        (
+		            SELECT 
+		                resourceShop.itemId AS itemId,
+		                resourceShop.itemName,
+		                resourceShop.itemPrice,
+		                resourceShop.itemWriter,
+		                resourceShop.resourceDate,
+		                resourceShop.totalReviewCount,
+		                resourceShop.resourceContent,
+		                resourceShop.resourceImage,
+		                resourceShop.userID,
+		                resourceShop.resourceSubCategoryId
+		            FROM ResourceShop resourceShop
+		            LEFT JOIN Counting counting 
+		                ON counting.itemId = resourceShop.itemId
+		            ORDER BY counting.dailycount DESC
+		        ) sub
+		    )
+		    WHERE ROWNUM <= 10
+	    ]]>
 	</select>
 
 	<!-- 로그인한 사용자가 등록한 상점 정보 -->
