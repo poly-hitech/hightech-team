@@ -21,7 +21,7 @@
     <nav class="sidebar locked">
       <div class="logo_items flex">
         <span class="nav_image">
-          <img src="images/logo.png" alt="logo_img" />
+          <img src="${root}/images/logo.jpg" alt="logo_img" />
         </span>
         <span class="logo_name"><a href="${root}/" class="logo_link">코딩기딩</a></span>
         <i class="bx bx-lock-alt" id="lock-icon" title="Unlock Sidebar"></i>
