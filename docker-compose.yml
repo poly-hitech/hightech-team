@@ -21,3 +21,17 @@ services:
     depends_on:
       - hightech-backend
     restart: always
+  
+  db:
+    image: sath89/oracle-18c
+    container_name: oracle-db
+    environment:
+      - ORACLE_ALLOW_REMOTE=true
+      - ORACLE_DISABLE_ASYNCH_IO=true
+      - ORACLE_PASSWORD=duswjd12
+    ports:
+      - "1521:1521"
+      - "8083:8083"
+    volumes:
+      - oracle-data:/u01/app/oracle
+    restart: always
