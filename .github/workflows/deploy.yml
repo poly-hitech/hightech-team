@@ -22,7 +22,7 @@ jobs:
       # Docker 이미지 빌드 전
       - name: Maven Build
         run: |
-          cd hitech
+          cd hightech
           mvn clean package -DskipTests
 
       # 2. 도커허브 로그인
@@ -34,11 +34,11 @@ jobs:
 
       # 3. 이미지 빌드
       - name: 이미지 빌드
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/hitech .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/hightech .
 
       # 4. 도커허브에 이미지 푸시
       - name: 도커허브에 이미지 푸시
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/hitech
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/hightech
 
       # 2. SSH로 EC2 접속 후 배포
       - name: Deploy on EC2
@@ -49,7 +49,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            APP_DIR=/home/ubuntu/hitech
+            APP_DIR=/home/ubuntu/hightech
 
             # Git clone 또는 pull
             if [ ! -d "$APP_DIR/.git" ]; then
@@ -72,18 +72,18 @@ jobs:
             sudo mvn clean package -DskipTests
 
             # 기존 컨테이너 중지 및 삭제
-            if [ $(sudo docker ps -q -f name=hitech) ]; then
-              sudo docker stop hitech
-              sudo docker rm hitech
+            if [ $(sudo docker ps -q -f name=hightech) ]; then
+              sudo docker stop hightech
+              sudo docker rm hightech
             fi
 
             # 최신 이미지 가져오기
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hitech
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hightech
 
             sudo curl http://localhost/.well-known/acme-challenge/test
 
             # Docker Compose로 springboot-app + nginx 실행
             cd $APP_DIR
-            sudo docker-compose up -d --build hitech-backend spring-nginx
+            sudo docker-compose up -d --build hightech-backend spring-nginx
 
             sudo docker logs spring-nginx --tail=50

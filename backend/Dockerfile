@@ -1,5 +1,5 @@
 FROM tomcat:9.0-jdk11
-WORKDIR /hitech
+WORKDIR /hightech
 # 기존 ROOT 제거
 RUN rm -rf /usr/local/tomcat/webapps/*
 

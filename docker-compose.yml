@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   hitech-backend:
-    build: ./hitech-backend
+    build: ./hightech-backend
     image: wlwl45wl/hitech-backend:latest
     container_name: hitech-backend
     ports:
@@ -19,5 +19,5 @@ services:
       - /etc/letsencrypt/live/wookportfolio.duckdns.org/fullchain.pem:/etc/nginx/certs/fullchain.pem:ro
       - /etc/letsencrypt/live/wookportfolio.duckdns.org/privkey.pem:/etc/nginx/certs/privkey.pem:ro
     depends_on:
-      - hitech-backend
+      - hightech-backend
     restart: always

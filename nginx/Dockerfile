@@ -1,5 +1,5 @@
 FROM nginx:alpine
-WORKDIR /hitech
+WORKDIR /hightech
 # Nginx 설정 파일 복사
 COPY ./conf.d /etc/nginx/conf.d
 
