@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  hitech-backend:
+  hightech-backend:
     build: .
     image: wlwl45wl/hitech-backend:latest
     container_name: hightech-backend

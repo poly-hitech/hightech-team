@@ -69,7 +69,7 @@ jobs:
 
             # Maven 빌드 (pom.xml 위치 확인)
             cd $APP_DIR   # pom.xml이 있는 디렉터리
-            sudo mvn clean package -DskipTests
+            sudo mvn clean package -DskipTests -f pom.xml
 
             # 기존 컨테이너 중지 및 삭제
             if [ $(sudo docker ps -q -f name=hightech) ]; then
