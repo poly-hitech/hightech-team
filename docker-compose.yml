@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  hitech-backend:
+    build: ./hitech-backend
+    image: wlwl45wl/hitech-backend:latest
+    container_name: hitech-backend
+    ports:
+      - "8083:8083"
+    restart: always
+
+  spring-nginx:
+    build: ./spring-nginx
+    container_name: spring-nginx
+    ports:
+      - "83:83"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:rw
+      - /etc/letsencrypt/live/wookportfolio.duckdns.org/fullchain.pem:/etc/nginx/certs/fullchain.pem:ro
+      - /etc/letsencrypt/live/wookportfolio.duckdns.org/privkey.pem:/etc/nginx/certs/privkey.pem:ro
+    depends_on:
+      - hitech-backend
+    restart: always
