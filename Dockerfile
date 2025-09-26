@@ -4,7 +4,6 @@ WORKDIR /hightech
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 # 빌드된 WAR 복사
-COPY server.xml /usr/local/tomcat/conf/server.xml
 COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 8083
