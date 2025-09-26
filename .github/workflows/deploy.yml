@@ -77,6 +77,9 @@ jobs:
               sudo docker rm hightech
             fi
 
+            #톰캣 설정 복사(포트설정)
+            docker cp ./server.xml hightech-backend:/usr/local/tomcat/conf/server.xml
+
             # 최신 이미지 가져오기
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hightech
 
