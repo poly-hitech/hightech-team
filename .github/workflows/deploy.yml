@@ -22,7 +22,6 @@ jobs:
       # Docker 이미지 빌드 전
       - name: Maven Build
         run: |
-          cd hightech
           mvn clean package -DskipTests
 
       # 2. 도커허브 로그인
