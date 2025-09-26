@@ -78,7 +78,9 @@ jobs:
             fi
 
             #톰캣 설정 복사(포트설정)
-            docker cp ./server.xml hightech-backend:/usr/local/tomcat/conf/server.xml
+            sudo docker cp ./server.xml hightech-backend:/usr/local/tomcat/conf/server.xml
+            sudo docker exec -it hightech-backend catalina.sh stop
+            sudo docker exec -it hightech-backend catalina.sh start
 
             # 최신 이미지 가져오기
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hightech
