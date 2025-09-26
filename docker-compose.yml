@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   hitech-backend:
-    build: ./backend
+    build: .
     image: wlwl45wl/hitech-backend:latest
     container_name: hitech-backend
     ports:
