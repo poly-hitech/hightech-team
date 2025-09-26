@@ -55,6 +55,7 @@ jobs:
               # 기존 소스 초기화
               sudo rm -rf $APP_DIR
               mkdir -p $APP_DIR
+              cd $APP_DIR
 
               echo "Git 저장소 없음 → 클론 실행"
               sudo git clone https://github.com/poly-hitech/hightech-team.git .
