@@ -31,7 +31,6 @@ services:
       - ORACLE_PASSWORD=duswjd12
     ports:
       - "1521:1521"
-      - "8083:8083"
     volumes:
       - oracle-data:/u01/app/oracle
     restart: always
