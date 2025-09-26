@@ -1,6 +1,21 @@
 version: "3.8"
 
+volumes:
+  oracle-data: {}
 services:
+  oracle-db:
+    image: sath89/oracle-18c
+    container_name: oracle-db
+    environment:
+      - ORACLE_ALLOW_REMOTE=true
+      - ORACLE_DISABLE_ASYNCH_IO=true
+      - ORACLE_PASSWORD=duswjd12
+    ports:
+      - "1521:1521"
+    volumes:
+      - oracle-data:/u01/app/oracle
+    restart: always
+
   hightech-backend:
     build: .
     image: wlwl45wl/hitech-backend:latest
@@ -8,6 +23,8 @@ services:
     ports:
       - "8083:8083"
     restart: always
+    depends_on:
+      - oracle-db
 
   spring-nginx:
     build: ./nginx
@@ -21,18 +38,3 @@ services:
     depends_on:
       - hightech-backend
     restart: always
-  
-  db:
-    image: sath89/oracle-18c
-    container_name: oracle-db
-    environment:
-      - ORACLE_ALLOW_REMOTE=true
-      - ORACLE_DISABLE_ASYNCH_IO=true
-      - ORACLE_PASSWORD=duswjd12
-    ports:
-      - "1521:1521"
-    volumes:
-      - oracle-data:/u01/app/oracle
-    restart: always
-  volumes:
-    oracle-data:
