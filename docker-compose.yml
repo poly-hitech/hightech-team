@@ -4,7 +4,7 @@ volumes:
   oracle-data: {}
 services:
   oracle-db:
-    image: sath89/oracle-18c
+    image: oracleinanutshell/oracle-xe-11g
     container_name: oracle-db
     environment:
       - ORACLE_ALLOW_REMOTE=true
@@ -25,6 +25,7 @@ services:
     restart: always
     depends_on:
       - oracle-db
+    command: ["./wait-for-it.sh", "oracle-db:1521", "--", "catalina.sh", "run"]
 
   spring-nginx:
     build: ./nginx
