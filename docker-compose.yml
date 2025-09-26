@@ -4,7 +4,7 @@ services:
   hitech-backend:
     build: .
     image: wlwl45wl/hitech-backend:latest
-    container_name: hitech-backend
+    container_name: hightech-backend
     ports:
       - "8083:8083"
     restart: always
