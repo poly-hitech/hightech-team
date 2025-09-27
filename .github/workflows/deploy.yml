@@ -96,7 +96,8 @@ jobs:
             sudo docker logs oracle-db --tail=50\
 
       # 서버 설정 복사 및 톰캣 재시작
-      - name: Copy server.xml to Tomcat
+      - name: 서버 설정 복사
         run: sudo docker cp /home/ubuntu/server.xml hightech-backend:/usr/local/tomcat/conf/server.xml
-      - name: Restart Tomcat
+      
+      - name: 톰캣 재시작
         run: sudo docker exec hightech-backend catalina.sh stop && docker exec hightech-backend catalina.sh start
