@@ -25,7 +25,6 @@ services:
     restart: always
     depends_on:
       - oracle-db
-    command: ["./wait-for-it.sh", "oracle-db:1521", "--", "catalina.sh", "run"]
 
   spring-nginx:
     build: ./nginx
