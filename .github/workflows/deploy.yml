@@ -89,15 +89,18 @@ jobs:
             sudo docker-compose up -d --build oracle-db
             sudo docker-compose up -d --build hightech-backend spring-nginx 
 
-            sudo docker logs spring-nginx --tail=50
-
             #톰캣 설정 복사(포트설정)
+            echo "${{ secrets.SERVER }}" > home/ubuntu/server.xml
+            sudo docker cp ~/server.xml hightech-backend:/usr/local/tomcat/conf/server.xml
+
+            # 톰캣 재시작
+            sudo docker exec hightech-backend catalina.sh stop
+            sudo docker exec hightech-backend catalina.sh start
+
+            sudo docker logs spring-nginx --tail=50
             sudo docker logs hightech-backend --tail=50
             sudo docker logs oracle-db --tail=50\
 
-      # 서버 설정 복사 및 톰캣 재시작
-      - name: 서버 설정 복사
-        run: sudo docker cp /home/ubuntu/server.xml hightech-backend:/usr/local/tomcat/conf/server.xml
-      
-      - name: 톰캣 재시작
-        run: sudo docker exec hightech-backend catalina.sh stop && docker exec hightech-backend catalina.sh start
+
+
+
