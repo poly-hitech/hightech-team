@@ -84,6 +84,11 @@ jobs:
 
             sudo curl http://localhost/.well-known/acme-challenge/test
 
+            # wait-for-it.sh 스크립트 다운로드 및 실행 권한 부여
+            echo "${{ secrets.WAIT_FOT_IT }}" > /home/ubuntu/wait-for-it.sh
+            sudo chmod +x /home/ubuntu/wait-for-it.sh
+            sudo docker cp /home/ubuntu/wait-for-it.sh hightech-backend:/usr/local/tomcat/bin/wait-for-it.sh
+
             # Docker Compose로 springboot-app + nginx 실행
             cd $APP_DIR
             sudo docker-compose up -d --build oracle-db
@@ -95,11 +100,12 @@ jobs:
 
             # 톰캣 재시작
             sudo docker exec hightech-backend catalina.sh stop
+            sleep 5
             sudo docker exec hightech-backend catalina.sh start
 
             sudo docker logs spring-nginx --tail=50
             sudo docker logs hightech-backend --tail=50
-            sudo docker logs oracle-db --tail=50\
+            sudo docker logs oracle-db --tail=50
 
 
 

@@ -7,4 +7,4 @@ RUN rm -rf /usr/local/tomcat/webapps/*
 COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 8083
-CMD ["catalina.sh", "run"]
+CMD ["/bin/bash", "-c", "/usr/local/tomcat/bin/wait-for-it.sh oracle-db:1521 --timeout=60 --strict -- catalina.sh run"]
