@@ -74,7 +74,7 @@ jobs:
             # 기존 컨테이너 중지 및 삭제
             if [ $(sudo docker ps -q -f name=hightech) ]; then
               sudo docker stop hightech
-              sudo docker rm -v hightech
+              sudo docker rm hightech
             fi
 
 
