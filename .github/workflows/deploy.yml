@@ -97,6 +97,6 @@ jobs:
 
       # 서버 설정 복사 및 톰캣 재시작
       - name: Copy server.xml to Tomcat
-        run: sodu docker cp /home/ubuntu/server.xml hightech-backend:/usr/local/tomcat/conf/server.xml
+        run: sudo docker cp /home/ubuntu/server.xml hightech-backend:/usr/local/tomcat/conf/server.xml
       - name: Restart Tomcat
         run: sudo docker exec hightech-backend catalina.sh stop && docker exec hightech-backend catalina.sh start
