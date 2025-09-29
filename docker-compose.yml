@@ -5,7 +5,7 @@ volumes:
 
 services:
   oracle-db:
-    image: gvenzl/oracle-xe:11g
+    image: gvenzl/oracle-xe:11
     container_name: oracle-db
     environment:
       - ORACLE_ALLOW_REMOTE=true
