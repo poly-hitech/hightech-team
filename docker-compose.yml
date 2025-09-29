@@ -3,10 +3,6 @@ version: "3.8"
 volumes:
   oracle-data: {}
 
-networks:
-  hitech-network:
-    driver: bridge
-
 services:
   oracle-db:
     image: gvenzl/oracle-xe:latest
