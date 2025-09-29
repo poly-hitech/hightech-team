@@ -85,7 +85,7 @@ jobs:
             sudo curl http://localhost/.well-known/acme-challenge/test
 
             # wait-for-it.sh 스크립트 다운로드 및 실행 권한 부여
-            echo "${{ secrets.WAIT_FOT_IT }}" > /home/ubuntu/wait-for-it.sh
+            echo "${{ secrets.WAIT_FOR_IT }}" > /home/ubuntu/wait-for-it.sh
             sudo chmod +x /home/ubuntu/wait-for-it.sh
             sudo docker cp /home/ubuntu/wait-for-it.sh hightech-backend:/usr/local/tomcat/bin/wait-for-it.sh
 
