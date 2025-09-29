@@ -71,6 +71,23 @@ jobs:
             cd $APP_DIR   # pom.xml이 있는 디렉터리
             sudo mvn clean package -DskipTests -f pom.xml
 
+            # 기존 컨테이너 중지 및 삭제
+            if [ $(sudo docker ps -q -f name=hightech) ]; then
+              sudo docker stop hightech
+              sudo docker rm hightech
+            fi
+            if [ $(sudo docker ps -q -f name=spring-nginx) ]; then
+              sudo docker stop spring-nginx
+              sudo docker rm spring-nginx
+            fi
+            if [ $(sudo docker ps -q -f name=hightech-backend) ]; then
+              sudo docker stop hightech-backend
+              sudo docker rm hightech-backend
+            fi
+            if [ $(sudo docker ps -q -f name=oracle-db) ]; then
+              sudo docker stop oracle-db
+              sudo docker rm oracle-db
+            fi
             # 최신 이미지 가져오기
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hightech
 
