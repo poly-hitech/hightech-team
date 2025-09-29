@@ -2,6 +2,11 @@ version: "3.8"
 
 volumes:
   oracle-data: {}
+
+networks:
+  hitech-network:
+    driver: bridge
+
 services:
   oracle-db:
     image: gvenzl/oracle-xe:latest
@@ -14,6 +19,8 @@ services:
       - "1521:1521"
     volumes:
       - oracle-data:/u01/app/oracle
+    networks:
+      - hitech-network
     restart: always
 
   hightech-backend:
@@ -22,9 +29,12 @@ services:
     container_name: hightech-backend
     ports:
       - "8083:8083"
-    restart: always
     depends_on:
       - oracle-db
+    networks:
+      - hitech-network
+    restart: always
+
 
   spring-nginx:
     build: ./nginx
@@ -37,4 +47,6 @@ services:
       - /etc/letsencrypt/live/wookportfolio.duckdns.org/privkey.pem:/etc/nginx/certs/privkey.pem:ro
     depends_on:
       - hightech-backend
+    networks:
+      - hitech-network
     restart: always
