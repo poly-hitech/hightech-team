@@ -79,7 +79,7 @@ jobs:
             # wait-for-it.sh 스크립트 다운로드 및 실행 권한 부여
             echo "${{ secrets.WAIT_FOR_IT }}" > /home/ubuntu/wait-for-it.sh
             sudo chmod +x /home/ubuntu/wait-for-it.sh
-            sudo docker cp /home/ubuntu/wait-for-it.sh hightech-backend:/usr/local/tomcat/bin/wait-for-it.sh
+            mv /home/ubuntu/wait-for-it.sh /home/ubuntu/hightech/
 
             # Docker Compose로 springboot-app + nginx 실행
             cd $APP_DIR

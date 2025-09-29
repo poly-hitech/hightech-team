@@ -5,6 +5,8 @@ RUN rm -rf /usr/local/tomcat/webapps/*
 
 # 빌드된 WAR 복사
 COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
+COPY wait-for-it.sh /usr/local/tomcat/bin/wait-for-it.sh
+RUN chmod +x /usr/local/tomcat/bin/wait-for-it.sh
 
 EXPOSE 8083
 CMD ["/bin/bash", "-c", "/usr/local/tomcat/bin/wait-for-it.sh oracle-db:1521 --timeout=300 --strict -- catalina.sh run"]
