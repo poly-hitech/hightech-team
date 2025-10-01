@@ -71,17 +71,13 @@ jobs:
               sudo git pull origin master
             fi
 
-            # Maven 빌드 (pom.xml 위치 확인)
-            cd $APP_DIR   # pom.xml이 있는 디렉터리
-            sudo mvn clean package -DskipTests -f pom.xml
-
             # 최신 이미지 가져오기
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hightech-backend:latest
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hightech-backend
 
             # Docker Compose로 springboot-app + nginx 실행
             cd $APP_DIR
             sudo docker-compose stop oracle-db hightech-backend spring-nginx
-            sudo docker-compose up -d oracle-db hightech-backend spring-nginx
+            sudo docker-compose up -d --build oracle-db hightech-backend spring-nginx
 
             #톰캣 설정 복사(포트설정)
             echo "${{ secrets.SERVER }}" > /home/ubuntu/server.xml
@@ -90,6 +86,7 @@ jobs:
             # 톰캣 재시작
             sudo docker restart hightech-backend
             sleep 30
+            sudo docker restart spring-nginx
 
             sudo docker ps -a
             sudo docker inspect spring-nginx --format '{{.State.Status}} {{.State.ExitCode}}' || echo "spring-nginx not found"

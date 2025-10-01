@@ -18,6 +18,7 @@ services:
     restart: always
 
   hightech-backend:
+    build: .
     image: wlwl45wl/hightech-backend:latest
     container_name: hightech-backend
     ports:
@@ -26,7 +27,7 @@ services:
       - oracle-db
     healthcheck:
       test: ["CMD-SHELL", "for i in {1..30}; do curl -f http://localhost:8083 && exit 0 || sleep 6; done; exit 1"]
-      interval: 15s
+      interval: 5s
       timeout: 10s
       retries: 20
       start_period: 30s
@@ -34,7 +35,7 @@ services:
 
 
   spring-nginx:
-    image: wlwl45wl/spring-nginx:latest
+    build: ./nginx
     container_name: spring-nginx
     ports:
       - "83:83"
