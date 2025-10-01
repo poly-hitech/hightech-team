@@ -18,7 +18,7 @@ services:
     restart: always
 
   hightech-backend:
-    image: ${{ secrets.DOCKER_USERNAME }}/hightech-backend:latest
+    image: wlwl45wl/hightech-backend:latest
     container_name: hightech-backend
     ports:
       - "8083:8083"
@@ -34,7 +34,7 @@ services:
 
 
   spring-nginx:
-    image: ${{ secrets.DOCKER_USERNAME }}/spring-nginx:latest
+    image: wlwl45wl/spring-nginx:latest
     container_name: spring-nginx
     ports:
       - "83:83"
