@@ -33,11 +33,17 @@ jobs:
 
       # 3. 이미지 빌드
       - name: 이미지 빌드
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/hightech .
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/hightech-backend .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/spring-nginx ./nginx
+          
+
 
       # 4. 도커허브에 이미지 푸시
       - name: 도커허브에 이미지 푸시
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/hightech
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/hightech-backend
+          docker push -t ${{ secrets.DOCKER_USERNAME }}/spring-nginx
 
       # 2. SSH로 EC2 접속 후 배포
       - name: Deploy on EC2
@@ -72,22 +78,23 @@ jobs:
             sudo mvn clean package -DskipTests -f pom.xml
 
             # 최신 이미지 가져오기
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hightech
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hightech-backend:latest
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/spring-nginx:latest
 
             sudo curl http://localhost/.well-known/acme-challenge/test
 
             # Docker Compose로 springboot-app + nginx 실행
             cd $APP_DIR
-            sudo docker-compose up -d --build oracle-db hightech-backend spring-nginx
+            sudo docker-compose stop oracle-db hightech-backend spring-nginx
+            sudo docker-compose up -d oracle-db hightech-backend spring-nginx
 
             #톰캣 설정 복사(포트설정)
             echo "${{ secrets.SERVER }}" > home/ubuntu/server.xml
             sudo docker cp ~/server.xml hightech-backend:/usr/local/tomcat/conf/server.xml
 
             # 톰캣 재시작
-            sudo docker exec hightech-backend catalina.sh stop
-            sleep 5
-            sudo docker exec hightech-backend catalina.sh start
+            sudo docker restart hightech-backend
+            sleep 30
 
             sudo docker logs spring-nginx --tail=50
             sudo docker logs hightech-backend --tail=50
