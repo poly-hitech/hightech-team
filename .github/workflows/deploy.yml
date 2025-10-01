@@ -81,21 +81,21 @@ jobs:
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hightech-backend:latest
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/spring-nginx:latest
 
-            sudo curl http://localhost/.well-known/acme-challenge/test
-
             # Docker Compose로 springboot-app + nginx 실행
             cd $APP_DIR
             sudo docker-compose stop oracle-db hightech-backend spring-nginx
             sudo docker-compose up -d oracle-db hightech-backend spring-nginx
 
             #톰캣 설정 복사(포트설정)
-            echo "${{ secrets.SERVER }}" > home/ubuntu/server.xml
+            echo "${{ secrets.SERVER }}" > /home/ubuntu/server.xml
             sudo docker cp ~/server.xml hightech-backend:/usr/local/tomcat/conf/server.xml
 
             # 톰캣 재시작
             sudo docker restart hightech-backend
             sleep 30
 
+            sudo docker ps -a
+            sudo docker inspect spring-nginx --format '{{.State.Status}} {{.State.ExitCode}}' || echo "spring-nginx not found"
             sudo docker logs spring-nginx --tail=50
             sudo docker logs hightech-backend --tail=50
             sudo docker logs oracle-db --tail=50
