@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.test.Model.HostAdress;
 import com.example.test.Model.ResourceShop;
 import com.example.test.Model.Users;
 import com.example.test.Service.ResourceShopService;
@@ -23,6 +24,9 @@ public class RootController {
 	
 	@Autowired
 	UsersService usersService;
+
+	@Autowired
+	HostAdress hostAddress;
 	
 	@Autowired
 	ResourceShopService resourceService;
@@ -57,7 +61,7 @@ public class RootController {
 	String logout(HttpSession session) {
 		session.invalidate();
 		
-		return "redirect:/";
+		return "redirect:" + hostAddress.getHost();
 	}
 	
 	@GetMapping("/login")

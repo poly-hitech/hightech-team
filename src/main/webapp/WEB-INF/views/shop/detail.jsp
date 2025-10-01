@@ -131,8 +131,6 @@
 	            $('.char-count').text(len + "/128");
 	        });
 	    });
- 		const shop = ${shop2};
- 		const review = ${reviewList2};
  		console.log(review)
 	</script>
 	<script src="${root}/js/shopDetail.js"></script>
