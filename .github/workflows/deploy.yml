@@ -35,7 +35,6 @@ jobs:
       - name: 이미지 빌드
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/hightech-backend .
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/spring-nginx ./nginx
           
 
 
@@ -43,7 +42,6 @@ jobs:
       - name: 도커허브에 이미지 푸시
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/hightech-backend
-          docker push ${{ secrets.DOCKER_USERNAME }}/spring-nginx
 
       # 2. SSH로 EC2 접속 후 배포
       - name: Deploy on EC2
@@ -79,7 +77,6 @@ jobs:
 
             # 최신 이미지 가져오기
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hightech-backend:latest
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/spring-nginx:latest
 
             # Docker Compose로 springboot-app + nginx 실행
             cd $APP_DIR
