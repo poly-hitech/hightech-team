@@ -51,19 +51,19 @@
             </div>
 
             <div>
-            	<label for="resourceFile">첨부파일: </label>
-            	<input type="file" id="resourceFile" name="resourceFile" multiple="multiple">
+                <label for="resourceFile">대표 이미지: </label>
+                <input type="file" id="resourceFile" name="resourceFile" multiple="multiple">
             </div>
             <div class="form-group">
                 <label for="file">자료 파일</label>
                 <div id="dropzone" class="dropzone-wrapper"
-                     ondragover="handleDragOver(event)"
-                     ondragleave="handleDragLeave(event)"
-                     ondrop="handleDrop(event)"
-                     onclick="document.getElementById('fileInput').click()">
+                    ondragover="handleDragOver(event)"
+                    ondragleave="handleDragLeave(event)"
+                    ondrop="handleDrop(event)"
+                    onclick="document.getElementById('fileInput').click()">
 
-                     <!-- 취소(X) 버튼 -->
-                     <span class="dropzone-cancel" onclick="event.stopPropagation(); clearFile();">×</span>
+                    <!-- 취소(X) 버튼 -->
+                    <span class="dropzone-cancel" onclick="event.stopPropagation(); clearFile();">×</span>
 
                     <span class="dropzone-text" id="dropzone-text">파일을 선택하거나 여기로 끌어놓으세요</span>
                     <input type="file" name="resourceImage" id="fileInput" style="display: none;" onchange="handleFileChange(event)" />
