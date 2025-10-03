@@ -89,6 +89,12 @@ jobs:
             sleep 30
             sudo docker restart spring-nginx
 
+            if [ ! -d "/home/ubuntu/upload" ]; then
+              sudo mkdir -p /home/ubuntu/upload
+              sudo chown -R ubuntu:ubuntu /home/ubuntu/upload  # 어느 사용자에게 소유권이 있는가
+              sudo chmod -R 755 /home/ubuntu/upload
+            fi
+
             sudo docker ps -a
             sudo docker inspect spring-nginx --format '{{.State.Status}} {{.State.ExitCode}}' || echo "spring-nginx not found"
             sudo docker logs spring-nginx --tail=50

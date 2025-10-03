@@ -24,7 +24,7 @@ services:
     ports:
       - "8083:8083"
     volumes:
-      - /home/ubuntu/hightech/uploads:/hightech/uploads
+      - /home/ubuntu/upload:/hightech/upload
     depends_on:
       - oracle-db
     healthcheck:
