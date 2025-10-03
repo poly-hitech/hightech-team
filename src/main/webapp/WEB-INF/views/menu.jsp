@@ -97,7 +97,7 @@
               <span class="line"></span>
             </div>
             <li class="item">
-              <a href="#" class="link flex">
+              <a href="${root}/board/list/1" class="link flex">
                 <i class="bx bxs-magic-wand"></i>
                 <span>공지사항</span>
               </a>

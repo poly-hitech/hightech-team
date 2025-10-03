@@ -8,6 +8,7 @@
 	</settings>
 	
 	<!-- 연결할 MODEL 혹은 VO 혹은 DTO추가(각각의 모델마다 패키지명을 생략하여 지정한 명칭으로 해당 모델을 사용할 수 있게 해줌) -->
+	<!-- 별칭 지정 ↓ -->
 	<typeAliases>
 		<typeAlias type="com.example.test.Model.Users" alias="Users"/>
 		<typeAlias type="com.example.test.Model.MarketCategory" alias="MarketCategory"/>
@@ -24,6 +25,7 @@
 		<typeAlias type="com.example.test.Model.MyOrderList" alias="MyOrderList"/>
 		<typeAlias type="com.example.test.Model.ShopReview" alias="ShopReview"/>
 		<typeAlias type="com.example.test.Model.UserAttendanceDetail" alias="UserAttendanceDetail"/>
+		<typeAlias type="com.example.test.Model.ForumPost" alias="ForumPost"/>
 	</typeAliases>
 	
 	<!-- mapper 파일 추가 -->
@@ -39,5 +41,6 @@
 		<mapper resource="mybatis/ranking.xml" />
 		<mapper resource="mybatis/shopReview.xml"/>
 		<mapper resource="mybatis/userAttendance.xml"/>
+		<mapper resource="mybatis/board.xml"/>
 	</mappers>
 </configuration>

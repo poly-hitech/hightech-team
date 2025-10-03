@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="board">
+	<select id="getBoard" resultType="ForumPost">
+		select * from forumpost
+		where boardId = #{boardId}
+	</select>
+</mapper>
+
+
+<!-- resultType이랑 typealias로 별칭 지정한게 같아야한다고 하셨는데 같지 않나요? -->
