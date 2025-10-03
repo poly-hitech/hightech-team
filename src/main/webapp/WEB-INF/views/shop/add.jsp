@@ -49,30 +49,37 @@
                 <label for="itemPrice">가격: </label>
                 <input type="number" id="itemPrice" name="resourceShop.itemPrice">
             </div>
-
-            <div>
-                <label for="resourceFile">대표 이미지: </label>
-                <input type="file" id="resourceFile" name="resourceFile" multiple="multiple">
-            </div>
             <div class="form-group">
-                <label for="file">자료 파일</label>
+                <label for="file">대표 이미지:</label>
                 <div id="dropzone" class="dropzone-wrapper"
-                    ondragover="handleDragOver(event)"
-                    ondragleave="handleDragLeave(event)"
-                    ondrop="handleDrop(event)"
-                    onclick="document.getElementById('fileInput').click()">
+                     ondragover="handleDragOver(event)"
+                     ondragleave="handleDragLeave(event)"
+                     ondrop="handleDrop(event)"
+                     onclick="document.getElementById('fileInput').click()">
 
-                    <!-- 취소(X) 버튼 -->
-                    <span class="dropzone-cancel" onclick="event.stopPropagation(); clearFile();">×</span>
+                     <!-- 취소(X) 버튼 -->
+                     <span class="dropzone-cancel" onclick="event.stopPropagation(); clearFile();">×</span>
 
                     <span class="dropzone-text" id="dropzone-text">파일을 선택하거나 여기로 끌어놓으세요</span>
                     <input type="file" name="resourceImage" id="fileInput" style="display: none;" onchange="handleFileChange(event)" />
                 </div>
-
             </div>
+
+            <div id="fileContainer">
+            	<div class="file-input-wrapper">
+	            	<label for="resourceFile">자료 파일: </label>
+	            	<input type="file" id="resourceFile" name="resourceFile" multiple="multiple" class="file-input">
+            	</div>
+            </div>
+            
             <div>
-                <button type="submit">등록</button>
-                <a href="../../../list">취소</a>
+            	<button type="button" id="addFileBtn">파일 추가</button>
+            	<button type="button" id="removeLastFileBtn">파일 삭제</button>
+            </div>
+
+            <div>
+                <button type="submit" class="button">등록</button>
+                <a href="../../../list" class="button">취소</a>
             </div>
         </form>
 	</div>
@@ -123,5 +130,6 @@
         });
 	</script>
 	<script src="${root}/js/addResource.js"></script>
+	<script src="${root}/js/addFileBtn.js"></script>
 </body>
 </html>
