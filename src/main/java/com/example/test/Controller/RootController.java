@@ -24,9 +24,6 @@ public class RootController {
 	
 	@Autowired
 	UsersService usersService;
-
-	@Autowired
-	HostAdress hostAddress;
 	
 	@Autowired
 	ResourceShopService resourceService;
@@ -58,7 +55,7 @@ public class RootController {
 	
 	//로그인
 	@GetMapping("/logout")
-	String logout(HttpSession session) {
+	String logout(HttpSession session, HostAdress hostAddress) {
 		session.invalidate();
 		
 		return "redirect:" + hostAddress.getHost();
