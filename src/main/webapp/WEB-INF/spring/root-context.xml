@@ -31,6 +31,6 @@
 	
 	<!-- 파일 업로드 기본 경로 설정 -->
     <bean id="fileUploadPathResolver" class="com.example.test.Util.FileUploadPathResolver">
-        <property name="baseDirectory" value="C:/upload" />
+        <property name="baseDirectory" value="/hightech/upload" />
     </bean>
 </beans>
