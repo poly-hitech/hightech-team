@@ -34,7 +34,7 @@ jobs:
       # 3. 이미지 빌드
       - name: 이미지 빌드
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/hightech-backend .
+          docker build --no-cache -t ${{ secrets.DOCKER_USERNAME }}/hightech-backend .
           
 
 
@@ -76,6 +76,7 @@ jobs:
 
             # Docker Compose로 springboot-app + nginx 실행
             cd $APP_DIR
+            sudo mvn clean package -DskipTests
             sudo docker-compose stop oracle-db hightech-backend spring-nginx
             sudo docker-compose up -d --build oracle-db hightech-backend spring-nginx
 
