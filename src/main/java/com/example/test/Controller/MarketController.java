@@ -1,22 +1,39 @@
 package com.example.test.Controller;
 
-import com.example.test.Model.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.example.test.Model.Market;
+import com.example.test.Model.OrdersDetails;
+import com.example.test.Model.Ranking;
+import com.example.test.Model.ResourceCategory;
+import com.example.test.Model.ResourceFile;
+import com.example.test.Model.ResourceShop;
+import com.example.test.Model.ResourceSubCategory;
+import com.example.test.Model.ShopReview;
+import com.example.test.Model.Users;
 import com.example.test.Service.OrdersService;
 import com.example.test.Service.ResourceShopService;
 import com.example.test.Service.ShopReviewService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
@@ -33,7 +50,7 @@ public class MarketController {
     @Autowired
     ShopReviewService shopReviewService;
 
-    //--------------------------------조회---------------------------------------------
+    // --------------------------------조회---------------------------------------------
     // 전체 상점 목록
     @GetMapping("public/list")
     String shopList(Model model, HttpSession session) {
@@ -107,10 +124,11 @@ public class MarketController {
 
         return path + "list";
     }
-    
+
     // 리소스 상품 상세
     @GetMapping("/detail/{itemId}")
-    public String showDetail(@PathVariable Long itemId, HttpSession session, Model model) throws JsonProcessingException {
+    public String showDetail(@PathVariable Long itemId, HttpSession session, Model model)
+            throws JsonProcessingException {
         int page = 1;
         int pageSize = 5;
         int startRow = 0;
@@ -137,7 +155,7 @@ public class MarketController {
         model.addAttribute("endPage", endPage);
         model.addAttribute("hasPrev", false);
         model.addAttribute("hasNext", endPage < totalPages);
-        //로그인한 유저의 유저 번호 호출
+        // 로그인한 유저의 유저 번호 호출
         Users member = (Users) session.getAttribute("member");
 
         if (member != null) {
@@ -162,9 +180,10 @@ public class MarketController {
         model.addAttribute("totalPages", totalPages);
         return path + "detail";
     }
-    //--------------------------------조회--------------------------------------------------
+    // --------------------------------조회--------------------------------------------------
 
-    //-----------------------------------상품 등록 및 수정-----------------------------------------------
+    // -----------------------------------상품 등록 및
+    // 수정-----------------------------------------------
     @GetMapping("{roleId}/add/{userId}")
     String addResourcePage(@PathVariable Long roleId, @PathVariable Long userId, Model model, HttpSession session) {
         List<ResourceCategory> category = resourceShopService.addResourcePage();
@@ -191,34 +210,33 @@ public class MarketController {
     // 리소스 상품 등록
     @PostMapping("{roleId}/add/{userId}")
     String uploadResource(@PathVariable Long roleId, @PathVariable Long userId, Market market,
-                          @RequestParam(value = "resourceFile", required = false) List<MultipartFile> file,
-                          @RequestParam(value = "resourceImage", required = false) MultipartFile resourceImage,
-                          Model model) throws Exception {
+            @RequestParam(value = "resourceFile", required = false) List<MultipartFile> resourceFile,
+            @RequestParam(value = "resourceImage", required = false) MultipartFile resourceImage,
+            Model model) throws Exception {
 
-        resourceShopService.addResource(userId, market, file, resourceImage, model);
+        resourceShopService.addResource(userId, market, resourceFile, resourceImage, model);
 
         return path + "add";
     }
-    
-    //리소스 상품 수정
+
+    // 리소스 상품 수정
     @PostMapping("/updateMyResource/{itemId}")
     String updateResource(@PathVariable Long itemId,
-                          Market market, @RequestParam MultipartFile file, Model model) throws
-            Exception {
+            Market market, @RequestParam MultipartFile file, Model model) throws Exception {
 
         resourceShopService.updateMyResource(itemId, market, file, model);
 
         return path + "updateMyResource";
     }
-    //-----------------------------------상품 등록 및 수정-----------------------------------------------
-    
-    
+    // -----------------------------------상품 등록 및
+    // 수정-----------------------------------------------
 
-    //-----------------------------------리소스 상품 구매----------------------------------------------
+    // -----------------------------------리소스 상품
+    // 구매----------------------------------------------
     @PostMapping("/detail/{userId}/{itemId}")
     @ResponseBody // responseBody를 사용하면 문자열을 반환하게됨
     public String buyResource(@PathVariable Long userId, @PathVariable Long itemId,
-                              @RequestBody List<ResourceShop> shop)
+            @RequestBody List<ResourceShop> shop)
             throws Exception {
 
         log.info("구매자 이름: {}", userId);
@@ -227,10 +245,11 @@ public class MarketController {
         log.info("구매 완료");
         return "success";
     }
-    //-----------------------------------리소스 상품 구매----------------------------------------------
-    
+    // -----------------------------------리소스 상품
+    // 구매----------------------------------------------
 
-    //--------------------------------로그인 한 유저가 등록한 상품-------------------------------------
+    // --------------------------------로그인 한 유저가 등록한
+    // 상품-------------------------------------
     @GetMapping("myResources/{userId}")
     public String myResources(@PathVariable Long userId, Model model) {
         List<ResourceCategory> category = resourceShopService.myResources(userId);
@@ -247,27 +266,24 @@ public class MarketController {
         }
         return path + "myResources";
     }
-    
+
     // 내 상품 상세
     @GetMapping("/salesDetail/{itemId}")
     public String salesResources() {
 
         return path + "salesDetail";
     }
-    
-    //내 판매 내역(내 상품에 대해서 판매된 최근순으로 조회)
+
+    // 내 판매 내역(내 상품에 대해서 판매된 최근순으로 조회)
     // 내 상품 상세
     @GetMapping("/mySalesList/{userId}")
     public String mySalesList() {
 
         return path + "mySalesList";
     }
-    
-    //----------------------------------로그인 한 유저가 등록한 상품-----------------------------------
 
-
-
-
+    // ----------------------------------로그인 한 유저가 등록한
+    // 상품-----------------------------------
 
     /*
      * @ResponseBody //responseBody를 사용하면 문자열을 반환하게됨(spring입장에서는 view가 아닌 데이터로 인식하고
@@ -276,6 +292,5 @@ public class MarketController {
      * @PutMapping("/update") public String updateResource(@RequestBody Cart cart )
      * throws Exception { resourceShopService.updateResource(cart); return "OK"; }
      */
-
 
 }
