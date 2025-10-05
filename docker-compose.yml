@@ -19,17 +19,20 @@ services:
 
   hightech-backend:
     build: .
-    image: wlwl45wl/hitech-backend:latest
+    image: wlwl45wl/hightech-backend:latest
     container_name: hightech-backend
     ports:
       - "8083:8083"
+    volumes:
+      - /home/ubuntu/upload:/hightech/upload
     depends_on:
       - oracle-db
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:8083 || exit 1"]
-      interval: 15s
+      interval: 5s
       timeout: 5s
-      retries: 10
+      retries: 30
+      start_period: 120s
     restart: always
 
 

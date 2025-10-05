@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	//path 등록해서 
+	//path 등록해서
 	private final static String path = "admin/";
 	
 	@Autowired

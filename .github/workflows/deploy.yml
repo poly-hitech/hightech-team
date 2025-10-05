@@ -33,11 +33,15 @@ jobs:
 
       # 3. 이미지 빌드
       - name: 이미지 빌드
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/hightech .
+        run: |
+          docker build --no-cache -t ${{ secrets.DOCKER_USERNAME }}/hightech-backend .
+          
+
 
       # 4. 도커허브에 이미지 푸시
       - name: 도커허브에 이미지 푸시
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/hightech
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/hightech-backend
 
       # 2. SSH로 EC2 접속 후 배포
       - name: Deploy on EC2
@@ -67,28 +71,32 @@ jobs:
               sudo git pull origin master
             fi
 
-            # Maven 빌드 (pom.xml 위치 확인)
-            cd $APP_DIR   # pom.xml이 있는 디렉터리
-            sudo mvn clean package -DskipTests -f pom.xml
-
             # 최신 이미지 가져오기
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hightech
-
-            sudo curl http://localhost/.well-known/acme-challenge/test
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hightech-backend
 
             # Docker Compose로 springboot-app + nginx 실행
             cd $APP_DIR
+            sudo mvn clean package -DskipTests
+            sudo docker-compose stop oracle-db hightech-backend spring-nginx
             sudo docker-compose up -d --build oracle-db hightech-backend spring-nginx
 
             #톰캣 설정 복사(포트설정)
-            echo "${{ secrets.SERVER }}" > home/ubuntu/server.xml
+            echo "${{ secrets.SERVER }}" > /home/ubuntu/server.xml
             sudo docker cp ~/server.xml hightech-backend:/usr/local/tomcat/conf/server.xml
 
             # 톰캣 재시작
-            sudo docker exec hightech-backend catalina.sh stop
-            sleep 5
-            sudo docker exec hightech-backend catalina.sh start
+            sudo docker restart hightech-backend
+            sleep 30
+            sudo docker restart spring-nginx
 
+            if [ ! -d "/home/ubuntu/upload" ]; then
+              sudo mkdir -p /home/ubuntu/upload
+              sudo chown -R ubuntu:ubuntu /home/ubuntu/upload  # 어느 사용자에게 소유권이 있는가
+              sudo chmod -R 755 /home/ubuntu/upload
+            fi
+
+            sudo docker ps -a
+            sudo docker inspect spring-nginx --format '{{.State.Status}} {{.State.ExitCode}}' || echo "spring-nginx not found"
             sudo docker logs spring-nginx --tail=50
             sudo docker logs hightech-backend --tail=50
             sudo docker logs oracle-db --tail=50

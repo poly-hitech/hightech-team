@@ -98,7 +98,7 @@ $(document).ready(function () {
         var itemId = $(this).data("item-id");
         if (itemId) {
             // 상세정보 페이지로 이동
-            window.location.href = "/shop/detail?itemId=" + itemId;
+            window.location.href = "/shop/detail/" + itemId;
         } else {
             console.log("itemId가 정의되지 않았습니다.");
             alert("상품 정보를 불러올 수 없습니다.");

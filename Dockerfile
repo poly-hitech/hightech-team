@@ -10,6 +10,9 @@ COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
 RUN curl -sL https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh \
   -o /usr/local/tomcat/bin/wait-for-it.sh \
   && chmod +x /usr/local/tomcat/bin/wait-for-it.sh
+  
+# 타임존 및 인코딩 설정
+ENV JAVA_OPTS="-Duser.timezone=Asia/Seoul -Dfile.encoding=UTF-8"
 
 EXPOSE 8083
-CMD ["/bin/bash", "-c", "/usr/local/tomcat/bin/wait-for-it.sh oracle-db:1521 --timeout=300 --strict -- catalina.sh run"]
+CMD ["/bin/bash", "-c", "/usr/local/tomcat/bin/wait-for-it.sh oracle-db:1521 --timeout=180 --strict -- catalina.sh run"]
