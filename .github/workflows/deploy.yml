@@ -90,10 +90,40 @@ jobs:
             sudo docker restart spring-nginx
 
             if [ ! -d "/home/ubuntu/upload" ]; then
+              echo "🔧 업로드 디렉토리 생성 중..."
               sudo mkdir -p /home/ubuntu/upload
-              sudo chown -R ubuntu:ubuntu /home/ubuntu/upload  # 어느 사용자에게 소유권이 있는가
-              sudo chmod -R 755 /home/ubuntu/upload
             fi
+
+            # ACL 설치
+            if ! command -v setfacl &> /dev/null; then
+              echo "🔧 ACL 설치 중..."
+              sudo apt-get update -y
+              sudo apt-get install -y acl
+            fi
+
+            # 기본 권한 및 소유자 설정
+            sudo chown -R ubuntu:ubuntu /home/ubuntu/upload
+            sudo chmod -R 775 /home/ubuntu/upload
+
+            # UID/GID 추출
+            TOMCAT_UID=$(docker exec hightech-backend id -u)
+            TOMCAT_GID=$(docker exec hightech-backend id -g)
+
+            # UID, GID 권한 부여
+            sudo setfacl -R -m u:$TOMCAT_UID:rwx $UPLOAD_DIR
+            sudo setfacl -R -m g:$TOMCAT_GID:rwx $UPLOAD_DIR
+            echo "✅ Tomcat UID/GID 권한 설정 완료!"
+
+            # docker 그룹에 ubuntu 추가 (이미 포함되어 있으면 무시)
+            sudo usermod -aG docker ubuntu
+
+            # Tomcat과 Docker 모두 접근할 수 있도록 ACL 설정
+            # Tomcat이 컨테이너 안에 있다면 UID가 1000일 가능성이 높음 → 안전하게 UID 기준으로 설정
+            sudo setfacl -R -m u:ubuntu:rwx /home/ubuntu/upload
+            sudo setfacl -R -m g:docker:rwx /home/ubuntu/upload
+            sudo setfacl -R -m o:rx /home/ubuntu/upload
+
+            echo "✅ /home/ubuntu/upload 권한 설정 완료!"
 
             sudo docker ps -a
             sudo docker inspect spring-nginx --format '{{.State.Status}} {{.State.ExitCode}}' || echo "spring-nginx not found"
