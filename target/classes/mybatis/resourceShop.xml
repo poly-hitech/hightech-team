@@ -13,10 +13,9 @@
 	</insert>
 
 	<insert id="addResourceFile">
-		INSERT INTO ResourceFile (resourceFileId, resourceFileName, itemId)
+	    INSERT INTO ResourceFile (resourceFileId, resourceFileName, itemId)
 	    VALUES (RESOURCEFILE_SEQ.NEXTVAL, #{resourceFileName}, #{itemId})
 	</insert>
-	
 
 	<!-- 전체 리소스 개수 -->
 	<select id="countAllItems" resultType="long">
@@ -88,7 +87,7 @@
       LEFT JOIN OrdersDetails ordersDetails
          ON ordersDetails.itemId = resourceShop.itemId
         WHERE resourceShop.itemId=#{itemId}
-        ORDER BY resourceShop.itemId, resourceFile.resourceFileId
+        ORDER BY resourceShop.itemId DESC
    </select>
 	
 	<select id="marketList" resultMap="MarketListMap">
@@ -143,11 +142,9 @@
             ON resourceShop.itemId = ranking.itemId
         LEFT JOIN Counting counting
             ON counting.itemId = resourceShop.itemId
-        ORDER BY
-	    resourceCategory.resourceCategoryId,
-	    resourceSubCategory.resourceSubCategoryId,
-	    resourceShop.itemId,
-	    resourceFile.resourceFileId
+        ORDER BY 
+	    resourceShop.itemId
+	    DESC
 	</select>
 	
 	<!-- 상위 판매량의 리소스 정보 -->
@@ -235,10 +232,8 @@
             ON counting.itemId = resourceShop.itemId
         WHERE resourceShop.userId = #{userId}
         ORDER BY
-	    resourceCategory.resourceCategoryId,
-	    resourceSubCategory.resourceSubCategoryId,
-	    resourceShop.itemId,
-	    resourceFile.resourceFileId
+	    resourceShop.itemId
+	    DESC
 	</select>
 
 	<!-- 상점 정보만 들고 오기 -->
