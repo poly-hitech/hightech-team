@@ -109,11 +109,6 @@ jobs:
             TOMCAT_UID=$(docker exec hightech-backend id -u)
             TOMCAT_GID=$(docker exec hightech-backend id -g)
 
-            # UID, GID 권한 부여
-            sudo setfacl -R -m u:$TOMCAT_UID:rwx $UPLOAD_DIR
-            sudo setfacl -R -m g:$TOMCAT_GID:rwx $UPLOAD_DIR
-            echo "✅ Tomcat UID/GID 권한 설정 완료!"
-
             # docker 그룹에 ubuntu 추가 (이미 포함되어 있으면 무시)
             sudo usermod -aG docker ubuntu
 
@@ -122,6 +117,11 @@ jobs:
             sudo setfacl -R -m u:ubuntu:rwx /home/ubuntu/upload
             sudo setfacl -R -m g:docker:rwx /home/ubuntu/upload
             sudo setfacl -R -m o:rx /home/ubuntu/upload
+
+            # UID, GID 권한 부여
+            sudo setfacl -R -m u:$TOMCAT_UID:rwx $UPLOAD_DIR
+            sudo setfacl -R -m g:$TOMCAT_GID:rwx $UPLOAD_DIR
+            echo "✅ Tomcat UID/GID 권한 설정 완료!"
 
             echo "✅ /home/ubuntu/upload 권한 설정 완료!"
 
