@@ -182,8 +182,7 @@ public class MarketController {
     }
     // --------------------------------조회--------------------------------------------------
 
-    // -----------------------------------상품 등록 및
-    // 수정-----------------------------------------------
+    // -----------------------------------상품 등록 및 수정-----------------------------------------------
     @GetMapping("{roleId}/add/{userId}")
     String addResourcePage(@PathVariable Long roleId, @PathVariable Long userId, Model model, HttpSession session) {
         List<ResourceCategory> category = resourceShopService.addResourcePage();
@@ -216,7 +215,7 @@ public class MarketController {
 
         resourceShopService.addResource(userId, market, resourceFile, resourceImage, model);
 
-        return path + "add";
+        return "redirect:/";
     }
 
     // 리소스 상품 수정
@@ -228,11 +227,9 @@ public class MarketController {
 
         return path + "updateMyResource";
     }
-    // -----------------------------------상품 등록 및
-    // 수정-----------------------------------------------
+    // -----------------------------------상품 등록 및 수정-----------------------------------------------
 
-    // -----------------------------------리소스 상품
-    // 구매----------------------------------------------
+    // -----------------------------------리소스 상품 구매----------------------------------------------
     @PostMapping("/detail/{userId}/{itemId}")
     @ResponseBody // responseBody를 사용하면 문자열을 반환하게됨
     public String buyResource(@PathVariable Long userId, @PathVariable Long itemId,
@@ -245,11 +242,9 @@ public class MarketController {
         log.info("구매 완료");
         return "success";
     }
-    // -----------------------------------리소스 상품
-    // 구매----------------------------------------------
+    // -----------------------------------리소스 상품 구매----------------------------------------------
 
-    // --------------------------------로그인 한 유저가 등록한
-    // 상품-------------------------------------
+    // --------------------------------로그인 한 유저가 등록한 상품-------------------------------------
     @GetMapping("myResources/{userId}")
     public String myResources(@PathVariable Long userId, Model model) {
         List<ResourceCategory> category = resourceShopService.myResources(userId);
@@ -282,8 +277,7 @@ public class MarketController {
         return path + "mySalesList";
     }
 
-    // ----------------------------------로그인 한 유저가 등록한
-    // 상품-----------------------------------
+    // ----------------------------------로그인 한 유저가 등록한 상품-----------------------------------
 
     /*
      * @ResponseBody //responseBody를 사용하면 문자열을 반환하게됨(spring입장에서는 view가 아닌 데이터로 인식하고

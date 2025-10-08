@@ -17,8 +17,6 @@ public interface ResourceDao {
 
 	List<ResourceCategory> addResourceShop();
 
-	void save(Map<String, Object> params);
-
 	ResourceShop getItem(Long itemId);
 
 	ResourceShop getOnlyOneResource(Long itemId);
@@ -28,4 +26,6 @@ public interface ResourceDao {
 	Long countAllItems();
 
 	List<ResourceShop> getTopFromResource();
+
+    void saveResourceFile(ResourceFile resourceFile);
 }

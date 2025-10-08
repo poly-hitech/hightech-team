@@ -12,11 +12,9 @@
     	</selectKey>
 	</insert>
 
-	<insert id="addResourceFile" parameterType="map">
-		<foreach collection="resourceFile" item="file" separator=";">
-			insert into ResourceFile
-			values (RESOURCEFILE_SEQ.NEXTVAL, #{file.resourceFileName}, #{itemId})
-		</foreach>
+	<insert id="addResourceFile">
+		INSERT INTO ResourceFile (resourceFileId, resourceFileName, itemId)
+	    VALUES (RESOURCEFILE_SEQ.NEXTVAL, #{resourceFileName}, #{itemId})
 	</insert>
 	
 

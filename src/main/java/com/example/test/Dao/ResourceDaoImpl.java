@@ -40,9 +40,9 @@ public class ResourceDaoImpl implements ResourceDao {
 
 	//파일 경로 등록
 	@Override
-	public void save(Map<String, Object> params) {
+	public void saveResourceFile(ResourceFile resourceFile) {
 		// TODO Auto-generated method stub
-		sql.selectList("resourceShop.addResourceFile", params);
+		sql.selectList("resourceShop.addResourceFile", resourceFile);
 	}
 
 	@Override
