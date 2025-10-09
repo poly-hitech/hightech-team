@@ -63,15 +63,15 @@ $(document).ready(function () {
                     $("#resourceGrid").html('<p>표시할 상점이 없습니다.</p>');
                 } else {
                     selectedSubcategory.resourceShop.forEach(function (shop) {
-                        var fileName = shop.resourceImage || '';
-                        if (fileName) {
-                            fileName = fileName.split(/[\\/]/).pop();
+                        var filepath = shop.resourceImage || '';
+                        if (filepath) {
+                            const fileName = filepath.split(/[\\/]/).pop();
                             // 추가 이스케이프 처리
                             var originfilename = fileName.replace(/\\/g, '/').replace(/[^a-zA-Z0-9._-]/g, '_');
                         }
                         console.log("파일명: " + fileName)
                         var itemHtml = '<div class="product-card" data-item-id="' + (shop.itemId || '') + '">' +
-                            '<img src="/upload/images/' + fileName + '" alt="' + (originfilename || '') + '">' +
+                            '<img src="' + filepath + '" alt="' + (originfilename || '') + '">' +
                             '<h3>' + (shop.itemName || '') + '</h3>' +
                             '<div class="author">' + (shop.itemWriter || '') + '</div>' +
                             '<div class="price">' + (shop.itemPrice || '0') + '</div>' +
@@ -133,16 +133,16 @@ $(document).ready(function () {
                             console.log("상점 객체: " + shop)
                             console.log("상점" + shop.itemName + "진입했습니다.")
                             if (shop.resourceFile && shop.resourceFile.length > 0) {
-                                var fileName = shop.resourceImage || '';
-                                console.log("상점 아이템이미지: " + fileName);
-                                if (fileName) {
-                                    fileName = fileName.split(/[\\/]/).pop();
+                                var filepath = shop.resourceImage || '';
+                                console.log("상점 아이템이미지: " + filepath);
+                                if (filepath) {
+                                    var fileName = filepath.split(/[\\/]/).pop();
                                     // 추가 이스케이프 처리
                                     var originfilename = fileName.replace(/\\/g, '/').replace(/[^a-zA-Z0-9._-]/g, '_');
                                 }
                                 console.log("파일명: " + fileName)
                                 var itemHtml = '<div class="product-card" data-item-id="' + (shop.itemId || '') + '">' +
-                                    '<img src="/upload/images/' + fileName + '" alt="' + (originfilename || '') + '">' +
+                                    '<img src="' + filepath + '" alt="' + (originfilename || '') + '">' +
                                     '<h3>' + (shop.itemName || '') + '</h3>' +
                                     '<div class="author">' + ('작성자 : ') + (shop.itemWriter || '') + '</div>' +
                                     '<div class="author">' + ('판매량 : ') + (shop.counting.totalcount || '0') + '</div>' +
