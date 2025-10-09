@@ -250,6 +250,7 @@ public class MarketController {
         List<ResourceCategory> category = resourceShopService.myResources(userId);
         log.info("내가 등록한 상품 리스트: {}", category);
         model.addAttribute("list", category);
+        model.addAttribute("pageUserId", userId);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             String userAsString;

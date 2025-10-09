@@ -1,8 +1,6 @@
 $(document).ready(function () {
     // showButton 값이 정의되어 있지 않으면 false로 설정
-    if (showButton === undefined || showButton === null) {
-        showButton = false;
-    }
+    let showButton = (typeof showButton !== "undefined") ? showButton : false;
 
     // 초기 로드 시 전체 데이터 표시
     displayAllResources();
@@ -82,7 +80,7 @@ $(document).ready(function () {
                             '<div class="price">' + (shop.itemPrice || '0') + '</div>';
                             if(showButton === true){
                             itemHtml += '<div>' + '<a href="../updateMyResource/'+ (shop.itemId || '') +'">수정</a>' + '</div>' +
-                            '<div>' + '<a href="../delete/'+ (shop.itemId || '') +'">수정</a>' + '</div>';
+                            '<div>' + '<a href="../delete/'+ (shop.itemId || '') +'">삭제</a>' + '</div>';
                             }
                             itemHtml += '</div>';
                         //빈카드 생성 방지
@@ -159,7 +157,7 @@ $(document).ready(function () {
                                     '<div class="price">' + (shop.itemPrice || '0') +('원') + '</div>';
                                     if(showButton === true){
                                     itemHtml += '<div>' + '<a href="../updateMyResource/'+ (shop.itemId || '') +'">수정</a>' + '</div>' +
-                                    '<div>' + '<a href="../delete/'+ (shop.itemId || '') +'">수정</a>' + '</div>';
+                                    '<div>' + '<a href="../delete/'+ (shop.itemId || '') +'">삭제</a>' + '</div>';
                                     }
                                     itemHtml += '</div>';
                                 //빈카드 생성 방지

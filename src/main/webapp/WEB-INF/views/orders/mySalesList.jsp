@@ -16,7 +16,7 @@
 		<c:import url="/WEB-INF/views/menu.jsp"></c:import>
 	</div>
 	<main>
-		<h2>구매한 리소스</h2>
+		<h2>판매된 리소스</h2>
 		<c:if test="${not empty purchasedList}">
         <div class="card-container">
             <c:forEach var="order" items="${purchasedList}">
@@ -48,9 +48,6 @@
     </c:if>
 	</main>
 
-	<script>
-		const showButton = true; // 버튼 숨기기
-	</script>
 	<script src="${root}/js/purchasedResources.js"></script>
 </body>
 </html>

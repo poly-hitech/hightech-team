@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리소스 상점</title>
+<title>내 상점</title>
 <link rel="stylesheet" href="${root}/css/shop.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -35,9 +35,6 @@
             <div class="products-grid" id="resourceGrid"></div>
 
             <div class="loading" id="loading">Loading...</div>
-        </div>
-        <div>
-            <a href="${root}/shop/updateMyResource">내 리소스 관리</a>
         </div>
     </main>
         <!-- 서버에서 전달된 데이터를 JavaScript 변수로 저장 -->
