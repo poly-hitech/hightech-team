@@ -1,7 +1,12 @@
 $(document).ready(function () {
+    // showButton 값이 정의되어 있지 않으면 false로 설정
+    if (showButton === undefined || showButton === null) {
+        showButton = false;
+    }
+
     // 초기 로드 시 전체 데이터 표시
     displayAllResources();
-
+    
     // 1차 카테고리 버튼 클릭 시
     $(".category-btn").click(function () {
         $(".category-btn").removeClass("active");

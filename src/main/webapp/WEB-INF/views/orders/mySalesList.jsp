@@ -49,7 +49,7 @@
 	</main>
 
 	<script>
-		
+		const showButton = true; // 버튼 숨기기
 	</script>
 	<script src="${root}/js/purchasedResources.js"></script>
 </body>
