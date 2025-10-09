@@ -16,4 +16,6 @@ public interface OrdersService {
     List<Long> getItemIdByLoginUser(Long userId);
 
 	OrdersDetails getOrdersDetailsByUserIdAndItemId(Map<String, Object> params);
+
+	List<MyOrderList> mySalesList(String nickname);
 }

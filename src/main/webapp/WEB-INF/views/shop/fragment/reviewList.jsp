@@ -11,7 +11,7 @@
         <c:set var="userId" value="${review.user.userId}" />
         <div class="review-item">
             <div class="review-header">
-                <img class="user-avatar" src="${fn:replace(review.user.profileImage, 'C:/upload', '/upload')}" alt="프로필" />
+                <img class="user-avatar" src="${review.user.profileImage}" alt="프로필" />
                 <div class="review-meta">
                     <div class="nickname">
                         ${review.user.nickname}

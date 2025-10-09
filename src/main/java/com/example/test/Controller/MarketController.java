@@ -269,14 +269,6 @@ public class MarketController {
         return path + "salesDetail";
     }
 
-    // 내 판매 내역(내 상품에 대해서 판매된 최근순으로 조회)
-    // 내 상품 상세
-    @GetMapping("/mySalesList/{userId}")
-    public String mySalesList() {
-
-        return path + "mySalesList";
-    }
-
     // ----------------------------------로그인 한 유저가 등록한 상품-----------------------------------
 
     /*

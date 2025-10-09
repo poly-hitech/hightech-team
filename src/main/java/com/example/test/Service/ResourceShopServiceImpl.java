@@ -143,7 +143,7 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 
 	@Override
 	public List<ResourceShop> getTopFromResource() {
-		// TODO Auto-generated method stub
+	
 		return dao.getTopFromResource();
 	}
 

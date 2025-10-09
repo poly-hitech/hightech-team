@@ -74,8 +74,12 @@ $(document).ready(function () {
                             '<img src="' + filepath + '" alt="' + (originfilename || '') + '">' +
                             '<h3>' + (shop.itemName || '') + '</h3>' +
                             '<div class="author">' + (shop.itemWriter || '') + '</div>' +
-                            '<div class="price">' + (shop.itemPrice || '0') + '</div>' +
-                            '</div>';
+                            '<div class="price">' + (shop.itemPrice || '0') + '</div>';
+                            if(showButton === true){
+                            itemHtml += '<div>' + '<a href="../updateMyResource/'+ (shop.itemId || '') +'">수정</a>' + '</div>' +
+                            '<div>' + '<a href="../delete/'+ (shop.itemId || '') +'">수정</a>' + '</div>';
+                            }
+                            itemHtml += '</div>';
                         //빈카드 생성 방지
                         if (shop.itemName !== null) {
                             $("#resourceGrid").append(itemHtml);
@@ -147,8 +151,12 @@ $(document).ready(function () {
                                     '<div class="author">' + ('작성자 : ') + (shop.itemWriter || '') + '</div>' +
                                     '<div class="author">' + ('판매량 : ') + (shop.counting.totalcount || '0') + '</div>' +
                                     '<div class="author">' + ('랭킹 : ') + (shop.ranking.totalRank || '없음') + '</div>' +
-                                    '<div class="price">' + (shop.itemPrice || '0') +('원') + '</div>' +
-                                    '</div>';
+                                    '<div class="price">' + (shop.itemPrice || '0') +('원') + '</div>';
+                                    if(showButton === true){
+                                    itemHtml += '<div>' + '<a href="../updateMyResource/'+ (shop.itemId || '') +'">수정</a>' + '</div>' +
+                                    '<div>' + '<a href="../delete/'+ (shop.itemId || '') +'">수정</a>' + '</div>';
+                                    }
+                                    itemHtml += '</div>';
                                 //빈카드 생성 방지
                                 if (shop.itemName !== null) {
                                     $("#resourceGrid").append(itemHtml);
