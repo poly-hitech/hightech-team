@@ -159,7 +159,7 @@
     <script>
         const userId = '${sessionScope.member.userId != null ? sessionScope.member.userId : ""}';
         const pageUserId = '${pageUserId != null ? pageUserId : ""}';
-        let showButton = userId === pageUserId;
+        var showButton = userId === pageUserId;
     </script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // showButton 값이 정의되어 있지 않으면 false로 설정
-    let showButton = (typeof showButton !== "undefined") ? showButton : false;
+    var showButton = (typeof showButton !== "undefined") ? showButton : false;
 
     // 초기 로드 시 전체 데이터 표시
     displayAllResources();
