@@ -36,7 +36,7 @@
 	</select>
 
 	<!-- 판매한 상품 목록 -->
-	<select id="purchasedList" resultMap="orderListMap">
+	<select id="mySalesList" resultMap="orderListMap">
 		SELECT
 		orders.ordersId,
 		orders.ordersDate,
