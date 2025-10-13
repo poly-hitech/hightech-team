@@ -67,10 +67,12 @@ $(document).ready(function () {
                 } else {
                     selectedSubcategory.resourceShop.forEach(function (shop) {
                         var filepath = shop.resourceImage || '';
+                        var fileName = '';
+                        var originfilename = '';
                         if (filepath) {
-                            const fileName = filepath.split(/[\\/]/).pop();
+                            fileName = filepath.split(/[\\/]/).pop();
                             // 추가 이스케이프 처리
-                            var originfilename = fileName.replace(/\\/g, '/').replace(/[^a-zA-Z0-9._-]/g, '_');
+                            originfilename = fileName.replace(/\\/g, '/').replace(/[^a-zA-Z0-9._-]/g, '_');
                         }
                         console.log("파일명: " + fileName)
                         var itemHtml = '<div class="product-card" data-item-id="' + (shop.itemId || '') + '">' +
@@ -142,10 +144,12 @@ $(document).ready(function () {
                             if (shop.resourceFile && shop.resourceFile.length > 0) {
                                 var filepath = shop.resourceImage || '';
                                 console.log("상점 아이템이미지: " + filepath);
+                                var fileName = '';
+                                var originfilename = '';
                                 if (filepath) {
-                                    var fileName = filepath.split(/[\\/]/).pop();
+                                    fileName = filepath.split(/[\\/]/).pop();
                                     // 추가 이스케이프 처리
-                                    var originfilename = fileName.replace(/\\/g, '/').replace(/[^a-zA-Z0-9._-]/g, '_');
+                                    originfilename = fileName.replace(/\\/g, '/').replace(/[^a-zA-Z0-9._-]/g, '_');
                                 }
                                 console.log("파일명: " + fileName)
                                 var itemHtml = '<div class="product-card" data-item-id="' + (shop.itemId || '') + '">' +
