@@ -12,10 +12,11 @@ public class ForumPost {
 	private String content;
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	private Date writeDate = new Date();
+	//공개여부 
 	private int state;
 	private int count;
 	private long boardId;
-	private long userID;
+	private long userId;
 	private String postWriter;
 	public long getPostId() {
 		return postId;
@@ -65,11 +66,11 @@ public class ForumPost {
 	public void setPostWriter(String postWriter) {
 		this.postWriter = postWriter;
 	}
-	public long getUserID() {
-		return userID;
+	public long getUserId() {
+		return userId;
 	}
-	public void setUserID(long userID) {
-		this.userID = userID;
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 	
 	
