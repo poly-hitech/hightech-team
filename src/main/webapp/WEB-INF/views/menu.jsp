@@ -103,13 +103,13 @@
               </a>
             </li>
             <li class="item">
-              <a href="#" class="link flex">
+              <a href="${root}/board/list/2" class="link flex">
                 <i class="bx bx-folder"></i>
                 <span>취업 정보공유</span>
               </a>
             </li>
             <li class="item">
-              <a href="#" class="link flex">
+              <a href="${root}/board/list/3" class="link flex">
                 <i class="bx bx-cloud-upload"></i>
                 <span>자유 게시판</span>
               </a>
