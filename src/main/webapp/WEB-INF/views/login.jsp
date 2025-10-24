@@ -40,7 +40,8 @@
         <script>
             alert("${message}"); // Model에서 받은 메시지 표시
             <c:if test="${redirect}">
-                window.location.href = "https://wookportfolio.duckdns.org:83/"; // 성공 시 메인 페이지로 이동
+                /* window.location.href = "https://wookportfolio.duckdns.org:83/"; // 성공 시 메인 페이지로 이동 */
+                window.location.href = "/";
             </c:if>
         </script>
     </c:if>

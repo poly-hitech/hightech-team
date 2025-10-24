@@ -159,6 +159,7 @@ public class MarketController {
         Users member = (Users) session.getAttribute("member");
 
         if (member != null) {
+        	log.info("로그인한 유저 프로필 이미지: {}", member.getProfileImage());
             Long userId = member.getUserId();
             Map<String, Object> userParams = new HashMap<>();
             userParams.put("userId", userId);

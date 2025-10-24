@@ -6,7 +6,8 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property><!-- 어떤 데이터베이스를 쓰는지  -->
-		<property name="url" value="jdbc:oracle:thin:@3.38.189.143:1521:xe"></property>	<!--배포용 url로 수정 sid 방식이 아니라 service_name방식-->
+		<!-- <property name="url" value="jdbc:oracle:thin:@3.38.189.143:1521:xe"></property>	배포용 url로 수정 sid 방식이 아니라 service_name방식 -->
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>	<!--배포용 url로 수정 sid 방식이 아니라 service_name방식-->
 		<property name="username" value="wlwl45wl"></property><!-- 데이터베이스 아이디 -->
 		<property name="password" value="duswjd12"></property><!-- 데이터베이스 비밀번호 -->
 	</bean>
@@ -31,6 +32,7 @@
 	
 	<!-- 파일 업로드 기본 경로 설정 -->
     <bean id="fileUploadPathResolver" class="com.example.test.Util.FileUploadPathResolver">
-        <property name="baseDirectory" value="/hightech/upload" />
+        <!-- <property name="baseDirectory" value="/hightech/upload" /> -->
+        <property name="baseDirectory" value="C:/hightech/upload" />
     </bean>
 </beans>
