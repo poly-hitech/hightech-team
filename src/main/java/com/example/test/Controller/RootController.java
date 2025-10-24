@@ -1,5 +1,7 @@
 package com.example.test.Controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.test.Model.HostAdress;
+import com.example.test.Model.ResourceShop;
 import com.example.test.Model.Users;
 import com.example.test.Service.ResourceShopService;
 import com.example.test.Service.UsersService;
@@ -21,8 +25,16 @@ public class RootController {
 	@Autowired
 	UsersService usersService;
 	
+	@Autowired
+	ResourceShopService resourceService;
+	
+	//게시판 작업 끝나면 불러와야 함.
+	
 	@GetMapping("/")
-	String index() {
+	String index(Model model) {
+		List<ResourceShop> resource = resourceService.getTopFromResource();
+		model.addAttribute("popularResources", resource);
+		//최근 게시물 
 		
 		return "index";
 	}
@@ -43,10 +55,10 @@ public class RootController {
 	
 	//로그인
 	@GetMapping("/logout")
-	String logout(HttpSession session) {
+	String logout(HttpSession session, HostAdress hostAddress) {
 		session.invalidate();
 		
-		return "redirect:/";
+		return "redirect:" + hostAddress.getHost();
 	}
 	
 	@GetMapping("/login")

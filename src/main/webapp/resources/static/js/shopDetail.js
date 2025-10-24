@@ -28,7 +28,7 @@ $(document).ready(function () {
                     console.log("구매 성공:", response);
                     alert("아이템 구매가 완료되었습니다.");
                     //구매 후 페이지 리디렉션
-                    window.location.href = "/shop/detail?itemId=" + itemId;
+                    window.location.href = "/shop/detail/" + itemId;
                 },
                 error: function (xhr, status, error) {
                     console.error("구매 실패:", error);

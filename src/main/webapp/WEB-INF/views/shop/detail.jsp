@@ -52,7 +52,7 @@
 				</div>
 					<div class="review-form-box">
                         <div class="review-form-header">
-                            <img class="user-avatar" src="${fn:replace(sessionScope.member.profileImage, 'C:/upload', '/upload')}" alt="프로필" />
+                            <img class="user-avatar" src="${sessionScope.member.profileImage}" alt="프로필" />
                             <div class="username">${sessionScope.member.nickname}</div>
                             <div class="star-select">
                                 <input type="radio" id="star5" name="reviewRating" value="5"><label for="star5">★</label>
@@ -85,7 +85,7 @@
 
 			<div class="right-section">
                 <div class="preview-header">
-                    <img class="preview-image" src="${pageContext.request.contextPath}${fn:replace(shop.resourceImage, 'C:/upload', '/upload')}" alt="리소스 이미지">
+                    <img class="preview-image" src="${shop.resourceImage}" alt="리소스 이미지">
                         <div class="preview-meta">
                             <div class="category">${shop.resourceCategory.resourceCategoryName} > ${shop.resourceSubCategory.resourceSubCategoryName}</div>
                             <div class="resource-title">${shop.itemName}</div>

@@ -35,6 +35,40 @@
 		ORDER BY rc.resourceCategoryId, rsc.resourceSubCategoryId, rs.itemId, rf.resourceFileId
 	</select>
 
+	<!-- 판매한 상품 목록 -->
+	<select id="mySalesList" resultMap="orderListMap">
+		SELECT
+		orders.ordersId,
+		orders.ordersDate,
+		orders.ordersPrice,
+
+		rc.resourceCategoryId,
+		rc.resourceCategoryName,
+
+		rsc.resourceSubCategoryId,
+		rsc.resourceSubCategoryName,
+
+		rs.itemId,
+		rs.itemName,
+		rs.itemPrice,
+		rs.itemWriter,
+		rs.resourceContent,
+		rs.resourceImage,
+
+		rf.resourceFileId,
+		rf.resourceFileName
+
+		FROM Orders orders
+		INNER JOIN OrdersDetails od ON orders.ordersId = od.ordersId
+		INNER JOIN ResourceShop rs ON rs.itemId = od.itemId
+		LEFT JOIN ResourceSubCategory rsc ON rsc.resourceSubCategoryId = rs.resourceSubCategoryId
+		LEFT JOIN ResourceCategory rc ON rc.resourceCategoryId = rsc.resourceCategoryId
+		LEFT JOIN ResourceFile rf ON rf.itemId = rs.itemId
+
+		WHERE rs.itemWriter = #{nickname}
+		ORDER BY od.ordersDate DESC
+	</select>
+
 	<!-- 로그인 유저의 주문 정보에 속한 리소스 번호 -->
 	<select id="getItemIdByLoginUser" resultType="long" parameterType="Long">
 		SELECT od.itemId

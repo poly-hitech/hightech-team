@@ -6,9 +6,9 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property><!-- 어떤 데이터베이스를 쓰는지  -->
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
-		<property name="username" value="localhost"></property><!-- 데이터베이스 아이디 -->
-		<property name="password" value="1234"></property><!-- 데이터베이스 비밀번호 -->
+		<property name="url" value="jdbc:oracle:thin:@3.38.189.143:1521:xe"></property>	<!--배포용 url로 수정 sid 방식이 아니라 service_name방식-->
+		<property name="username" value="wlwl45wl"></property><!-- 데이터베이스 아이디 -->
+		<property name="password" value="duswjd12"></property><!-- 데이터베이스 비밀번호 -->
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -21,8 +21,8 @@
 	</bean>
 
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
-		<property name="maxUploadSize" value="52428800"></property>
-		<property name="maxUploadSizePerFile" value="10000000"></property>
+		<property name="maxUploadSize" value="524288000"></property>
+		<property name="maxUploadSizePerFile" value="100000000"></property>
 	</bean>
 	
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -31,6 +31,6 @@
 	
 	<!-- 파일 업로드 기본 경로 설정 -->
     <bean id="fileUploadPathResolver" class="com.example.test.Util.FileUploadPathResolver">
-        <property name="baseDirectory" value="C:/upload" />
+        <property name="baseDirectory" value="/hightech/upload" />
     </bean>
 </beans>
