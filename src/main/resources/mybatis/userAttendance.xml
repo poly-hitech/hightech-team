@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="userAttendance">
+    <!-- 월별 출석 데이터 -->
+    <select id="selectMonthAttendance" resultType="UserAttendanceDetail">
+        SELECT *
+        FROM USERATTENDANCEDETAIL
+        WHERE USERID = #{userId}
+        AND ATTENDDATE BETWEEN #{startDate} AND #{endDate}
+    </select>
+
+    <!-- 오늘 출석 여부 (1: 있음, 0: 없음) -->
+    <select id="countTodayAttendance" resultType="int">
+        SELECT COUNT(*)
+        FROM USERATTENDANCEDETAIL
+        WHERE USERID = #{userId}
+        AND ATTENDDATE = #{today}
+    </select>
+
+    <!-- 출석 기록 추가 -->
+    <insert id="insertAttendance">
+        INSERT INTO USERATTENDANCEDETAIL (ATTENDID, USERID, ATTENDDATE)
+        VALUES (USERATTENDANCEDETAIL_SEQ.NEXTVAL, #{userId}, #{attendDate})
+    </insert>
+
+    <!-- 보너스 지급 여부 조회 -->
+    <select id="hasReceivedBonus" resultType="boolean">
+        SELECT COUNT(*) > 0 FROM ATTENDANCEBONUS
+        WHERE USERID = #{userId}
+        AND year = #{year}
+        AND month = #{month}
+        AND given = 'Y'
+    </select>
+
+    <!-- 지급 기록 삽입 -->
+    <insert id="insertBonusRecord">
+        INSERT INTO ATTENDANCEBONUS (userId, year, month, given)
+        VALUES (#{userId}, #{year}, #{month}, 'Y')
+    </insert>
+</mapper>

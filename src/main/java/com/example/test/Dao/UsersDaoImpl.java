@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.test.Model.NewRegex;
+import com.example.test.Model.BuyPoint;
 import com.example.test.Model.RegexDetail;
 import com.example.test.Model.Users;
 
@@ -16,17 +17,20 @@ public class UsersDaoImpl implements UsersDao {
 	@Autowired
 	SqlSession sql;
 
+	//로그인
 	@Override
 	public Users login(Users item) {
 		return sql.selectOne("users.login", item);
 	}
 
+	//회원가입 후 생성된 사용자의 기본키 호출
 	@Override
-	public void add(Users item) {
+	public Long add(Users item) {
 		sql.insert("users.add",item);
-		
+		return item.getUserId();	
 	}
 
+	//---------------------특수무자 관련(비밀번호)-------------------------
 	@Override
 	public Long getLastRegexId() {
 		
@@ -57,12 +61,6 @@ public class UsersDaoImpl implements UsersDao {
 	}
 
 	@Override
-	public Long selectUserId() {
-		// TODO Auto-generated method stub
-		return sql.selectOne("users.selectUserId");
-	}
-
-	@Override
 	public List<NewRegex> selectNewRegex(String username) {
 		// TODO Auto-generated method stub
 		return sql.selectList("users.selectNewRegex", username);
@@ -73,11 +71,21 @@ public class UsersDaoImpl implements UsersDao {
 		// TODO Auto-generated method stub
 		return sql.selectOne("users.getFirstNewRegexId", username);
 	}
+	//------------------------------------------------------------------
+	
 
+	//회원 아이디 조회
 	@Override
 	public String search(String username) {
 		// TODO Auto-generated method stub
 		return sql.selectOne("users.getUsername", username);
+	}
+	
+	//유저번호 검색
+	@Override
+	public Long selectUserId() {
+		// TODO Auto-generated method stub
+		return sql.selectOne("users.selectUserId");
 	}
 
 	//회원정보 불러오기
@@ -105,6 +113,45 @@ public class UsersDaoImpl implements UsersDao {
 	public void updateIncludeNewPassword(Users item) {
 		sql.update("users.updateIncludeNewPassword", item);
 	}
+	
+
+	//--------------------------------포인트 관련-----------------------------------------
+	//유저번호로 포인트 검색
+	@Override
+	public BuyPoint getPointByUserId(Long userId) {
+		// TODO Auto-generated method stub
+		return sql.selectOne("buyPoint.selectByUserId", userId);
+	}
+
+	//유저 닉네임으로 포인트 검색
+	@Override
+	public BuyPoint getPointByNickname(String itemWriter) {
+		// TODO Auto-generated method stub
+		return sql.selectOne("buyPoint.selectByNickname", itemWriter);
+	}
+	
+	//주문자 포인트 차감
+	@Override
+	public void disPointByUserId(BuyPoint orderUserPoint) {
+		// TODO Auto-generated method stub
+		sql.update("buyPoint.updatePointByUserId", orderUserPoint);
+	}
+
+	//포인트 증가
+	@Override
+	public void earnPointByUserId(BuyPoint saleUserPoint) {
+		// TODO Auto-generated method stub
+		sql.update("buyPoint.updatePointByUserId", saleUserPoint);
+	}
+	
+	//초기 회원가입 포인트 세팅
+	@Override
+	public void addPoint(BuyPoint buyPoint) {
+		sql.insert("buyPoint.addPoint", buyPoint);
+	}
+	//----------------------------------------------------------------------------------
+
+
 
 
 }

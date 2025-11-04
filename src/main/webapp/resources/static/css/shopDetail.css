@@ -1,0 +1,402 @@
+body {
+	margin: 0;
+	background-color: #121212;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+main {
+	margin-left: 350px;
+	margin-right: 80px;
+	margin-top: 80px;
+	margin-bottom: 80px;
+	padding: 25px;
+	background: rgba(255, 255, 255, 0.95);
+	border-radius: 12px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+	min-height: calc(100vh - 160px);
+	transition: margin-left 0.4s ease, box-shadow 0.3s ease;
+}
+
+.shop-detail-container {
+	display: flex;
+	padding: 40px;
+	gap: 40px;
+	color: white;
+}
+
+.left-section {
+	flex: 3;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+}
+
+.file-preview-box {
+	background-color: #1e1e1e;
+	padding: 20px;
+	border-radius: 10px;
+	max-height: 300px;
+	overflow-y: auto;
+}
+
+.file-preview-box ul {
+	list-style: none;
+	padding-left: 0;
+}
+
+.file-preview-box li {
+	padding: 6px 0;
+	border-bottom: 1px solid #333;
+}
+
+.section-box {
+	background-color: #1e1e1e;
+	padding: 20px;
+	border-radius: 10px;
+}
+
+.section-review-box {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: #1e1e1e;
+	padding: 20px;
+	border-radius: 10px;
+}
+
+.section-title {
+	font-weight: bold;
+	margin-bottom: 10px;
+	font-size: 16px;
+}
+
+.rating-options span {
+	margin-right: 15px;
+	color: #aaa;
+}
+
+.right-section {
+    position: sticky;
+    top: 40px;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    height: fit-content;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.preview-header {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.preview-image {
+    width: 110px;
+    height: 110px;
+    border-radius: 8px;
+    object-fit: cover;
+    background-color: #222;
+}
+
+.preview-image-box {
+    width: 180px;
+    height: 180px;
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.preview-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.info-box {
+    width: 100%;
+    text-align: center;
+}
+
+.preview-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.preview-meta .category {
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 4px;
+}
+
+.preview-meta .resource-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.icon-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.icon-btn {
+    background: none;
+    border: 1px solid #444;
+    color: #ccc;
+    padding: 4px 6px;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+    background-color: #333;
+    color: #a78bfa;
+}
+
+.counts {
+    font-size: 13px;
+    color: #bbb;
+    display: flex;
+    gap: 12px;
+}
+
+.icons {
+    font-size: 14px;
+    color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.icons i {
+    cursor: pointer;
+    color: #a78bfa;
+}
+
+.meta-group {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #bbb;
+    margin-bottom: 20px;
+}
+
+.meta-left, .meta-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.meta-group span {
+	color: white;
+}
+
+.meta-left a {
+	font-weight: bold;
+	color: #cfcaff;
+	text-decoration: none;
+}
+
+.meta-left a:hover {
+	text-decoration: underline;
+}
+
+.creator {
+    font-weight: bold;
+    color: #cfcaff;
+}
+
+.meta {
+	font-size: 12px;
+	color: #aaa;
+	margin-bottom: 20px;
+	line-height: 1.8;
+}
+
+.download-btn {
+    background-color: #7c3aed;
+    color: white;
+    border: none;
+    padding: 12px 0;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    width: 100%;
+    font-weight: bold;
+}
+
+.other-btn {
+    background-color: transparent;
+    border: 1px solid #444;
+    color: white;
+    padding: 12px 0;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.download-btn:hover {
+	background-color: #6d28d9;
+}
+
+.other-btn {
+	background-color: #333;
+	color: white;
+}
+
+.review-form-box {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.review-form-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+
+.review-form-header .username {
+    font-weight: bold;
+    color: #e0e0e0;
+}
+
+.user-header {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.username {
+	font-weight: bold;
+	color: #cfcfcf;
+}
+
+.star-select {
+    margin-left: auto;
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 18px;
+}
+
+.star-select input {
+    display: none;
+}
+
+.star-select label {
+    color: #555;
+    cursor: pointer;
+    transition: color 0.2s;
+    margin-left: 5px;
+}
+
+.star-select input:checked ~ label,
+.star-select label:hover,
+.star-select label:hover ~ label {
+    color: #a78bfa;
+}
+
+.review-stars {
+	font-size: 16px;
+	margin: 4px 0;
+}
+
+.star {
+	color: #555; /* 비활성 별 */
+}
+
+.star-display .star {
+    font-size: 14px;
+    color: #555;
+}
+
+.star.filled {
+	color: #a78bfa; /* 보라색 별 */
+}
+
+textarea#reviewContent {
+    width: 100%;
+    height: 90px;
+    padding: 12px;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    resize: none;
+    font-size: 14px;
+    color: white;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.char-count {
+    font-size: 13px;
+    color: #aaa;
+}
+
+button#addReview {
+    background-color: #7c3aed;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button#addReview:hover {
+    background-color: #6b21a8;
+}
+
+@media ( max-width : 768px) {
+	main {
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+	.shop-detail-container {
+		flex-direction: column;
+		padding: 20px;
+	}
+	.left-section, .right-section {
+		flex: none;
+		width: 100%;
+	}
+	.preview-image-box {
+		width: 100%;
+		height: 200px;
+	}
+}

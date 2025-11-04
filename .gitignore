@@ -1,1 +1,8 @@
 /test/
+target/
+.factorypath
+.classpath
+.project
+.settings/
+.class
+.log

@@ -1,13 +1,19 @@
 package com.example.test.Model;
 
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 //주문
 public class Orders {
 	private Long ordersId;
-	private Date orderDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date ordersDate = new Date();
 	private String ordersUser;
 	private Long userId;
+	private Long ordersPrice;
+	private List<OrdersDetails> ordersDetails;
 	
 	public Long getOrdersId() {
 		return ordersId;
@@ -15,11 +21,11 @@ public class Orders {
 	public void setOrdersId(Long ordersId) {
 		this.ordersId = ordersId;
 	}
-	public Date getOrderDate() {
-		return orderDate;
+	public Date getOrdersDate() {
+		return ordersDate;
 	}
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
+	public void setOrdersDate(Date ordersDate) {
+		this.ordersDate = ordersDate;
 	}
 	public String getOrdersUser() {
 		return ordersUser;
@@ -32,5 +38,17 @@ public class Orders {
 	}
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+	public Long getOrdersPrice() {
+		return ordersPrice;
+	}
+	public void setOrdersPrice(Long ordersPrice) {
+		this.ordersPrice = ordersPrice;
+	}
+	public List<OrdersDetails> getOrdersDetails() {
+		return ordersDetails;
+	}
+	public void setOrdersDetails(List<OrdersDetails> ordersDetails) {
+		this.ordersDetails = ordersDetails;
 	}
 }

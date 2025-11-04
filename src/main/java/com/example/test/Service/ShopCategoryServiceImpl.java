@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.test.Dao.ShopCategoryDao;
 import com.example.test.Model.MarketCategory;
+import com.example.test.Model.ResourceCategory;
 import com.example.test.Model.ResourceSubCategory;
 
 @Service
@@ -38,6 +39,12 @@ public class ShopCategoryServiceImpl implements ShopCategoryService {
 	public void addAdminCategory(MarketCategory item) {
 
 		dao.add(item);
+	}
+
+	@Override
+	public ResourceCategory getResourceCategory(Long resourceSubcategoryId) {
+		// TODO Auto-generated method stub
+		return dao.getResourceCategory(resourceSubcategoryId);
 	}
 
 }

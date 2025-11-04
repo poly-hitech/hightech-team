@@ -1,0 +1,91 @@
+main {
+  margin-left: 270px;
+  padding: 60px;
+  /* background-color: #f3f4f6; */
+  min-height: 100vh;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 제목 스타일 */
+main h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #f3f4f6;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* 필수 항목 표시 */
+.required {
+  color: red;
+  margin-left: 4px;
+}
+
+/* 폼 박스 */
+form {
+  background: #fff;
+  padding: 40px 30px;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+table tr {
+  margin-bottom: 24px;
+}
+
+table td {
+  padding: 12px 10px;
+}
+
+table td:first-child {
+  width: 160px;
+  font-weight: 600;
+  font-size: 15px;
+  vertical-align: middle;
+}
+
+table td:last-child input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.btn-wrap {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.btn-wrap input[type="submit"] {
+  background-color: #4a90e2;
+  color: white;
+  padding: 10px 24px;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.btn-wrap .cancel {
+  background-color: #999;
+  color: white;
+  padding: 10px 24px;
+  font-size: 15px;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.btn-wrap input:hover,
+.btn-wrap .cancel:hover {
+  opacity: 0.85;
+}

@@ -1,0 +1,217 @@
+.attd-wrapper {
+	width: 95vw;
+	width: 1250px;
+	min-width: 310px;
+	height: 890px;
+	background: #f0f0f0;
+	border-radius: 24px;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+	position: relative;
+}
+
+.titlebar {
+	background: #e4e4e4;
+	border-radius: 22px 22px 0 0;
+	padding: 20px 0 10px 0;
+	text-align: center;
+	border-bottom: 2px solid #ccc;
+}
+
+.attd-title {
+	font-size: 34px;
+	font-weight: bold;
+	letter-spacing: 1.2px;
+	color: #333;
+}
+
+.period {
+	font-size: 17px;
+	color: #666;
+	font-weight: bold;
+	margin-top: 5px;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 8px;
+	padding: 16px 20px 10px 20px;
+	background: #dcdcdc;
+	border-radius: 0 0 24px 24px;
+	min-height: 340px;
+}
+
+.cell {
+	background: #ffffff;
+	border: 1px solid #c7c7c7;
+	border-radius: 10px;
+	text-align: center;
+	padding: 8px 3px 4px 3px;
+	min-height: 104px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	transition: 0.15s;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.cell.today {
+	border: 2px solid #888;
+	background: #f7f7f7;
+}
+
+.cell.attended {
+	background: #eaf9e9;
+	border: 1px solid #89cb7b;
+	color: #1b4c28;
+}
+
+.cell-header {
+	font-size: 15px;
+	color: #444;
+	font-weight: bold;
+	margin-bottom: 7px;
+	margin-top: 1px;
+}
+
+.cell-reward {
+	font-size: 16px;
+	color: #333;
+	margin-bottom: 3px;
+	font-weight: bold;
+	min-height: 18px;
+}
+
+.cell-check {
+	font-size: 15px;
+	margin-top: 3px;
+	color: #3ebf53;
+	font-weight: bold;
+}
+
+.cell-today {
+	margin-top: 3px;
+	color: #000;
+	font-weight: bold;
+	font-size: 14px;
+	letter-spacing: 1px;
+}
+
+.btn-area {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.big-btn {
+	padding: 14px 48px;
+	font-size: 24px;
+	background: #555;
+	color: #fff;
+	border: none;
+	border-radius: 20px;
+	cursor: pointer;
+	font-weight: bold;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+	transition: 0.15s;
+	letter-spacing: 1px;
+}
+
+.big-btn:disabled {
+	background: #bbb;
+	color: #eee;
+	cursor: not-allowed;
+	opacity: 0.6;
+	box-shadow: none;
+}
+
+.desc {
+	display: flex;
+	justify-content: space-between;
+	margin: 16px 38px 0 38px;
+	padding: 18px 22px;
+	background: #fefefe;
+	border-radius: 10px;
+	color: #444;
+	font-size: 15px;
+	list-style: disc inside;
+	border: 1px solid #dcdcdc;
+	font-weight: 500;
+	line-height: 1.9;
+}
+
+.desc-form {
+	display: flex;
+	justify-content: flex-end; /* 오른쪽 정렬 */
+	margin-top: 10px;
+}
+
+/* 모달 오버레이/레이어 */
+.attd-modal {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 10000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.attd-modal-bg {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(30, 32, 42, 0.6);
+	left: 0;
+	top: 0;
+}
+
+.attd-modal-content {
+	position: relative;
+	background: transparent;
+	border: none;
+	box-shadow: 0 10px 36px #00000048;
+	border-radius: 28px;
+	width: 1250px;
+	max-height: 96vh;
+	overflow-y: auto;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.attd-modal-close {
+	position: absolute;
+	right: 30px;
+	top: 30px;
+	font-size: 16px;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	box-shadow: 0 4px 12px #00000044;
+	z-index: 10002;
+	transition: 0.12s;
+}
+
+.attd-modal-close:hover {
+	background: #c43535;
+	color: #fff;
+}
+
+#attendance-modal-body .attd-wrapper {
+	margin: 0 !important;
+	/* 필요시 width만 조정 */
+}
+
+.coin-icon {
+	color: gold;
+	margin-right: 4px;
+}

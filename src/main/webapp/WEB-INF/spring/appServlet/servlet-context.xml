@@ -23,6 +23,7 @@
 	<resources location="/resources/static/js/" mapping="/js/**"></resources>
 	<resources location="/resources/static/images/" mapping="/images/**"></resources>
 	<resources location="/resources/static/css/" mapping="/css/**"></resources>
+	<resources location="file:/hightech/upload/" mapping="/hightech/upload/**"></resources>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -38,37 +39,35 @@
 	<!-- 트랜잭션 활성화 트랜잭션-->
 	<tx:annotation-driven/>
 	
-	<!-- 
+		
+	<!--  <beans:bean id="Counting" class="어떤 클래스에 컴포넌트를 적용할 것인가?"> </beans:bean>-->
 	<beans:bean id="Counting" class="com.example.test.Component.Counting"></beans:bean>
-	 -->
 	
-	<!-- scheduler -->
-	<!--  
+	
+	<!-- scheduler 설정 -->
 	<task:annotation-driven scheduler="scheduler"/>
-	<task:scheduler id="scheduler" pool-size="10"/> -->
-	
-		<!--  <beans:bean id="Counting" class="어떤 클래스에 컴포넌트를 적용할 것인가?"> </beans:bean>-->
-	<!--  
+	<task:scheduler id="scheduler" pool-size="10"/>
+
+	 
 	<task:scheduled-tasks>
 		<task:scheduled ref="Counting" method="resetDailyCount" cron = "0 0 0 * * *"/>
 		<task:scheduled ref="Counting" method="resetWeekCount" cron = "0 0 0 * * MON"/>
 		<task:scheduled ref="Counting" method="resetMonthCount" cron = "0 0 0 1 * *"/>
-	</task:scheduled-tasks> -->
+	</task:scheduled-tasks>
+
 	
 	<!-- interceptor작성 -->
 	<interceptors>
 		<interceptor>		
 			<mapping path="/admin/**"/>
-			
+			<!--제외시켜라  -->
 			<exclude-mapping path="**/shop/**"/>
-			 <!--제외시켜라  -->
-			
+
 			<beans:bean class="com.example.test.interceptor.AdminInterceptor"></beans:bean>	<!-- 어떤걸 실행시킬지 -->
 		</interceptor>
 		
 		<interceptor>		
 			<mapping path="/partner/**"/>
-
 			
 			<beans:bean class="com.example.test.interceptor.PartnerInterceptor"></beans:bean>	<!-- 어떤걸 실행시킬지 -->
 		</interceptor>

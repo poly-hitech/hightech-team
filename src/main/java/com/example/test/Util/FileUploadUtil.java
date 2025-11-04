@@ -39,18 +39,20 @@ public class FileUploadUtil {
 	
 	        try {
 	            // 파일 저장
-	            File destinationFile = new File(uploadDir + "/" + file.getOriginalFilename() + uuid);
+	            File destinationFile = new File(uploadDir + "/" + uuid +"_"+ file.getOriginalFilename());
 	            file.transferTo(destinationFile);
 	
 	            model.addAttribute("filePath", destinationFile.getAbsolutePath());
 	            log.info("저장경로 확인: {}" + uploadDir);
 	            //저장 경로 반환
-	    		return destinationFile.getAbsolutePath();	//서비스로 반환된 것을 저장 필요
+	            String filepath = destinationFile.getAbsolutePath();	//상세 정보 필요
+	            filepath = filepath.replace("\\", "/"); // 백슬래시를 슬래시로 변환
+	    		return filepath;//서비스로 반환된 것을 저장 필요
 	
 	        } catch (Exception e) {
 	            model.addAttribute("message", "파일 업로드 중 오류 발생: " + e.getMessage());
 	            return null;
 	        }
 
-	}	
+	}
 }

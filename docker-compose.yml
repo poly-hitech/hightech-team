@@ -1,0 +1,51 @@
+version: "3.8"
+
+volumes:
+  oracle-data: {}
+
+services:
+  oracle-db:
+    image: gvenzl/oracle-xe:11
+    container_name: oracle-db
+    environment:
+      - ORACLE_ALLOW_REMOTE=true
+      - ORACLE_DISABLE_ASYNCH_IO=true
+      - ORACLE_PASSWORD=duswjd12
+    ports:
+      - "1521:1521"
+    volumes:
+      - oracle-data:/u01/app/oracle
+    restart: always
+
+  hightech-backend:
+    build: .
+    image: wlwl45wl/hightech-backend:latest
+    container_name: hightech-backend
+    ports:
+      - "8083:8083"
+    volumes:
+      - /home/ubuntu/upload:/hightech/upload
+    depends_on:
+      - oracle-db
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8083 || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+    restart: always
+
+
+  spring-nginx:
+    build: ./nginx
+    container_name: spring-nginx
+    ports:
+      - "83:83"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:rw
+      - /etc/letsencrypt/live/wookportfolio.duckdns.org/fullchain.pem:/etc/nginx/certs/fullchain.pem:ro
+      - /etc/letsencrypt/live/wookportfolio.duckdns.org/privkey.pem:/etc/nginx/certs/privkey.pem:ro
+    depends_on:
+      hightech-backend:
+        condition: service_healthy
+    restart: always

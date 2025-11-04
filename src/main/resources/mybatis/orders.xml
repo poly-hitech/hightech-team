@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="orders">
+	<!-- 조회 -->
+	<select id="purchasedList" resultMap="orderListMap">
+		SELECT
+		orders.ordersId,
+		orders.ordersDate,
+		orders.ordersPrice,
+
+		rc.resourceCategoryId,
+		rc.resourceCategoryName,
+
+		rsc.resourceSubCategoryId,
+		rsc.resourceSubCategoryName,
+
+		rs.itemId,
+		rs.itemName,
+		rs.itemPrice,
+		rs.itemWriter,
+		rs.resourceContent,
+		rs.resourceImage,
+
+		rf.resourceFileId,
+		rf.resourceFileName
+
+		FROM Orders orders
+		INNER JOIN OrdersDetails od ON orders.ordersId = od.ordersId
+		INNER JOIN ResourceShop rs ON rs.itemId = od.itemId
+		LEFT JOIN ResourceSubCategory rsc ON rsc.resourceSubCategoryId = rs.resourceSubCategoryId
+		LEFT JOIN ResourceCategory rc ON rc.resourceCategoryId = rsc.resourceCategoryId
+		LEFT JOIN ResourceFile rf ON rf.itemId = rs.itemId
+
+		WHERE orders.userId = #{userId}
+		ORDER BY rc.resourceCategoryId, rsc.resourceSubCategoryId, rs.itemId, rf.resourceFileId
+	</select>
+
+	<!-- 판매한 상품 목록 -->
+	<select id="mySalesList" resultMap="orderListMap">
+		SELECT
+		orders.ordersId,
+		orders.ordersDate,
+		orders.ordersPrice,
+
+		rc.resourceCategoryId,
+		rc.resourceCategoryName,
+
+		rsc.resourceSubCategoryId,
+		rsc.resourceSubCategoryName,
+
+		rs.itemId,
+		rs.itemName,
+		rs.itemPrice,
+		rs.itemWriter,
+		rs.resourceContent,
+		rs.resourceImage,
+
+		rf.resourceFileId,
+		rf.resourceFileName
+
+		FROM Orders orders
+		INNER JOIN OrdersDetails od ON orders.ordersId = od.ordersId
+		INNER JOIN ResourceShop rs ON rs.itemId = od.itemId
+		LEFT JOIN ResourceSubCategory rsc ON rsc.resourceSubCategoryId = rs.resourceSubCategoryId
+		LEFT JOIN ResourceCategory rc ON rc.resourceCategoryId = rsc.resourceCategoryId
+		LEFT JOIN ResourceFile rf ON rf.itemId = rs.itemId
+
+		WHERE rs.itemWriter = #{nickname}
+		ORDER BY od.ordersDate DESC
+	</select>
+
+	<!-- 로그인 유저의 주문 정보에 속한 리소스 번호 -->
+	<select id="getItemIdByLoginUser" resultType="long" parameterType="Long">
+		SELECT od.itemId
+		FROM Orders orders
+		INNER JOIN OrdersDetails od ON orders.ordersId = od.ordersId
+		INNER JOIN ResourceShop rs ON rs.itemId = od.itemId
+		WHERE orders.userId = #{userId}
+	</select>
+
+	<!-- 수정 -->
+	
+	<!-- 주문취소 -->
+	
+	<!-- 주문생성 -->
+	<insert id="buyResource">
+		insert into Orders
+		values(ORDERS_SEQ.nextval, #{ordersDate}, #{ordersUser}, #{userId}, #{ordersPrice})
+		
+		<selectKey keyProperty="ordersId" resultType="Long" order="AFTER">
+			select ORDERS_SEQ.currval FROM dual
+		</selectKey>
+	</insert>
+
+	<resultMap id="orderListMap" type="MyOrderList">
+		<id property="ordersId" column="ordersId" />
+		<result property="ordersDate" column="ordersDate" />
+		<result property="ordersPrice" column="ordersPrice" />
+		<result property="resourceCategoryId" column="resourceCategoryId" />
+		<result property="resourceCategoryName" column="resourceCategoryName" />
+		<result property="resourceSubCategoryId" column="resourceSubCategoryId" />
+		<result property="resourceSubCategoryName" column="resourceSubCategoryName" />
+		<result property="resourceContent" column="resourceContent" />
+		<result property="resourceImage" column="resourceImage" />
+		<result property="itemId" column="itemId" />
+		<result property="itemName" column="itemName" />
+		<result property="itemPrice" column="itemPrice" />
+		<result property="itemWriter" column="itemWriter" />
+		<collection property="resourceFile" ofType="ResourceFile" javaType="ArrayList" column="itemId">
+			<id property="resourceFileId" column="resourceFileId"/>
+			<result property="resourceFileName" column="resourceFileName"/>
+		</collection>
+	</resultMap>
+</mapper>
