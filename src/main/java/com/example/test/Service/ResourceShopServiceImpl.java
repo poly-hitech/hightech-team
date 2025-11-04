@@ -113,9 +113,6 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 	@Override
 	public ResourceShop getItemById(Long itemId) {
 		log.info("itemId: {}", itemId);
-		ResourceShop item = dao.getItem(itemId);
-		List<String> fileNames = item.getResourceFile().stream().map(ResourceFile::getResourceFileName).toList();
-		log.info("Retrieved file names: {}", fileNames);
 		return dao.getItem(itemId);
 	}
 

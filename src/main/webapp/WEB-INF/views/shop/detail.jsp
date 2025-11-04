@@ -30,27 +30,50 @@
 					<div class="section-title">리소스 프리뷰</div>
 					<ul class="file-list">
 						<c:forEach var="f" items="${shop.resourceFile}">
-							<c:set var="abs"
-								value="${f.resourceFileName != null ? f.resourceFileName : f}" />
-							<c:set var="rel" value="${fn:substringAfter(abs, 'upload/')}" />
-
+							<c:set var="abs" value="${f.resourceFileName}" />
 							<c:set var="parts" value="${fn:split(abs, '/')}" />
 							<c:set var="name" value="${parts[fn:length(parts)-1]}" />
-
 							<c:set var="extParts" value="${fn:split(name, '.')}" />
 							<c:set var="ext"
 								value="${fn:toLowerCase(extParts[fn:length(extParts)-1])}" />
+							<c:set var="rel" value="${fn:substringAfter(abs, 'upload/')}" />
+							<c:set var="folder" value="${fn:substringBefore(rel, '/')}" />
 
-							<li><i class="file-icon ${ext}"></i> <a
-								href="${root}/upload/${rel}" target="_blank"><c:out
-										value="${name}" /></a> <c:if
-									test="${ext == 'png' || ext == 'jpg' || ext == 'jpeg' || ext == 'gif' || ext == 'webp'}">
-									<div class="thumb">
-										<img src="${root}/upload/${rel}" alt="${name}" />
-									</div>
-								</c:if></li>
+							<li class="file-item"> <c:choose>
+									<c:when test="${folder == 'images'}">
+										<div class="file-type-label">이미지</div>
+										<img src="${root}/upload/${rel}" alt="${name}"
+											class="preview-img" />
+									</c:when>
+
+									<c:when test="${folder == 'musics'}">
+										<div class="file-type-label">음원</div>
+										<audio controls src="${root}/upload/${rel}"></audio>
+									</c:when>
+
+									<c:when test="${folder == 'documents'}">
+										<div class="file-type-label">문서</div>
+										<a href="${root}/upload/${rel}" target="_blank">${name}</a>
+									</c:when>
+
+									<c:when test="${folder == 'video'}">
+										<div class="file-type-label">영상</div>
+										<video controls width="100%" src="${root}/upload/${rel}"></video>
+									</c:when>
+
+									<c:when test="${folder =='programming'}">
+										<div class="file-type-label">소스코드</div>
+										<a href="${root}/upload/${rel}" target="_blank">${name}</a>
+									</c:when>
+
+									<c:otherwise>
+										<div class="file-type-label">기타</div>
+										<a href="${root}/upload/${rel}" target="_blank">${name}</a>
+									</c:otherwise>
+								</c:choose></li>
 						</c:forEach>
 					</ul>
+
 				</div>
 
 
