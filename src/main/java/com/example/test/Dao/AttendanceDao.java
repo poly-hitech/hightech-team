@@ -10,4 +10,6 @@ public interface AttendanceDao {
     List<UserAttendanceDetail> selectMonthAttendance(Long userId, Date startDate, Date endDate);
     int countTodayAttendance(Map<String, Object> params);
     void insertAttendance(Long userId, Date attendDate);
+    void insertBonusRecord(Map<String, Object> params);
+    boolean hasReceivedBonus(Map<String, Object> params);
 }

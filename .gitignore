@@ -4,4 +4,3 @@ target/
 .classpath
 .project
 .settings/
-src/main/webapp/WEB-INF/spring/root-context.xml

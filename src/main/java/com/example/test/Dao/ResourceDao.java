@@ -1,13 +1,10 @@
 package com.example.test.Dao;
 
 import java.util.List;
-import java.util.Map;
 
-import com.example.test.Model.Market;
 import com.example.test.Model.ResourceCategory;
 import com.example.test.Model.ResourceFile;
 import com.example.test.Model.ResourceShop;
-import com.example.test.Model.ResourceSubCategory;
 
 public interface ResourceDao {
 
@@ -16,8 +13,6 @@ public interface ResourceDao {
 	void save(ResourceShop resource);
 
 	List<ResourceCategory> addResourceShop();
-
-	void save(Map<String, Object> params);
 
 	ResourceShop getItem(Long itemId);
 
@@ -29,5 +24,5 @@ public interface ResourceDao {
 
 	List<ResourceShop> getTopFromResource();
 
-  void saveResourceFile(ResourceFile resourceFile);
+	void saveResourceFile(ResourceFile resourceFile);
 }

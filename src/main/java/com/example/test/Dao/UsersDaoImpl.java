@@ -137,7 +137,7 @@ public class UsersDaoImpl implements UsersDao {
 		sql.update("buyPoint.updatePointByUserId", orderUserPoint);
 	}
 
-	//판매자 포인트 증가
+	//포인트 증가
 	@Override
 	public void earnPointByUserId(BuyPoint saleUserPoint) {
 		// TODO Auto-generated method stub
@@ -146,8 +146,8 @@ public class UsersDaoImpl implements UsersDao {
 	
 	//초기 회원가입 포인트 세팅
 	@Override
-	public void addPoint(Long userId) {
-		sql.insert("buyPoint.addPoint", userId);
+	public void addPoint(BuyPoint buyPoint) {
+		sql.insert("buyPoint.addPoint", buyPoint);
 	}
 	//----------------------------------------------------------------------------------
 

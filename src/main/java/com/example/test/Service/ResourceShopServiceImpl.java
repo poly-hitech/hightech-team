@@ -1,6 +1,5 @@
 package com.example.test.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +52,6 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 	@Override
 	public void addResource(Long userId, Market market, List<MultipartFile> file, MultipartFile resourceImage,
 			Model model) throws Exception {
-
-		// resourceFile 리스트 초기화
-		List<ResourceFile> rf = new ArrayList<>();
 		String resourceImagePath = null;
 
 		// 대표이미지 업로드
@@ -80,36 +76,35 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 			for (MultipartFile singleFile : file) {
 				if (singleFile != null && !singleFile.isEmpty()) {
 					String filePath = fileupload.saveFile(singleFile, model);
+					log.info("다중 파일 업로드 중 단일 파일 업로드 성공: {}", filePath);
 					if (filePath != null && !filePath.isEmpty()) {
 						// 다중 파일업로드 경로 저장 로직
 						ResourceFile resourceFile = new ResourceFile();
 						resourceFile.setResourceFileName(filePath);
 						resourceFile.setItemId(market.getResourceShop().getItemId());
 						dao.saveResourceFile(resourceFile);
-
-						log.info("다중 파일 업로드 중 단일 파일 업로드 성공: {}", filePath);
+						log.info("다중 파일업로드 경로 저장 성공: {}", resourceFile.getResourceFileName());
 					} else {
 						log.warn("다중 파일업로드 실패: {}", singleFile.getOriginalFilename());
 					}
 				}
 			}
-			// // 리소스 정보 등록 후 리소스 파일 등록
-			// if (!rf.isEmpty()) {
-			// for (ResourceFile resourcefile : rf) {
-			// Map<String, Object> params = new HashMap<>();
-			// params.put("itemId", market.getResourceShop().getItemId());
-			// params.put("resourceFileName", filePath);
-			// dao.save(params);
-			// }
-			// }
-			log.info("총 {}개의 다중 파일이 업로드되었습니다.", rf.size());
 		} else {
 			log.info("등록된 다중 파일이 없습니다.");
 		}
 
+		// 리소스가 업로드 되지않았을 경우 예외 발생
+		if (market.getResourceShop() == null) {
+			log.info("생성된 리소스 정보가 없습니다.");
+		} else {
+			log.info("모든 파일 업로드 및 리소스 등록이 완료되었습니다.");
+		}
+
+		// 상품 등록시 카운팅 및 랭킹 테이블에 상품 추가
 		countingDao.save(market.getResourceShop().getItemId());
 		long totalCount = dao.countAllItems(); // 전체 상품 수 조회
 
+		// 최신 상품은 등수가 맨 마지막이어야함.
 		Ranking ranking = Ranking.builder()
 				.itemId(market.getResourceShop().getItemId())
 				.dailyRank(totalCount)
@@ -118,13 +113,6 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 				.totalRank(totalCount)
 				.build();
 		rankingDao.save(ranking);
-
-		// 리소스가 업로드 되지않았을 경우 예외 발생
-		if (market.getResourceShop() == null) {
-			log.info("생성된 리소스 정보가 없습니다.");
-		} else {
-			log.info("모든 파일 업로드 및 리소스 등록이 완료되었습니다.");
-		}
 	}
 
 	@Override
@@ -148,7 +136,7 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 
 	@Override
 	public List<ResourceShop> getTopFromResource() {
-		// TODO Auto-generated method stub
+
 		return dao.getTopFromResource();
 	}
 

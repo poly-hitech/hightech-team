@@ -3,6 +3,7 @@ package com.example.test.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.test.Model.BuyPoint;
 import com.example.test.Util.FileUploadUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -215,7 +216,10 @@ public class UsersServiceImpl implements UsersService {
 			userdao.saveRegexDetail(list);
 		}
 		userdao.saveNewRegex(list2);
-		userdao.addPoint(userId);
+		BuyPoint buyPoint = new BuyPoint();
+		buyPoint.setUserId(userId);
+		buyPoint.setPointMoney(0L); // 기본 포인트 설정
+		userdao.addPoint(buyPoint);
 	}
 	
 	@Override

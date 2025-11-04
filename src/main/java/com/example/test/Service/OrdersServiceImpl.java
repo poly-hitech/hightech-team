@@ -150,4 +150,11 @@ public class OrdersServiceImpl implements OrdersService {
 	public OrdersDetails getOrdersDetailsByUserIdAndItemId(Map<String, Object> params) {
 		return ordersDao.getOrdersDetailsByUserIdAndItemId(params);
 	}
+
+	@Override
+	@Transactional
+	public List<MyOrderList> mySalesList(String nickname) {
+		
+		return ordersDao.mySalesList(nickname);
+	}
 }

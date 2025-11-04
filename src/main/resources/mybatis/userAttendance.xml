@@ -20,6 +20,21 @@
     <!-- 출석 기록 추가 -->
     <insert id="insertAttendance">
         INSERT INTO USERATTENDANCEDETAIL (ATTENDID, USERID, ATTENDDATE)
-        VALUES (USERATTENDANCE_SEQ.NEXTVAL, #{userId}, #{attendDate})
+        VALUES (USERATTENDANCEDETAIL_SEQ.NEXTVAL, #{userId}, #{attendDate})
+    </insert>
+
+    <!-- 보너스 지급 여부 조회 -->
+    <select id="hasReceivedBonus" resultType="boolean">
+        SELECT COUNT(*) > 0 FROM ATTENDANCEBONUS
+        WHERE USERID = #{userId}
+        AND year = #{year}
+        AND month = #{month}
+        AND given = 'Y'
+    </select>
+
+    <!-- 지급 기록 삽입 -->
+    <insert id="insertBonusRecord">
+        INSERT INTO ATTENDANCEBONUS (userId, year, month, given)
+        VALUES (#{userId}, #{year}, #{month}, 'Y')
     </insert>
 </mapper>

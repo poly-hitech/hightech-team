@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리소스 상점</title>
+<title>내 상점</title>
 <link rel="stylesheet" href="${root}/css/shop.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>

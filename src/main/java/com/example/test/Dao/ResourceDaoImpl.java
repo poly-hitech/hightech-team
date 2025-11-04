@@ -1,7 +1,6 @@
 package com.example.test.Dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +41,6 @@ public class ResourceDaoImpl implements ResourceDao {
 	public void saveResourceFile(ResourceFile resourceFile) {
 		// TODO Auto-generated method stub
 		sql.insert("resourceShop.addResourceFile", resourceFile);
-	}
-
-	@Override
-	public void save(Map<String, Object> params) {
-		// TODO Auto-generated method stub
-		// sql.insert("resourceShop.addResourceFile", params);
 	}
 
 	@Override
