@@ -23,11 +23,11 @@ public class UsersDaoImpl implements UsersDao {
 		return sql.selectOne("users.login", item);
 	}
 
-	//회원가입
+	//회원가입 후 생성된 사용자의 기본키 호출
 	@Override
-	public void add(Users item) {
+	public Long add(Users item) {
 		sql.insert("users.add",item);
-		
+		return item.getUserId();	
 	}
 
 	//---------------------특수무자 관련(비밀번호)-------------------------
@@ -137,11 +137,17 @@ public class UsersDaoImpl implements UsersDao {
 		sql.update("buyPoint.updatePointByUserId", orderUserPoint);
 	}
 
-	//판매자 포인트 증가
+	//포인트 증가
 	@Override
-	public void earnPointByNickname(BuyPoint saleUserPoint) {
+	public void earnPointByUserId(BuyPoint saleUserPoint) {
 		// TODO Auto-generated method stub
 		sql.update("buyPoint.updatePointByUserId", saleUserPoint);
+	}
+	
+	//초기 회원가입 포인트 세팅
+	@Override
+	public void addPoint(BuyPoint buyPoint) {
+		sql.insert("buyPoint.addPoint", buyPoint);
 	}
 	//----------------------------------------------------------------------------------
 

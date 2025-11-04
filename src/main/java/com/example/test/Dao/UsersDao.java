@@ -11,7 +11,7 @@ public interface UsersDao {
 
 	Users login(Users item);
 
-	void add(Users item);
+	Long add(Users item);
 
 	Long getLastRegexId();
 
@@ -45,6 +45,8 @@ public interface UsersDao {
 
 	void disPointByUserId(BuyPoint orderUserPoint);
 
-	void earnPointByNickname(BuyPoint saleUserPoint);
+	void earnPointByUserId(BuyPoint saleUserPoint);
+
+	void addPoint(BuyPoint buyPoint);
 
 }

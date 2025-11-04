@@ -71,7 +71,11 @@
 		
 		<insert id="add">
 			insert into Users
-			values (USERS_SEQ.nextval, #{username}, #{password},#{nickname}, #{birthday}, #{phone}, #{gender}, #{profileImage}, #{agreeStatus}, #{signupDay}, #{roleId}, #{name})
+			(userId, username, password, nickname, birthday, phone, gender, profileImage, agreeStatus, signupDay, roleId, name)
+			values (USERS_SEQ.nextval, #{username}, #{password}, #{nickname}, #{birthday}, #{phone}, #{gender}, #{profileImage}, #{agreeStatus}, #{signupDay}, #{roleId}, #{name})
+			<selectKey keyProperty="userId" resultType="Long" order="AFTER">
+       			SELECT USERS_SEQ.CURRVAL FROM DUAL
+    		</selectKey>
 		</insert>
 		
 		<insert id="addRegex" parameterType="java.util.List">
@@ -104,7 +108,7 @@
 		
 		<update id="update">
 			update Users
-			set username=#{username}, nickname=#{nickname}, phone=#{phone}, gender=#{gender}, profileImage=#{profileImage}
+			set username=#{username}, nickname=#{nickname}, phone=#{phone}, gender=#{gender}, profileImage=#{profileImage}, birthday=#{birthday}
 			where userId=#{userId}
 		</update>
 		

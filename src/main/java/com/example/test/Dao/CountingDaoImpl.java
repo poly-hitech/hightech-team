@@ -25,4 +25,30 @@ public class CountingDaoImpl implements CountingDao {
 		sql.update("counting.updateByItemId", counting);
 	}
 
+	
+	//------------------각 카운트 초기화------------------------
+	@Override
+	public void resetDailyCount() {
+		// TODO Auto-generated method stub
+		sql.update("counting.resetDailyCount");
+	}
+
+	@Override
+	public void resetWeeklyCount() {
+		// TODO Auto-generated method stub
+		sql.update("counting.resetWeeklyCount");
+	}
+
+	@Override
+	public void resetMonthlyCount() {
+		// TODO Auto-generated method stub
+		sql.update("counting.resetMonthlyCount");
+	}
+	//------------------------------------------------------
+
+	@Override
+	public void save(Long itemId) {
+		sql.insert("counting.add", itemId);		
+	}
+
 }

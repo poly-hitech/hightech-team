@@ -15,7 +15,7 @@
 	
 	<!-- 최근 리소스 1차 카테고리 번호 -->
 	<select id="selectRCId" resultType="Long">
-		select MAX(resourceCategoryId) from resourceCategoryId
+		select MAX(resourceCategoryId) from resourceCategory
 	</select>
  
  	<!-- 리소스 1차 카테고리 로출 -->
@@ -23,15 +23,21 @@
 		select * from ResourceCategory
 		where resourceCategoryId=#{resourceCategoryId}
 	</select>
+	
+	<!-- 리소스 1차 카테고리 찾기 -->
+	<select id="findCategoryByName" resultType="ResourceCategory">
+		select * from ResourceCategory
+		where resourceCategoryName=#{resourceCategoryName}
+	</select>
 
 	<!-- 리소스 1차 카테고리 추가 sql -->
 	<insert id="addCate">
 		insert
 		into ResourceCategory
-		values (RESOURCESUBCATEGORY_SEQ.nextval, #{resourceCategoryName})
+		values (RESOURCECATEGORY_SEQ.nextval, #{resourceCategoryName})
 		
 		<selectKey keyProperty="resourceCategoryId" resultType="Long" order="AFTER">
-			select RESOURCESUBCATEGORY_SEQ.currval FROM dual
+			select RESOURCECATEGORY_SEQ.currval FROM dual
 		</selectKey>
 	</insert>
 

@@ -2,9 +2,9 @@ package com.example.test.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import com.example.test.Model.BuyPoint;
+import com.example.test.Util.FileUploadUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.test.Dao.UsersDao;
 import com.example.test.Model.NewRegex;
 import com.example.test.Model.RegexDetail;
-import com.example.test.Model.ResourceSubCategory;
 import com.example.test.Model.Users;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @Service
@@ -24,6 +25,9 @@ public class UsersServiceImpl implements UsersService {
 
 	@Autowired
 	UsersDao userdao;
+
+	@Autowired
+	FileUploadUtil fileupload;
 	
 	//로그인 암호화1번 방법
 	//저장된 특수문자와 경로를 모두 불러와서 사용자가 입력한 패스워드에 합쳐서 비교하도록함
@@ -100,10 +104,7 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public void add(Users item) {
 		String username = userdao.search(item.getUsername());
-		//저장된 유저정보 중 최신의 userId 호출
-		Long userId = userdao.selectUserId() != null ? userdao.selectUserId() + 1 : 1L;
-		item.setUserId(userId);
-		log.info("사용자 순번 확인: " + userId);
+		
 		if(username != null) {
 			throw new IllegalArgumentException("중복된 아이디 입니다.");
 		}
@@ -111,6 +112,17 @@ public class UsersServiceImpl implements UsersService {
 		if (item.getPassword() == null || item.getPassword().isEmpty()) {
             throw new IllegalArgumentException("비밀번호는 필수 입력 항목입니다.");
         }
+		
+		item.setRoleId(1L);
+		if(item.getNickname() == null || item.getNickname().isEmpty()) {
+			item.setNickname(item.getUsername());
+		}
+		
+		//유저 정보 생성 후 기본키 호출
+		Long userId = userdao.add(item);
+
+		log.info("사용자 순번 확인: " + userId);
+		item.setUserId(userId);
 		
 
 		// 리스트 초기화
@@ -171,7 +183,7 @@ public class UsersServiceImpl implements UsersService {
 			int random = (int)(Math.random()*7);
 			
 			//0부터 시작하여 그 이후엔 2의 배수의 위치에 특수문자 랜덤 저장
-			String charpass = stringPass[random];
+			String charpass = stringPass[random-1];
 			log.info("임의 생성된 특수문자 확인: {}" + charpass);
 		    if (passEncode[a*2] == null) {
 		        passEncode[a*2] = "";  // null을 빈 문자열로 대체
@@ -197,18 +209,17 @@ public class UsersServiceImpl implements UsersService {
 		
 		//변환된 문자열을 패스워드로 새로 저장
 		item.setPassword(newpassword);
-		item.setRoleId(1L);
 		
-		if(item.getNickname() == null || item.getNickname() == "미입력 시 아이디로 닉네임이 설정됩니다.") {
-			item.setNickname(item.getUsername());
-		}
-		
-		userdao.add(item);
+		userdao.updateIncludeNewPassword(item);
 		//널이 아닐때만 실행
 		if(!list.isEmpty()) {
 			userdao.saveRegexDetail(list);
 		}
 		userdao.saveNewRegex(list2);
+		BuyPoint buyPoint = new BuyPoint();
+		buyPoint.setUserId(userId);
+		buyPoint.setPointMoney(0L); // 기본 포인트 설정
+		userdao.addPoint(buyPoint);
 	}
 	
 	@Override
@@ -218,9 +229,11 @@ public class UsersServiceImpl implements UsersService {
 	}
 
 	@Override
-	public void update(Users item) {
+	public void update(Users item, MultipartFile profileImage, Model model) throws Exception {
 		//비밀번호 설정 및 특수문자 저장로직
 		Long userId = item.getUserId();
+		String profileImagePath = fileupload.saveFile(profileImage, model);
+		item.setProfileImage(profileImagePath);
 		if(!item.getPassword().isEmpty()) {
 			// 리스트 초기화
 	        if (item.getRegexDetail() == null) {
@@ -241,7 +254,7 @@ public class UsersServiceImpl implements UsersService {
 			
 			//임의로 지정할 특수문자 리스트
 			List<NewRegex> list2 = item.getNewRegex();
-			
+
 			//생성되어 있는 마지막 번호 호출
 			Long regexId = userdao.getLastRegexId();
 			if(regexId==null) {

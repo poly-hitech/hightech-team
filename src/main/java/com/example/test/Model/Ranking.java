@@ -1,18 +1,27 @@
 package com.example.test.Model;
 
-//랭킹 정보 
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+//랭킹 정보
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Ranking {
-	private Long rankingId;
+	private Long rankId;
 	private Long totalRank;
 	private Long dailyRank;
 	private Long weeklyRank;
 	private Long monthlyRank;
+	private Long itemId;
 	
 	public Long getRankingId() {
-		return rankingId;
+		return rankId;
 	}
-	public void setRankingId(Long rankingId) {
-		this.rankingId = rankingId;
+	public void setRankingId(Long rankId) {
+		this.rankId = rankId;
 	}
 	public Long getTotalRank() {
 		return totalRank;
@@ -38,4 +47,11 @@ public class Ranking {
 	public void setMonthlyRank(Long monthlyRank) {
 		this.monthlyRank = monthlyRank;
 	}
+	public Long getItemId() {
+		return itemId;
+	}
+	public void setItemId(Long itemId) {
+		this.itemId = itemId;
+	}
+
 }

@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	//path 등록해서 
+	//path 등록해서
 	private final static String path = "admin/";
 	
 	@Autowired
@@ -71,7 +71,7 @@ public class AdminController {
 		log.info("마켓 1차 카테고리: ", item.getResourceCategory());
 		log.info("마켓 2차 카테고리: ", item.getResourceSubCategory());
 		
-		return "redirect:shop";
+		return "redirect:add";
 	}
 	
 	//리소스 상점 카테고리 추가 페이지
