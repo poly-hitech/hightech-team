@@ -28,4 +28,6 @@ public interface ResourceDao {
 	Long countAllItems();
 
 	List<ResourceShop> getTopFromResource();
+
+  void saveResourceFile(ResourceFile resourceFile);
 }
