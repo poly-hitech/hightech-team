@@ -119,7 +119,7 @@
 
 			<div class="sidebar_profile flex">
 				<span class="nav_image"> <img
-					src="${fn:replace(sessionScope.member.profileImage, 'C:/upload', '/upload')}"
+					src="${fn:replace(sessionScope.member.profileImage, '/upload')}"
 					alt="logo_img" />
 				</span>
 				<div class="data_text">
