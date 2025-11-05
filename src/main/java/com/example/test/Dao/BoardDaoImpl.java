@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.test.Model.ForumPost;
+import com.example.test.Model.ForumPostFile;
 import com.example.test.Model.ForumPostReview;
 
 
@@ -38,8 +39,8 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	@Override
-	public void delPost(ForumPost forumPost) {
-		sql.delete("board.delPost", forumPost);
+	public void delPost(Long postId) {
+		sql.delete("board.delPost", postId);
 	}
 	
 	@Override
@@ -55,6 +56,16 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public void addComment(ForumPostReview forumPostReview) {
 		sql.insert("board.addComment", forumPostReview);
+	}
+	
+	@Override
+    public void savePostFile(ForumPostFile postFile) {
+        sql.insert("board.savePostFile", postFile); 
+    }
+	
+	@Override
+	public void delPostComment(Long postId) {
+		sql.delete("board.delPostComment", postId);
 	}
 
 }
