@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.test.Model.ForumPost;
 import com.example.test.Model.ForumPostReview;
@@ -50,11 +52,28 @@ public class BoardController {
 	}
 	
 	@PostMapping("/add/{boardId}")
-	String addPost(@PathVariable Long boardId, ForumPost forumPost, HttpSession session) {
+	String addPost(@PathVariable Long boardId, ForumPost forumPost, HttpSession session, 
+			@RequestParam(value = "file", required = false) List<MultipartFile> file, 
+            Model model) throws Exception {
 		log.info("재목: " + forumPost.getTitle());
 		log.info("노용: " + forumPost.getContent());
+		if (file != null && !file.isEmpty()) {
+	        log.info("첨부 파일 목록 (List<MultipartFile>) 확인:");
+	        for (MultipartFile attachedFile : file) {
+	            // 파일이 비어있지 않은지 최종 확인
+	            if (!attachedFile.isEmpty()) {
+	                log.info("  - 파일명: {}, 크기: {} bytes", 
+	                         attachedFile.getOriginalFilename(), 
+	                         attachedFile.getSize());
+	            } else {
+	                log.warn("  - 첨부 파일 목록에 빈 파일 객체가 포함되어 있습니다.");
+	            }
+	        }
+	    } else {
+	        log.warn("첨부된 파일이 없거나, 파일 바인딩에 실패했습니다. (file is null or empty)");
+	    }
 		// BoardService를 호출하여 게시글을 저장 (forumPost 객체, boardId, 세션 정보를 전달)
-		boardService.addPost(forumPost, boardId, session); 
+		boardService.addPost(forumPost, boardId, session, file, model); 
 		
 		return "redirect:/";
 		
@@ -89,6 +108,7 @@ public class BoardController {
 		return "redirect:../" + boardId;
 	}
 
+	//게시글 상세보기
 	@GetMapping("/detail/{postId}")
 	String getPostDetail(@PathVariable Long postId, Model model) {
 		ForumPost forumPost = boardService.getPostDetail(postId);
