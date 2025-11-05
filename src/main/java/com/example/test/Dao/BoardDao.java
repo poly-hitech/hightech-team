@@ -3,6 +3,7 @@ package com.example.test.Dao;
 import java.util.List;
 
 import com.example.test.Model.ForumPost;
+import com.example.test.Model.ForumPostFile;
 import com.example.test.Model.ForumPostReview;
 
 /**
@@ -18,12 +19,16 @@ public interface BoardDao {
 	
 	ForumPost getpost(Long postId);
 
-	void delPost(ForumPost forumPost);
+	void delPost(Long postId);
 
 	void modiPost(ForumPost forumPost);
 
 	List<ForumPostReview> getComments(Long postId);
 
 	void addComment(ForumPostReview forumPostReview);
+
+	void savePostFile(ForumPostFile postFile);
+
+	void delPostComment(Long postId);
 
 }
