@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.test.Model.HostAdress;
 import com.example.test.Model.ResourceShop;
 import com.example.test.Model.Users;
 import com.example.test.Service.ResourceShopService;
@@ -54,10 +55,10 @@ public class RootController {
 	
 	//로그인
 	@GetMapping("/logout")
-	String logout(HttpSession session) {
+	String logout(HttpSession session, HostAdress hostAddress) {
 		session.invalidate();
 		
-		return "redirect:/";
+		return "redirect:" + hostAddress.getHost();
 	}
 	
 	@GetMapping("/login")

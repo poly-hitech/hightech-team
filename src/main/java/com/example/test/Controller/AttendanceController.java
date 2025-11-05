@@ -26,10 +26,14 @@ public class AttendanceController {
     @GetMapping("/calendar")
     public String calendar(@RequestParam(required = false) Integer year,
                            @RequestParam(required = false) Integer month,
+                           @RequestParam(required = false, defaultValue = "0") int modal,
                            HttpSession session,
                            Model model) {
 
         Users user = (Users) session.getAttribute("member");
+        if(user == null) {
+            return "redirect:/login"; // 로그인하지 않은 경우 로그인 페이지로 리다이렉트
+        }
         Long userId = user.getUserId();
         LocalDate now = LocalDate.now();
 
@@ -42,14 +46,7 @@ public class AttendanceController {
 
         Map<Integer, Boolean> attendanceMap = attendanceService.getMonthAttendance(userId, year, month);
 
-        // 오늘 출석 여부
         boolean attendedToday = isThisMonth && attendanceMap.getOrDefault(today, false);
-
-        // 보상 리스트 샘플(직접 만들어서 넘기면 됨)
-        List<String> rewardList = new ArrayList<>();
-        for (int i = 1; i <= lastDay; i++) {
-            rewardList.add(i + "일차 보상");
-        }
 
         model.addAttribute("year", year);
         model.addAttribute("month", month);
@@ -58,21 +55,26 @@ public class AttendanceController {
         model.addAttribute("isThisMonth", isThisMonth);
         model.addAttribute("attendedToday", attendedToday);
         model.addAttribute("attendanceMap", attendanceMap);
-        model.addAttribute("rewardList", rewardList);
 
         log.info("출석 {}", attendanceMap);
 
-        return "attendance";
+        // **modal=1로 들어오면 헤더/바디 없이 attendance.jsp만 반환**
+        if (modal == 1) {
+            return "attendance";
+        } else {
+            return "menu";
+        }
     }
-
 
     // 오늘 출석체크
     @PostMapping("/check-in")
-    public String checkIn(HttpSession session, @RequestParam Integer year, @RequestParam Integer month, Model model) {
+    @ResponseBody
+    public String checkIn(HttpSession session, @RequestParam int year, @RequestParam int month, @RequestParam String point, Model model) {
+        int pointValue = Integer.parseInt(point);
         Users user = (Users) session.getAttribute("member");
         Long userId = user.getUserId();
-        attendanceService.checkTodayAttendance(userId);
-        // 바로 달력으로 리다이렉트
-        return "redirect:/attendance/calendar?year=" + year + "&month=" + month;
+        attendanceService.checkTodayAttendance(userId, pointValue);
+        attendanceService.giveBonusIfEligible(userId, year, month);
+        return "success";
     }
 }

@@ -43,4 +43,10 @@ public class OrdersDaoImpl implements OrdersDao {
 	public OrdersDetails getOrdersDetailsByUserIdAndItemId(Map<String, Object> params) {
 		return sql.selectOne("ordersDetails.getOrdersDetailsByUserIdAndItemId", params);
 	}
+
+	@Override
+	public List<MyOrderList> mySalesList(String nickname) {
+		
+		return sql.selectList("orders.mySalesList", nickname);
+	}
 }

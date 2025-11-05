@@ -18,8 +18,8 @@
 	<!-- 초기 카운트 저장 -->
 	<insert id="add">
 		insert into Counting
-		(countingId, itemId)
-		values(COUNTING_SEQ.nextval, #{itemId})
+		(countingId, itemId, totalcount, dailycount, weeklycount, monthlycount)
+		values(COUNTING_SEQ.nextval, #{itemId}, 0, 0, 0, 0)
 	</insert>
 	
 	<!-- 카운트 초기화 -->

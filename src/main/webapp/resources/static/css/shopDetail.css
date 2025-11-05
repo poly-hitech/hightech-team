@@ -2,7 +2,6 @@ body {
 	margin: 0;
 	background-color: #121212;
 	font-family: 'Noto Sans KR', sans-serif;
-	color: white;
 }
 
 main {
@@ -22,6 +21,7 @@ main {
 	display: flex;
 	padding: 40px;
 	gap: 40px;
+	color: white;
 }
 
 .left-section {
@@ -135,7 +135,7 @@ main {
     margin-bottom: 4px;
 }
 
-.preview-meta .title {
+.preview-meta .resource-title {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 8px;

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class FileUploadPathResolver {
-    private String baseDirectory = "C:/upload";
+    private String baseDirectory = "/hightech/upload";
     private final Map<String, String> extensionPaths = new HashMap<>();
 
     public void setBaseDirectory(String baseDirectory) {
