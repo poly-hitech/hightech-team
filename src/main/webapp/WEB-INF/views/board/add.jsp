@@ -10,22 +10,26 @@
 
 </head>
 <body>
-<%--     <div>
-        <c:import url="/WEB-INF/views/menu.jsp"></c:import>
-    </div> --%>
-    <div class="container">
-    	<form method="post">
-    		<div>
-    			<input name="title" type="text" placeholder="제목"
-  				/>
-  			</div>
-  			<div>
-  				<textarea name="content" type="text" placeholder="내용"></textarea>
-  			</div>
-  			<div>
-  				<button class="regist" type="submit">등록</button>
-  			</div>  					
-  		</form>
+<%--     <div>
+        <c:import url="/WEB-INF/views/menu.jsp"></c:import>
+    </div> --%>
+    <div class="container">
+    	<form method="post" enctype="multipart/form-data">
+    		<div>
+    			<input name="title" type="text" placeholder="제목"/>
+  			</div>
+  			<div>
+  				<textarea name="content" type="text" placeholder="내용"></textarea>
+  			</div>
+            <!-- ✅ 2. 파일 선택 필드 추가 -->
+            <div>
+                <label for="file-upload">첨부 파일</label>
+                <input type="file" id="file-upload" name="file" multiple/>
+            </div>
+  			<div>
+  				<button class="regist" type="submit">등록</button>
+  			</div>  					
+  		</form>
 	</div>
 </body>
 </html>
