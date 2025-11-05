@@ -22,7 +22,7 @@ public class ForumPostReview {
 	public String getCommentContent() {
 		return commentContent;
 	}
-	public void setCommnetContent(String commentContent) {
+	public void setCommentContent(String commentContent) {
 		this.commentContent = commentContent;
 	}
 	public Date getCommentWriteDate() {
