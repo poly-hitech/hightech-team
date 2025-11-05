@@ -19,9 +19,12 @@
 		) VALUES (
     		forumpost_seq.nextval, #{title}, #{content}, #{writeDate}, #{boardId}, #{userId}, #{postWriter}, 0
 		)
+		<selectKey keyProperty="postId" resultType="Long" order="AFTER">
+       		SELECT ForumPost_SEQ.CURRVAL FROM DUAL
+    	</selectKey>
 	</insert>
 	<!-- dao와 연결이 안되면 namespace혹은 id를 확인할 것, resultType은 mybatis에서 지정해놓은 alias와 명칭이 일치해야함. -->
-	<select id="getpost" resultType="com.example.test.Model.ForumPost">
+	<select id="getpost" resultType="ForumPost">
 		select * from forumpost
 		where postId = #{postId}
 	</select>
@@ -29,6 +32,7 @@
 		delete from forumpost
 		where postId = #{postId}
 	</delete>
+	
 	<update id="modiPost">
 		update forumpost
 		set title=#{title}, content=#{content}
@@ -63,6 +67,18 @@
             #{commentWriteDate}
 		)
 	</insert>
+	<insert id="savePostFile" parameterType="com.example.test.Model.ForumPostFile">
+        INSERT INTO ForumPostFile (
+            postId, 
+            fileName
+        ) 
+        VALUES (
+            #{postId},   #{fileName}  )
+    </insert>
+    <delete id="delPostComment" parameterType="ForumPost">
+    	delete from forumpostreview
+		where postId = #{postId}
+    </delete>
 </mapper>
 
 	<!-- 연결할 MODEL 혹은 VO 혹은 DTO추가(각각의 모델마다 패키지명을 생략하여 지정한 명칭으로 해당 모델을 사용할 수 있게 해줌) -->
