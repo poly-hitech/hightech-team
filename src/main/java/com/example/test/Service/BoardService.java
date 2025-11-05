@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.example.test.Model.ForumPostReview;
 import com.example.test.Model.ForumPost;
 
@@ -18,8 +21,8 @@ public interface BoardService {
 	List<ForumPost> getboard(Long boardId);
 
 	//반환 할 거 없음
-	void addPost(ForumPost forumPost, Long boardId, HttpSession session);
-
+	void addPost(ForumPost forumPost, Long boardId, HttpSession session, List<MultipartFile> file, Model model) throws Exception;
+	
 	ForumPost getpost(Long postId);
 
 	void delPost(Long postId);
