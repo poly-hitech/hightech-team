@@ -67,18 +67,23 @@
             #{commentWriteDate}
 		)
 	</insert>
-	<insert id="savePostFile" parameterType="com.example.test.Model.ForumPostFile">
+	<insert id="savePostFile" parameterType="ForumPostFile">
         INSERT INTO ForumPostFile (
+        	postFileId,
             postId, 
             fileName
         ) 
         VALUES (
-            #{postId},   #{fileName}  )
+            forumpostfile_seq.nextval, #{postId}, #{fileName} )
     </insert>
     <delete id="delPostComment" parameterType="ForumPost">
     	delete from forumpostreview
 		where postId = #{postId}
     </delete>
+    <select id="getPostFiles" resultType="ForumPostFIle">
+    	SELECT * FROM ForumPostFile
+    	WHERE postId = #{postId}
+    </select>
 </mapper>
 
 	<!-- 연결할 MODEL 혹은 VO 혹은 DTO추가(각각의 모델마다 패키지명을 생략하여 지정한 명칭으로 해당 모델을 사용할 수 있게 해줌) -->

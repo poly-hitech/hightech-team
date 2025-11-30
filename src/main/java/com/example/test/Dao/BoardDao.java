@@ -31,4 +31,6 @@ public interface BoardDao {
 
 	void delPostComment(Long postId);
 
+	List<ForumPostFile> getPostFiles(Long postId);
+
 }

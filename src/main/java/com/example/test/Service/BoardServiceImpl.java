@@ -81,9 +81,8 @@ public class BoardServiceImpl implements BoardService {
 	                
 	                if (filePath != null) {
 	                    ForumPostFile postFile = new ForumPostFile();
-	                    
 	                    postFile.setPostId(newPostId); // 확보된 Post ID 사용
-	                    postFile.setFileName(filePath); 
+	                    postFile.setFileName(filePath);
 	                    
 	                    boardDao.savePostFile(postFile); 
 	                    log.info("파일 저장 및 DB 기록 완료. 파일 경로: {}", filePath);
@@ -153,6 +152,11 @@ public class BoardServiceImpl implements BoardService {
 		forumPostReview.setCommentContent(forumPostReview.getCommentContent());
 		
 		boardDao.addComment(forumPostReview);
+	}
+	
+	@Override
+	public List<ForumPostFile> getPostFiles(Long postId) {
+		return boardDao.getPostFiles(postId);
 	}
 
 }

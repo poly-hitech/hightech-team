@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.test.Model.ForumPost;
+import com.example.test.Model.ForumPostFile;
 import com.example.test.Model.ForumPostReview;
 import com.example.test.Service.BoardService;
 
@@ -79,6 +80,7 @@ public class BoardController {
 		
 	}
 	
+	
 	@GetMapping("/modify/{postId}")
 	//pathVariable이란 주소값에 들어온postId(58번줄에 있는 postId)의 값을 사용하기 위한 어노테이션
 	String getPostId(@PathVariable Long postId, Model model) {
@@ -91,6 +93,7 @@ public class BoardController {
 		return path+"modify";
 	}
 	
+	//게시글 수정
 	@PostMapping("/modify/{postId}")
 	String modiPost(@PathVariable Long postId, ForumPost forumPost, HttpSession session) {
 		log.info("재재목: " + forumPost.getTitle());
@@ -101,6 +104,8 @@ public class BoardController {
 		return "redirect:/";
 	}
 	
+	
+	// 게시글 삭제
 	@GetMapping("/list/{boardId}/{postId}")
 	String delPost(@PathVariable Long postId, @PathVariable Long boardId) {
 		boardService.delPost(postId);
@@ -113,11 +118,14 @@ public class BoardController {
 	String getPostDetail(@PathVariable Long postId, Model model) {
 		ForumPost forumPost = boardService.getPostDetail(postId);
 		
+		List<ForumPostFile> postFiles = boardService.getPostFiles(postId);
+		
 		List<ForumPostReview> comments = boardService.getComments(postId);
 		
 		//forumPost를 "forumPost"란 이름으로 복사본 만듦, 조회된 게시글 정보(forumPost)를 "forumPost"란 이름으로 모델에 추가
 		model.addAttribute("forumPost",forumPost);
 		model.addAttribute("comments", comments);
+		model.addAttribute("postFiles", postFiles);
 		
 		log.info("재재목: " + forumPost.getTitle());
 		log.info("노노용: " + forumPost.getContent());

@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.test.Model.ForumPostReview;
 import com.example.test.Model.ForumPost;
+import com.example.test.Model.ForumPostFile;
 
 /**
  * BoardService 인터페이스는 게시판 관련 비즈니스 로직을 처리하기 위한 명세를 정의합니다.
@@ -34,6 +35,8 @@ public interface BoardService {
 	List<ForumPostReview> getComments(Long postId);
 
 	void addComment(ForumPostReview forumPostReview, Long postId, HttpSession session);
+
+	List<ForumPostFile> getPostFiles(Long postId);
 
 	
 }

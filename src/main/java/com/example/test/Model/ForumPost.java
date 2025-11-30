@@ -10,7 +10,7 @@ public class ForumPost {
 	private long postId;
 	private String title;
 	private String content;
-	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	private Date writeDate = new Date();
 	//공개여부 
 	private int state;
@@ -36,6 +36,7 @@ public class ForumPost {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	public Date getWriteDate() {
 		return writeDate;
 	}

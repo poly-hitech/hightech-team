@@ -27,6 +27,7 @@
 		<typeAlias type="com.example.test.Model.UserAttendanceDetail" alias="UserAttendanceDetail"/>
 		<typeAlias type="com.example.test.Model.ForumPost" alias="ForumPost"/>
 		<typeAlias type="com.example.test.Model.ForumPostReview" alias="ForumPostReview"/>
+		<typeAlias type="com.example.test.Model.ForumPostFile" alias="ForumPostFile"/>
 	</typeAliases>
 	
 	<!-- mapper 파일 추가 -->

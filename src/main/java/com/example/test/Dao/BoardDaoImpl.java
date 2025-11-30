@@ -67,5 +67,10 @@ public class BoardDaoImpl implements BoardDao {
 	public void delPostComment(Long postId) {
 		sql.delete("board.delPostComment", postId);
 	}
+	
+	@Override
+	public List<ForumPostFile> getPostFiles(Long postId) {
+		return sql.selectList("board.getPostFiles", postId);
+	}
 
 }
