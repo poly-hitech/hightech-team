@@ -33,7 +33,7 @@
 	        <div class="card-container">
 	            <c:forEach var="order" items="${purchasedList}">
 	                <article class="order-card">
-	                    <div class="order-card__ribbon">구매 완료</div>
+	                    <!-- <div class="order-card__ribbon">구매 완료</div> -->
 	
 	                    <!-- 상단 주문 정보 -->
 	                    <header class="order-header">
