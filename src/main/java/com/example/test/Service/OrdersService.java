@@ -13,7 +13,7 @@ public interface OrdersService {
 
 	List<MyOrderList> purchasedResources(Long userId);
 
-    List<Long> getItemIdByLoginUser(Long userId);
+	List<Long> getItemIdByLoginUser(Long userId);
 
 	OrdersDetails getOrdersDetailsByUserIdAndItemId(Map<String, Object> params);
 
