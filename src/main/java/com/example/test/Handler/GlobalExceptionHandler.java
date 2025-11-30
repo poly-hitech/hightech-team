@@ -1,12 +1,8 @@
 package com.example.test.Handler;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.core.NestedCheckedException;
 import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -19,12 +15,16 @@ import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @ControllerAdvice
