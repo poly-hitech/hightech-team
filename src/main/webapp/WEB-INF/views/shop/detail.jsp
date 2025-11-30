@@ -192,14 +192,8 @@
 				$('.char-count').text(len + "/128");
 			});
 		});
-		const shop = $
-		{
-			shop2
-		};
-		const review = $
-		{
-			reviewList2
-		};
+		const shop = ${shop2};
+		const review = ${reviewList2};
 
 		console.log(shop);
 	</script>

@@ -58,7 +58,8 @@ public class RootController {
 	String logout(HttpSession session, HostAdress hostAddress) {
 		session.invalidate();
 		
-		return "redirect:" + hostAddress.getHost();
+//		return "redirect:" + hostAddress.getHost();
+		return "redirect:/";
 	}
 	
 	@GetMapping("/login")
