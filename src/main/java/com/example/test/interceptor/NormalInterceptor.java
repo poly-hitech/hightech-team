@@ -13,6 +13,7 @@ import com.example.test.Model.UsersRole;
 @Component
 public class NormalInterceptor implements HandlerInterceptor  {
 	
+	@SuppressWarnings("null")
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {

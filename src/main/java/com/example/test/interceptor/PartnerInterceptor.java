@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class PartnerInterceptor implements HandlerInterceptor  {
 	
+	@SuppressWarnings("null")
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
