@@ -14,6 +14,7 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<property name="mapperLocations" value="classpath*:mybatis/*.xml"/>
 	</bean>
 	
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
@@ -28,6 +29,9 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
+	
+	<bean id="requestLogFilter" class="com.example.test.RequestLogFilter">
+    </bean>
 	
 	<!-- 파일 업로드 기본 경로 설정 -->
     <bean id="fileUploadPathResolver" class="com.example.test.Util.FileUploadPathResolver">
