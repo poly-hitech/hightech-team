@@ -100,6 +100,15 @@
 	                                <span class="dropzone-icon">📁</span>
 	                                <span class="dropzone-main-text">파일을 끌어다 놓거나 클릭해서 선택하세요</span>
 	                                <span class="dropzone-sub-text">권장: 1:1 또는 16:9 비율의 썸네일 이미지</span>
+	                                
+                                    <!-- 이미지 미리보기 -->
+									<div class="dropzone-preview">
+									    <img id="imagePreview" alt="미리보기" style="display:none; max-width:100%; max-height:180px; border-radius:8px;" />
+									</div>
+
+								
+								    <!-- 파일 이름 표시 -->
+								    <span class="dropzone-file-name" id="imageFileName">선택된 파일 없음</span>
 	
 	                                <input type="file" name="resourceImage" id="fileInput" style="display: none;" onchange="handleFileChange(event)" />
 	                            </div>
@@ -116,6 +125,9 @@
 	                                <button type="button" id="addFileBtn">파일 추가</button>
 	                                <button type="button" id="removeLastFileBtn">파일 삭제</button>
 	                            </div>
+	                            
+	                            <ul id="resourceFileList" class="file-list"></ul>
+	                            
 	                            <span class="field-help">
 	                                이미지, 음원, 문서, 코드 등 리소스 본문 파일을 업로드하세요. 여러 개의 파일을 한 번에 등록할 수 있습니다.
 	                            </span>
