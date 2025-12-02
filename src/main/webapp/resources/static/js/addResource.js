@@ -1,7 +1,3 @@
-// =====================
-// 대표 이미지 드롭존
-// =====================
-
 function handleDragOver(e) {
 	e.preventDefault();
 	document.getElementById('dropzone').classList.add('drag-active');
@@ -36,7 +32,6 @@ function updateImagePreview(file) {
 
 	if (textSpan) textSpan.textContent = file.name;
 
-	// 이미지면 미리보기 처리
 	if (file.type && file.type.startsWith('image/')) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
@@ -61,38 +56,28 @@ function clearFile() {
 	previewImg.style.display = "none";
 }
 
-
-// =====================
-// 리소스 파일 목록 표시
-// =====================
-
-// fileContainer 내의 모든 .file-input을 감시해서 파일 목록 업데이트
 document.addEventListener("DOMContentLoaded", () => {
 	const fileContainer = document.getElementById("fileContainer");
 	const fileList = document.getElementById("resourceFileList");
 
 	if (!fileContainer || !fileList) return;
 
-	// input 변화 감지 (동적 추가 input 포함)
 	fileContainer.addEventListener("change", () => {
 		updateResourceFileList();
 	});
 
-	// 초기 표시
 	updateResourceFileList();
 });
 
-// 실제 파일 리스트 생성
 function updateResourceFileList() {
 	const fileContainer = document.getElementById("fileContainer");
 	const fileList = document.getElementById("resourceFileList");
 
-	fileList.innerHTML = ""; // 초기화
+	fileList.innerHTML = "";
 
 	const inputs = fileContainer.querySelectorAll(".file-input");
 	const files = [];
 
-	// 모든 input의 파일을 수집
 	inputs.forEach((input) => {
 		if (input.files && input.files.length > 0) {
 			for (const f of input.files) files.push(f);
@@ -104,7 +89,6 @@ function updateResourceFileList() {
 		return;
 	}
 
-	// 수집된 파일 목록 렌더링
 	files.forEach((file) => {
 		const sizeKB = Math.round(file.size / 1024);
 		const li = document.createElement("li");

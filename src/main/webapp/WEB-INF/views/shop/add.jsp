@@ -60,9 +60,9 @@
 	                        </div>
 	
 	                        <div class="form-field form-field-full">
-	                            <label for="itemContent">상품 설명 (256자 내외)</label>
-	                            <textarea id="itemContent"
-	                                      name="resourceShop.itemContent"
+	                            <label for="resourceContent">상품 설명 (256자 내외)</label>
+	                            <textarea id="resourceContent"
+	                                      name="resourceShop.resourceContent"
 	                                      maxlength="256"
 	                                      rows="4"
 	                                      placeholder="구성, 사용처, 해상도, 파일 형식 등 구매자가 알고 싶어할 정보를 적어주세요. (최대 256자)"></textarea>
