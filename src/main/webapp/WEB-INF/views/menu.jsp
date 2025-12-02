@@ -184,7 +184,7 @@
     });
     const userId = '${sessionScope.member.userId != null ? sessionScope.member.userId : ""}';
     const pageUserId = '${pageUserId != null ? pageUserId : ""}';
-    var showButton = userId === pageUserId;
+    var showButton = userId && userId === pageUserId;
     </script>
 	<script src="${root}/js/mainmenu.js" defer></script>
 </body>

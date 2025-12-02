@@ -6,10 +6,80 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="com.example.test" level="info" additivity="false">
+        <Logger name="com.example.test" level="DEBUG" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
-        <Root level="warn">
+        <!-- Spring Framework Loggers -->
+		<Logger name="org.springframework.web" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+   		<Logger name="org.springframework.web.servlet.DispatcherServlet" level="WARN" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+   		<Logger name="org.springframework.web.mvc.method.annotation" level="WARN" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+   		<Logger name="org.springframework.web.context.request.async.WebAsyncManager" level="WARN" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.springframework.context" level="INFO" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.springframework.beans" level="INFO" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.springframework.jdbc" level="INFO" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.springframework.transaction" level="INFO" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <!-- Mybatis Loggers -->
+        <Logger name="org.mybatis" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.mybatis.spring" level="WARN" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.apache.ibatis" level="DEBUG" additivity="false">
+    		<AppenderRef ref="Console" />
+		</Logger>
+		
+		<Logger name="buyPoint" level="DEBUG" additivity="false">
+     	   <AppenderRef ref="Console" />
+        </Logger>
+        <Loger name="counting" level="DEBUG" additivity="false">
+     	   <AppenderRef ref="Console" />
+        </Loger>
+        <Logger name="orders" level="DEBUG" additivity="false">
+ 	    	<AppenderRef ref="Console" />
+   	    </Logger>
+   	    <Logger name="ordersDetails" level="DEBUG" additivity="false">
+   	    	<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="ranking" level="DEBUG" additivity="false">
+   	    	<AppenderRef ref="Console" />
+   	    </Logger>
+   	    <Logger name="resourceCategory" level="DEBUG" additivity="false">
+   	    	<AppenderRef ref="Console" />
+   	    </Logger>
+   	    <Logger name="resourceShop" level="DEBUG" additivity="false">
+   	    	<AppenderRef ref="Console" />
+   	    </Logger>
+   	    <Logger name="resourceSubCategory" level="DEBUG" additivity="false">
+   	    	<AppenderRef ref="Console" />
+	    </Logger>
+	    <Logger name="shopReview" level="DEBUG" additivity="false">
+   	    	<AppenderRef ref="Console" />
+   	    </Logger>
+   	    <Logger name="userAttendance" level="DEBUG" additivity="false">
+   	    	<AppenderRef ref="Console" />
+   	    </Logger>
+   	    <Logger name="users" level="DEBUG" additivity="false">
+   	    	<AppenderRef ref="Console" />
+   	    </Logger>
+
+        <Root level="INFO">
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
