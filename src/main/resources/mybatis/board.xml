@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace와 id값이 daoImpl에 있는 위치 값과 일치해야함. -->
+<mapper namespace="board">
+	<select id="getBoard" resultType="ForumPost">
+		select * from forumpost
+		where boardId = #{boardId}
+	</select>
+	<insert id="addPost">
+		insert into forumpost(
+		     POSTID
+     		, TITLE
+     		, CONTENT
+     		, WRITEDATE
+     		, BOARDID
+    		, USERID 
+     		, POSTWRITER
+     		, count
+		) VALUES (
+    		forumpost_seq.nextval, #{title}, #{content}, #{writeDate}, #{boardId}, #{userId}, #{postWriter}, 0
+		)
+		<selectKey keyProperty="postId" resultType="Long" order="AFTER">
+       		SELECT ForumPost_SEQ.CURRVAL FROM DUAL
+    	</selectKey>
+	</insert>
+	<!-- dao와 연결이 안되면 namespace혹은 id를 확인할 것, resultType은 mybatis에서 지정해놓은 alias와 명칭이 일치해야함. -->
+	<select id="getpost" resultType="ForumPost">
+		select * from forumpost
+		where postId = #{postId}
+	</select>
+	<delete id="delPost">
+		delete from forumpost
+		where postId = #{postId}
+	</delete>
+	
+	<update id="modiPost">
+		update forumpost
+		set title=#{title}, content=#{content}
+		where postId = #{postId}
+	</update>
+	<select id="getComments" resultType="ForumPostReview">
+		select
+            commentId,
+            commentContent,
+            commentWriteDate,
+            commentWriter,
+            postId,
+            userId
+        from
+            ForumPostReview where
+            postId = #{postId}
+	</select>
+	<insert id="addComment">
+		insert into forumpostreview(
+		     commentId, 
+		     postId, 
+		     userId, 
+		     commentContent, 
+		     commentWriter, 
+		     commentWriteDate
+		) VALUES (
+    		forumpost_seq.nextval, 
+    		#{postId}, 
+            #{userId}, 
+            #{commentContent}, 
+            #{commentWriter}, 
+            #{commentWriteDate}
+		)
+	</insert>
+	<insert id="savePostFile" parameterType="ForumPostFile">
+        INSERT INTO ForumPostFile (
+        	postFileId,
+            postId, 
+            fileName
+        ) 
+        VALUES (
+            forumpostfile_seq.nextval, #{postId}, #{fileName} )
+    </insert>
+    <delete id="delPostComment" parameterType="ForumPost">
+    	delete from forumpostreview
+		where postId = #{postId}
+    </delete>
+    <select id="getPostFiles" resultType="ForumPostFIle">
+    	SELECT * FROM ForumPostFile
+    	WHERE postId = #{postId}
+    </select>
+</mapper>
+
+	<!-- 연결할 MODEL 혹은 VO 혹은 DTO추가(각각의 모델마다 패키지명을 생략하여 지정한 명칭으로 해당 모델을 사용할 수 있게 해줌) -->
+	<!-- 별칭 지정 ↓ -->
+
+<!-- resultType이랑 typealias로 별칭 지정한게 같아야한다고 하셨는데 같지 않나요? -->

@@ -94,13 +94,13 @@
 					<div class="menu_title flex">
 						<span class="title">커뮤니티</span> <span class="line"></span>
 					</div>
-					<li class="item"><a href="${root}/board" class="link flex">
+					<li class="item"><a href="${root}/board/list/1" class="link flex">
 							<i class="bx bxs-magic-wand"></i> <span>공지사항</span>
 					</a></li>
-					<li class="item"><a href="#" class="link flex"> <i
+					<li class="item"><a href="${root}/board/list/2" class="link flex"> <i
 							class="bx bx-folder"></i> <span>취업 정보공유</span>
 					</a></li>
-					<li class="item"><a href="#" class="link flex"> <i
+					<li class="item"><a href="${root}/board/list/3" class="link flex"> <i
 							class="bx bx-cloud-upload"></i> <span>자유 게시판</span>
 					</a></li>
 					<li class="item"><a href="#" id="open-attendance-modal"

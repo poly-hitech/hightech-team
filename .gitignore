@@ -5,4 +5,5 @@ target/
 .project
 .settings/
 .class
+src/main/webapp/WEB-INF/spring/root-context.xml
 .log

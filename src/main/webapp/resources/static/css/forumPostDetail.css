@@ -1,0 +1,151 @@
+@charset "UTF-8";
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+  background-color: #000;
+}
+
+.sidebar-wrapper {
+  width: 260px;
+  flex-shrink: 0;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 10;
+  background-color: white;
+}
+
+.scrollable-content {
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #000;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.content-border {
+  border: 1px solid #ddd;
+  background-color: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 800px;
+  width: 90%;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+}
+
+.post-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.post-date {
+  font-size: 14px;
+  color: #666;
+}
+
+.post-sub-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #eee;
+}
+
+.post-writer {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.post-count {
+  font-size: 14px;
+  color: #888;
+}
+
+.post-main-content {
+  min-height: 150px;
+  line-height: 1.8;
+  color: #444;
+  padding: 20px 0;
+  margin-top: 10px;
+  border-top: 1px solid #f0f0f0;
+  font-size: 16px;
+  white-space: pre-wrap;
+}
+
+.file-preview-box {
+  margin: 30px 0;
+  padding: 15px;
+  border: 1px solid #f0f0f0;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.file-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.file-list img,
+.file-list audio,
+.file-list video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 10px 0;
+}
+
+.comment-section {
+  margin-top: 40px;
+  border-top: 1px dashed #ddd;
+  padding-top: 20px;
+}
+
+.comment-list-table {
+  margin-top: 10px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comment-list-table th,
+.comment-list-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.comment-form input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.comment-form button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
