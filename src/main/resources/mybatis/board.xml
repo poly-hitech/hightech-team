@@ -2,9 +2,18 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- namespace와 id값이 daoImpl에 있는 위치 값과 일치해야함. -->
 <mapper namespace="board">
-	<select id="getBoard" resultType="ForumPost">
+	<select id="getBoardList" resultType="ForumPost">
 		select * from forumpost
 		where boardId = #{boardId}
+	</select>
+	<select id="getBoardListOnlyFive" resultType="ForumPost">
+		select sub.* from (
+			select * from forumpost
+			where boardId = #{boardId}
+		)sub
+		<![CDATA[
+			WHERE ROWNUM <= 5
+		]]>
 	</select>
 	<insert id="addPost">
 		insert into forumpost(

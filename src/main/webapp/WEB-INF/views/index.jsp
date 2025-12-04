@@ -230,15 +230,9 @@
         <div class="footer">
             <p class="footer-text">&copy; 2025 Dev Community Hub 코딩기딩. All rights reserved.</p>
             <div class="footer-links">
-                <a href="https://wookportfolio.duckdns.org/contact" class="footer-link">정지욱</a>
-                <a href="#" class="footer-link">장민규</a>
-                <a href="#" class="footer-link">김택수</a>
-            </div>
-            <br><br>
-            <div class="footer-links">
-                <a href="#" class="footer-link">Contact</a>
-                <a href="#" class="footer-link">Terms</a>
-                <a href="#" class="footer-link">Privacy</a>
+                <a href="https://wookportfolio.duckdns.org" class="footer-link">정지욱</a>
+                <a href="portfolio-nu-rosy-28.vercel.app" class="footer-link">장민규</a>
+                <a href="" class="footer-link">김택수</a>
             </div>
         </div>
     </div>

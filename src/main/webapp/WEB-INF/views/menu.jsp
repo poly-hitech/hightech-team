@@ -84,7 +84,7 @@
 							</a>
 						</c:if></li>
 					<li class="item"><a
-						href="${root}/shop/mySalesList/${sessionScope.member.userId}"
+						href="${root}/orders/mySalesList/${sessionScope.member.userId}"
 						class="link flex"> <i class="bx bx-grid-alt"></i> <span>내
 								판매 내역</span>
 					</a></li>
@@ -111,8 +111,8 @@
 					<div class="menu_title flex">
 						<span class="title">랭킹</span> <span class="line"></span>
 					</div>
-					<li class="item"><a href="#" class="link flex"> <i
-							class="bx bx-flag"></i> <span>판매 랭킹</span>
+					<li class="item"><a href="/salesRank" class="link flex">
+					<i class="bx bx-flag"></i> <span>판매 랭킹</span>
 					</a></li>
 				</ul>
 			</div>

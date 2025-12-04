@@ -32,10 +32,10 @@ public class BoardServiceImpl implements BoardService {
     FileUploadUtil fileupload;
 
 	@Override
-	public List<ForumPost> getboard(Long boardId) {
+	public List<ForumPost> getBoardList(Long boardId) {
 		// TODO Auto-generated method stub
 		// DAO의 getBoard 메서드를 호출하여 DB에서 게시글 목록을 조회하고 결과를 Controller로 반환
-		return boardDao.getBoard(boardId);
+		return boardDao.getBoardList(boardId);
 	}
 
 	@Transactional
@@ -157,6 +157,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<ForumPostFile> getPostFiles(Long postId) {
 		return boardDao.getPostFiles(postId);
+	}
+
+	@Override
+	public List<ForumPost> getBoardListOnlyFive(long boardId) {
+		// TODO Auto-generated method stub
+		return boardDao.getBoardListOnlyFive(boardId);
 	}
 
 }

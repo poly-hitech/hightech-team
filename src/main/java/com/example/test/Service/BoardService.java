@@ -18,9 +18,6 @@ import com.example.test.Model.ForumPostFile;
 
 public interface BoardService {
 
-	//반환할 거 있음
-	List<ForumPost> getboard(Long boardId);
-
 	//반환 할 거 없음
 	void addPost(ForumPost forumPost, Long boardId, HttpSession session, List<MultipartFile> file, Model model) throws Exception;
 	
@@ -37,6 +34,10 @@ public interface BoardService {
 	void addComment(ForumPostReview forumPostReview, Long postId, HttpSession session);
 
 	List<ForumPostFile> getPostFiles(Long postId);
+
+	List<ForumPost> getBoardList(Long boardId);
+
+	List<ForumPost> getBoardListOnlyFive(long boardId);
 
 	
 }

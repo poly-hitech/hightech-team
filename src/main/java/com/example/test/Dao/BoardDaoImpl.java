@@ -21,9 +21,9 @@ public class BoardDaoImpl implements BoardDao {
 	
 	
 	@Override
-	public List<ForumPost> getBoard(Long boardId) {
+	public List<ForumPost> getBoardList(Long boardId) {
 		// TODO Auto-generated method stub
-		return sql.selectList("board.getBoard", boardId);
+		return sql.selectList("board.getBoardList", boardId);
 		/* 형식 : sql.태그타입("매퍼파일의 namespace값, 매퍼파일의 id값", 인자값); */
 	}
 
@@ -71,6 +71,12 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public List<ForumPostFile> getPostFiles(Long postId) {
 		return sql.selectList("board.getPostFiles", postId);
+	}
+
+	@Override
+	public List<ForumPost> getBoardListOnlyFive(long boardId) {
+		// TODO Auto-generated method stub
+		return sql.selectList("board.getBoardListOnlyFive", boardId);
 	}
 
 }
