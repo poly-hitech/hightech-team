@@ -4,7 +4,8 @@ target/
 .classpath
 .project
 .settings/
-.class
+*.class
 src/main/webapp/WEB-INF/spring/root-context.xml
 .log
 /.metadata/
+
