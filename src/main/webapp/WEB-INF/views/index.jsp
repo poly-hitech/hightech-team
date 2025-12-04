@@ -250,7 +250,7 @@
                         <div class="community-card">
                             <h4 class="community-title">${post.title}</h4>
                             <p class="community-summary">${fn:substring(post.content, 0, 50)}...</p>
-                            <a href="${root}/board/detail/${post.postId}" class="community-link">Read More</a>
+                            <a href="${root}/board/list/1" class="community-link">Read More</a>
                         </div>
                     </c:forEach>
                 </div>
@@ -262,7 +262,7 @@
                         <div class="community-card">
                             <h4 class="community-title">${post.title}</h4>
                             <p class="community-summary">${fn:substring(post.content, 0, 50)}...</p>
-                            <a href="${root}/board/detail/${post.postId}" class="community-link">Read More</a>
+                            <a href="${root}/board/list/2" class="community-link">Read More</a>
                         </div>
                     </c:forEach>
                 </div>
@@ -274,7 +274,7 @@
                         <div class="community-card">
                             <h4 class="community-title">${post.title}</h4>
                             <p class="community-summary">${fn:substring(post.content, 0, 50)}...</p>
-                            <a href="${root}/board/detail/${post.postId}" class="community-link">Read More</a>
+                            <a href="${root}/board/list/3" class="community-link">Read More</a>
                         </div>
                     </c:forEach>
                 </div>
