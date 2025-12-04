@@ -78,8 +78,11 @@
             gap: 20px;
         }
         @media (min-width: 640px) {
-            .resource-grid, .community-grid {
+            .resource-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            .community-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
         @media (min-width: 1024px) {
@@ -89,6 +92,24 @@
             .resource-grid {
                 grid-template-columns: repeat(5, 1fr);
             }
+            .community-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .board-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .board-column-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #6B46C1;
+            text-align: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #D275D9;
         }
 
         .resource-card {
@@ -215,14 +236,43 @@
         <div class="community-section">
             <h2 class="section-title">최근 게시물</h2>
             <p class="section-subtitle">공지사항부터 최근 게시물까지 확인해보세요.</p>
+            
             <div class="community-grid">
-                <c:forEach var="post" items="${latestPosts}">
-                    <div class="community-card">
-                        <h3 class="community-title">${post.title}</h3>
-                        <p class="community-summary">${post.summary}</p>
-                        <a href="${root}/community/detail/${post.postId}" class="community-link">Read More</a>
-                    </div>
-                </c:forEach>
+                <!-- 공지사항 -->
+                <div class="board-column">
+                    <h3 class="board-column-title">공지사항</h3>
+                    <c:forEach var="post" items="${notice}">
+                        <div class="community-card">
+                            <h4 class="community-title">${post.postTitle}</h4>
+                            <p class="community-summary">${fn:substring(post.postContent, 0, 50)}...</p>
+                            <a href="${root}/board/detail/${post.postId}" class="community-link">Read More</a>
+                        </div>
+                    </c:forEach>
+                </div>
+                
+                <!-- 취업 정보 공유 -->
+                <div class="board-column">
+                    <h3 class="board-column-title">취업 정보 공유</h3>
+                    <c:forEach var="post" items="${job}">
+                        <div class="community-card">
+                            <h4 class="community-title">${post.postTitle}</h4>
+                            <p class="community-summary">${fn:substring(post.postContent, 0, 50)}...</p>
+                            <a href="${root}/board/detail/${post.postId}" class="community-link">Read More</a>
+                        </div>
+                    </c:forEach>
+                </div>
+                
+                <!-- 자유 게시판 -->
+                <div class="board-column">
+                    <h3 class="board-column-title">자유 게시판</h3>
+                    <c:forEach var="post" items="${board}">
+                        <div class="community-card">
+                            <h4 class="community-title">${post.postTitle}</h4>
+                            <p class="community-summary">${fn:substring(post.postContent, 0, 50)}...</p>
+                            <a href="${root}/board/detail/${post.postId}" class="community-link">Read More</a>
+                        </div>
+                    </c:forEach>
+                </div>
             </div>
         </div>
 

@@ -45,8 +45,11 @@ public class RootController {
 		List<ForumPost> job = boardService.getBoardListOnlyFive(2L);
 		List<ForumPost> board = boardService.getBoardListOnlyFive(3L);
 		
+		//공지사항
 		model.addAttribute("notice", notice);
+		//취업 정보 공유
 		model.addAttribute("job", job);
+		//자유 게시판
 		model.addAttribute("board", board);
 		
 		return "index";
