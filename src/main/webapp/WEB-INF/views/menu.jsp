@@ -84,7 +84,7 @@
 							</a>
 						</c:if></li>
 					<li class="item"><a
-						href="${root}/shop/mySalesList/${sessionScope.member.userId}"
+						href="${root}/orders/mySalesList/${sessionScope.member.userId}"
 						class="link flex"> <i class="bx bx-grid-alt"></i> <span>내
 								판매 내역</span>
 					</a></li>
