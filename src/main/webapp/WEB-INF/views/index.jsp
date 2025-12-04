@@ -248,8 +248,8 @@
                     <h3 class="board-column-title">공지사항</h3>
                     <c:forEach var="post" items="${notice}">
                         <div class="community-card">
-                            <h4 class="community-title">${post.postTitle}</h4>
-                            <p class="community-summary">${fn:substring(post.postContent, 0, 50)}...</p>
+                            <h4 class="community-title">${post.title}</h4>
+                            <p class="community-summary">${fn:substring(post.content, 0, 50)}...</p>
                             <a href="${root}/board/detail/${post.postId}" class="community-link">Read More</a>
                         </div>
                     </c:forEach>
@@ -260,8 +260,8 @@
                     <h3 class="board-column-title">취업 정보 공유</h3>
                     <c:forEach var="post" items="${job}">
                         <div class="community-card">
-                            <h4 class="community-title">${post.postTitle}</h4>
-                            <p class="community-summary">${fn:substring(post.postContent, 0, 50)}...</p>
+                            <h4 class="community-title">${post.title}</h4>
+                            <p class="community-summary">${fn:substring(post.content, 0, 50)}...</p>
                             <a href="${root}/board/detail/${post.postId}" class="community-link">Read More</a>
                         </div>
                     </c:forEach>
@@ -272,8 +272,8 @@
                     <h3 class="board-column-title">자유 게시판</h3>
                     <c:forEach var="post" items="${board}">
                         <div class="community-card">
-                            <h4 class="community-title">${post.postTitle}</h4>
-                            <p class="community-summary">${fn:substring(post.postContent, 0, 50)}...</p>
+                            <h4 class="community-title">${post.title}</h4>
+                            <p class="community-summary">${fn:substring(post.content, 0, 50)}...</p>
                             <a href="${root}/board/detail/${post.postId}" class="community-link">Read More</a>
                         </div>
                     </c:forEach>
