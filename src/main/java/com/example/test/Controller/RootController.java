@@ -10,9 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.test.Model.ForumPost;
 import com.example.test.Model.HostAdress;
 import com.example.test.Model.ResourceShop;
 import com.example.test.Model.Users;
+import com.example.test.Service.BoardService;
 import com.example.test.Service.ResourceShopService;
 import com.example.test.Service.UsersService;
 
@@ -28,13 +30,24 @@ public class RootController {
 	@Autowired
 	ResourceShopService resourceService;
 	
+	@Autowired
+	BoardService boardService;
+	
 	//게시판 작업 끝나면 불러와야 함.
 	
 	@GetMapping("/")
 	String index(Model model) {
 		List<ResourceShop> resource = resourceService.getTopFromResource();
 		model.addAttribute("popularResources", resource);
+		
 		//최근 게시물 
+		List<ForumPost> notice = boardService.getBoardListOnlyFive(1L);
+		List<ForumPost> job = boardService.getBoardListOnlyFive(2L);
+		List<ForumPost> board = boardService.getBoardListOnlyFive(3L);
+		
+		model.addAttribute("notice", notice);
+		model.addAttribute("job", job);
+		model.addAttribute("board", board);
 		
 		return "index";
 	}
@@ -95,6 +108,11 @@ public class RootController {
 	@GetMapping("/menu")
 	String menu() {
 		return "menu";
+	}
+	
+	@GetMapping("/salesRank")
+	String rank() {
+		return "rank";
 	}
 	
 }

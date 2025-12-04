@@ -13,8 +13,6 @@ import com.example.test.Model.ForumPostReview;
 
 public interface BoardDao {
 
-	List<ForumPost> getBoard(Long boardId);
-
 	void addPost(ForumPost forumPost);
 	
 	ForumPost getpost(Long postId);
@@ -32,5 +30,9 @@ public interface BoardDao {
 	void delPostComment(Long postId);
 
 	List<ForumPostFile> getPostFiles(Long postId);
+
+	List<ForumPost> getBoardList(Long boardId);
+
+	List<ForumPost> getBoardListOnlyFive(long boardId);
 
 }
