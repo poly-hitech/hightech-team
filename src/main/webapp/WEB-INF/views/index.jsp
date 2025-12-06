@@ -237,7 +237,7 @@
             </div>
         </div>
 
-       <!-- Community Section -->
+        <!-- Community Section -->
         <div class="community-section">
             <h2 class="section-title">최근 게시물</h2>
             <p class="section-subtitle">공지사항부터 최근 게시물까지 확인해보세요.</p>
@@ -274,6 +274,7 @@
                         <div class="community-card">
                             <h4 class="community-title">${post.title}</h4>
                             <p class="community-summary">${fn:substring(post.content, 0, 50)}...</p>
+                            
                             <a href="${root}/board/list/3" class="community-link">Read More</a>
                         </div>
                     </c:forEach>

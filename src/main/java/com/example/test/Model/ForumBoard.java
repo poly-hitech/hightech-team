@@ -1,6 +1,6 @@
 package com.example.test.Model;
 
-public class PostType {
+public class ForumBoard {
 	private long boardId;
 	private String boardName;
 	public long getBoardId() {
