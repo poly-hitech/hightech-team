@@ -162,6 +162,20 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             padding: 15px;
         }
+        .community-card-with-image {
+            display: flex;
+            gap: 15px;
+        }
+        .community-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            flex-shrink: 0;
+        }
+        .community-content {
+            flex: 1;
+        }
         .community-title {
             font-size: 1.2rem;
             font-weight: 600;
@@ -271,11 +285,15 @@
                 <div class="board-column">
                     <h3 class="board-column-title">자유 게시판</h3>
                     <c:forEach var="post" items="${board}">
-                        <div class="community-card">
-                            <h4 class="community-title">${post.title}</h4>
-                            <p class="community-summary">${fn:substring(post.content, 0, 50)}...</p>
-                            
-                            <a href="${root}/board/list/3" class="community-link">Read More</a>
+                        <div class="community-card <c:if test="${not empty post.postImage}">community-card-with-image</c:if>">
+                            <c:if test="${not empty post.postImage}">
+                                <img src="${post.postImage}" alt="${post.title}" class="community-image" />
+                            </c:if>
+                            <div class="community-content">
+                                <h4 class="community-title">${post.title}</h4>
+                                <p class="community-summary">${fn:substring(post.content, 0, 50)}...</p>
+                                <a href="${root}/board/list/3" class="community-link">Read More</a>
+                            </div>
                         </div>
                     </c:forEach>
                 </div>
