@@ -22,18 +22,18 @@
 	        </div>
 			<div>
 				<label>아이디:</label>
-				<input type="text" name="username" id="username">				
+				<input type="text" name="username" id="username" value="wlwl45wl">
 			</div>
 					
 			<div>
 				<label>비밀번호:</label>
-				<input type="password" name="password" id="password">				
+				<input type="password" name="password" id="password" value="dfasd">
 			</div>
 									
 			<div>
 				<button type="submit">로그인</button>
 				<a href="/">취소</a>
-			</div>					
+			</div>
 		</form>	
 	</div>
 	<c:if test="${not empty message}">
