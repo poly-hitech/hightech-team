@@ -15,6 +15,7 @@ import com.example.test.Model.HostAdress;
 import com.example.test.Model.ResourceShop;
 import com.example.test.Model.Users;
 import com.example.test.Service.BoardService;
+import com.example.test.Service.RanksService;
 import com.example.test.Service.ResourceShopService;
 import com.example.test.Service.UsersService;
 
@@ -24,6 +25,10 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class RootController {
 	
+
+	@Autowired
+	RanksService rankService;
+
 	@Autowired
 	UsersService usersService;
 	
@@ -45,8 +50,11 @@ public class RootController {
 		List<ForumPost> job = boardService.getBoardListOnlyFive(2L);
 		List<ForumPost> board = boardService.getBoardListOnlyFive(3L);
 		
+		//공지사항
 		model.addAttribute("notice", notice);
+		//취업 정보 공유
 		model.addAttribute("job", job);
+		//자유 게시판
 		model.addAttribute("board", board);
 		
 		return "index";
@@ -111,8 +119,18 @@ public class RootController {
 	}
 	
 	@GetMapping("/salesRank")
-	String rank() {
-		return "rank";
+	String salesRank(Model model) {
+		List<ResourceShop> total = rankService.getTotalTop(10);
+		List<ResourceShop> daily = rankService.getdailyTop(10);
+		List<ResourceShop> weekly = rankService.getweeklyTop(10);
+		List<ResourceShop> monthly = rankService.getmonthlyTop(10);
+
+		model.addAttribute("total", total);
+		model.addAttribute("daily", daily);
+		model.addAttribute("weekly", weekly);
+		model.addAttribute("monthly", monthly);
+
+		return "salesRank";
 	}
 	
 }
