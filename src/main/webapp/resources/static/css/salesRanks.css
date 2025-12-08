@@ -49,19 +49,26 @@
 }
 
 .rank-grid {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
     gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+    justify-content: center;
 }
-@media (min-width: 640px) {
-    .rank-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.rank-grid::-webkit-scrollbar {
+    height: 8px;
 }
-@media (min-width: 1024px) {
-    .rank-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.rank-grid::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+.rank-grid::-webkit-scrollbar-thumb {
+    background: #6B46C1;
+    border-radius: 10px;
+}
+.rank-grid::-webkit-scrollbar-thumb:hover {
+    background: #D53F8C;
 }
 
 .rank-card {
@@ -70,6 +77,9 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-width: 280px;
+    max-width: 280px;
+    flex-shrink: 0;
 }
 .rank-card:hover {
     transform: translateY(-5px);
