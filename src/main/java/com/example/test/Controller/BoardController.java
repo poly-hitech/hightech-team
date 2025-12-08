@@ -37,11 +37,16 @@ public class BoardController {
 	String getNotice(@PathVariable Long boardId,Model model) {
 		//boardId를 넘겨주는 getboard를 실행 시킨 값을 list에 저장, boardService.getboard(boardId)를 실행하여 해당 boardId의 게시글 목록(List<ForumPost>)을 조회하여 list에 저장
 		List<ForumPost> list = boardService.getBoardList(boardId);
+		String postImage = null;
+		for(ForumPost post :list) {
+			postImage = post.getForumPostFile().get(0).getFileName();
+		}
 		
 		//list를 "boardList"란 이름으로 복사본 만듦, 조회된 게시글 목록(list)을 "boardList"라는 이름으로 모델에 추가하여 뷰에서 접근 가능하게 함
 		model.addAttribute("boardList",list);
 		//boardId를 "boardId"란 이름으로 복사본 만듦, 현재 게시판 ID(boardId)를 "boardId"라는 이름으로 모델에 추가하여 뷰에 전달
 		model.addAttribute("boardId", boardId);
+		model.addAttribute("postImage", postImage);
 		return path + "list";
 	}
 	
