@@ -39,14 +39,19 @@ public class BoardController {
 		List<ForumPost> list = boardService.getBoardList(boardId);
 		String postImage = null;
 		for(ForumPost post :list) {
-			postImage = post.getForumPostFile().get(0).getFileName();
+			if(post.getForumPostFile() != null && !post.getForumPostFile().isEmpty()) {
+				postImage = post.getForumPostFile().get(0).getFileName();
+				break;
+			}
 		}
 		
 		//list를 "boardList"란 이름으로 복사본 만듦, 조회된 게시글 목록(list)을 "boardList"라는 이름으로 모델에 추가하여 뷰에서 접근 가능하게 함
 		model.addAttribute("boardList",list);
 		//boardId를 "boardId"란 이름으로 복사본 만듦, 현재 게시판 ID(boardId)를 "boardId"라는 이름으로 모델에 추가하여 뷰에 전달
 		model.addAttribute("boardId", boardId);
-		model.addAttribute("postImage", postImage);
+		if(postImage != null) {
+			model.addAttribute("postImage", postImage);
+		}
 		return path + "list";
 	}
 	

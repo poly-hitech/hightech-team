@@ -285,9 +285,9 @@
                 <div class="board-column">
                     <h3 class="board-column-title">자유 게시판</h3>
                     <c:forEach var="post" items="${board}">
-                        <div class="community-card <c:if test="${not empty post.forumPostFile[0].filename}">community-card-with-image</c:if>">
-                            <c:if test="${not empty post.forumPostFile[0].filename}">
-                                <img src="${post.forumPostFile[0].filename}" alt="${post.title}" class="community-image" />
+                        <div class="community-card <c:if test="${not empty post.forumPostFile[0].fileName}">community-card-with-image</c:if>">
+                            <c:if test="${not empty post.forumPostFile[0].fileName}">
+                                <img src="${post.forumPostFile[0].fileName}" alt="${post.title}" class="community-image" />
                             </c:if>
                             <div class="community-content">
                                 <h4 class="community-title">${post.title}</h4>
