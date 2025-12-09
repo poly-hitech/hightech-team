@@ -29,18 +29,23 @@
             </c:if>
             <c:forEach var="boardList" items="${boardList}">
                 <div class="boardlist-item">
-    				<div class="boardlist-header">
-        				<a href="${root}/board/detail/${boardList.postId}">${boardList.title}</a><span class="item-date"><fmt:formatDate value="${boardList.writeDate}" pattern="yyyy/MM/dd HH:mm:ss"/></span>
+                	<div class="thumbnail-area">
+        				<img src="${root}/resources/static/images/logo.jpg" alt="게시글 썸네일" class="post-thumbnail-img">
     				</div>
-    				<div class="item-meta">
-        				<div class="meta-info">
-            				<span class="item-writer">${boardList.postWriter}</span>
-            				<span class="item-count">조회 ${boardList.count}</span>
-        				</div>
-        				<div class="meta-actions">
-            				<a href="${root}/board/modify/${boardList.postId}">수정</a>
-            				<span class="divider">|</span>
-            				<a href="${root}/board/list/${boardList.boardId}/${boardList.postId}">삭제</a>
+    				<div class="post-content-area">
+	    				<div class="boardlist-header">
+	        				<a href="${root}/board/detail/${boardList.postId}">${boardList.title}</a><span class="item-date"><fmt:formatDate value="${boardList.writeDate}" pattern="yyyy/MM/dd HH:mm:ss"/></span>
+	    				</div>
+	    				<div class="item-meta">
+	        				<div class="meta-info">
+	            				<span class="item-writer">${boardList.postWriter}</span>
+	            				<span class="item-count">조회 ${boardList.count}</span>
+	        				</div>
+	        				<div class="meta-actions">
+	            				<a href="${root}/board/modify/${boardList.postId}">수정</a>
+	            				<span class="divider">|</span>
+	            				<a href="${root}/board/list/${boardList.boardId}/${boardList.postId}">삭제</a>
+	        				</div>
         				</div>
     				</div>
 				</div>
