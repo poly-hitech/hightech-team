@@ -25,4 +25,10 @@ public interface ResourceDao {
 	List<ResourceShop> getTopFromResource();
 
 	void saveResourceFile(ResourceFile resourceFile);
+
+	List<ResourceFile> findResourceFilesByItemId(Long itemId);
+
+	int existsOrderForUserAndItem(Long userId, Long itemId);
+
+	int isSellerOfItem(Long userId, Long itemId);
 }

@@ -1,9 +1,18 @@
 package com.example.test.Controller;
 
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -272,6 +281,89 @@ public class MarketController {
 	public String salesResources() {
 
 		return path + "salesDetail";
+	}
+
+	@GetMapping("/download/{itemId}")
+	public void downloadItem(@PathVariable Long itemId, HttpSession session, HttpServletResponse response)
+			throws IOException {
+		Users user = (Users) session.getAttribute("member");
+
+		if (user == null) {
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "로그인이 필요합니다.");
+			return;
+		}
+
+		Long userId = user.getUserId();
+
+		if (!resourceShopService.canDownload(userId, itemId)) {
+			response.sendError(HttpServletResponse.SC_FORBIDDEN, "다운로드 권한이 없습니다.");
+			return;
+		}
+
+		List<ResourceFile> files = resourceShopService.getResourceFiles(itemId);
+		if (files == null || files.isEmpty()) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND, "다운로드할 파일이 없습니다.");
+			return;
+		}
+
+		if (files.size() == 1) {
+			ResourceFile f = files.get(0);
+			log.debug("다운로드할 파일 경로: {}", f.getResourceFileName());
+			Path path = Paths.get(f.getResourceFileName());
+			log.debug("실제 파일 경로: {}", path.toAbsolutePath().toString());
+
+			if (!Files.exists(path)) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND, "파일을 찾을 수 없습니다.");
+				return;
+			}
+
+			String downloadName = extractFileNameForDownload(f.getResourceFileName());
+			String encodedName = URLEncoder.encode(downloadName, StandardCharsets.UTF_8).replaceAll("\\+", "%20");
+
+			response.setContentType("application/octet-stream");
+			response.setHeader("Content-Disposition", "attachment; filename=\"" + encodedName + "\"");
+
+			Files.copy(path, response.getOutputStream());
+			response.getOutputStream().flush();
+			return;
+		}
+
+		String zipName = "resource-" + itemId + ".zip";
+		String encodedZipName = URLEncoder.encode(zipName, StandardCharsets.UTF_8).replaceAll("\\+", "%20");
+
+		response.setContentType("application/zip");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + encodedZipName + "\"");
+
+		try (ZipOutputStream zos = new ZipOutputStream(response.getOutputStream())) {
+			for (ResourceFile f : files) {
+				Path path = Paths.get(f.getResourceFileName());
+				if (!Files.exists(path)) {
+					// 없는 파일은 스킵
+					continue;
+				}
+
+				String entryName = extractFileNameForDownload(f.getResourceFileName());
+
+				ZipEntry entry = new ZipEntry(entryName);
+				zos.putNextEntry(entry);
+
+				Files.copy(path, zos);
+
+				zos.closeEntry();
+			}
+			zos.finish();
+		}
+	}
+
+	private String extractFileNameForDownload(String resourceFileName) {
+		if (resourceFileName == null) {
+			return "download.file";
+		}
+		int idx = resourceFileName.lastIndexOf('/');
+		if (idx >= 0 && idx < resourceFileName.length() - 1) {
+			return resourceFileName.substring(idx + 1);
+		}
+		return resourceFileName;
 	}
 
 	// ----------------------------------로그인 한 유저가 등록한

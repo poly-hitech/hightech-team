@@ -1,6 +1,8 @@
 package com.example.test.Dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +74,27 @@ public class ResourceDaoImpl implements ResourceDao {
 	public List<ResourceShop> getTopFromResource() {
 		// TODO Auto-generated method stub
 		return sql.selectList("resourceShop.getTopFromResource");
+	}
+
+	@Override
+	public List<ResourceFile> findResourceFilesByItemId(Long itemId) {
+		return sql.selectList("resourceShop.findResourceFilesByItemId", itemId);
+	}
+
+	@Override
+	public int existsOrderForUserAndItem(Long userId, Long itemId) {
+		Map<String, Long> params = new HashMap<>();
+		params.put("userId", userId);
+		params.put("itemId", itemId);
+		return sql.selectOne("resourceShop.existsOrderForUserAndItem", params);
+	}
+
+	@Override
+	public int isSellerOfItem(Long userId, Long itemId) {
+		Map<String, Long> params = new HashMap<>();
+		params.put("userId", userId);
+		params.put("itemId", itemId);
+		return sql.selectOne("resourceShop.isSellerOfItem", params);
 	}
 
 }

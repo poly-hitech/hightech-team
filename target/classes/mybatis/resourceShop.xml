@@ -237,6 +237,31 @@
 	    resourceShop.itemId
 	    DESC
 	</select>
+	
+    <select id="findResourceFilesByItemId" resultType="resourceFile">
+        SELECT
+            RESOURCEFILEID,
+            ITEMID,
+            RESOURCEFILENAME
+        FROM RESOURCEFILE
+        WHERE ITEMID = #{itemId}
+        ORDER BY RESOURCEFILEID
+    </select>
+
+    <select id="existsOrderForUserAndItem" resultType="int">
+        SELECT COUNT(*)
+        FROM Orders o
+        JOIN OrdersDetails od ON o.ordersId = od.ordersId
+        WHERE o.userID = #{userId}
+          AND od.itemId = #{itemId}
+    </select>
+
+    <select id="isSellerOfItem" resultType="int">
+        SELECT COUNT(*)
+        FROM ResourceShop rs
+        WHERE rs.itemId = #{itemId}
+          AND rs.userId = #{userId}
+    </select>
 
 	<!-- 상점 정보만 들고 오기 -->
 	<resultMap type="ResourceShop" id="GetItemMap">

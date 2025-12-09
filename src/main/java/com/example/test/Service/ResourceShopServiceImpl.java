@@ -23,7 +23,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class ResourceShopServiceImpl implements ResourceShopService {
-
 	@Autowired
 	ResourceDao dao;
 
@@ -105,13 +104,8 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 		long totalCount = dao.countAllItems(); // 전체 상품 수 조회
 
 		// 최신 상품은 등수가 맨 마지막이어야함.
-		Ranking ranking = Ranking.builder()
-				.itemId(market.getResourceShop().getItemId())
-				.dailyRank(totalCount)
-				.weeklyRank(totalCount)
-				.monthlyRank(totalCount)
-				.totalRank(totalCount)
-				.build();
+		Ranking ranking = Ranking.builder().itemId(market.getResourceShop().getItemId()).dailyRank(totalCount)
+				.weeklyRank(totalCount).monthlyRank(totalCount).totalRank(totalCount).build();
 		rankingDao.save(ranking);
 	}
 
@@ -140,4 +134,19 @@ public class ResourceShopServiceImpl implements ResourceShopService {
 		return dao.getTopFromResource();
 	}
 
+	@Override
+	public List<ResourceFile> getResourceFiles(Long itemId) {
+		return dao.findResourceFilesByItemId(itemId);
+	}
+
+	@Override
+	public boolean canDownload(Long userId, Long itemId) {
+		int orderCnt = dao.existsOrderForUserAndItem(userId, itemId);
+		if (orderCnt > 0) {
+			return true;
+		}
+
+		int sellerCnt = dao.isSellerOfItem(userId, itemId);
+		return sellerCnt > 0;
+	}
 }

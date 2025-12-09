@@ -10,17 +10,14 @@
 <link rel="stylesheet" href="${root}/css/shopDetail.css" />
 <link rel="stylesheet" href="${root}/css/reviewList.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 	<div>
 		<c:import url="/WEB-INF/views/menu.jsp"></c:import>
 	</div>
-	<c:set var="userId"
-		value="${sessionScope.member.userId != null ? sessionScope.member.userId : 0}" />
-	<c:set var="username"
-		value="${sessionScope.member.nickname != null ? sessionScope.member.nickname : 'Guest'}" />
+	<c:set var="userId" value="${sessionScope.member.userId != null ? sessionScope.member.userId : 0}" />
+	<c:set var="username" value="${sessionScope.member.nickname != null ? sessionScope.member.nickname : 'Guest'}" />
 	<c:set var="itemId" value="${shop.itemId}" />
 	<c:set var="ordersDetailsId" value="${ordersDetails.ordersDetailsId}" />
 	<main>
@@ -34,19 +31,17 @@
 							<c:set var="parts" value="${fn:split(abs, '/')}" />
 							<c:set var="name" value="${parts[fn:length(parts)-1]}" />
 							<c:set var="extParts" value="${fn:split(name, '.')}" />
-							<c:set var="ext"
-								value="${fn:toLowerCase(extParts[fn:length(extParts)-1])}" />
+							<c:set var="ext" value="${fn:toLowerCase(extParts[fn:length(extParts)-1])}" />
 							<c:set var="rel" value="${fn:substringAfter(abs, 'upload/')}" />
 							<c:set var="folder" value="${fn:substringBefore(rel, '/')}" />
 
 							<li class="file-item"> <c:choose>
 									<c:when test="${folder == 'images'}">
 										<div class="file-type-label">이미지</div>
-										<img src="${root}/upload/${rel}" alt="${name}"
-											class="preview-img" />
+										<img src="${root}/upload/${rel}" alt="${name}" class="preview-img" />
 									</c:when>
 
-									<c:when test="${folder == 'musics'}">
+									<c:when test="${folder == 'music'}">
 										<div class="file-type-label">음원</div>
 										<audio controls src="${root}/upload/${rel}"></audio>
 									</c:when>
@@ -90,26 +85,26 @@
 				<div class="section-review-box">
 					<div class="section-title">리소스 평가하기</div>
 					<div class="rating-options">
-						<label><input type="radio" name="ratingSort"
-							value="latest" checked> 최신순</label> <label><input
-							type="radio" name="ratingSort" value="high"> 별점 높은 순</label> <label><input
-							type="radio" name="ratingSort" value="low"> 별점 낮은 순</label>
+						<label><input type="radio" name="ratingSort" value="latest" checked> 최신순</label>
+					    <label><input type="radio" name="ratingSort" value="high"> 별점 높은 순</label> 
+						<label><input type="radio" name="ratingSort" value="low"> 별점 낮은 순</label>
 					</div>
 				</div>
 				<div class="review-form-box">
 					<div class="review-form-header">
-						<img class="user-avatar" src="${sessionScope.member.profileImage}"
-							alt="프로필" />
+						<img class="user-avatar" src="${sessionScope.member.profileImage}" alt="프로필" />
 						<div class="username">${sessionScope.member.nickname}</div>
 						<div class="star-select">
-							<input type="radio" id="star5" name="reviewRating" value="5"><label
-								for="star5">★</label> <input type="radio" id="star4"
-								name="reviewRating" value="4"><label for="star4">★</label>
-							<input type="radio" id="star3" name="reviewRating" value="3"><label
-								for="star3">★</label> <input type="radio" id="star2"
-								name="reviewRating" value="2"><label for="star2">★</label>
-							<input type="radio" id="star1" name="reviewRating" value="1"><label
-								for="star1">★</label>
+							<input type="radio" id="star5" name="reviewRating" value="5">
+							<label for="star5">★</label> 
+							<input type="radio" id="star4" name="reviewRating" value="4">
+							<label for="star4">★</label>
+							<input type="radio" id="star3" name="reviewRating" value="3">
+							<label for="star3">★</label> 
+							<input type="radio" id="star2" name="reviewRating" value="2">
+							<label for="star2">★</label>
+							<input type="radio" id="star1" name="reviewRating" value="1">
+							<label for="star1">★</label>
 						</div>
 					</div>
 
@@ -131,11 +126,11 @@
 
 			<div class="right-section">
 				<div class="preview-header">
-					<img class="preview-image" src="${shop.resourceImage}"
-						alt="리소스 이미지">
+					<img class="preview-image" src="${shop.resourceImage}" alt="리소스 이미지">
 					<div class="preview-meta">
 						<div class="category">${shop.resourceCategory.resourceCategoryName}
-							> ${shop.resourceSubCategory.resourceSubCategoryName}</div>
+							> ${shop.resourceSubCategory.resourceSubCategoryName}
+						</div>
 						<div class="resource-title">${shop.itemName}</div>
 						<div class="icon-buttons">
 							<button class="icon-btn">
@@ -146,8 +141,8 @@
 							</button>
 						</div>
 						<div class="counts">
-							<span><i class="fa fa-heart"></i> 21</span> <span><i
-								class="fa fa-star"></i> 5</span>
+							<span><i class="fa fa-heart"></i> 21</span> 
+							<span><i class="fa fa-star"></i> 5</span>
 						</div>
 					</div>
 				</div>
@@ -166,8 +161,7 @@
 								파일 사이즈 <span> MB</span>
 							</div>
 							<div>
-								업로드일 <span><fmt:formatDate value="${shop.resourceDate}"
-										pattern="yyyy.MM.dd" /></span>
+								업로드일 <span><fmt:formatDate value="${shop.resourceDate}" pattern="yyyy.MM.dd" /></span>
 							</div>
 						</div>
 					</div>
@@ -176,8 +170,9 @@
 							<button id="download" class="download-btn">다운로드</button>
 						</c:when>
 						<c:otherwise>
-							<button id="buy" class="download-btn" data-user-id="${userId}"
-								data-item-id="${itemId}">구매하기</button>
+							<button id="buy" class="download-btn" data-user-id="${userId}" data-item-id="${itemId}">
+								구매하기
+							</button>
 						</c:otherwise>
 					</c:choose>
 					<a href="/shop/myResources/${shop.users.userId}"><button class="other-btn">제작자의 다른 리소스 보기</button></a>
@@ -194,8 +189,14 @@
 		});
 		const shop = ${shop2};
 		const review = ${reviewList2};
+		
+	    const root = '${root}';
+	    const itemId = '${itemId}';
 
-		console.log(shop);
+	    $(document).on('click', '#download', function () {
+	        // 단순 페이지 이동 → 서버가 파일 다운로드 응답
+	        window.location.href = root + '/shop/download/' + itemId;
+	    });
 	</script>
 	<script src="${root}/js/shopDetail.js"></script>
 	<script src="${root}/js/reviewList.js"></script>

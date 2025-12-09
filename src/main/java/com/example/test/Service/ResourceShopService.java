@@ -7,13 +7,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.test.Model.Market;
 import com.example.test.Model.ResourceCategory;
+import com.example.test.Model.ResourceFile;
 import com.example.test.Model.ResourceShop;
 
 public interface ResourceShopService {
 
 	List<ResourceCategory> list();
 
-	void addResource(Long userId, Market market, List<MultipartFile> file, MultipartFile resourceImage, Model model) throws Exception;
+	void addResource(Long userId, Market market, List<MultipartFile> file, MultipartFile resourceImage, Model model)
+			throws Exception;
 
 	List<ResourceCategory> addResourcePage();
 
@@ -25,4 +27,7 @@ public interface ResourceShopService {
 
 	List<ResourceShop> getTopFromResource();
 
+	List<ResourceFile> getResourceFiles(Long itemId);
+
+	boolean canDownload(Long userId, Long itemId);
 }
