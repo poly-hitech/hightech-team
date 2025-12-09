@@ -196,6 +196,7 @@
 	    resourceShop.itemWriter,
 	    resourceShop.resourceDate,
 	    resourceShop.resourceSubCategoryId AS rs_resourceSubCategoryId,
+	    resourceShop.resourceImage,
 	    resourceShop.userId,
 
 	    <!-- ResourceFile -->
