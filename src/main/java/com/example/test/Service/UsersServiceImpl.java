@@ -87,9 +87,9 @@ public class UsersServiceImpl implements UsersService {
 		item.setPassword(newpassword);
 		//사용자가 입력한 아이디와 암호화 된 패스워드를 데이터베이스에서 비교
 		Users result = userdao.login(item);
+		log.info("아이디 값 확인하기: {}", result.getUsername());
 		if(result != null) {
 			BeanUtils.copyProperties(result, item);
-			
 			item.setPassword(null);
 		
 			return true;
@@ -180,10 +180,10 @@ public class UsersServiceImpl implements UsersService {
 		}
 		//passEncode의 짝수위치에 특수문자 랜덤 추가
 		for(int a = 0 ; a < password.length() ; a++) {	//사용자가 입력한 패스워드의 길이에 맞춰서 그 길이 만큼 특수문자 추가
-			int random = (int)(Math.random()*7);
+			int idx = (int)(Math.random() * stringPass.length);
 			
 			//0부터 시작하여 그 이후엔 2의 배수의 위치에 특수문자 랜덤 저장
-			String charpass = stringPass[random-1];
+			String charpass = stringPass[idx];
 			log.info("임의 생성된 특수문자 확인: {}" + charpass);
 		    if (passEncode[a*2] == null) {
 		        passEncode[a*2] = "";  // null을 빈 문자열로 대체

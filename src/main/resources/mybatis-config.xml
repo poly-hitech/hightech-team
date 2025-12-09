@@ -5,6 +5,7 @@
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 		<setting name="jdbcTypeForNull" value="NULL" />
 		<setting name="returnInstanceForEmptyRow" value="true"/>
+		<setting name="logImpl" value="log4j2"/>
 	</settings>
 	
 	<!-- 연결할 MODEL 혹은 VO 혹은 DTO추가(각각의 모델마다 패키지명을 생략하여 지정한 명칭으로 해당 모델을 사용할 수 있게 해줌) -->
@@ -31,18 +32,4 @@
 	</typeAliases>
 	
 	<!-- mapper 파일 추가 -->
-	<mappers>
-		<mapper resource="mybatis/users.xml"/>
-		<mapper resource="mybatis/resourceCategory.xml"/>
-		<mapper resource="mybatis/resourceSubCategory.xml"/>
-		<mapper resource="mybatis/resourceShop.xml"/>
-		<mapper resource="mybatis/buyPoint.xml"/>
-		<mapper resource="mybatis/counting.xml"/>
-		<mapper resource="mybatis/orders.xml"/>
-		<mapper resource="mybatis/ordersDetails.xml"/>
-		<mapper resource="mybatis/ranking.xml" />
-		<mapper resource="mybatis/shopReview.xml"/>
-		<mapper resource="mybatis/userAttendance.xml"/>
-		<mapper resource="mybatis/board.xml"/>
-	</mappers>
 </configuration>

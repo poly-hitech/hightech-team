@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>판매한 상품 목록</title>
+<title>최근 판매 내역</title>
 <link rel="stylesheet" href="${root}/css/purchasedResources.css" />
 </head>
 <body>
@@ -16,36 +16,73 @@
 		<c:import url="/WEB-INF/views/menu.jsp"></c:import>
 	</div>
 	<main>
-		<h2>판매된 리소스</h2>
+		<div class="page-header">
+			<div>
+				<h2 class="page-title">💰 최근 판매 내역</h2>
+				<p class="page-subtitle">회원님의 리소스 판매 내역을 최신순으로 확인하세요</p>
+			</div>
+			<c:if test="${not empty purchasedList}">
+				<div class="page-summary">
+					총 <span>${fn:length(purchasedList)}</span>건의 판매
+				</div>
+			</c:if>
+		</div>
+		
 		<c:if test="${not empty purchasedList}">
         <div class="card-container">
             <c:forEach var="order" items="${purchasedList}">
                 <div class="order-card">
-                    <div class="order-header">주문번호: ${order.ordersId}</div>
-                    <div class="order-info">
-                        <img src="${order.resourceImage}" alt="Resource Image" class="resource-image">
-                        <p>주문일: <fmt:formatDate value='${order.ordersDate}' pattern='yyyy-MM-dd' /></p>
-                        <p>총 금액: ${order.ordersPrice}원</p>
-                        <p>카테고리: ${order.resourceCategoryName} > ${order.resourceSubCategoryName}</p>
-                        <p>자료명: ${order.itemName}</p>
-                        <p>가격: ${order.itemPrice}원</p>
-                        <p>작성자: ${order.itemWriter}</p>
-                    </div>
-
-                    <c:if test="${not empty order.resourceFile}">
-                        <div class="file-list">
-                            <p>첨부파일:</p>
-                            <ul>
-                                <c:forEach var="file" items="${order.resourceFile}">
-                                    <li>${file.resourceFileName}</li>
-                                </c:forEach>
-                            </ul>
+                    <div class="order-header">
+                    	<div>
+	                        <div class="order-number">주문번호: ${order.ordersId}</div>
+	                        <div class="order-meta">
+	                        	<span>📅 판매일: <strong><fmt:formatDate value='${order.ordersDate}' pattern='yyyy-MM-dd HH:mm' /></strong></span>
+	                        	<span>👤 구매자 ID: <strong>${order.ordersUser}</strong></span>
+	                        </div>
                         </div>
-                    </c:if>
+                        <div class="price-badge">
+                        	<span class="price-label">판매 금액</span>
+                        	<div class="price-value">${order.itemPrice}원</div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-body">
+	                    <div class="order-thumb">
+	                        <img src="${order.resourceImage}" alt="${order.itemName}" class="resource-image">
+	                    </div>
+	                    <div class="order-info">
+	                        <h3 class="item-name">${order.itemName}</h3>
+	                        <div class="item-meta">
+	                        	<span class="category-badge">${order.resourceCategoryName}</span>
+	                        	<span class="category-badge category-badge--sub">${order.resourceSubCategoryName}</span>
+	                        </div>
+	                        <p class="item-description">${fn:substring(order.resourceContent, 0, 100)}<c:if test="${fn:length(order.resourceContent) > 100}">...</c:if></p>
+	
+	                        <c:if test="${not empty order.resourceFile}">
+	                            <div class="file-list">
+	                                <div class="file-list__header">📎 첨부파일 (${fn:length(order.resourceFile)}개)</div>
+	                                <ul class="file-list__items">
+	                                    <c:forEach var="file" items="${order.resourceFile}">
+	                                        <li class="file-item">${file.resourceFileName}</li>
+	                                    </c:forEach>
+	                                </ul>
+	                            </div>
+	                        </c:if>
+	                    </div>
+                    </div>
                 </div>
             </c:forEach>
         </div>
-    </c:if>
+	    </c:if>
+	    
+	    <c:if test="${empty purchasedList}">
+	    	<div class="empty-state">
+	    		<div class="empty-state__icon">📦</div>
+	    		<h3 class="empty-state__title">판매 내역이 없습니다</h3>
+	    		<p class="empty-state__description">아직 판매된 리소스가 없습니다. 리소스를 등록하고 판매를 시작해보세요!</p>
+	    		<a href="${root}/shop/${sessionScope.member.roleId}/add/${sessionScope.member.userId}" class="empty-state__button">리소스 등록하기</a>
+	    	</div>
+	    </c:if>
 	</main>
 
 	<script src="${root}/js/purchasedResources.js"></script>

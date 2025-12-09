@@ -10,9 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.test.Model.ForumPost;
 import com.example.test.Model.HostAdress;
 import com.example.test.Model.ResourceShop;
 import com.example.test.Model.Users;
+import com.example.test.Service.BoardService;
+import com.example.test.Service.RanksService;
 import com.example.test.Service.ResourceShopService;
 import com.example.test.Service.UsersService;
 
@@ -22,11 +25,18 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class RootController {
 	
+
+	@Autowired
+	RanksService rankService;
+
 	@Autowired
 	UsersService usersService;
 	
 	@Autowired
 	ResourceShopService resourceService;
+	
+	@Autowired
+	BoardService boardService;
 	
 	//게시판 작업 끝나면 불러와야 함.
 	
@@ -34,7 +44,18 @@ public class RootController {
 	String index(Model model) {
 		List<ResourceShop> resource = resourceService.getTopFromResource();
 		model.addAttribute("popularResources", resource);
+		
 		//최근 게시물 
+		List<ForumPost> notice = boardService.getBoardListOnlyFive(1L);
+		List<ForumPost> job = boardService.getBoardListOnlyFive(2L);
+		List<ForumPost> board = boardService.getBoardListOnlyFive(3L);
+		
+		//공지사항
+		model.addAttribute("notice", notice);
+		//취업 정보 공유
+		model.addAttribute("job", job);
+		//자유 게시판
+		model.addAttribute("board", board);
 		
 		return "index";
 	}
@@ -58,7 +79,8 @@ public class RootController {
 	String logout(HttpSession session, HostAdress hostAddress) {
 		session.invalidate();
 		
-		return "redirect:" + hostAddress.getHost();
+//		return "redirect:" + hostAddress.getHost();
+		return "redirect:/";
 	}
 	
 	@GetMapping("/login")
@@ -94,6 +116,21 @@ public class RootController {
 	@GetMapping("/menu")
 	String menu() {
 		return "menu";
+	}
+	
+	@GetMapping("/salesRank")
+	String salesRank(Model model) {
+		List<ResourceShop> total = rankService.getTotalTop(10);
+		List<ResourceShop> daily = rankService.getdailyTop(10);
+		List<ResourceShop> weekly = rankService.getweeklyTop(10);
+		List<ResourceShop> monthly = rankService.getmonthlyTop(10);
+
+		model.addAttribute("total", total);
+		model.addAttribute("daily", daily);
+		model.addAttribute("weekly", weekly);
+		model.addAttribute("monthly", monthly);
+
+		return "salesRank";
 	}
 	
 }

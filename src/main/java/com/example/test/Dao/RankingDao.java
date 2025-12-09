@@ -1,6 +1,9 @@
 package com.example.test.Dao;
 
+import java.util.List;
+
 import com.example.test.Model.Ranking;
+import com.example.test.Model.ResourceShop;
 
 public interface RankingDao {
 
@@ -13,5 +16,10 @@ public interface RankingDao {
 	void resetWeeklyRank();
 
 	void resetMonthlyRank();
+
+	List<ResourceShop> getTotalRank(int limit);
+	List<ResourceShop> getDailyRank(int limit);
+	List<ResourceShop> getWeeklyRank(int limit);
+	List<ResourceShop> getMonthlyRank(int limit);
 
 }

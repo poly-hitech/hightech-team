@@ -180,7 +180,7 @@
 								data-item-id="${itemId}">구매하기</button>
 						</c:otherwise>
 					</c:choose>
-					<button class="other-btn">제작자의 다른 리소스 보기</button>
+					<a href="/shop/myResources/${shop.users.userId}"><button class="other-btn">제작자의 다른 리소스 보기</button></a>
 				</div>
 			</div>
 		</div>
@@ -192,14 +192,8 @@
 				$('.char-count').text(len + "/128");
 			});
 		});
-		const shop = $
-		{
-			shop2
-		};
-		const review = $
-		{
-			reviewList2
-		};
+		const shop = ${shop2};
+		const review = ${reviewList2};
 
 		console.log(shop);
 	</script>

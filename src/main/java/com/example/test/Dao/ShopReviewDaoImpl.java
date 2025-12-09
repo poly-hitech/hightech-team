@@ -1,13 +1,13 @@
 package com.example.test.Dao;
 
-import com.example.test.Model.ShopReview;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.example.test.Model.ShopReview;
 
 @Repository
 public class ShopReviewDaoImpl implements ShopReviewDao{

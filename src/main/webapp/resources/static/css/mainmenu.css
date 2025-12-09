@@ -45,6 +45,7 @@ body {
 }
 .logo_items {
   gap: 8px;
+  padding: 10px 0;
 }
 .logo_name {
   font-size: 26px;
@@ -78,7 +79,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 40px;
+  margin-top: 10px;
   overflow-y: auto;
   height: calc(100% - 82px);
 }
@@ -88,7 +89,18 @@ body {
 .menu_title {
   position: relative;
   height: 50px;
-  width: 100px;
+  width: 100%;
+  padding-top: 15px;
+  margin-top: 10px;
+}
+.menu_title::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 90%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(155, 89, 182, 0.3), transparent);
 }
 .menu_title .title {
   margin-left: 15px;
@@ -195,7 +207,7 @@ body {
     justify-content: center;
     align-items: center;
   }
-}}
+}
 @media screen and (max-width: 800px) {
   .sidebar {
     left: 0;
@@ -210,7 +222,6 @@ body {
   #lock-icon {
     display: none;
   }
-}
   #sidebar-open {
     display: block;
   }

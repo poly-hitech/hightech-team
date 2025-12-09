@@ -64,7 +64,7 @@
         .section-title {
             font-size: 2rem;
             font-weight: bold;
-            color: #D275D9;
+            color: #E680ED;
             text-align: center;
         }
         .section-subtitle {
@@ -72,13 +72,13 @@
             text-align: center;
             margin-bottom: 20px;
         }
-        .resource-grid, .community-grid {
+        .resource-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
         }
         @media (min-width: 640px) {
-            .resource-grid, .community-grid {
+            .resource-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -89,6 +89,32 @@
             .resource-grid {
                 grid-template-columns: repeat(5, 1fr);
             }
+        }
+
+        .community-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .community-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .board-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .board-column-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #E4AAD7;
+            text-align: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #D275D9;
         }
 
         .resource-card {
@@ -135,6 +161,20 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             padding: 15px;
+        }
+        .community-card-with-image {
+            display: flex;
+            gap: 15px;
+        }
+        .community-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            flex-shrink: 0;
+        }
+        .community-content {
+            flex: 1;
         }
         .community-title {
             font-size: 1.2rem;
@@ -215,14 +255,48 @@
         <div class="community-section">
             <h2 class="section-title">최근 게시물</h2>
             <p class="section-subtitle">공지사항부터 최근 게시물까지 확인해보세요.</p>
+            
             <div class="community-grid">
-                <c:forEach var="post" items="${latestPosts}">
-                    <div class="community-card">
-                        <h3 class="community-title">${post.title}</h3>
-                        <p class="community-summary">${post.summary}</p>
-                        <a href="${root}/community/detail/${post.postId}" class="community-link">Read More</a>
-                    </div>
-                </c:forEach>
+                <!-- 공지사항 -->
+                <div class="board-column">
+                    <h3 class="board-column-title">공지사항</h3>
+                    <c:forEach var="post" items="${notice}">
+                        <div class="community-card">
+                            <h4 class="community-title">${post.title}</h4>
+                            <p class="community-summary">${fn:substring(post.content, 0, 50)}...</p>
+                            <a href="${root}/board/list/1" class="community-link">Read More</a>
+                        </div>
+                    </c:forEach>
+                </div>
+                
+                <!-- 취업 정보 공유 -->
+                <div class="board-column">
+                    <h3 class="board-column-title">취업 정보 공유</h3>
+                    <c:forEach var="post" items="${job}">
+                        <div class="community-card">
+                            <h4 class="community-title">${post.title}</h4>
+                            <p class="community-summary">${fn:substring(post.content, 0, 50)}...</p>
+                            <a href="${root}/board/list/2" class="community-link">Read More</a>
+                        </div>
+                    </c:forEach>
+                </div>
+                
+                <!-- 자유 게시판 -->
+                <div class="board-column">
+                    <h3 class="board-column-title">자유 게시판<i class="bi bi-box-arrow-up-right"></i></h3>
+                    <c:forEach var="post" items="${board}">
+                        <div class="community-card <c:if test="${not empty post.forumPostFile[0].fileName}">community-card-with-image</c:if>">
+                            <c:if test="${not empty post.forumPostFile[0].fileName}">
+                                <img src="${post.forumPostFile[0].fileName}" alt="${post.title}" class="community-image" />
+                            </c:if>
+                            <div class="community-content">
+                                <h4 class="community-title">${post.title}</h4>
+                                <p class="community-summary">${fn:substring(post.content, 0, 50)}...</p>
+                                <a href="${root}/board/detail/${post.postId}" class="community-link">Read More</a>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
             </div>
         </div>
 
@@ -230,15 +304,9 @@
         <div class="footer">
             <p class="footer-text">&copy; 2025 Dev Community Hub 코딩기딩. All rights reserved.</p>
             <div class="footer-links">
-                <a href="https://wookportfolio.duckdns.org/contact" class="footer-link">정지욱</a>
-                <a href="#" class="footer-link">장민규</a>
-                <a href="#" class="footer-link">김택수</a>
-            </div>
-            <br><br>
-            <div class="footer-links">
-                <a href="#" class="footer-link">Contact</a>
-                <a href="#" class="footer-link">Terms</a>
-                <a href="#" class="footer-link">Privacy</a>
+                <a href="https://wookportfolio.duckdns.org" class="footer-link">정지욱</a>
+                <a href="portfolio-nu-rosy-28.vercel.app" class="footer-link">장민규</a>
+                <a href="" class="footer-link">김택수</a>
             </div>
         </div>
     </div>
