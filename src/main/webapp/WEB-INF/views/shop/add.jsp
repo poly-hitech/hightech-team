@@ -71,7 +71,7 @@
 	
 	                        <div class="form-field">
 	                            <label for="itemWriter">판매자</label>
-	                            <input type="text" id="itemWriter" name="resourceShop.itemWriter" value="${sessionScope.member.nickname}" readonly>
+	                            <input type="text" id="itemWriter" name="resourceShop.itemWriter" value="${sessionScope.member.username}" readonly>
 	                        </div>
 	
 	                        <div class="form-field">

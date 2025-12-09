@@ -44,6 +44,14 @@
 
 		<div class="menu_container">
 			<div class="menu_items">
+				<ul class="menu-item">
+					<li class="item">
+						<a href="#" id="open-attendance-modal" class="link flex">
+							<i class="bx bx-calendar"></i>
+							<span>출석체크</span>
+						</a>
+					</li>
+				</ul>
 				<ul class="menu_item">
 					<div class="menu_title flex">
 						<span class="title">리소스</span> <span class="line"></span>
@@ -110,9 +118,6 @@
 					</a></li>
 					<li class="item"><a href="${root}/board/list/3" class="link flex"> <i
 							class="bx bx-cloud-upload"></i> <span>자유 게시판</span>
-					</a></li>
-					<li class="item"><a href="#" id="open-attendance-modal"
-						class="link flex"> <i class="bx bx-calendar"></i> <span>출석체크</span>
 					</a></li>
 				</ul>
 				<ul class="menu_item">

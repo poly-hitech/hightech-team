@@ -34,7 +34,7 @@
 				<button type="submit">로그인</button>
 				<a href="/">취소</a>
 			</div>
-		</form>	
+		</form>
 	</div>
 	<c:if test="${not empty message}">
         <script>

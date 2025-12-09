@@ -46,11 +46,12 @@ public class OrdersController {
 		String mySalesList(@PathVariable Long userId, Model model, HttpSession session) {
 		//판매자 닉네임 조회
 		Users users = (Users)session.getAttribute("member");
-		String nickname = users.getNickname();
-
+		String nickname = users.getUsername();
+		
 		//넘어온 userId와 세션의 userId가 같은지 확인
-		if(userId == null || !userId.equals(users.getUserId())) {
+		if(userId.equals(users.getUserId())) {
 			List<MyOrderList> purchasedList = ordersService.mySalesList(nickname);
+			log.info("p:", purchasedList);
 			model.addAttribute("purchasedList", purchasedList);
 			
 			for(MyOrderList market : purchasedList) {

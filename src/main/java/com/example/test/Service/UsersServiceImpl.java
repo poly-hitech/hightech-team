@@ -87,9 +87,9 @@ public class UsersServiceImpl implements UsersService {
 		item.setPassword(newpassword);
 		//사용자가 입력한 아이디와 암호화 된 패스워드를 데이터베이스에서 비교
 		Users result = userdao.login(item);
+		log.info("아이디 값 확인하기: {}", result.getUsername());
 		if(result != null) {
 			BeanUtils.copyProperties(result, item);
-			
 			item.setPassword(null);
 		
 			return true;

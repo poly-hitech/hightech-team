@@ -141,8 +141,9 @@ $(document).ready(function () {
                         sub.resourceShop.forEach(function (shop) {
                             console.log("상점 객체: " + shop)
                             console.log("상점" + shop.itemName + "진입했습니다.")
+                            const filepath = shop.resourceImage || '';
                             if (shop.resourceFile && shop.resourceFile.length > 0) {
-                                var filepath = shop.resourceImage || '';
+
                                 console.log("상점 아이템이미지: " + filepath);
                                 var fileName = '';
                                 var originfilename = '';

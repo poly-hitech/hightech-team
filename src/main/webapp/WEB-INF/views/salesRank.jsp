@@ -42,7 +42,7 @@
                             <div class="rank-details">
                                 <h3 class="rank-item-title">${item.itemName}</h3>
                                 <p class="rank-price">${item.itemPrice}원</p>
-                                <p class="rank-seller">판매자: ${item.userId}</p>
+                                <p class="rank-seller">판매자: ${item.itemWriter}</p>
                             </div>
                         </div>
                     </a>

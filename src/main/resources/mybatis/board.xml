@@ -2,14 +2,39 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- namespace와 id값이 daoImpl에 있는 위치 값과 일치해야함. -->
 <mapper namespace="board">
-	<select id="getBoardList" resultType="ForumPost">
-		select * from forumpost
-		where boardId = #{boardId}
+	<resultMap id="ForumPostAndFiles" type="ForumPost">
+		<id property="postId" column="postId"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="writeDate" column="writeDate"/>
+		<result property="state" column="state"/>
+		<result property="count" column="count"/>
+		<result property="boardId" column="boardId"/>
+		<result property="userId" column="userId"/>
+		<result property="postWriter" column="postWriter"/>
+		<collection property="forumPostFile" ofType="ForumPostFile">
+			<id property="postFileId" column="postFileId"/>
+			<result property="postId" column="postId"/>
+			<result property="fileName" column="fileName"/>
+		</collection>
+	</resultMap>
+	
+	<select id="getBoardList" resultMap="ForumPostAndFiles">
+		select 
+			forumPost.postId, forumPost.title, forumPost.content, forumPost.writeDate, forumPost.state, forumPost.count, forumPost.boardId, forumPost.userId, forumPost.postWriter,
+			forumPostFile.postFileId, forumPostFile.fileName
+		from forumpost forumPost
+		left join forumpostfile forumPostFile on forumPost.postId = forumPostFile.postId
+		where forumPost.boardId = #{boardId}
 	</select>
-	<select id="getBoardListOnlyFive" resultType="ForumPost">
+	<select id="getBoardListOnlyFive" resultMap="ForumPostAndFiles">
 		select sub.* from (
-			select * from forumpost
-			where boardId = #{boardId}
+			select 
+				forumPost.postId, forumPost.title, forumPost.content, forumPost.writeDate, forumPost.state, forumPost.count, forumPost.boardId, forumPost.userId, forumPost.postWriter,
+				forumPostFile.postFileId, forumPostFile.fileName
+			from forumpost forumPost
+			left join forumpostfile forumPostFile on forumPost.postId = forumPostFile.postId
+			where forumPost.boardId = #{boardId}
 		)sub
 		<![CDATA[
 			WHERE ROWNUM <= 5

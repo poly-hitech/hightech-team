@@ -1,6 +1,7 @@
 package com.example.test.Model;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,6 +19,7 @@ public class ForumPost {
 	private long boardId;
 	private long userId;
 	private String postWriter;
+	private List<ForumPostFile> forumPostFile;
 	public long getPostId() {
 		return postId;
 	}
@@ -72,6 +74,12 @@ public class ForumPost {
 	}
 	public void setUserId(long userId) {
 		this.userId = userId;
+	}
+	public List<ForumPostFile> getForumPostFile() {
+		return forumPostFile;
+	}
+	public void setForumPostFile(List<ForumPostFile> forumPostFile) {
+		this.forumPostFile = forumPostFile;
 	}
 	
 	
