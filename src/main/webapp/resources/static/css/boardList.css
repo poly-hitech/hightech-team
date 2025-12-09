@@ -52,6 +52,29 @@ body {
 	border-bottom: 1px solid #c0c0c0;
     padding: 10px 20px;
     
+    display: flex;
+    align-items: center; 
+    gap: 20px;
+    
+}
+
+.thumbnail-area {
+    width: 80px; 
+    height: 80px;
+    flex-shrink: 0;
+    overflow: hidden; 
+    border-radius: 4px;
+}
+
+.post-thumbnail-img {
+    width: 100%;
+    height: 100%; 
+    object-fit: contain; 
+    object-position: center;
+}
+
+.post-content-area {
+    flex-grow: 1;
 }
 
 .boardlist-header {
@@ -65,6 +88,11 @@ body {
     flex-grow: 1; 
     display: block;
     margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    max-width: 100px;
 }
 
 .boardlist-header .item-date {
