@@ -16,7 +16,6 @@
     
     <div class="scrollable-content">
         <div class="content-border">
-            
             <div class="post-header">
                 <h1 class="post-title">${forumPost.title}</h1>
                 <span class="post-date">
