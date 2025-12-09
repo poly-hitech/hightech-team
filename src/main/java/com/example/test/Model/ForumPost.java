@@ -19,6 +19,7 @@ public class ForumPost {
 	private long boardId;
 	private long userId;
 	private String postWriter;
+	private String postImage;
 	private List<ForumPostFile> forumPostFile;
 	public long getPostId() {
 		return postId;
@@ -80,6 +81,12 @@ public class ForumPost {
 	}
 	public void setForumPostFile(List<ForumPostFile> forumPostFile) {
 		this.forumPostFile = forumPostFile;
+	}
+	public String getPostImage() {
+		return postImage;
+	}
+	public void setPostImage(String postImage) {
+		this.postImage = postImage;
 	}
 	
 	
