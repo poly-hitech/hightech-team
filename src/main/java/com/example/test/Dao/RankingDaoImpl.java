@@ -1,10 +1,13 @@
 package com.example.test.Dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.test.Model.Ranking;
+import com.example.test.Model.ResourceShop;
 
 @Repository
 public class RankingDaoImpl implements RankingDao {
@@ -43,6 +46,30 @@ public class RankingDaoImpl implements RankingDao {
 	@Override
 	public void save(Ranking ranking) {
 		sql.insert("ranking.add", ranking);		
+	}
+
+	@Override
+	public List<ResourceShop> getTotalRank(int limit) {
+		// TODO Auto-generated method stub
+		return sql.selectList("ranking.getTotalRank", limit);
+	}
+
+	@Override
+	public List<ResourceShop> getDailyRank(int limit) {
+		// TODO Auto-generated method stub
+		return sql.selectList("ranking.getDailyRank", limit);
+	}
+
+	@Override
+	public List<ResourceShop> getWeeklyRank(int limit) {
+		// TODO Auto-generated method stub
+		return sql.selectList("ranking.getWeeklyRank", limit);
+	}
+
+	@Override
+	public List<ResourceShop> getMonthlyRank(int limit) {
+		// TODO Auto-generated method stub
+		return sql.selectList("ranking.getMonthlyRank", limit);
 	}
 
 }

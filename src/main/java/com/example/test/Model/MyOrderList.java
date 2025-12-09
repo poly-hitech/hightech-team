@@ -23,4 +23,6 @@ public class MyOrderList {
     private Long itemPrice;
     private String itemWriter;
     private List<ResourceFile> resourceFile;
+    private Long userId;
+    private String ordersUser;
 }

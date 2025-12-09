@@ -22,25 +22,25 @@
 	        </div>
 			<div>
 				<label>아이디:</label>
-				<input type="text" name="username" id="username">				
+				<input type="text" name="username" id="username" value="wlwl45wl">
 			</div>
 					
 			<div>
 				<label>비밀번호:</label>
-				<input type="password" name="password" id="password">				
+				<input type="password" name="password" id="password" value="dfasd">
 			</div>
 									
 			<div>
 				<button type="submit">로그인</button>
 				<a href="/">취소</a>
-			</div>					
-		</form>	
+			</div>
+		</form>
 	</div>
 	<c:if test="${not empty message}">
         <script>
             alert("${message}"); // Model에서 받은 메시지 표시
             <c:if test="${redirect}">
-                window.location.href = "https://wookportfolio.duckdns.org:83/"; // 성공 시 메인 페이지로 이동
+                window.location.href = "/"; // 성공 시 메인 페이지로 이동
             </c:if>
         </script>
     </c:if>

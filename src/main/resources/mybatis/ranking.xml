@@ -53,6 +53,59 @@
 	    VALUES (RANKING_SEQ.nextval, #{itemId}, #{totalRank}, #{dailyRank}, #{weeklyRank}, #{monthlyRank})
 	</insert>
 	
+	<!-- 조회 -->
+	<select id="getTotalRank" parameterType="int" resultType="ResourceShop">
+		SELECT *
+		FROM (
+			SELECT rs.*
+			FROM ResourceShop rs
+			JOIN Ranking r ON rs.itemId = r.itemId
+			ORDER BY r.totalRank ASC
+		)
+		<if test="_parameter > 0">
+		WHERE ROWNUM &lt;= #{_parameter}
+		</if>
+	</select>
+	
+	<select id="getDailyRank" parameterType="int" resultType="ResourceShop">
+		SELECT *
+		FROM (
+			SELECT rs.*
+			FROM ResourceShop rs
+			JOIN Ranking r ON rs.itemId = r.itemId
+			ORDER BY r.dailyRank ASC
+		)
+		<if test="_parameter > 0">
+		WHERE ROWNUM &lt;= #{_parameter}
+		</if>
+	</select>
+	
+	<select id="getWeeklyRank" parameterType="int" resultType="ResourceShop">
+		SELECT *
+		FROM (
+			SELECT rs.*
+			FROM ResourceShop rs
+			JOIN Ranking r ON rs.itemId = r.itemId
+			ORDER BY r.weeklyRank ASC
+		)
+		<if test="_parameter > 0">
+		WHERE ROWNUM &lt;= #{_parameter}
+		</if>
+	</select>
+	
+	<select id="getMonthlyRank" parameterType="int" resultType="ResourceShop">
+		SELECT *
+		FROM (
+			SELECT rs.*
+			FROM ResourceShop rs
+			JOIN Ranking r ON rs.itemId = r.itemId
+			ORDER BY r.monthlyRank ASC
+		)
+		<if test="_parameter > 0">
+		WHERE ROWNUM &lt;= #{_parameter}
+		</if>
+	</select>
+
 	<!-- 수정 -->
 	<!-- 각 아이템 별 랭킹 정보 변경 -->
 	<update id="updateByDailyrankByitemId">

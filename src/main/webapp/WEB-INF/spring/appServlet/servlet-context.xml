@@ -74,6 +74,7 @@
 		
 		<interceptor>		
 			<mapping path="/normal/**"/>
+			<mapping path="/orders/**"/>
 			
 			<beans:bean class="com.example.test.interceptor.NormalInterceptor"></beans:bean>	<!-- 어떤걸 실행시킬지 -->
 		</interceptor>
