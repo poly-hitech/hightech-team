@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="root" value="${pageContext.request.contextPath}" />
 
 <html>
@@ -17,9 +18,11 @@
         <div class="content-border">
             
             <div class="post-header">
-                <h1 class="post-title">${forumPost.title}</h1>
-                <span class="post-date">${forumPost.writeDate}</span>
-            </div>
+                <h1 class="post-title">${forumPost.title}</h1>
+                <span class="post-date">
+                    <fmt:formatDate value="${forumPost.writeDate}" pattern="yyyy/MM/dd HH:mm:ss"/>
+                </span>
+            </div>
             
             <div class="post-sub-info">
                 <span class="post-writer">${forumPost.postWriter}</span>
@@ -65,9 +68,7 @@
             </c:choose>
             </div>
             
-            <div class="post-main-content">
-                ${forumPost.content}
-            </div>
+            <div class="post-main-content">${forumPost.content}</div>
 
             <div class="comment-section">
                 <div class="comment-form">
@@ -98,7 +99,9 @@
                                     <tr>
                                         <td>${comment.commentWriter}</td>
                                         <td>${comment.commentContent}</td>
-                                        <td>${comment.commentWriteDate}</td>
+                                        <td>
+                                            <fmt:formatDate value="${comment.commentWriteDate}" pattern="yyyy/MM/dd HH:mm:ss"/>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </c:when>

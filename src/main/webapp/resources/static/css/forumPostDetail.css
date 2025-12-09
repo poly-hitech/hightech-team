@@ -14,36 +14,50 @@ body {
 }
 
 .sidebar-wrapper {
-  width: 260px;
-  flex-shrink: 0;
-  height: 100%;
-  overflow-y: auto;
-  z-index: 10;
-  background-color: white;
+    width: 260px;
+    flex-shrink: 0; /* 크기가 줄어들지 않도록 보호 */
+    height: 100%;
+    overflow-y: auto;
+    z-index: 10;
 }
 
 .scrollable-content {
-  flex: 1;
-  height: 100%;
-  overflow-y: auto;
-  background-color: #000;
-
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+    background-color: #000;
+    
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; /* 스크롤 시 제목이 상단부터 보이도록 유지 */
+    
+    /* ***** [핵심 수정] 컨테이너에 상단 여백 추가 ***** */
+    padding-top: 60px; /* 검은 화면 상단과 게시글 사이의 원하는 여백 (예: 60px) */
+    padding-bottom: 20px; /* 하단 여백 추가 (스크롤 끝에서도 보기 좋게) */
 }
+
+/* ======================================= */
+/* 2. 게시글 컨테이너 (흰색 박스) */
+/* ======================================= */
 
 .content-border {
-  border: 1px solid #ddd;
-  background-color: white;
-  padding: 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 20px auto;
-  max-width: 800px;
-  width: 90%;
+	background-color: white;
+	padding: 40px;
+	border-radius: 8px;
+    
+    /* ***** [수정] 마진 제거 또는 최소화 ***** */
+    /* margin-top: 60px; 대신 0 또는 20px만 유지하고 나머지는 padding이 담당 */
+	margin: 0 auto; /* 상하 여백을 0으로 두고 가로 중앙 정렬만 유지 */
+    
+	max-width: 800px;
+	width: 90%;
 }
 
+/* ======================================= */
+/* 3. 게시글 상세 요소 (Flexbox 양 끝 정렬) */
+/* ======================================= */
+
+/* 제목 + 날짜 섹션 */
 .post-header {
   display: flex;
   justify-content: space-between;

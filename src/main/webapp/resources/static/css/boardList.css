@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* 브라우저 전체 스크롤 방지 */
+}
+
+body {
+    display: flex;
+    flex-direction: row; 
+    background-color: #000;
+}
+
+.sidebar-wrapper {
+    width: 260px;
+    flex-shrink: 0;
+    height: 100%;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.scrollable-content {
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 60px;
+    padding-bottom: 20px;
+}
+
+.boardlist-container{
+	margin: 60px auto 20px auto;
+	background-color: white;
+	border-radius: 8px;
+	padding: 40px;
+}
+
+.board-page-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+	border-bottom: 2px solid #333;
+	padding-bottom: 10px;
+}
+
+.boardlist-item {
+	border-bottom: 1px solid #c0c0c0;
+    padding: 10px 20px;
+    
+}
+
+.boardlist-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.boardlist-header a {
+    flex-grow: 1; 
+    display: block;
+    margin: 0;
+}
+
+.boardlist-header .item-date {
+    flex-shrink: 0;
+    font-size : 12px;
+    color: #666;
+}
+
+.item-meta {
+    display: block;
+}
+
+.item-writer {
+	font-size: 14px;
+    margin-right: 170px; 
+}
+
+.item-count {
+    font-size: 14px;
+    color: #666;
+}
+
+.meta-actions {
+    text-align: right;
+}
+
+.meta-actions a {
+    color: #666;
+    font-size: 13px;
+}
+
+.meta-actions .divider {
+    margin: 0 5px;
+    color: #ddd;
+}
+
